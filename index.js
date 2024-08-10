@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const { exec } = require('child_process');
-const sqlite3 = require('sqlite3').verbose();
+const mysql = require('mysql2');
 const session = require('express-session');
 const app = express();
 
@@ -10,43 +10,44 @@ const port = 5000;
 
 app.use(bodyParser.json());
 app.use(express.static('public')); 
+
 app.use(session({
-    secret: 'secret-key',
+    secret: process.env.SECRET_KEY || 'secret-key',
+    name: 'sessionId',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Set to true if using HTTPS
-  }));
+    cookie: { secure: process.env.NODE_ENV === "production" } // Set to true if using HTTPS
+}));
 
-const db = new sqlite3.Database('data/courses.db', (err) => {
-    if (err) {
-        console.error('Error opening database:', err.message);
-    }
+// Create a MySQL connection pool
+const pool = mysql.createPool({
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
+    connectionLimit: 10
 });
 
-
+const db = pool.promise();
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-app.post('/search', (req, res) => {
+app.post('/search', async (req, res) => {
     const courseName = req.body.courseName;
     if (!courseName) {
         return res.status(400).json({ error: 'Course name is required' });
     }
 
-    // Modify the query to fetch both course_name and section_name
     const query = `
         SELECT course_name, credits, section_name
         FROM courses
         WHERE course_name LIKE ?`;
 
     const likePattern = `%${courseName}%`;
-    db.all(query, [likePattern], (err, rows) => {
-        if (err) {
-            console.error('Error executing query:', err.message);
-            return res.status(500).json({ error: 'Database query failed' });
-        }
+    try {
+        const [rows] = await db.execute(query, [likePattern]);
 
         // Use a map to aggregate sections by course_name and credits
         const courseMap = new Map();
@@ -67,7 +68,10 @@ app.post('/search', (req, res) => {
 
         res.json({ courses: uniqueResults });
         console.log('uniqueResults:', uniqueResults);
-    });
+    } catch (err) {
+        console.error('Error executing query:', err.message);
+        res.status(500).json({ error: 'Database query failed' });
+    }
 });
 
 app.post('/add-course', (req, res) => {
@@ -126,7 +130,7 @@ app.post('/generate-schedules', (req, res) => {
     const lessons = req.session.courses.map(course => `${course.course_name}`);
     const lessonsArgs = lessons.join(' ');
 
-    exec(`python3 scripts/generate_schedules.py "${lessonsArgs}"`, (error, stdout, stderr) => {
+    exec(`python scripts/generate_schedules.py "${lessonsArgs}"`, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error executing script: ${error}`);
             res.status(500).send('Error generating schedules');
@@ -151,4 +155,4 @@ app.post('/generate-schedules', (req, res) => {
 
 app.listen(port, '0.0.0.0', () => {
     console.log(`Server running on port ${port}`);
-  });
+});

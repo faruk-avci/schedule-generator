@@ -1,8 +1,10 @@
-import sqlite3
+import mysql.connector
 import numpy as np
 import json
 import sys
 import os
+from dotenv import load_dotenv
+
 selected_lessons = [ "CS105","MATH104" , "IE101"]
 
 lesson_id = {
@@ -11,46 +13,65 @@ lesson_id = {
 id_lesson = {
 
 }
+load_dotenv()
+def create_connection():
+    try:
+        conn = mysql.connector.connect(
+            user=os.getenv("MYSQL_USER"),  
+            password=os.getenv("MYSQL_PASSWORD"),
+            host=os.getenv("MYSQL_HOST"),
+            port=os.getenv("MYSQL_PORT"),
+            database=os.getenv("MYSQL_DATABASE")
+        )
+        return conn
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        return None
 
 def get_info_from_db(lessons, lesson_id):
     all_courses = {}
     must_count_dict = {}
-    db_path = os.path.join(os.path.dirname(__file__), '../data/courses.db')
-    with sqlite3.connect(db_path) as connection:
-        cursor = connection.cursor()
-        for lesson in lessons:
-            cursor.execute('''
-            SELECT 
-                c.course_name,
-                c.section_name,   
-                c.lecturer,
-                c.credits,
-                c.required,
-                ts_start.day_of_week AS start_day,
-                ts_start.hour_of_day AS start_hour,
-                ts_end.hour_of_day AS end_hour,
-                c.id
-            FROM
-                course_time_slots cts
-            JOIN
-                time_slots ts_start ON cts.start_time_id = ts_start.time_id
-            JOIN
-                time_slots ts_end ON cts.end_time_id = ts_end.time_id
-            JOIN
-                courses c ON cts.course_id = c.id
-            WHERE
-                c.course_name = ?
-            ''', (lesson,))
-            all_courses[lesson] = cursor.fetchall()
-            
-            for le in all_courses[lesson]:
-                if le[1] not in lesson_id:
-                    lesson_id[le[1]] = le[8]
-                    
-                if le[1] not in must_count_dict:
-                    must_count_dict[le[1]] = all_courses[lesson][0][4]
-    return all_courses, must_count_dict
+    
+    conn = create_connection()
+    if conn is None:
+        return all_courses, must_count_dict
 
+    cursor = conn.cursor()
+    
+    for lesson in lessons:
+        cursor.execute('''
+        SELECT 
+            c.course_name,
+            c.section_name,   
+            c.lecturer,
+            c.credits,
+            c.required,
+            ts_start.day_of_week AS start_day,
+            ts_start.hour_of_day AS start_hour,
+            ts_end.hour_of_day AS end_hour,
+            c.id
+        FROM
+            course_time_slots cts
+        JOIN
+            time_slots ts_start ON cts.start_time_id = ts_start.time_id
+        JOIN
+            time_slots ts_end ON cts.end_time_id = ts_end.time_id
+        JOIN
+            courses c ON cts.course_id = c.id
+        WHERE
+            c.course_name = %s
+        ''', (lesson,))
+        all_courses[lesson] = cursor.fetchall()
+        
+        for le in all_courses[lesson]:
+            if le[1] not in lesson_id:
+                lesson_id[le[1]] = le[8]
+                
+            if le[1] not in must_count_dict:
+                must_count_dict[le[1]] = all_courses[lesson][0][4]
+
+    conn.close()
+    return all_courses, must_count_dict
 def course_to_section(courses):
     course_to_section = {}
     for course_name, sections in courses.items():

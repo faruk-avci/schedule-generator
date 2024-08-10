@@ -13,12 +13,12 @@ function searchLessons() {
         },
         body: JSON.stringify({ courseName })
     })
-    .then(response => response.json())
-    .then(data => displayResultCourses(data.courses))
-    .catch(error => {
-        console.error('Error:', error);
-        showToast('Arama sırasında bir hata oluştu', 'error');
-    });
+        .then(response => response.json())
+        .then(data => displayResultCourses(data.courses))
+        .catch(error => {
+            console.error('Error:', error);
+            showToast('Arama sırasında bir hata oluştu', 'error');
+        });
 }
 
 function displayResultCourses(courses) {
@@ -62,15 +62,15 @@ function calculateTotalCreditAndLesson() {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('totalCredits').textContent = data.totalCredits || 0;
-        document.getElementById('totalLessons').textContent = data.totalLesson || 0;
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showToast('Toplam kredi ve ders hesaplanamadı', 'error');
-    });
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('totalCredits').textContent = data.totalCredits || 0;
+            document.getElementById('totalLessons').textContent = data.totalLesson || 0;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showToast('Toplam kredi ve ders hesaplanamadı', 'error');
+        });
 }
 
 function addCourse(course) {
@@ -79,19 +79,19 @@ function addCourse(course) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ courseName: course.course_name, credits: course.credits })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            showToast(`${course.course_name} başarıyla eklendi!`, 'added');
-            updateAddedCourses();
-        } else {
-            showToast(data.error || 'Hata', 'error');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showToast('Ders eklenirken bir hata oluştu', 'error');
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showToast(`${course.course_name} başarıyla eklendi!`, 'added');
+                updateAddedCourses();
+            } else {
+                showToast(data.error || 'Hata', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showToast('Ders eklenirken bir hata oluştu', 'error');
+        });
 }
 
 function removeCourse(course) {
@@ -100,19 +100,19 @@ function removeCourse(course) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ courseName: course.course_name, credits: course.credits })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            showToast(`${course.course_name} başarıyla çıkarıldı!`, 'error');
-            updateAddedCourses();
-        } else {
-            showToast(data.error || 'Hata.', 'error');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showToast('Ders çıkarılırken bir hata oluştu', 'error');
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showToast(`${course.course_name} başarıyla çıkarıldı!`, 'error');
+                updateAddedCourses();
+            } else {
+                showToast(data.error || 'Hata.', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showToast('Ders çıkarılırken bir hata oluştu', 'error');
+        });
 }
 
 function updateAddedCourses() {
@@ -120,12 +120,12 @@ function updateAddedCourses() {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
-    .then(response => response.json())
-    .then(data => displayAddedCourses(data.courses))
-    .catch(error => {
-        console.error('Error:', error);
-        showToast('Eklenen dersler getirilemedi', 'error');
-    });
+        .then(response => response.json())
+        .then(data => displayAddedCourses(data.courses))
+        .catch(error => {
+            console.error('Error:', error);
+            showToast('Eklenen dersler getirilemedi', 'error');
+        });
 }
 
 function displayAddedCourses(courses) {
@@ -177,7 +177,7 @@ function showToast(message, type) {
     }, 3000);
 }
 
-window.onload = function() {
+window.onload = function () {
     updateAddedCourses();
     calculateTotalCreditAndLesson();
 };
@@ -187,22 +187,22 @@ function generateSchedules() {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
-    .then(response => response.json())
-    .then(data => {
-        const addedCourses = data.courses;
-        return fetch('/generate-schedules', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ lessons: addedCourses.map(course => course.course_name) })
+        .then(response => response.json())
+        .then(data => {
+            const addedCourses = data.courses;
+            return fetch('/generate-schedules', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ lessons: addedCourses.map(course => course.course_name) })
+            });
+        })
+        .then(response => response.json())
+        .then(schedules => {
+            localStorage.setItem('schedules', JSON.stringify(schedules));
+            window.location.href = '/schedules.html';
+        })
+        .catch(error => {
+            console.error('Error generating schedules:', error);
+            showToast('Error generating schedules', 'error');
         });
-    })
-    .then(response => response.json())
-    .then(schedules => {
-        localStorage.setItem('schedules', JSON.stringify(schedules));
-        window.location.href = '/schedules.html';
-    })
-    .catch(error => {
-        console.error('Error generating schedules:', error);
-        showToast('Error generating schedules', 'error');
-    });
 }
