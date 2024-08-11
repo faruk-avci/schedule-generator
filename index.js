@@ -1,25 +1,112 @@
 require('dotenv').config();
 const express = require('express');
+const RedisStore = require('connect-redis').default;
+const rateLimit = require('express-rate-limit');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const { exec } = require('child_process');
+const winston = require('winston');
 const mysql = require('mysql2');
-const session = require('express-session');
-const app = express();
+const redis = require('redis');
+const path = require('path');
 
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 150, // Limit each IP to 100 requests per windowMs
+    handler: (req, res, next, options) => {
+        res.status(429).json({
+            error: 'Bu IP adresi üzerinden çok fazla istekte bulundunuz. Lütfen daha sonra tekrar deneyin.'
+        });
+    }
+});
+
+
+
+const logFormat = winston.format.printf(({ level, message, timestamp }) => {
+    return `${timestamp} [${level}]: ${message}`;
+});
+// Logger configuration
+const errorLogger = winston.createLogger({
+    level: 'error',
+    format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.json(),
+        logFormat
+    ),
+    transports: [
+        new winston.transports.File({ filename: path.join(__dirname, 'logs', 'error.log') })
+    ]
+});
+const searchLogger = winston.createLogger({
+    level: 'info',
+    format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.json(),
+        logFormat
+    ),
+    transports: [
+        new winston.transports.File({ filename: path.join(__dirname, 'logs', 'searches.log') })
+    ]
+});
+const addedCoursesLogger = winston.createLogger({
+    level: 'info',
+    format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.json(),
+        logFormat
+    ),
+    transports: [
+        new winston.transports.File({ filename: path.join(__dirname, 'logs', 'added-courses.log') })
+    ]
+});
+const removedCoursesLogger = winston.createLogger({
+    level: 'info',
+    format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.json(),
+        logFormat
+    ),
+    transports: [
+        new winston.transports.File({ filename: path.join(__dirname, 'logs', 'removed-courses.log') })
+    ]
+});
+
+
+
+
+const app = express();
 const port = 5000;
 
+const redisClient = redis.createClient({
+    url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
+});
+
+(async () => {
+    try {
+        await redisClient.connect();
+        console.log('Connected to Redis successfully');
+    } catch (err) {
+        console.error('Error connecting to Redis:', err);
+        errorLogger.error('Error connecting to Redis:', err);
+        process.exit(1); 
+    }
+})();
+
 app.use(bodyParser.json());
-app.use(express.static('public')); 
+app.use(express.static('public'));
+app.use(limiter);
 
 app.use(session({
+    store: new RedisStore({ client: redisClient }),
     secret: process.env.SECRET_KEY || 'secret-key',
     name: 'sessionId',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: process.env.NODE_ENV === "production" } // Set to true if using HTTPS
+    cookie: { 
+        secure: process.env.NODE_ENV === "production", // Set true for HTTPS
+        maxAge: 1000 * 60 * 60 // 1 hour
+    }
 }));
-
-// Create a MySQL connection pool
 const pool = mysql.createPool({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
@@ -39,6 +126,8 @@ app.post('/search', async (req, res) => {
     if (!courseName) {
         return res.status(400).json({ error: 'Course name is required' });
     }
+
+    searchLogger.info(`Searching for courses with name: ${courseName}`);
 
     const query = `
         SELECT course_name, credits, section_name
@@ -70,6 +159,7 @@ app.post('/search', async (req, res) => {
         console.log('uniqueResults:', uniqueResults);
     } catch (err) {
         console.error('Error executing query:', err.message);
+        errorLogger.error('Error executing query:', err.message);
         res.status(500).json({ error: 'Database query failed' });
     }
 });
@@ -90,6 +180,7 @@ app.post('/add-course', (req, res) => {
     }
 
     req.session.courses.push({ course_name: courseName, credits });
+    addedCoursesLogger.info(`Added course: ${courseName}, credits: ${credits}`);
     res.json({ success: true });
 });
 
@@ -109,6 +200,7 @@ app.post('/remove-course', (req, res) => {
     }
 
     req.session.courses.splice(index, 1);
+    removedCoursesLogger.info(`Removed course: ${courseName}, credits: ${credits}`);
     res.json({ success: true });
 });
 
@@ -133,12 +225,12 @@ app.post('/generate-schedules', (req, res) => {
     exec(`python scripts/generate_schedules.py "${lessonsArgs}"`, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error executing script: ${error}`);
-            res.status(500).send('Error generating schedules');
+            res.status(500).send('Program oluşturulurken bir hata oluştu');
             return;
         }
         if (stderr) {
             console.error(`Script stderr: ${stderr}`);
-            res.status(500).send('Error generating schedules');
+            res.status(500).send('Program oluşturulurken bir hata oluştu');
             return;
         }
 
@@ -148,11 +240,12 @@ app.post('/generate-schedules', (req, res) => {
             res.send(schedules);
         } catch (parseError) {
             console.error(`Error parsing script output: ${parseError}`);
-            res.status(500).send('Error parsing schedules');
+            errorLogger.error(`Error parsing script output: ${parseError}`);
+            res.status(500).send('Program oluşturulurken bir hata oluştu');
+            
         }
     });
 });
-
 app.listen(port, '0.0.0.0', () => {
     console.log(`Server running on port ${port}`);
 });

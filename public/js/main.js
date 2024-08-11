@@ -27,6 +27,7 @@ function displayResultCourses(courses) {
 
     if (courses.length === 0) {
         resultsDiv.innerHTML = '<p>Sonuç Bulunamadı</p>';
+        showToast('Sonuç bulunamadı', 'error');
         return;
     }
 
