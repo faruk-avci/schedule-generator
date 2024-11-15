@@ -13,76 +13,39 @@
 
     <div id="toastContainer"></div>
 
-    <div class="promotion">
-        <h1>Schedule Generator</h1>
-        <div id="how_it_works">
-            <h3>Nasıl Çalışır?</h3>
-            <p>
-                Bu site Özyeğin Üniversitesi öğrencileri için dönemlik ders programlarını hazırlamalarına yardımcı olmak için yapılmıştır. Aşağı kısımda bu dönem alacağınız derslerinizi bulabilir ve onları listenize ekleyebilirsiniz. Daha sonra "Oluştur" butonuna basarak seçilen dersler için muhtemel tüm ders programlarını görebilir ve onları çeşitli kriterlere göre sıralayabilirsiniz.
-            </p>
-        </div>
-        <div class="two_boxes">
-            <div id="box_1">
-                <h3>Özellikler:</h3>
-                <ul>
-                    <li>Lisans seviyesindeki tüm ÖzÜ öğrencilerine uygun</li>
-                    <li>Kolaylaştılımış ve hızlı ders programı hazılama</li>
-                    <li>Sabah yoğunluğuna ve gün yoğunluğuna göre sıralama</li>
-                    <li>İstediğiniz ders programını anında resim olarak indirme</li>
-                    <li><a target="_blank" href="https://github.com/faruk-avci/Schedule-Generator" style="color: #fff;">Açık kaynak</a> ve kullanımı ücretsiz :)</li>
-                </ul>
-            </div>
-            <div id="box_2">
-                <h3>Dikkat:</h3>
-                <ul>
-                    <li>Staj ve Bitirme Proje dersleri dahil edilmemiştir.</li>
-                    <li>Bazı derslerin ve Labların çok sayıda şubesi olduğundan çok bu dersleri seçmeniz durumunda çok sayıda program ile karşılaşabilirsiniz. Bu durumda çok şubeli dersleri çıkarmanız tavsiye edilir.</li>
-                    <li> Ders seçimlerinizi yaparken ön koşul ya da yan koşul şartlarına dikkat ediniz çünkü program ön koşullara ve yan koşullara dikkat etmemektedir.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
     <div class="actualProgram">
         <div class="searchAndDisplayArea">
             <div class="searchArea">
                 <form id="searchForm">
                     
                     <div class="text-input">
-                    <p>Ders Ara:</p>
-                    <input name="courseName" type="text" id="searchInput" placeholder="Ex: BUS101">
+                    <input name="courseName" type="text" id="searchInput" placeholder="Ders Ara: BUS101">
                 </div>
                     <div class="form-buttons">
                     <button type="button" onclick="searchLessons()">Ara</button>
                     <button type="button" onclick="clearResults()">Temizle</button>
                     </div>
+                    <button class="generate" id="generate" type="button" onclick="generateSchedules()">Oluştur</button>
                 </form>
             </div>
-            <div class="CreditLesson">
-                <div>
-                    <h3>Toplam Kredi: <span id="totalCredits">0</span></h3>
-                    <h3>Toplam Ders: <span id="totalLessons">0</span></h3>
+        </div>
+    <div class="resultAndAddeds">
+            <div id="results">
+    
+            </div>
+            <div id="addedCourses">
+                <div id="courses">
+                    <h3>Added Courses</h3>
                 </div>
-                <div class="generate-class">
-                    <button class="generate" id="generate" type="button" onclick="generateSchedules()">Oluştur</button>
+                <div id="sections">
+                    <h3>Added Sections</h3>
                 </div>
             </div>
         </div>
-    
-    <div class="resultAndAddeds">
-        <div id="results">
 
-        </div>
-        <div id="addedCourses">
-            
-        </div>
-    </div>  
     </div>
 
-    <div class="footer">
-        <p>Coded by <i>Faruk Avcı</i></p>
-        <p style="margin-left: 5px;">İletişim <a href="mailto:faruk.avci@ozu.edu.tr" style="color: #fff;">faruk.avci@ozu.edu.tr</a></p>
-    </div>
+   
     <script src="js/main.js"></script>
 </body>
 

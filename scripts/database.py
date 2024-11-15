@@ -8,11 +8,9 @@ load_dotenv()
 def create_connection():
     try:
         conn = mysql.connector.connect(
-            user=os.getenv("MYSQL_USER"),  
-            password=os.getenv("MYSQL_PASSWORD"),
-            host=os.getenv("MYSQL_HOST"),
-            port=os.getenv("MYSQL_PORT"),
-            database=os.getenv("MYSQL_DATABASE")
+            user="root",  
+            password="1234",
+            database="ozu2"
         )
         return conn
     except mysql.connector.Error as err:

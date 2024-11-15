@@ -1,411 +1,206 @@
+/* Updated body background with a more modern gradient */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #01121c;
+    font-family: 'Inter', Arial, sans-serif;
+    background: linear-gradient(135deg, #1a1f2c 0%, #2d3748 100%);
     color: #ffffff;
     margin: 0;
-    padding: 0;
+    padding: 20px;
+    min-height: 100vh;
 }
 
+/* Improved scrollbar styling */
 ::-webkit-scrollbar {
-    width: 14px; /* Width of the scrollbar */
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent; /* Background color of the track */
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(206, 168, 168, 0.65); /* Color of the scrollbar thumb with transparency */
-    border-radius: 15px; /* Rounded corners for the scrollbar thumb */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.7); /* Darker color when hovering */
+    background: rgba(255, 255, 255, 0.3);
 }
 
-/* Toast Container */
+/* Enhanced search and display area */
+.searchAndDisplayArea {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+}
+
+/* Improved search form */
+#searchForm {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+#searchForm input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 12px 0 12px 4px;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+#searchForm input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+#searchForm input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Enhanced button styles */
+button {
+    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(66, 153, 225, 0.3);
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(66, 153, 225, 0.4);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* Improved course item styling */
+.course-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.course-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.course-item span {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.course-item .actions {
+    display: flex;
+    gap: 10px;
+}
+
+.course-item button {
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+/* Results and Added Courses sections */
+.resultAndAddeds {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+#results, #addedCourses {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Toast notifications */
 #toastContainer {
     position: fixed;
     top: 20px;
     right: 20px;
     z-index: 1000;
-
 }
 
-/* Toast Message */
 .toast {
-    display: none;
-    color: #fff;
-    padding: 20px 40px;
-    border-radius: 5px;
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
     margin-bottom: 10px;
-    font-size: 19px;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
     opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-
+    transform: translateX(100%);
+    transition: all 0.3s ease;
 }
 
-/* Success Toast */
-.toast.added {
-    background-color: #28a745; /* Green */
-
+.toast.success {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
 }
 
-/* Error Toast */
 .toast.error {
-    background-color: #dc3545; /* Red */
+    background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
 }
 
-/* Show Toast */
 .toast.show {
-    display: block;
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
 }
 
-/* Fade Out Toast */
-.toast.fadeOut {
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-
-.promotion{
-    width: 100%;
-}
-
-#how_it_works {
-    width: auto;
-    color: #ffffff;
-    margin: 0 15px 15px 15px;
-    background-image: linear-gradient(to right, #009aca, #19d2fd);
-    border-radius: 30px;
-    padding: 35px;
-}
-#how_it_works h3 {
-    font-size: 30px;
-    margin: 0;
-    padding: 0 0 10px 0;
-}
-#how_it_works p {
-    font-size: 22px;
-    margin: 0;
-    padding: 10px 0 0 0;
-}
-
-.two_boxes{
-    display: flex;
-    justify-content: space-around;
-}
-
-.two_boxes>div {
-    width: 50%;
-    color: #fff;
-    margin: 15px 15px 0 15px;
-    background-image: linear-gradient(to right, #009aca, #19d2fd);
-    border-radius: 30px;
-    padding: 35px;
-    box-sizing: border-box;
-}
-
-.two_boxes>div h3 {
-    font-size: 30px;
-    margin: 0;
-    padding: 0 0 10px 0;
-}
-.two_boxes>div ul {
-    font-size: 22px;
-    margin: 0;
-}
-.general_boxes>div ul li {
-    padding: 5px 0;
-}
-#box_1{
-    background-image: linear-gradient(to right, #31146b, #4d0f8e);
-}
-#box_2{
-    background-image: linear-gradient(to right, #085936, #22851b);
-}
-
-/**/
-
-
-
-.searchAndDisplayArea {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-image: linear-gradient(to right, #ff5f1a, #ff8550);
-    margin: 30px 15px 20px 15px;
-    border-radius: 30px;
-    padding: 35px 0;
-}
-.searchArea{
-
-    width: 50%;
-}
-
-.searchArea input[type="text"], .searchArea button {
-    padding: 15px;
-    font-size: 19px;
-    border: none;
-    border-radius: 5px;
-}
-
-#searchForm{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.searchArea button {
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.searchArea p{
-    display: inline;
-    padding: 0 25px;
-    font-size: 19px;
-    font-weight: 700;
-}
-.form-buttons button{
-    margin-left: 10px;
-}
-
-.CreditLesson{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 50%;
-    margin-left:30px ;
-}
-.CreditLesson>div{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.CreditLesson>div>h3{
-    padding: 0 30px 0 0;
-}
-.generate-class{
-    padding-right: 25px;
-}
-.generate-class button {
-    padding: 15px;
-    font-size: 19px;
-    border: none;
-    border-radius: 5px;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-
-
-
-
-
-/**/
-.resultAndAddeds{
-    display: flex;
-    justify-content: center;
-    margin:15px;
-}
-
-#results{
-    width: 50% !important;
-    padding: 0 10px;
-}
-#addedCourses{
-width: 50% !important;
-padding: 0 10px;
-
-}
-
-#addedCourses button{
-    background-color: rgb(201, 36, 36);
-}
-
-.course-item{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 10px 12px;
-    margin: 10px 0;
-    color: #000000;
-    font-size: 20px;
-    border-radius: 20px;
-}
-
-.course-item button {
-    padding: 12px 18px;
-    margin-right: 15px;
-    font-size: 19px;
-    border: none;
-    border-radius: 5px;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-
-
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(to right, #01121f, #04262e);
-    color: #ffffff;
-    padding: 20px;
-    border-radius: 30px;
-    margin: 12px;
-    font-size: 18px;
-}
-
-
-
-/* Responsive */
-@media screen and (max-width: 1250px) {
-
-    *{
-        font-size: 18px !important;
+/* Responsive design */
+@media (max-width: 768px) {
+    .resultAndAddeds {
+        grid-template-columns: 1fr;
     }
-    body{
-        padding: 0;
-        margin: 0;
-    }
-    
-    .promotion h1{
-        font-size: 45px !important; 
-        text-align: center;   
-    }
-    .two_boxes{
+
+    #searchForm {
         flex-direction: column;
+        align-items: stretch;
     }
-    .two_boxes>div {
-        margin: 10px 12px;  
-        padding: 25px;
-    }
-    .two_boxes>div>ul {
-        padding-left: 15px;
-    }
-    #box_1, #box_2 {
-        width: auto;
-    }
-    #how_it_works {
-        margin: 10px 12px;
-    }   
 
-    .searchAndDisplayArea{
-        flex-direction: column;
-        background-image: none;
-        padding: 0;
-    }
-    .searchArea, .CreditLesson{
+    #searchForm input {
         width: 100%;
-        justify-content: center;
+    }
+
+    .course-item {
         flex-direction: column;
-        background-image: linear-gradient(to right, #ff5f1a, #ff8550);
-        margin: 10px 12px;
-        padding: 10px 0;
-
-        border-radius: 30px;
-
-    }
-    #searchForm{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-    .form-buttons{
-        display: flex;
-        justify-content: center;
-        margin-top: 5px;
-    }
-    .searchArea p{
-        padding: 0 2px;
-    }
-    .searchArea button {
-        margin: 0 0 0 6px;
-    }
-    .footer{
-        flex-direction: column;
-    }
-    .footer p{
-        margin: 7px 0;
-    }
-@media screen and (max-width: 768px){
-
-    .promotion h1{
-        font-size: 35px !important; 
-        text-align: center;   
-    }
-    *{
-        font-size: 16px !important;
-    }
-
-    .resultAndAddeds{
-        flex-direction: column;
-        width: auto;
-    }
-    #results, #addedCourses{
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100% !important;
-    }
-
-
-
-    #how_it_works {
-        margin: 10px 7px;
-        padding: 25px;
-    }
-    .two_boxes>div {
-        margin: 10px 7px;  
-        padding: 25px;
-    }
-
-    .searchAndDisplayArea{
-        margin: 10px 7px;
-    }
-    .searchArea, .CreditLesson{
-        margin: 10px 7px;
-    }
-
-    .searchArea input[type="text"], .searchArea button {
-        padding: 10px;
-        font-size: 16px;
-    }
-
-    .CreditLesson>div{
+        gap: 10px;
         text-align: center;
     }
-    .CreditLesson>div>h3{
-        margin: 4px 0;
-    }
-    
 
-    .CreditLesson>div>button {
-        padding: 10px;
-        font-size: 16px;
+    .course-item .actions {
+        width: 100%;
+        justify-content: center;
     }
-
-    .course-item{
-        padding: 10px 12px;
-        margin: 10px 0;
-        font-size: 16px;
-    }
-
-    .resultAndAddeds{
-        margin: 10px 7px;
-    }
-
 }
-} 

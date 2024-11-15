@@ -20,12 +20,9 @@ const limiter = rateLimit({
     }
 });
 
-
-
 const logFormat = winston.format.printf(({ level, message, timestamp }) => {
     return `${timestamp} [${level}]: ${message}`;
 });
-// Logger configuration
 const errorLogger = winston.createLogger({
     level: 'error',
     format: winston.format.combine(
@@ -71,33 +68,15 @@ const removedCoursesLogger = winston.createLogger({
     ]
 });
 
-
-
-
 const app = express();
 const port = 5000;
 
-const redisClient = redis.createClient({
-    url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
-});
-
-(async () => {
-    try {
-        await redisClient.connect();
-        console.log('Connected to Redis successfully');
-    } catch (err) {
-        console.error('Error connecting to Redis:', err);
-        errorLogger.error('Error connecting to Redis:', err);
-        process.exit(1); 
-    }
-})();
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(limiter);
 
 app.use(session({
-    store: new RedisStore({ client: redisClient }),
     secret: process.env.SECRET_KEY || 'secret-key',
     name: 'sessionId',
     resave: false,
@@ -107,11 +86,12 @@ app.use(session({
         maxAge: 1000 * 60 * 60 // 1 hour
     }
 }));
+
 const pool = mysql.createPool({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE,
+    host: "localhost",
+    user: "root",
+    password: "1234",
+    database: "ozu2",
     connectionLimit: 10
 });
 
@@ -164,88 +144,134 @@ app.post('/search', async (req, res) => {
     }
 });
 
-app.post('/add-course', (req, res) => {
-    const { courseName, credits } = req.body;
-    if (!courseName || credits === undefined) {
-        return res.status(400).json({ error: 'Course name and credits are required' });
+app.post('/add', async (req, res) =>{
+    const { course, section } = req.body;
+
+    if (!req.session.addedCourses) {
+        req.session.addedCourses = [];
+    }
+    if (!req.session.addedSections) {
+        req.session.addedSections = [];
     }
 
-    if (!req.session.courses) {
-        req.session.courses = [];
-    }
-
-    const exists = req.session.courses.some(course => course.course_name === courseName);
-    if (exists) {
-        return res.status(400).json({ error: 'Course already added.' });
-    }
-
-    req.session.courses.push({ course_name: courseName, credits });
-    addedCoursesLogger.info(`Added course: ${courseName}, credits: ${credits}`);
-    res.json({ success: true });
-});
-
-app.post('/remove-course', (req, res) => {
-    const { courseName, credits } = req.body;
-    if (!courseName || credits === undefined) {
-        return res.status(400).json({ error: 'Course name and credits are required' });
-    }
-
-    if (!req.session.courses) {
-        return res.status(400).json({ error: 'No courses found' });
-    }
-
-    const index = req.session.courses.findIndex(course => course.course_name === courseName);
-    if (index === -1) {
-        return res.status(400).json({ error: 'Course not found' });
-    }
-
-    req.session.courses.splice(index, 1);
-    removedCoursesLogger.info(`Removed course: ${courseName}, credits: ${credits}`);
-    res.json({ success: true });
-});
-
-app.get('/get-added-courses', (req, res) => {
-    res.json({ courses: req.session.courses || [] });
-});
-
-app.get('/get-total-credit-lesson', (req, res) => {
-    if (!req.session.courses) {
-        return res.json({ totalCredits: 0, totalLesson: 0 });
-    }
-
-    let totalCredits = req.session.courses.reduce((acc, course) => acc + course.credits, 0);
-    let totalLesson = req.session.courses.length;
-    res.json({ totalCredits, totalLesson });
-});
-
-app.post('/generate-schedules', (req, res) => {
-    const lessons = req.session.courses.map(course => `${course.course_name}`);
-    const lessonsArgs = lessons.join(' ');
-
-    exec(`python scripts/generate_schedules.py "${lessonsArgs}"`, (error, stdout, stderr) => {
-        if (error) {
-            console.error(`Error executing script: ${error}`);
-            res.status(500).send('Program oluşturulurken bir hata oluştu');
-            return;
-        }
-        if (stderr) {
-            console.error(`Script stderr: ${stderr}`);
-            res.status(500).send('Program oluşturulurken bir hata oluştu');
-            return;
+    if (section === null) {
+        // Process of adding a COURSE
+        // Check if the course is already added
+        if (req.session.addedCourses.includes(course)) {
+            return res.status(400).json({ error: 'Course is already added' });
         }
 
-        try {
-            const schedules = JSON.parse(stdout.trim());
-            console.log('Schedules:', schedules);
-            res.send(schedules);
-        } catch (parseError) {
-            console.error(`Error parsing script output: ${parseError}`);
-            errorLogger.error(`Error parsing script output: ${parseError}`);
-            res.status(500).send('Program oluşturulurken bir hata oluştu');
+        // Check if any of its sections are added
+        const sectionExists = req.session.addedSections.some(s => s.course === course);
+        if (sectionExists) {
+            return res.status(400).json({
+                error: `One of the sections of the course "${course}" is already added. Remove the section before adding the entire course.`
+            });
+        }
+
+        // Add the course
+        req.session.addedCourses.push(course);
+        return res.json({ success: true, message: `Course "${course}" added successfully.` });
+    } else {
+        // Process of adding a SECTION
+        // Check if the section is already added
+        const existingSection = req.session.addedSections.find(
+            s => s.course === course && s.section === section
+        );
+        if (existingSection) {
+            return res.status(400).json({
+                error: `The section "${section}" of the course "${course}" is already added.`
+            });
+        }
+
+        // Check if the entire course is already added
+        if (req.session.addedCourses.includes(course)) {
+            return res.status(400).json({
+                error: `The course "${course}" is already added. Cannot add individual sections.`
+            });
+        }
+
+        // Add the section
+        req.session.addedSections.push({ course, section });
+        return res.json({
+            success: true,
+            message: `Section "${section}" of the course "${course}" added successfully.`
+        });
+    }
+
+
+});
+
+app.post('/remove', async (req, res) => {
+    const { course, section } = req.body;
+
+    // Ensure session arrays exist
+    if (!req.session.addedCourses) {
+        req.session.addedCourses = [];
+    }
+    if (!req.session.addedSections) {
+        req.session.addedSections = [];
+    }
+
+    try {
+        if (section === null) {
+            // Process of removing a COURSE
+            // Check if the course exists
+            if (!req.session.addedCourses.includes(course)) {
+                return res.status(400).json({
+                    error: `Course "${course}" is not in your added courses.`
+                });
+            }
+
+            // Remove the course
+            req.session.addedCourses = req.session.addedCourses.filter(c => c !== course);
             
+            return res.json({
+                success: true,
+                message: `Course "${course}" removed successfully.`
+            });
+
+        } else {
+            // Process of removing a SECTION
+            // Check if the section exists
+            const sectionIndex = req.session.addedSections.findIndex(
+                s => s.course === course && s.section === section
+            );
+
+            if (sectionIndex === -1) {
+                return res.status(400).json({
+                    error: `The section "${section}" of the course "${course}" is not in your added sections.`
+                });
+            }
+
+            // Remove the section
+            req.session.addedSections = req.session.addedSections.filter(
+                (s, index) => index !== sectionIndex
+            );
+
+            return res.json({
+                success: true,
+                message: `Section "${section}" of the course "${course}" removed successfully.`
+            });
         }
-    });
+
+    } catch (error) {
+        console.error('Error in /remove endpoint:', error);
+        return res.status(500).json({
+            error: 'An error occurred while processing your request.'
+        });
+    }
 });
+
+app.get('/get-courses-sections',(req,res)=>{
+    const response = {
+        addedCourses: req.session.addedCourses,
+        addedSections: req.session.addedSections,
+    };
+
+    res.json(response);
+});
+
 app.listen(port, '0.0.0.0', () => {
     console.log(`Server running on port ${port}`);
 });
