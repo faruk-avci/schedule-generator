@@ -215,15 +215,12 @@ app.post('/remove', async (req, res) => {
 
     try {
         if (section === null) {
-            // Process of removing a COURSE
-            // Check if the course exists
             if (!req.session.addedCourses.includes(course)) {
                 return res.status(400).json({
                     error: `Course "${course}" is not in your added courses.`
                 });
             }
 
-            // Remove the course
             req.session.addedCourses = req.session.addedCourses.filter(c => c !== course);
             
             return res.json({
@@ -233,7 +230,6 @@ app.post('/remove', async (req, res) => {
 
         } else {
             // Process of removing a SECTION
-            // Check if the section exists
             const sectionIndex = req.session.addedSections.findIndex(
                 s => s.course === course && s.section === section
             );

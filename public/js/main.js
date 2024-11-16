@@ -38,9 +38,15 @@ function displayResultCourses(courses) {
         const courseDiv = document.createElement('div');
         courseDiv.classList.add('course-item');
 
+        const upperC = document.createElement('div');
+        upperC.classList.add('upper');
+
         const courseText = document.createElement('span');
         courseText.textContent = `${course.course_name} Kredi: ${course.credits} `;
-        courseDiv.appendChild(courseText);
+        const textDiv = document.createElement('div');
+        textDiv.appendChild(courseText);
+        upperC.appendChild(textDiv);
+
 
         const addButton = document.createElement('button');
         addButton.textContent = 'Ekle';
@@ -53,8 +59,9 @@ function displayResultCourses(courses) {
         buttondDiv.classList.add('button-div');
         buttondDiv.append(showSectionButton);
         buttondDiv.append(addButton);
-        courseDiv.appendChild(buttondDiv);
+        upperC.appendChild(buttondDiv);
 
+        courseDiv.appendChild(upperC)
         // Create a hidden section container to show sections when the button is clicked
         const sectionDiv = document.createElement('div');
         sectionDiv.classList.add('sections-container');
@@ -76,18 +83,24 @@ function toggleSectionDisplay(courseDiv, course) {
 
         course.sections.forEach(section => {
             const sectionItem = document.createElement('div');
-            sectionItem.classList.add('section-item');
+            sectionItem.classList.add('course-item');
+
+            const upperC = document.createElement('div');
+            upperC.classList.add('upper');
 
             const sectionText = document.createElement('span');
             sectionText.textContent = section;
-            sectionItem.appendChild(sectionText);
+            const divSpan = document.createElement('div');
+            divSpan.appendChild(sectionText);
+            upperC.appendChild(divSpan);
 
             const addButton = document.createElement('button');
             addButton.textContent = 'Ekle';
             addButton.onclick = () => add(course.course_name, section);
-            sectionItem.appendChild(addButton);
-
-            fragment.appendChild(sectionItem);
+            const divButton = document.createElement('div');
+            divButton.appendChild(addButton);
+            upperC.appendChild(divButton);
+            fragment.appendChild(upperC);
         });
 
         sectionDiv.appendChild(fragment);
@@ -151,7 +164,7 @@ function displayAddeds() {
             coursesContainer.appendChild(h3C);
             courses.forEach((course, index) => {
                 const courseDiv = document.createElement('div');
-                courseDiv.classList.add('course-item');
+                courseDiv.classList.add('added-course-item');
 
                 const courseText = document.createElement('span');
                 courseText.textContent = course;
@@ -171,7 +184,7 @@ function displayAddeds() {
             // Display added sections
             sections.forEach((section, index) => {
                 const sectionDiv = document.createElement('div');
-                sectionDiv.classList.add('course-item');
+                sectionDiv.classList.add('added-course-item');
 
                 const sectionText = document.createElement('span');
                 sectionText.textContent = `${section.section}`;
