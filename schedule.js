@@ -1,4 +1,6 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2'); // MySQL Connection
+const math = require('mathjs'); // Matrices Operations
+const { ConstantMatrixOverlapError } = require('./error');
 
 async function regulate(courses, sections) {
     const regulated = {};
@@ -74,6 +76,7 @@ async function course_to_sections(regulated,all_courses) {
                 }
                 if(!(section_namee in course_to_section[course_name])){
                     course_to_section[course_name][section_namee] = {
+                        "id" : section["id"],
                         "lecturer": section["lecturer"],
                         "credits": section["credits"],
                         "required": section["required"],
@@ -93,8 +96,6 @@ async function course_to_sections(regulated,all_courses) {
         else{
             for(const section of sections){
                 const section_namee = section["section_name"];
-                console.log(regulated[course_name])
-                console.log(section_namee)
                 for(inside of regulated[course_name]){ 
                     if(inside == section_namee){ 
                         if(!(course_name in course_to_section)){
@@ -102,10 +103,11 @@ async function course_to_sections(regulated,all_courses) {
                         }
                         if(!(section_namee in course_to_section[course_name])){
                             course_to_section[course_name][section_namee] = {
+                                "id": section["id"],
                                 "lecturer": section["lecturer"],
                                 "credits": section["credits"],
                                 "required": section["required"],
-                                "times": {}
+                                "times": {},
                             }
                         }
                         const day_of_week = section["start_day"];
@@ -121,27 +123,61 @@ async function course_to_sections(regulated,all_courses) {
             }
         }
     }
-    console.dir(course_to_section, { depth: null });
+    return course_to_section;
+    //console.dir(course_to_section, { depth: null });
 }
+
+async function generate_constant_matrix(grouped_sections) {
+    const daysOfWeek = {
+        Pazartesi: 0,
+        Salı: 1,
+        Çarşamba: 2,
+        Perşembe: 3,
+        Cuma: 4
+    };
+    let c_matrix = math.zeros([5,13]);
+    for(const course in grouped_sections){
+        
+        const sections = Object.keys(grouped_sections[course]);
+        if(sections.length === 1){
+            
+            const times = grouped_sections[course][sections]["times"];
+            
+            for (const day in times) {
+                
+                const time = times[day];
+                const start_hour = parseInt(time[0].split(":")[0]) - 8;
+                const end_hour = parseInt(time[1].split(":")[0]) - 8;
+                const rowIndex = daysOfWeek[day];
+
+                for (let i = start_hour; i <= end_hour; i++) {
+                    if (c_matrix[rowIndex][i] !== 0) {
+                        throw new ConstantMatrixOverlapError(`Overlap detected at ${course}, ${section} on row ${rowIndex}, column ${i}`);
+                    }
+                    c_matrix[rowIndex][i] = grouped_sections[course][sections]["id"];
+                }    
+            }
+        }
+    }
+    return c_matrix;
+}
+
 
 (async () => {
     const regulated = await regulate(
-        ["CS202","MATH103","MATH104"],[{
-            "course": "CS201",
-            "section": "CS201A"
-            },
-            {
-            "course": "CS201",
-            "section": "CS201B"
-            },
-            {
-            "course": "CS201L",
-            "section": "CS201LA"
-            },
-            {
-            "course": "CS201L",
-            "section": "CS201LB"
-            }]
+        ["CS202","MATH104"],[
+        {
+            course: "MATH103",
+            section: "MATH103B"
+        },
+        {
+            course: "EE203L",
+            section: "EE203LC"
+        }
+    ]
     );
-    course_to_sections(regulated,await get_lessons_from_db(Object.keys(regulated)));
+    const grouped_sections = await course_to_sections(regulated,await get_lessons_from_db(Object.keys(regulated)));
+    const c_matrix = await generate_constant_matrix(grouped_sections);
+    let all_matrix = [c_matrix];
+    console.log(all_matrix[0])
 })();
