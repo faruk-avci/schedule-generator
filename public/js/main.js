@@ -248,3 +248,12 @@ function showToast(message, type) {
     }, 3000);
 }
 
+async function generateSchedules(){
+    const response = await fetch('/generate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+}

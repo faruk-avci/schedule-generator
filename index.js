@@ -9,6 +9,7 @@ const winston = require('winston');
 const mysql = require('mysql2');
 const redis = require('redis');
 const path = require('path');
+const { calistir } = require('./schedule');
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -259,6 +260,24 @@ app.post('/remove', async (req, res) => {
     }
 });
 
+app.post('/generate', async (req, res) => {
+    try {
+        // Call calistir with session data
+        const schedules = await calistir(req.session.addedCourses, req.session.addedSections);
+
+        // Send the generated schedules as a response
+        res.json({
+            success: true,
+            data: schedules,
+        });
+    } catch (error) {
+        console.error('Error generating schedules:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to generate schedules',
+        });
+    }
+});
 app.get('/get-courses-sections',(req,res)=>{
     const response = {
         addedCourses: req.session.addedCourses,
