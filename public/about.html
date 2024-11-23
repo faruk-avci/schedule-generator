@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Schedule Generator</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+
+.promotion {
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.promotion h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2rem;
+  text-align: center;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.how-it-works {
+  margin-bottom: 3rem;
+}
+
+.how-it-works h3 {
+  color: var(--text);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.how-it-works p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.two-boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.box {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.box h3 {
+  color: var(--text);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.75rem;
+}
+
+.box ul {
+  list-style: none;
+}
+
+.box li {
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.box li::before {
+  content: "•";
+  color: var(--primary);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.box a {
+  color: var(--text);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.box a:hover {
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .two-boxes {
+    grid-template-columns: 1fr;
+  }
+  
+  .promotion {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+}
+</style>
+<body>
+    <!-- Navigation from previous response -->
+    <nav class="header-nav">
+        <div class="nav-container">
+            <a href="/" class="logo">Schedule Generator</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/me">Me</a>
+                <a href="https://github.com/faruk-avci/Schedule-Generator" target="_blank">Source Code</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="promotion">
+        <h1>Schedule Generator</h1>
+        
+        <div class="how-it-works">
+            <h3>Nasıl Çalışır?</h3>
+            <p>
+                Bu site Özyeğin Üniversitesi öğrencileri için dönemlik ders programlarını hazırlamalarına yardımcı olmak için yapılmıştır. 
+                Ana Sayfasa bu dönem alacağınız derslerinizi bulabilir ve onları listenize ekleyebilirsiniz. 
+                Daha sonra "Oluştur" butonuna basarak seçilen dersler için muhtemel tüm ders programlarını görebilir ve 
+                onları çeşitli kriterlere göre sıralayabilirsiniz.
+            </p>
+        </div>
+
+        <div class="two-boxes">
+            <div class="box">
+                <h3>Özellikler:</h3>
+                <ul>
+                    <li>Lisans seviyesindeki tüm ÖzÜ öğrencilerine uygun</li>
+                    <li>Kolaylaştılımış ve hızlı ders programı hazılama</li>
+                    <li>Sabah yoğunluğuna ve gün yoğunluğuna göre sıralama</li>
+                    <li>İstediğiniz ders programını anında resim olarak indirme</li>
+                    <li><a target="_blank" href="https://github.com/faruk-avci/Schedule-Generator">Açık kaynak</a> ve kullanımı ücretsiz :)</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h3>Dikkat:</h3>
+                <ul>
+                    <li>Staj ve Bitirme Proje dersleri dahil edilmemiştir.</li>
+                    <li>Bazı derslerin ve Labların çok sayıda şubesi olduğundan bu derslerde bütün dersi seçmek yerine şube seçmeniz tavsiye edilir.</li>
+                    <li>Ders seçimlerinizi yaparken ön koşul ya da yan koşul şartlarına dikkat ediniz çünkü program ön koşullara ve yan koşullara dikkat etmemektedir.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

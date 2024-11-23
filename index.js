@@ -9,7 +9,7 @@ const winston = require('winston');
 const mysql = require('mysql2');
 const redis = require('redis');
 const path = require('path');
-const { calistir } = require('./schedule');
+const { generateSchedule } = require('./schedule');
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -111,14 +111,14 @@ app.post('/search', async (req, res) => {
     searchLogger.info(`Searching for courses with name: ${courseName}`);
 
     const query = `
-        SELECT course_name, credits, section_name
+        SELECT course_name, credits, section_name, lecturer
         FROM courses
         WHERE course_name LIKE ?`;
 
     const likePattern = `%${courseName}%`;
     try {
         const [rows] = await db.execute(query, [likePattern]);
-
+        console.log(rows)
         // Use a map to aggregate sections by course_name and credits
         const courseMap = new Map();
 
@@ -130,8 +130,9 @@ app.post('/search', async (req, res) => {
                     sections: []
                 });
             }
-            courseMap.get(row.course_name).sections.push(row.section_name);
+            courseMap.get(row.course_name).sections.push({section_name: row.section_name, lecturer:row.lecturer});
         });
+        console.log(courseMap);
 
         // Convert map values to an array
         const uniqueResults = Array.from(courseMap.values());
@@ -262,19 +263,26 @@ app.post('/remove', async (req, res) => {
 
 app.post('/generate', async (req, res) => {
     try {
-        // Call calistir with session data
-        const schedules = await calistir(req.session.addedCourses, req.session.addedSections);
-
-        // Send the generated schedules as a response
-        res.json({
-            success: true,
-            data: schedules,
-        });
+        const schedules = await generateSchedule(req.session.addedCourses, req.session.addedSections);
+        if (schedules) {
+            res.json({
+                success: true,
+                data: schedules,
+            });
+        } else {
+            // If schedules is falsy, respond with an error message
+            res.status(400).json({
+                success: false,
+                message: 'No schedules could be generated. Please check the input data.',
+            });
+        }
     } catch (error) {
         console.error('Error generating schedules:', error);
         res.status(500).json({
             success: false,
             message: 'Failed to generate schedules',
+            error: error.message, // Send the error message
+            stack: process.env.NODE_ENV === 'development' ? error.stack : undefined, // Include stack trace only in development
         });
     }
 });
@@ -286,6 +294,15 @@ app.get('/get-courses-sections',(req,res)=>{
 
     res.json(response);
 });
+
+// headers
+app.get('/me',(req,res) =>{
+    res.sendFile(__dirname + '/public/me.html');
+})
+
+app.get('/about',(req,res) =>{
+    res.sendFile(__dirname + '/public/about.html');
+})
 
 app.listen(port, '0.0.0.0', () => {
     console.log(`Server running on port ${port}`);

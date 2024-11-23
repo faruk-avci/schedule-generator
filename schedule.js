@@ -207,10 +207,10 @@ async function createCourseIdMap(groupedSections) {
     Object.values(groupedSections).forEach(sections => {
         Object.values(sections).forEach(section => {
             idMap[section.id] = {
-                section_name: section.section_name,
-                lecturer: section.lecturer,
-                credits: section.credits,
-                class: "AB1.00"
+                s_n: section.section_name,
+                lec: section.lecturer,
+                cr: section.credits,
+                cl: "AB1.00"
             };
         });
     });
@@ -218,24 +218,39 @@ async function createCourseIdMap(groupedSections) {
 }
 
 async function transformSchedule(idMap, matrix) {
-    return matrix.map(day =>
-        day.map(cellId => {
+    return matrix.map((day, dayIndex) =>
+        day.map((cellId, hourIndex) => {
             if (cellId !== 0) {
-                // Replace cellId with the corresponding value from idMap
                 return {
-                    ...idMap[cellId] || cellId}; // Fallback to cellId if not found in idMap
+                    ...idMap[cellId], 
+                    dayIndex,         
+                    hourIndex         
+                };
             }
-            return 0; 
+            return 0;
         })
     );
 }
 
+function extractNonZeroItems(matrix) {
+    const nonZeroList = [];
+    matrix.forEach((day) => {
+        day.forEach((cell) => {
+            if (cell !== 0) {
+                nonZeroList.push(cell);
+            }
+        });
+    });
+    return nonZeroList;
+}
 
-
-async function calistir(courses,sections) {
+async function generateSchedule(courses,sections) {
     try {
         const regulated = await regulate(courses,sections);
         const lessons = Object.keys(regulated);  
+        if(lessons.length > 10){
+            return;
+        }
         const allCourses = await get_lessons_from_db(lessons);
         const groupedSections = await course_to_sections(regulated, allCourses);
         const idMap = await createCourseIdMap(groupedSections);
@@ -258,9 +273,13 @@ async function calistir(courses,sections) {
         let transformed = [];
         let schedules = {};
         schedules["totalSchedules"] = allMatrices.length;
+        if(allMatrices.length > 120){
+            return;
+        }
         for(const matrix of allMatrices){
             const matrixx = await transformSchedule(idMap, matrix);
-            transformed.push(matrixx);
+            const nonZeroItems = extractNonZeroItems(matrixx); 
+            transformed.push(nonZeroItems);
         }
         schedules["schs"] = transformed;
 
@@ -270,4 +289,4 @@ async function calistir(courses,sections) {
     }
 }
 
-module.exports = { calistir };
+module.exports = { generateSchedule };

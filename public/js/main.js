@@ -80,23 +80,24 @@ function toggleSectionDisplay(courseDiv, course) {
     // If the sectionDiv is not already populated, add the sections
     if (sectionDiv.innerHTML === '') {
         const fragment = document.createDocumentFragment();
-
+        console.log(sections);
         course.sections.forEach(section => {
             const sectionItem = document.createElement('div');
             sectionItem.classList.add('course-item');
 
             const upperC = document.createElement('div');
-            upperC.classList.add('upper');
+            upperC.classList.add('upper2');
 
             const sectionText = document.createElement('span');
-            sectionText.textContent = section;
+            sectionText.textContent = `${section.section_name}  (${section.lecturer})`;
+            console.log(section);
             const divSpan = document.createElement('div');
             divSpan.appendChild(sectionText);
             upperC.appendChild(divSpan);
 
             const addButton = document.createElement('button');
             addButton.textContent = 'Ekle';
-            addButton.onclick = () => add(course.course_name, section);
+            addButton.onclick = () => add(course.course_name, section.section_name);
             const divButton = document.createElement('div');
             divButton.appendChild(addButton);
             upperC.appendChild(divButton);
@@ -248,12 +249,35 @@ function showToast(message, type) {
     }, 3000);
 }
 
-async function generateSchedules(){
-    const response = await fetch('/generate', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
+async function generateSchedules() {
+   
+    try {
 
+        const response = await fetch('/generate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Store the schedules data in localStorage to access it on the schedules page
+            localStorage.setItem('scheduleData', JSON.stringify(data.data));
+            
+            // Redirect to schedules page
+            window.location.href = '/schedules.html';
+        } else {
+            alert('Failed to generate schedules. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error generating schedules:', error);
+        alert('An error occurred while generating schedules. Please try again.');
+        return;
+    }
 }
+window.onload = (event) => {
+    displayAddeds();
+};
+  
