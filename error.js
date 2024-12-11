@@ -5,6 +5,12 @@ class ConstantMatrixOverlapError extends Error {
     }
 }
 
+class TooManySchedulesError extends Error{
+    constructor(message) {
+        super(message);  
+        this.name = "TooManySchedulesError"; 
+    }
+}
 
 
 
@@ -17,4 +23,4 @@ class ConstantMatrixOverlapError extends Error {
 
 
 
-module.exports = { ConstantMatrixOverlapError };
+module.exports = { ConstantMatrixOverlapError , TooManySchedulesError};

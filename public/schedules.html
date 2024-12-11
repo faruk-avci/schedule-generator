@@ -3,27 +3,474 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schedules</title>
-    <link rel="stylesheet" href="css/sch.css">
+    <title>All Course Schedules</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3730a3;
+            --bg-dark: #0f172a;
+            --bg-light: #1e293b;
+            --text: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --success: #10b981;
+            --error: #ef4444;
+            --gradient: linear-gradient(145deg, var(--primary), var(--primary-dark));
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            color: var(--text);
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .schedule-container {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .schedule-title {
+            color: var(--text);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.75rem;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .schedule-table th {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .class-slot {
+            background: var(--card-bg);
+            padding: 0.75rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .class-slot:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .class-slot .course-code {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .class-slot .instructor {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .class-slot .room {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .selected-courses {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .selected-courses a {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .schedule-container {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .schedule-table th,
+            .schedule-table td {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        .selected-courses {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    margin-bottom: 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selected-courses a {
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding-bottom: 0.75rem;
+    text-decoration: none;
+    border-bottom: 2px solid var(--primary);
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.selected-courses a:hover {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary-dark);
+}
+
+#sortOptions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+#sortOptions label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+#sortOptions select, #sortOptions button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    background: var(--bg-light);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+    -webkit-appearance: none;  /* Remove default dropdown styling */
+    -moz-appearance: none;     /* Remove default dropdown styling */
+    appearance: none;          /* Remove default dropdown styling */
+}
+
+#sortOptions select {
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+#sortOptions select::after {
+    content: ' ▼'; /* Add a custom down arrow */
+    font-size: 0.8rem;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text);
+}
+
+#sortOptions select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+#sortOptions button {
+    background: var(--primary);
+    color: var(--text);
+    font-weight: 600;
+}
+
+#sortOptions button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+#sortOptions button:focus {
+    outline: none;
+}
+
+#sortOptions option {
+    background: var(--bg-light);
+    color: var(--text);
+    padding: 0.75rem;
+}
+
+@media (max-width: 768px) {
+    .selected-courses {
+        padding: 1.5rem;
+    }
+
+    #sortOptions {
+        gap: 0.5rem;
+    }
+
+    #sortOptions select, #sortOptions button {
+        width: 100%;
+    }
+}
+
+    </style>
 </head>
 <body>
-    <h1  >Generated Schedules</h1>
-    
-    <div class="general-info">
-        <div id="selected-lessons">
-            <h3>Seçilen Dersler:</h3>
-        </div>
-        <div id="credit-lesson"></div>
+    <div class="header">
+        <h1>All Generated Schedules</h1>
     </div>
 
-    <div id="schedules-container" style="color: #fff;"></div>
+    <div class="selected-courses">
+        <a href="/">Geri Dön</a>
+        <div id="sortOptions">
+            <label for="sortOrder">Sabah yoğunluğuna göre sırala:</label>
+            <select id="sortOrder">
+                <option value="desc">Sabah çok yoğundan az yoğuna</option>
+                <option value="asc">Sabah az yoğundan çok yoğuna</option>
+            </select>
+            <button id="sortButton">Sırala</button>
+        </div>
+        
+    </div>
+
+    <div id="allSchedules"></div>
 
     <div class="footer">
-        <p>Coded by <i>Faruk Avcı</i></p>
-        <p>İletişim <a href="mailto:faruk.avci@ozu.edu.tr" style="color: #fff;">faruk.avci@ozu.edu.tr</a></p>
+        <p>Coded by <em>Faruk Avcı</em></p>
+        <p>Contact: faruk.avci@ozu.edu.tr</p>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-    <script src="js/sch.js"></script>   
+    <script>
+        const hours = ['8:40', '9:40', '10:40', '11:40', '12:40', '13:40', '14:40', '15:40', '16:40', '17:40','18:40','19:40','20:40'];
+
+        function createScheduleTable(schedule, index) {
+            const container = document.createElement('div');
+            container.className = 'schedule-container';
+
+            const title = document.createElement('h2');
+            title.className = 'schedule-title';
+            title.textContent = `Schedule ${index + 1}`;
+            container.appendChild(title);
+
+            const table = document.createElement('table');
+            table.className = 'schedule-table';
+
+            // Create header
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            ['Hours', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].forEach(day => {
+                const th = document.createElement('th');
+                th.textContent = day;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            // Create body
+            const tbody = document.createElement('tbody');
+            hours.forEach((hour, hourIndex) => {
+                const row = document.createElement('tr');
+                
+                // Add hour cell
+                const hourCell = document.createElement('td');
+                hourCell.textContent = hour;
+                row.appendChild(hourCell);
+                
+                // Add cells for each day
+                for (let dayIndex = 0; dayIndex < 5; dayIndex++) {
+                    const cell = document.createElement('td');
+                    const currentClass = schedule.find(
+                        cls => cls.dayIndex === dayIndex && cls.hourIndex === hourIndex
+                    );
+                    
+                    if (currentClass) {
+                        cell.innerHTML = `
+                            <div class="class-slot">
+                                <div class="course-code">${currentClass.s_n}</div>
+                                <div class="instructor">${currentClass.lec}</div>
+                                <div class="room">${currentClass.cl}</div>
+                            </div>
+                        `;
+                    }
+                    row.appendChild(cell);
+                }
+                tbody.appendChild(row);
+            });
+            table.appendChild(tbody);
+            container.appendChild(table);
+            return container;
+        }
+
+        function loadSchedules() {
+            const scheduleData = localStorage.getItem('scheduleData');
+            console.log('Retrieved scheduleData:', scheduleData);
+
+            if (scheduleData) {
+                const schedules = JSON.parse(scheduleData);
+
+                // Check if schedules.sch is present and is an array
+                if (Array.isArray(schedules.schs)) {
+                    console.log('Parsed schedules.schs:', schedules.schs);
+                    renderSchedules(schedules.schs);
+                } else {
+                    console.error('Schedules.schs is not an array:', schedules.schs);
+                    alert('Invalid schedule data. Please regenerate schedules.');
+                }
+            } else {
+                console.error('No data found in sessionStorage for key: scheduleData');
+                alert('No schedule data found. Please generate schedules first.');
+            }
+        }
+
+
+        function renderSchedules(schedules) {
+            const container = document.getElementById('allSchedules');
+            container.innerHTML = ''; // Clear existing schedules
+
+            schedules.forEach((scheduleObj, index) => {
+            const schedule = scheduleObj.sch; // Access the `sch` property of each object
+            const scheduleTable = createScheduleTable(schedule, index);
+            container.appendChild(scheduleTable);
+            });
+        }
+
+        function sortSchedules(scheduleArray, order) {
+    if (!Array.isArray(scheduleArray)) {
+        console.error('Provided data is not an array:', scheduleArray);
+        return;
+    }
+
+    // Sort based on the selected order
+    scheduleArray.sort((a, b) => {
+        return order === 'asc' 
+            ? a.morningWeight - b.morningWeight 
+            : b.morningWeight - a.morningWeight;
+    });
+
+    console.log('Sorted schedules:', scheduleArray);
+
+    // Update sessionStorage with the sorted schedules
+    const updatedSchedules = { schs: scheduleArray };
+    localStorage.setItem('scheduleData', JSON.stringify(updatedSchedules));
+
+    // Render the sorted schedules
+    renderSchedules(scheduleArray);
+}
+
+function onSortButtonClick() {
+    const scheduleData = localStorage.getItem('scheduleData');
+
+    if (scheduleData) {
+        const schedules = JSON.parse(scheduleData);
+
+        if (Array.isArray(schedules.schs)) {
+            // Get the selected sorting order
+            const sortOrder = document.getElementById('sortOrder').value;
+            sortSchedules(schedules.schs, sortOrder); // Pass the sorting order
+        } else {
+            console.error('Schedules.schs is not an array:', schedules.schs);
+            alert('Cannot sort schedules: Invalid data format.');
+        }
+    } else {
+        console.error('No schedule data found in sessionStorage.');
+        alert('Please generate schedules first.');
+    }
+}
+
+// Add an event listener for the sort button
+document.getElementById('sortButton').addEventListener('click', onSortButtonClick);
+
+        window.onload = function() {
+        loadSchedules();
+        };
+
+    </script>
 </body>
 </html>

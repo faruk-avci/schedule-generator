@@ -1,6 +1,14 @@
 const mysql = require('mysql2'); // MySQL Connection
 const math = require('mathjs');  // Matrix Operations
-const { ConstantMatrixOverlapError } = require('./error');
+const { ConstantMatrixOverlapError, TooManySchedulesError } = require('./error');
+
+const MORNING_WEIGHTS = {
+    0: 4, // 8:40
+    1: 3, // 9:40
+    2: 2, // 10:40
+    3: 1  // 11:40
+};
+
 
 const DAYS_OF_WEEK = {
     'Pazartesi': 0,
@@ -243,6 +251,18 @@ function extractNonZeroItems(matrix) {
     });
     return nonZeroList;
 }
+function calculateMorningWeight(schedule){
+    let morningWeight = 0;
+
+    schedule.forEach(lesson => {
+        if (lesson.hourIndex >= 0 && lesson.hourIndex <= 4) {
+            morningWeight = MORNING_WEIGHTS[lesson.hourIndex] + morningWeight;
+        }
+    });
+
+    return morningWeight;
+}
+
 
 async function generateSchedule(courses,sections) {
     try {
@@ -267,21 +287,21 @@ async function generateSchedule(courses,sections) {
             }
         }
 
-        // test matrices
-
         // final version
         let transformed = [];
         let schedules = {};
         schedules["totalSchedules"] = allMatrices.length;
-        if(allMatrices.length > 120){
-            return;
-        }
         for(const matrix of allMatrices){
             const matrixx = await transformSchedule(idMap, matrix);
-            const nonZeroItems = extractNonZeroItems(matrixx); 
-            transformed.push(nonZeroItems);
+            const nonZeroItems = extractNonZeroItems(matrixx);
+            const morningWeight = calculateMorningWeight(nonZeroItems);
+            transformed.push({
+                "morningWeight": morningWeight,
+                "sch": nonZeroItems
+            });
         }
         schedules["schs"] = transformed;
+        
 
         return schedules;
     } catch (error) {

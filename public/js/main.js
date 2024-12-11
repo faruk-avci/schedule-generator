@@ -267,7 +267,7 @@ async function generateSchedules() {
             localStorage.setItem('scheduleData', JSON.stringify(data.data));
             
             // Redirect to schedules page
-            window.location.href = '/schedules.html';
+            window.open('/schedules.html');
         } else {
             alert('Failed to generate schedules. Please try again.');
         }

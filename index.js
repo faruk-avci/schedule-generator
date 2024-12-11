@@ -10,6 +10,8 @@ const mysql = require('mysql2');
 const redis = require('redis');
 const path = require('path');
 const { generateSchedule } = require('./schedule');
+const { ConstantMatrixOverlapError, TooManySchedulesError } = require('./error');
+
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -264,11 +266,16 @@ app.post('/remove', async (req, res) => {
 app.post('/generate', async (req, res) => {
     try {
         const schedules = await generateSchedule(req.session.addedCourses, req.session.addedSections);
+        
         if (schedules) {
+            
+            if(schedules["totalSchedules"] > 120){
+                throw new TooManySchedulesError("The number of schedules exceeds the allowed limit of 120.");
+            }
             res.json({
                 success: true,
                 data: schedules,
-            });
+            }); 
         } else {
             // If schedules is falsy, respond with an error message
             res.status(400).json({
