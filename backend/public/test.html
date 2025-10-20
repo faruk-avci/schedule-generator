@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Basket Test</title>
+</head>
+<body>
+    <h1>Course Basket Test</h1>
+    
+    <!-- Search Section -->
+    <div>
+        <h2>1. Search Courses</h2>
+        <input type="text" id="searchInput" placeholder="Enter course name (e.g., CS, EE)">
+        <button onclick="searchCourses()">Search</button>
+        <div id="searchResults"></div>
+    </div>
+
+    <hr>
+
+    <!-- Basket Section -->
+    <div>
+        <h2>2. Current Basket</h2>
+        <button onclick="viewBasket()">Refresh Basket</button>
+        <button onclick="clearBasket()">Clear All</button>
+        <div id="basket"></div>
+    </div>
+
+    <hr>
+
+    <!-- Generate Schedules Section -->
+    <div>
+        <h2>3. Generate Schedules</h2>
+        <button onclick="generateSchedules()">Generate All Possible Schedules</button>
+        <div id="schedules"></div>
+    </div>
+
+    <hr>
+
+    <!-- Log Section -->
+    <div>
+        <h2>4. Activity Log</h2>
+        <div id="log" style="border: 1px solid black; padding: 10px; height: 200px; overflow-y: scroll;"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8081/api';
+
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? 'red' : type === 'success' ? 'green' : 'black';
+            logDiv.innerHTML += `<div style="color: ${color}">[${timestamp}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        async function searchCourses() {
+            const searchTerm = document.getElementById('searchInput').value.trim();
+            
+            if (!searchTerm) {
+                log('Please enter a course name', 'error');
+                return;
+            }
+
+            log(`Searching for: ${searchTerm}`);
+
+            try {
+                const response = await fetch(`${API_BASE}/courses/search`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ courseName: searchTerm })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    log(`Found ${data.count} courses`, 'success');
+                    displaySearchResults(data.courses);
+                } else {
+                    log(`Error: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                log(`Network error: ${error.message}`, 'error');
+            }
+        }
+
+        function displaySearchResults(courses) {
+            const resultsDiv = document.getElementById('searchResults');
+            
+            if (courses.length === 0) {
+                resultsDiv.innerHTML = '<p>No courses found</p>';
+                return;
+            }
+
+            let html = '<h3>Search Results:</h3>';
+            
+            courses.forEach(course => {
+                html += `
+                    <div style="border: 1px solid #ccc; margin: 10px 0; padding: 10px;">
+                        <h4>${course.course_name} (${course.credits} credits)</h4>
+                        <button onclick="addCourse('${course.course_name}', null)">
+                            Add Entire Course
+                        </button>
+                        <h5>Sections:</h5>
+                `;
+
+                course.sections.forEach(section => {
+                    html += `
+                        <div style="margin-left: 20px; margin-bottom: 10px; border-left: 3px solid #999; padding-left: 10px;">
+                            <strong>${section.section_name}</strong> - ${section.lecturer}
+                            <button onclick="addCourse('${course.course_name}', '${section.section_name}')">
+                                Add This Section
+                            </button>
+                            <br>
+                            <small>Times:</small>
+                            <ul>
+                    `;
+
+                    section.times.forEach(time => {
+                        html += `<li>${time.day}: ${time.start} - ${time.end}</li>`;
+                    });
+
+                    html += `
+                            </ul>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+            });
+
+            resultsDiv.innerHTML = html;
+        }
+
+        async function addCourse(courseName, sectionName) {
+            const action = sectionName ? `section ${sectionName}` : `entire course`;
+            log(`Adding ${action} of ${courseName}...`);
+
+            try {
+                const response = await fetch(`${API_BASE}/courses/add`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        course: courseName, 
+                        section: sectionName 
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    log(data.message, 'success');
+                    viewBasket();
+                } else {
+                    log(`Error: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                log(`Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function removeCourse(courseName, sectionName) {
+            const action = sectionName ? `section ${sectionName}` : `entire course`;
+            log(`Removing ${action} of ${courseName}...`);
+
+            try {
+                const response = await fetch(`${API_BASE}/courses/remove`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        course: courseName, 
+                        section: sectionName 
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    log(data.message, 'success');
+                    viewBasket();
+                } else {
+                    log(`Error: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                log(`Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function viewBasket() {
+            log('Fetching basket...');
+
+            try {
+                const response = await fetch(`${API_BASE}/courses/basket`);
+                const data = await response.json();
+
+                if (data.success) {
+                    displayBasket(data.basket);
+                } else {
+                    log(`Error: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                log(`Network error: ${error.message}`, 'error');
+            }
+        }
+
+        function displayBasket(basket) {
+            const basketDiv = document.getElementById('basket');
+            
+            if (basket.totalItems === 0) {
+                basketDiv.innerHTML = '<p><strong>Basket is empty</strong></p>';
+                log('Basket is empty', 'info');
+                return;
+            }
+
+            let html = `<p><strong>Total Items: ${basket.totalItems}</strong></p>`;
+
+            if (basket.courses.length > 0) {
+                html += '<h3>Entire Courses:</h3><ul>';
+                basket.courses.forEach(course => {
+                    html += `
+                        <li>
+                            ${course}
+                            <button onclick="removeCourse('${course}', null)">Remove</button>
+                        </li>
+                    `;
+                });
+                html += '</ul>';
+            }
+
+            if (basket.sections.length > 0) {
+                html += '<h3>Specific Sections:</h3><ul>';
+                basket.sections.forEach(section => {
+                    html += `
+                        <li>
+                            ${section.course} - ${section.section}
+                            <button onclick="removeCourse('${section.course}', '${section.section}')">Remove</button>
+                        </li>
+                    `;
+                });
+                html += '</ul>';
+            }
+
+            basketDiv.innerHTML = html;
+            log(`Basket loaded: ${basket.totalItems} items`, 'success');
+        }
+
+        async function clearBasket() {
+            if (!confirm('Clear entire basket?')) return;
+
+            log('Clearing basket...');
+
+            try {
+                const response = await fetch(`${API_BASE}/courses/basket/clear`, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    log('Basket cleared', 'success');
+                    viewBasket();
+                } else {
+                    log(`Error: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                log(`Network error: ${error.message}`, 'error');
+            }
+        }
+
+        // Load basket on page load
+        window.onload = function() {
+            log('Page loaded. Ready to test!', 'success');
+            viewBasket();
+        };
+        async function generateSchedules() {
+    log('🎯 Generating schedules...');
+    document.getElementById('schedules').innerHTML = '<p>Generating... Please wait...</p>';
+
+    try {
+        const response = await fetch(`${API_BASE}/schedule/generate`, {
+            method: 'POST'
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            log(`✅ Generated ${data.totalSchedules} schedules!`, 'success');
+            if (data.limited) {
+                log(`⚠️ Limited to 120 schedules (${data.totalGenerated} total possible)`, 'info');
+            }
+            displaySchedules(data.schedules);
+        } else {
+            log(`Error: ${data.error || data.message}`, 'error');
+            document.getElementById('schedules').innerHTML = `<p style="color: red;">${data.error || data.message}</p>`;
+        }
+    } catch (error) {
+        log(`Network error: ${error.message}`, 'error');
+        document.getElementById('schedules').innerHTML = `<p style="color: red;">Network error</p>`;
+    }
+}
+
+function displaySchedules(schedules) {
+    const schedulesDiv = document.getElementById('schedules');
+
+    if (schedules.length === 0) {
+        schedulesDiv.innerHTML = '<p>No valid schedules found. All combinations have time conflicts.</p>';
+        return;
+    }
+
+    let html = `<h3>Found ${schedules.length} Valid Schedules</h3>`;
+
+    schedules.forEach((schedule, index) => {
+        html += `
+            <div style="border: 2px solid #333; margin: 15px 0; padding: 15px; background: #f9f9f9;">
+                <h4>Schedule ${index + 1} - Total Credits: ${schedule.totalCredits}</h4>
+                <table border="1" cellpadding="5" style="border-collapse: collapse;">
+                    <tr>
+                        <th>Course</th>
+                        <th>Section</th>
+                        <th>Lecturer</th>
+                        <th>Credits</th>
+                    </tr>
+        `;
+
+        schedule.lessons.forEach(lesson => {
+            html += `
+                <tr>
+                    <td>${lesson.course_name}</td>
+                    <td>${lesson.section_name}</td>
+                    <td>${lesson.lecturer}</td>
+                    <td>${lesson.credits}</td>
+                </tr>
+            `;
+        });
+
+        html += `
+                </table>
+                <button onclick="showScheduleMatrix(${index})">Show Time Grid</button>
+                <div id="matrix-${index}" style="display:none; margin-top: 10px;"></div>
+            </div>
+        `;
+    });
+
+    schedulesDiv.innerHTML = html;
+    window.generatedSchedules = schedules;
+}
+
+function showScheduleMatrix(scheduleIndex) {
+    const matrixDiv = document.getElementById(`matrix-${scheduleIndex}`);
+    
+    if (matrixDiv.style.display === 'none') {
+        const schedule = window.generatedSchedules[scheduleIndex];
+        const matrix = schedule.matrix;
+
+        const days = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma'];
+        const hours = [];
+        for (let h = 8; h <= 20; h++) {
+            hours.push(`${h}:40`);
+        }
+
+        let html = '<table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 10px;">';
+        html += '<tr><th>Time</th>';
+        days.forEach(day => {
+            html += `<th>${day}</th>`;
+        });
+        html += '</tr>';
+
+        for (let hour = 0; hour < 13; hour++) {
+            html += `<tr><td><strong>${hours[hour]}</strong></td>`;
+            for (let day = 0; day < 5; day++) {
+                const cellId = matrix[day][hour];
+                if (cellId === 0) {
+                    html += '<td style="background: #fff;"></td>';
+                } else {
+                    const lesson = schedule.lessons.find(l => l.id === cellId);
+                    const color = `hsl(${(cellId * 50) % 360}, 70%, 85%)`;
+                    html += `<td style="background: ${color}; font-size: 10px;">${lesson ? lesson.course_name : cellId}</td>`;
+                }
+            }
+            html += '</tr>';
+        }
+
+        html += '</table>';
+        matrixDiv.innerHTML = html;
+        matrixDiv.style.display = 'block';
+    } else {
+        matrixDiv.style.display = 'none';
+    }
+}
+    </script>
+</body>
+</html>
