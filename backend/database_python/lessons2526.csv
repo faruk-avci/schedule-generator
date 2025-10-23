@@ -1,0 +1,2668 @@
+code,SECTIONNO,TITLE,FACULTY,CREDITS,INSTRUCTORFULLNAME,SCHEDULEFORPRINT
+AVM101,A,Hava Taşımacılığı,Havacılık ve Uzay Bilimleri Fakültesi,6,MEHMET ERTÜRK,"Pazartesi | 13:40 - 16:30
+"
+AVM101,B,Hava Taşımacılığı,Havacılık ve Uzay Bilimleri Fakültesi,6,MEHMET ERTÜRK,"Salı | 13:40 - 16:30
+"
+AVM102,A,Havaalanı ve Faaliyetleri,Havacılık ve Uzay Bilimleri Fakültesi,6,HATİCE KÜÇÜKÖNAL,"Salı | 09:40 - 11:30
+Çarşamba | 11:40 - 12:30
+"
+AVM202,A,Havacılık Yönetiminde Veri Analizi,Havacılık ve Uzay Bilimleri Fakültesi,6,CEM ERSÖZ,"Perşembe | 13:40 - 16:30
+"
+AVM301,A,Havayolu Yönetimi,Havacılık ve Uzay Bilimleri Fakültesi,6,LUIS MARTIN DOMINGO,"Pazartesi | 13:40 - 16:30
+"
+AVM303,A,Hava Trafik ve Meteoroloji,Havacılık ve Uzay Bilimleri Fakültesi,4,MEHMET ERTÜRK,"Çarşamba | 09:40 - 11:30
+"
+AVM306,A,Havacılıkta Operasyon Yönetimi,Havacılık ve Uzay Bilimleri Fakültesi,6,SENA KILIÇ,"Perşembe | 09:40 - 12:30
+"
+AVM307,A,İnsansız Hava Aracı Sistemlerine Giriş,Havacılık ve Uzay Bilimleri Fakültesi,6,HÜSEYİN ÖNDER ALDEMİR,"Pazartesi | 09:40 - 12:30
+"
+AVM401,A,Havayolu Filo Planlaması Ve Uçuş Ağı Yönetimi,Havacılık ve Uzay Bilimleri Fakültesi,6,MEHMET ERTÜRK,"Salı | 09:40 - 12:30
+"
+AVM402,A,Havacılık İş Simülasyonu,Havacılık ve Uzay Bilimleri Fakültesi,6,LUIS MARTIN DOMINGO,"Salı | 13:40 - 16:30
+"
+AVM404,A,Havacılık Güvenliği,Havacılık ve Uzay Bilimleri Fakültesi,4,HATİCE KÜÇÜKÖNAL,"Perşembe | 09:40 - 11:30
+"
+AVM405,A,Emniyet Yönetimi Sistemi,Havacılık ve Uzay Bilimleri Fakültesi,6,HÜSEYİN ÖNDER ALDEMİR,"Çarşamba | 13:40 - 16:30
+"
+AVM406,A,Hava Hukuku,Havacılık ve Uzay Bilimleri Fakültesi,4,GÜLFER MERİÇ,"Çarşamba | 09:40 - 11:30
+"
+AVM408,A,Havacılık Yönetiminde Öngörü ve Optimizasyon,Havacılık ve Uzay Bilimleri Fakültesi,6,CEM ERSÖZ,"Pazartesi | 13:40 - 16:30
+"
+AVM410,A,Havayolu Rezervasyon ve Yönetim Sistemleri,Havacılık ve Uzay Bilimleri Fakültesi,6,BELMA CAN,"Perşembe | 13:40 - 16:30
+"
+AVT201,A,Uçuş Prensipleri,Havacılık ve Uzay Bilimleri Fakültesi,4,HÜSEYİN ÖNDER ALDEMİR,"Salı | 13:40 - 15:30
+"
+PLT104,A,Aerodinamik,Havacılık ve Uzay Bilimleri Fakültesi,6,PINAR GÖKALP,"Çarşamba | 08:40 - 11:30
+"
+PLT109,A,Evrenin Keşfi,Havacılık ve Uzay Bilimleri Fakültesi,6,DÜNDAR TEKİN DERELİ,"Perşembe | 08:40 - 11:30
+"
+PLT110,A,Uzay Yolculuklarının Fiziği,Havacılık ve Uzay Bilimleri Fakültesi,6,DÜNDAR TEKİN DERELİ,"Perşembe | 12:40 - 15:30
+"
+PLT201,A,Hava Hukukuna Giriş,Havacılık ve Uzay Bilimleri Fakültesi,2,PINAR GÖKALP,"Salı | 10:40 - 11:30
+"
+PLT201,B,Hava Hukukuna Giriş,Havacılık ve Uzay Bilimleri Fakültesi,2,PINAR GÖKALP,"Salı | 09:40 - 10:30
+"
+PLT201,C,Hava Hukukuna Giriş,Havacılık ve Uzay Bilimleri Fakültesi,2,PINAR GÖKALP,"Salı | 08:40 - 09:30
+"
+PLT203,A,Genel Uçak Bilgisi (PPL),Havacılık ve Uzay Bilimleri Fakültesi,3,MEHMET BOZTEPE,"Çarşamba | 10:40 - 12:30
+"
+PLT203,B,Genel Uçak Bilgisi (PPL),Havacılık ve Uzay Bilimleri Fakültesi,3,MEHMET BOZTEPE,"Çarşamba | 12:40 - 14:30
+"
+PLT203,C,Genel Uçak Bilgisi (PPL),Havacılık ve Uzay Bilimleri Fakültesi,3,MEHMET BOZTEPE,"Çarşamba | 08:40 - 10:30
+"
+PLT205,A,Meteoroloji (PPL),Havacılık ve Uzay Bilimleri Fakültesi,3,CELAL ALPAY HAVLE,"Pazartesi | 10:40 - 12:30
+"
+PLT205,B,Meteoroloji (PPL),Havacılık ve Uzay Bilimleri Fakültesi,3,CELAL ALPAY HAVLE,"Pazartesi | 08:40 - 10:30
+"
+PLT205,C,Meteoroloji (PPL),Havacılık ve Uzay Bilimleri Fakültesi,3,CELAL ALPAY HAVLE,"Pazartesi | 13:40 - 15:30
+"
+PLT207,A,Uçuş Performans ve Planlama (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,MEHMET BOZTEPE,"Pazartesi | 13:40 - 15:30
+"
+PLT207,B,Uçuş Performans ve Planlama (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,MEHMET BOZTEPE,"Pazartesi | 10:40 - 12:30
+"
+PLT207,C,Uçuş Performans ve Planlama (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,MEHMET BOZTEPE,"Pazartesi | 08:40 - 10:30
+"
+PLT209,A,Seyrüsefer (PPL),Havacılık ve Uzay Bilimleri Fakültesi,6,CELAL ALPAY HAVLE,"Çarşamba | 13:40 - 15:30
+Perşembe | 09:40 - 10:30
+Perşembe | 09:40 - 10:30
+"
+PLT209,B,Seyrüsefer (PPL),Havacılık ve Uzay Bilimleri Fakültesi,6,CELAL ALPAY HAVLE,"Çarşamba | 08:40 - 10:30
+Perşembe | 10:40 - 11:30
+Perşembe | 10:40 - 11:30
+"
+PLT209,C,Seyrüsefer (PPL),Havacılık ve Uzay Bilimleri Fakültesi,6,CELAL ALPAY HAVLE,"Çarşamba | 10:40 - 12:30
+Perşembe | 11:40 - 12:30
+Perşembe | 11:40 - 12:30
+"
+PLT211,A,İşletme Prosedürleri (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,SEMİH SORAN,"Salı | 12:40 - 13:30
+"
+PLT211,B,İşletme Prosedürleri (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,SEMİH SORAN,"Salı | 13:40 - 14:30
+"
+PLT211,C,İşletme Prosedürleri (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,SEMİH SORAN,"Salı | 14:40 - 15:30
+"
+PLT213,A,İnsan Performansı ve Limitleri (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,PINAR GÖKALP,"Salı | 13:40 - 14:30
+"
+PLT213,B,İnsan Performansı ve Limitleri (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,PINAR GÖKALP,"Salı | 11:40 - 12:30
+"
+PLT213,C,İnsan Performansı ve Limitleri (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,PINAR GÖKALP,"Salı | 12:40 - 13:30
+"
+PLT215,A,Haberleşme (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,MEHMET BÜLENT AKSUM,"Salı | 09:40 - 10:30
+"
+PLT215,B,Haberleşme (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,MEHMET BÜLENT AKSUM,"Salı | 14:40 - 15:30
+"
+PLT215,C,Haberleşme (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,MEHMET BÜLENT AKSUM,"Salı | 10:40 - 11:30
+"
+PLT217,A,Uçuş Prensipleri (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,ÇAĞLAR ÜÇLER,"Perşembe | 12:40 - 13:30
+"
+PLT217,B,Uçuş Prensipleri (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,ÇAĞLAR ÜÇLER,"Perşembe | 13:40 - 14:30
+"
+PLT217,C,Uçuş Prensipleri (PPL),Havacılık ve Uzay Bilimleri Fakültesi,2,ÇAĞLAR ÜÇLER,"Perşembe | 14:40 - 15:30
+"
+PLT221,A,Emniyet Yönetim Sistemi,Havacılık ve Uzay Bilimleri Fakültesi,6,LEYLA ADİLOĞLU YALÇINKAYA,"Cuma | 09:40 - 12:30
+"
+PLT301,A,Hava Hukuku (ATPL),Havacılık ve Uzay Bilimleri Fakültesi,3,MEHMET ERTÜRK,"Cuma | 08:40 - 11:30
+"
+PLT301,B,Hava Hukuku (ATPL),Havacılık ve Uzay Bilimleri Fakültesi,3,MEHMET ERTÜRK,"Cuma | 14:40 - 17:30
+"
+PLT303,A,Genel Uçak Bilgisi (ATPL),Havacılık ve Uzay Bilimleri Fakültesi,6,SHAYAN RAMEZANZADEH,"Salı | 08:40 - 11:30
+Çarşamba | 08:40 - 11:30
+"
+PLT303,B,Genel Uçak Bilgisi (ATPL),Havacılık ve Uzay Bilimleri Fakültesi,6,SHAYAN RAMEZANZADEH,"Salı | 13:40 - 16:30
+Çarşamba | 13:40 - 16:30
+"
+PLT305,A,Haberleşme (ATPL),Havacılık ve Uzay Bilimleri Fakültesi,3,MEHMET BÜLENT AKSUM,"Cuma | 14:40 - 17:30
+"
+PLT305,B,Haberleşme (ATPL),Havacılık ve Uzay Bilimleri Fakültesi,3,MEHMET BÜLENT AKSUM,"Cuma | 08:40 - 11:30
+"
+PLT307,A,Uçuş İşletme Usulleri (ATPL),Havacılık ve Uzay Bilimleri Fakültesi,2,MEHMET ONUR BALKAN,"Perşembe | 09:40 - 11:30
+"
+PLT307,B,Uçuş İşletme Usulleri (ATPL),Havacılık ve Uzay Bilimleri Fakültesi,2,MEHMET ONUR BALKAN,"Perşembe | 13:40 - 15:30
+"
+PLT309,A,İnsan Performansı ve Limitleri (ATPL),Havacılık ve Uzay Bilimleri Fakültesi,4,TİLBE BAŞPINAR,"Pazartesi | 12:40 - 14:30
+Çarşamba | 14:40 - 16:30
+"
+PLT309,B,İnsan Performansı ve Limitleri (ATPL),Havacılık ve Uzay Bilimleri Fakültesi,4,TİLBE BAŞPINAR,"Pazartesi | 08:40 - 10:30
+Çarşamba | 10:40 - 12:30
+"
+PLT311,A,Meteoroloji (ATPL),Havacılık ve Uzay Bilimleri Fakültesi,6,HANDE TEMUR,"Pazartesi | 14:40 - 16:30
+Çarşamba | 12:40 - 14:30
+"
+PLT311,B,Meteoroloji (ATPL),Havacılık ve Uzay Bilimleri Fakültesi,6,HANDE TEMUR,"Pazartesi | 10:40 - 12:30
+Çarşamba | 08:40 - 10:30
+"
+PLT313,A,Havacılık İngilizcesi,Havacılık ve Uzay Bilimleri Fakültesi,6,PETEK ŞİRİN,"Pazartesi | 08:40 - 11:30
+"
+PLT313,B,Havacılık İngilizcesi,Havacılık ve Uzay Bilimleri Fakültesi,6,PETEK ŞİRİN,"Pazartesi | 13:40 - 16:30
+"
+PLT406,A,Ekip Kaynak Yönetimi,Havacılık ve Uzay Bilimleri Fakültesi,6,GÖKHAN KAYA,"Perşembe | 08:40 - 11:30
+"
+PLT411,A,Uçak Kaza Kırım İncelemeleri,Havacılık ve Uzay Bilimleri Fakültesi,6,HALUK TEKEREK,"Perşembe | 15:40 - 18:30
+"
+PLT412,A,Çoklu Ekip Koordinasyonu (ÇEK),Havacılık ve Uzay Bilimleri Fakültesi,6,GÖKHAN KAYA,"Perşembe | 12:40 - 15:30
+"
+ARCH101,A,Tasarım,Mimarlık ve Tasarım Fakültesi,8,SEMRA AYDINLI,"Pazartesi | 12:40 - 16:30
+Perşembe | 08:40 - 12:30
+"
+ARCH101,B,Tasarım,Mimarlık ve Tasarım Fakültesi,8,DERYA YORGANCIOĞLU,"Pazartesi | 12:40 - 16:30
+Perşembe | 08:40 - 12:30
+"
+ARCH101,C,Tasarım,Mimarlık ve Tasarım Fakültesi,8,BEYZA ŞAT,"Pazartesi | 12:40 - 16:30
+Perşembe | 08:40 - 12:30
+"
+ARCH101,D,Tasarım,Mimarlık ve Tasarım Fakültesi,8,AYŞE BİKE BAYKARA,"Pazartesi | 12:40 - 16:30
+Perşembe | 08:40 - 12:30
+"
+ARCH101,E,Tasarım,Mimarlık ve Tasarım Fakültesi,8,BURÇİN MIZRAK BİLEN,"Pazartesi | 12:40 - 16:30
+Perşembe | 08:40 - 12:30
+"
+ARCH102,A,Mimari Tasarım Stüdyosu  I,Mimarlık ve Tasarım Fakültesi,8,DİDEM BOYACIOĞLU,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH102,B,Mimari Tasarım Stüdyosu  I,Mimarlık ve Tasarım Fakültesi,8,BEGÜM DİKER,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH105,A,Mimarlık Kültürü,Mimarlık ve Tasarım Fakültesi,3,MURAT ŞAHİN,"Salı | 09:40 - 12:30
+"
+ARCH107,A,Mimari Anlatım Teknikleri,Mimarlık ve Tasarım Fakültesi,5,İLKER FATİH ÖZORHON,"Salı | 13:40 - 17:30
+"
+ARCH107,B,Mimari Anlatım Teknikleri,Mimarlık ve Tasarım Fakültesi,5,DERYA YORGANCIOĞLU,"Salı | 13:40 - 17:30
+"
+ARCH107,C,Mimari Anlatım Teknikleri,Mimarlık ve Tasarım Fakültesi,5,EZGİ ÇİÇEK,"Salı | 12:40 - 16:30
+"
+ARCH110,A,Bilgisayar Destekli Tasarım,Mimarlık ve Tasarım Fakültesi,4,MEHMET EMİN BAYRAKTAR,"Cuma | 14:40 - 18:30
+"
+ARCH110,B,Bilgisayar Destekli Tasarım,Mimarlık ve Tasarım Fakültesi,4,FARUK CAN ÜNAL,"Cuma | 14:40 - 18:30
+"
+ARCH201,A,Mimari Tasarım Stüdyosu II,Mimarlık ve Tasarım Fakültesi,8,DİDEM BOYACIOĞLU,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH201,B,Mimari Tasarım Stüdyosu II,Mimarlık ve Tasarım Fakültesi,8,BEGÜM DİKER,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH201,C,Mimari Tasarım Stüdyosu II,Mimarlık ve Tasarım Fakültesi,8,İDİL ERDEMİR KOCAGİL,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH201,D,Mimari Tasarım Stüdyosu II,Mimarlık ve Tasarım Fakültesi,8,MEHMET EMİN BAYRAKTAR,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH201,E,Mimari Tasarım Stüdyosu II,Mimarlık ve Tasarım Fakültesi,8,HASAN TAŞTAN,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH201,F,Mimari Tasarım Stüdyosu II,Mimarlık ve Tasarım Fakültesi,8,DERYA YORGANCIOĞLU,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH202,A,Mimari Tasarım Stüdyosu III,Mimarlık ve Tasarım Fakültesi,8,İLKER FATİH ÖZORHON,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH202,B,Mimari Tasarım Stüdyosu III,Mimarlık ve Tasarım Fakültesi,8,NEVŞET GÜL ÇANAKÇIOĞLU,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH205,A,Yapı Bilgisi ve Malzeme,Mimarlık ve Tasarım Fakültesi,5,TUĞBA GÜLFEM KAYA,"Pazartesi | 13:40 - 15:30
+Perşembe | 13:40 - 16:30
+"
+ARCH205,B,Yapı Bilgisi ve Malzeme,Mimarlık ve Tasarım Fakültesi,5,GÜLTEN ASLIHAN ÜNLÜ,"Pazartesi | 13:40 - 15:30
+Perşembe | 13:40 - 16:30
+"
+ARCH207,A,Statik ve Mukavemet,Mimarlık ve Tasarım Fakültesi,5,ÖMER KARADAĞ,"Çarşamba | 13:40 - 16:30
+"
+ARCH207,B,Statik ve Mukavemet,Mimarlık ve Tasarım Fakültesi,5,ÖMER KARADAĞ,"Çarşamba | 09:40 - 12:30
+"
+ARCH209,A,Mimarlık Tarihi I,Mimarlık ve Tasarım Fakültesi,3,ZEHRA TONBUL,"Salı | 09:40 - 11:30
+"
+ARCH209,B,Mimarlık Tarihi I,Mimarlık ve Tasarım Fakültesi,3,AYŞE BİKE BAYKARA,"Salı | 09:40 - 11:30
+"
+ARCH210,A,Mimarlık Tarihi II,Mimarlık ve Tasarım Fakültesi,3,LUCA ORLANDI,"Salı | 13:40 - 15:30
+"
+ARCH212,A,Çevre Analizi ve Sürdürülebilir Peyzaj Tasarımı,Mimarlık ve Tasarım Fakültesi,3,DOĞA DİNEMİS AMAN,"Cuma | 08:40 - 11:30
+"
+ARCH212,B,Çevre Analizi ve Sürdürülebilir Peyzaj Tasarımı,Mimarlık ve Tasarım Fakültesi,3,BEYZA ŞAT,"Cuma | 08:40 - 11:30
+"
+ARCH212,C,Çevre Analizi ve Sürdürülebilir Peyzaj Tasarımı,Mimarlık ve Tasarım Fakültesi,3,ABDULKADİR KAAN ÖZGÜN,"Cuma | 08:40 - 11:30
+"
+ARCH301,A,Mimari Tasarım Stüdyosu  IV,Mimarlık ve Tasarım Fakültesi,8,İLKER FATİH ÖZORHON,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH301,B,Mimari Tasarım Stüdyosu  IV,Mimarlık ve Tasarım Fakültesi,8,NEVŞET GÜL ÇANAKÇIOĞLU,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH301,C,Mimari Tasarım Stüdyosu  IV,Mimarlık ve Tasarım Fakültesi,8,ASLI AĞIRBAŞ,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH301,D,Mimari Tasarım Stüdyosu  IV,Mimarlık ve Tasarım Fakültesi,8,LUCA ORLANDI,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH301,E,Mimari Tasarım Stüdyosu  IV,Mimarlık ve Tasarım Fakültesi,8,IŞILAY TEKÇE,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH301,F,Mimari Tasarım Stüdyosu  IV,Mimarlık ve Tasarım Fakültesi,8,NEVŞET GÜL ÇANAKÇIOĞLU,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH302,A,Mimari Tasarım Stüdyosu  V,Mimarlık ve Tasarım Fakültesi,8,GÜLTEN ASLIHAN ÜNLÜ,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH302,B,Mimari Tasarım Stüdyosu  V,Mimarlık ve Tasarım Fakültesi,8,VEHBİ TOSUN,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH303,A,Kentsel Planlama ve Tasarım,Mimarlık ve Tasarım Fakültesi,5,MEHMET SANER,"Salı | 13:40 - 17:30
+"
+ARCH303,B,Kentsel Planlama ve Tasarım,Mimarlık ve Tasarım Fakültesi,5,ABDULKADİR KAAN ÖZGÜN,"Salı | 13:40 - 17:30
+"
+ARCH303,C,Kentsel Planlama ve Tasarım,Mimarlık ve Tasarım Fakültesi,5,TOLGA KAYACAN,"Salı | 13:40 - 17:30
+"
+ARCH304,A,Mimari Koruma ve Rölöve,Mimarlık ve Tasarım Fakültesi,5,AYŞE CEREN BİLGE,"Çarşamba | 13:40 - 17:30
+"
+ARCH305,A,Fiziksel Çevre Kontrolü,Mimarlık ve Tasarım Fakültesi,5,İDİL ERDEMİR KOCAGİL,"Salı | 08:40 - 12:30
+Salı | 08:40 - 12:30
+"
+ARCH305,B,Fiziksel Çevre Kontrolü,Mimarlık ve Tasarım Fakültesi,5,FERHAN HASMADEN,"Salı | 08:40 - 12:30
+Salı | 08:40 - 12:30
+"
+ARCH305,C,Fiziksel Çevre Kontrolü,Mimarlık ve Tasarım Fakültesi,5,BEGÜM DİKER,"Salı | 08:40 - 12:30
+Salı | 08:40 - 12:30
+"
+ARCH401,A,Mimari Tasarım Stüdyosu VI,Mimarlık ve Tasarım Fakültesi,8,ALPER ÜNLÜ,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH401,B,Mimari Tasarım Stüdyosu VI,Mimarlık ve Tasarım Fakültesi,8,MURAT ŞAHİN,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH401,C,Mimari Tasarım Stüdyosu VI,Mimarlık ve Tasarım Fakültesi,8,MEHMET SANER,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH401,D,Mimari Tasarım Stüdyosu VI,Mimarlık ve Tasarım Fakültesi,8,ZEHRA TONBUL,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+ARCH402,A,Mezuniyet Projesi,Mimarlık ve Tasarım Fakültesi,12,ALPER ÜNLÜ,
+ARCH402,B,Mezuniyet Projesi,Mimarlık ve Tasarım Fakültesi,12,NEVŞET GÜL ÇANAKÇIOĞLU,
+ARCH403,A,Yapım Yönetim ve Ekonomisi,Mimarlık ve Tasarım Fakültesi,5,IŞILAY TEKÇE,"Salı | 08:40 - 12:30
+"
+ARCH403,B,Yapım Yönetim ve Ekonomisi,Mimarlık ve Tasarım Fakültesi,5,VEHBİ TOSUN,"Pazartesi | 13:40 - 17:30
+"
+ARCH434,A,Parametrik Tasarım,Mimarlık ve Tasarım Fakültesi,3,MEHMET EMİN BAYRAKTAR,"Çarşamba | 09:40 - 12:30
+"
+ARCH445,A,İslam Mimarisi,Mimarlık ve Tasarım Fakültesi,3,MELİS TANER,"Perşembe | 13:40 - 16:30
+"
+ARCH446,A,Mimari Yenileme ve Yeniden Kullanım,Mimarlık ve Tasarım Fakültesi,3,AYŞE CEREN BİLGE,"Salı | 13:40 - 16:30
+"
+ARCH451,A,"Kent, Peyzaj ve Form",Mimarlık ve Tasarım Fakültesi,3,DOĞA DİNEMİS AMAN,"Cuma | 14:40 - 17:30
+"
+ARCH466,A,Mimarlıkta Karma Sunum Teknikleri,Mimarlık ve Tasarım Fakültesi,3,MUSTAFA BATU KEPEKCİOĞLU,"Salı | 09:40 - 12:30
+"
+ARCH468,A,Eskiz Teknikleri,Mimarlık ve Tasarım Fakültesi,3,İLKER FATİH ÖZORHON,"Pazartesi | 13:40 - 16:30
+"
+ARCH469,A,Yapay Zeka ve Mimarlık,Mimarlık ve Tasarım Fakültesi,3,ASLI AĞIRBAŞ,"Pazartesi | 13:40 - 16:30
+"
+ARCH470,A,Tasarımda Yaratıcı Stratejiler,Mimarlık ve Tasarım Fakültesi,3,VEHBİ TOSUN,"Perşembe | 13:40 - 16:30
+"
+ARCH472,A,"Sinema, Mekân ve Mimarlık",Mimarlık ve Tasarım Fakültesi,5,MAHMUT ŞENOL,"Cuma | 09:40 - 12:30
+"
+COD101,A,İletişim Tasarımına Giriş,Mimarlık ve Tasarım Fakültesi,3,ESER SELEN,"Pazartesi | 13:40 - 16:30
+"
+COD101,B,İletişim Tasarımına Giriş,Mimarlık ve Tasarım Fakültesi,3,ESER SELEN,"Çarşamba | 13:40 - 16:30
+"
+COD102,A,İletişim Uygulamaları,Mimarlık ve Tasarım Fakültesi,8,ESER SELEN,"Cuma | 08:40 - 12:30
+Cuma | 08:40 - 12:30
+Cuma | 14:40 - 18:30
+Cuma | 14:40 - 18:30
+"
+COD103,A,Grafik Tasarım Araçları,Mimarlık ve Tasarım Fakültesi,5,SALİH ALP TUĞAN,"Pazartesi | 08:40 - 11:30
+"
+COD103,B,Grafik Tasarım Araçları,Mimarlık ve Tasarım Fakültesi,5,METİN ÇAVUŞ,"Çarşamba | 08:40 - 11:30
+"
+COD201,A,Tasarım Stüdyosu I,Mimarlık ve Tasarım Fakültesi,8,GÖKÇE ELİF BAYKAL,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+COD201,B,Tasarım Stüdyosu I,Mimarlık ve Tasarım Fakültesi,8,GÖKÇE ELİF BAYKAL,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+COD202,A,Tasarım Stüdyosu II,Mimarlık ve Tasarım Fakültesi,8,GÖKÇE ELİF BAYKAL,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+COD203,A,Video Prodüksiyon,Mimarlık ve Tasarım Fakültesi,5,METİN ÇAVUŞ,"Salı | 08:40 - 12:30
+"
+COD205,A,Tipografik İletişim,Mimarlık ve Tasarım Fakültesi,5,ESER SELEN,"Çarşamba | 09:40 - 12:30
+"
+COD205,B,Tipografik İletişim,Mimarlık ve Tasarım Fakültesi,5,ATANUR ANDIÇ,"Çarşamba | 13:40 - 16:30
+"
+COD206,A,Bilgi Mimarisi,Mimarlık ve Tasarım Fakültesi,4,GÖKÇE ELİF BAYKAL,"Cuma | 09:40 - 12:30
+"
+COD207,A,Yaratıcı Kodlama I,Mimarlık ve Tasarım Fakültesi,5,SALİH ALP TUĞAN,"Salı | 09:40 - 12:30
+"
+COD207,B,Yaratıcı Kodlama I,Mimarlık ve Tasarım Fakültesi,5,SALİH ALP TUĞAN,"Salı | 13:40 - 16:30
+"
+COD209,A,İnteraktif Tasarım Araçları,Mimarlık ve Tasarım Fakültesi,5,SALİH ALP TUĞAN,"Pazartesi | 13:40 - 16:30
+"
+COD301,A,Tasarım Stüdyosu III,Mimarlık ve Tasarım Fakültesi,8,ATANUR ANDIÇ,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+COD301,B,Tasarım Stüdyosu III,Mimarlık ve Tasarım Fakültesi,8,ATANUR ANDIÇ,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+COD302,A,Tasarım Stüdyosu IV,Mimarlık ve Tasarım Fakültesi,8,ATANUR ANDIÇ,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+COD305,A,Etkileşim Tasarımı,Mimarlık ve Tasarım Fakültesi,5,GÖKÇE ELİF BAYKAL,"Çarşamba | 08:40 - 12:30
+"
+COD316,A,Anlatı Yapıları,Mimarlık ve Tasarım Fakültesi,3,METİN ÇAVUŞ,"Salı | 13:40 - 16:30
+"
+COD322,A,Tasarım İçin Rol Oynama,Mimarlık ve Tasarım Fakültesi,3,SALİH ALP TUĞAN,"Perşembe | 13:40 - 16:30
+"
+COD323,A,Ses Tasarımı,Mimarlık ve Tasarım Fakültesi,3,SALİH ALP TUĞAN,"Çarşamba | 13:40 - 16:30
+"
+COD324,A,Mobil Etkileşim Tasarımı,Mimarlık ve Tasarım Fakültesi,3,METİN ÇAVUŞ,"Çarşamba | 13:40 - 16:30
+"
+COD325,A,Sanal Gerçeklik Tasarımı,Mimarlık ve Tasarım Fakültesi,3,METİN ÇAVUŞ,"Cuma | 09:40 - 12:30
+"
+COD401,A,Tasarım Stüdyosu V,Mimarlık ve Tasarım Fakültesi,8,METİN ÇAVUŞ,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+COD401,B,Tasarım Stüdyosu V,Mimarlık ve Tasarım Fakültesi,8,SİMGE ORHUN,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+COD403,A,Etkileşimli Pazarlama,Mimarlık ve Tasarım Fakültesi,6,METİN ÇAVUŞ,"Cuma | 16:40 - 19:30
+"
+COD404,A,Meslek Pratiği ve Etiği,Mimarlık ve Tasarım Fakültesi,4,ESER SELEN,"Perşembe | 13:40 - 16:30
+"
+IDE101,A,Tasarımın Temel Prensipleri,Mimarlık ve Tasarım Fakültesi,8,DUYGU BEYKAL İZ,"Salı | 08:40 - 12:30
+Cuma | 08:40 - 12:30
+"
+IDE101,B,Tasarımın Temel Prensipleri,Mimarlık ve Tasarım Fakültesi,8,BORA FER,"Salı | 08:40 - 12:30
+Salı | 08:40 - 12:30
+Salı | 13:40 - 17:30
+Salı | 13:40 - 17:30
+"
+IDE101,C,Tasarımın Temel Prensipleri,Mimarlık ve Tasarım Fakültesi,8,BORA FER,"Cuma | 08:40 - 12:30
+Cuma | 08:40 - 12:30
+Cuma | 14:40 - 18:30
+Cuma | 14:40 - 18:30
+"
+IDE101,D,Tasarımın Temel Prensipleri,Mimarlık ve Tasarım Fakültesi,8,İPEK KOSOVA,"Salı | 08:40 - 12:30
+Cuma | 08:40 - 12:30
+"
+IDE102,A,Yaratıcı Problem Çözümü Olarak Tasarım,Mimarlık ve Tasarım Fakültesi,8,SONAY ARDI AKKAR,"Salı | 12:40 - 16:30
+Cuma | 08:40 - 12:30
+"
+IDE103,A,Tasarım Görselleştirme ,Mimarlık ve Tasarım Fakültesi,6,MUHARREM ALİ GÖKKURT,"Pazartesi | 13:40 - 16:30
+Perşembe | 13:40 - 16:30
+"
+IDE103,B,Tasarım Görselleştirme ,Mimarlık ve Tasarım Fakültesi,6,ATANUR ANDIÇ,"Salı | 09:40 - 12:30
+Salı | 09:40 - 12:30
+Salı | 13:40 - 16:30
+Salı | 13:40 - 16:30
+"
+IDE103,C,Tasarım Görselleştirme ,Mimarlık ve Tasarım Fakültesi,6,ATANUR ANDIÇ,"Cuma | 09:40 - 12:30
+Cuma | 09:40 - 12:30
+Cuma | 14:40 - 17:30
+Cuma | 14:40 - 17:30
+"
+IDE105,A,Endüstriyel Tasarıma Giriş,Mimarlık ve Tasarım Fakültesi,3,HAMİT ALPAY ER,"Çarşamba | 08:40 - 10:30
+"
+IDE106,A,Model Yapımı,Mimarlık ve Tasarım Fakültesi,4,BARIŞ ÇETİN ALTINDAĞ,"Çarşamba | 13:40 - 16:30
+Çarşamba | 13:40 - 16:30
+"
+IDE107,A,Malzeme Statiği ve Mukavemeti,Mimarlık ve Tasarım Fakültesi,5,MUHARREM ALİ GÖKKURT,"Perşembe | 08:40 - 12:30
+"
+IDE110,A,Tasarım için Araştırma,Mimarlık ve Tasarım Fakültesi,5,EMRAH ÖZTURAN,"Çarşamba | 09:40 - 12:30
+"
+IDE201,A,Tasarım Stüdyosu I,Mimarlık ve Tasarım Fakültesi,8,GÜLAY GAMZE GÜVEN,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+IDE202,A,Tasarım Stüdyosu II,Mimarlık ve Tasarım Fakültesi,8,TUĞBA TOK,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+IDE203,A,Endüstriyel Tasarımda 3D Modelleme,Mimarlık ve Tasarım Fakültesi,5,BARIŞ ÇETİN ALTINDAĞ,"Perşembe | 13:40 - 17:30
+"
+IDE205,A,Prototip,Mimarlık ve Tasarım Fakültesi,2,GÜLBAHAR COŞKUN,"Çarşamba | 13:40 - 16:30
+Çarşamba | 13:40 - 16:30
+"
+IDE207,A,Malzeme ve İmalat,Mimarlık ve Tasarım Fakültesi,5,MUHARREM ALİ GÖKKURT,"Cuma | 14:40 - 17:30
+"
+IDE209,A,Çağdaş Sanat ve Tasarım,Mimarlık ve Tasarım Fakültesi,5,UFUK SOYÖZ,"Salı | 13:40 - 16:30
+"
+IDE301,A,Tasarım Stüdyosu III,Mimarlık ve Tasarım Fakültesi,8,ŞEBNEM TİMUR,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+IDE302,A,Tasarım Stüdyosu 4,Mimarlık ve Tasarım Fakültesi,8,EMRAH ÖZTURAN,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+IDE303,A,Tasarım Yönetimi ve Stratejisi,Mimarlık ve Tasarım Fakültesi,5,HAMİT ALPAY ER,"Çarşamba | 13:40 - 16:30
+"
+IDE305,A,Etkileşim Tasarımının İlkeleri,Mimarlık ve Tasarım Fakültesi,6,GÜLHİS ZEYNEP KARAPARS,"Cuma | 14:40 - 17:30
+"
+IDE313,A,Endüstriyel Tasarımda Renk,Mimarlık ve Tasarım Fakültesi,3,TUĞBA TOK,"Perşembe | 13:40 - 16:30
+"
+IDE317,A,Perakende Sektöründe Deneyim Tasarımı,Mimarlık ve Tasarım Fakültesi,3,NİL TELLİ,"Cuma | 09:40 - 12:30
+"
+IDE319,A,İleri Görselleştirme Teknikleri,Mimarlık ve Tasarım Fakültesi,3,TAHSİN EMRE EKE,"Salı | 13:40 - 16:30
+"
+IDE332,A,Hizmet Tasarımına Giriş,Mimarlık ve Tasarım Fakültesi,3,SONAY ARDI AKKAR,"Pazartesi | 13:40 - 16:30
+"
+IDE401,A,Tasarım Stüdyosu V,Mimarlık ve Tasarım Fakültesi,8,HAMİT ALPAY ER,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+IDE403,A,Meslek Pratiği ve Portfolyo Tasarımı,Mimarlık ve Tasarım Fakültesi,5,EMRAH ÖZTURAN,"Salı | 09:40 - 12:30
+"
+IDE424,A,Sürdürülebilirlik için Döngüsel Tasarım,Mimarlık ve Tasarım Fakültesi,3,HAFİZE GAMZE EKİN,"Cuma | 09:40 - 12:30
+"
+IDE437,A,Etkileşimler ve Hizmetler için Tasarım Stüdyosu,Mimarlık ve Tasarım Fakültesi,8,GÜLHİS ZEYNEP KARAPARS,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+INAR105,A,İç Mimarlık ve Çevre Tasarımına Giriş,Mimarlık ve Tasarım Fakültesi,3,ZEYNEP CEYLANLI,"Salı | 08:40 - 11:30
+"
+INAR201,A,İç Mimarlık Tasarım Stüdyosu I,Mimarlık ve Tasarım Fakültesi,8,ELİF AKTAŞ YANAŞ,"Pazartesi | 08:40 - 12:30
+Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+INAR201,B,İç Mimarlık Tasarım Stüdyosu I,Mimarlık ve Tasarım Fakültesi,8,ELİF AKTAŞ YANAŞ,"Pazartesi | 08:40 - 12:30
+Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+INAR201,C,İç Mimarlık Tasarım Stüdyosu I,Mimarlık ve Tasarım Fakültesi,8,MERVE AŞÇIOĞLU YILDIRIM,"Pazartesi | 08:40 - 12:30
+Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+INAR202,A,İç Mimarlık Tasarım Stüdyosu II,Mimarlık ve Tasarım Fakültesi,8,MERVE AŞÇIOĞLU YILDIRIM,"Pazartesi | 08:40 - 12:30
+Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+INAR206,A,İç Mimarlıkta Ergonomi,Mimarlık ve Tasarım Fakültesi,5,SELİN ÜST,"Çarşamba | 09:40 - 12:30
+"
+INAR209,A,Bina Yapı Sistemleri I,Mimarlık ve Tasarım Fakültesi,5,MERVE AŞÇIOĞLU YILDIRIM,"Pazartesi | 13:40 - 17:30
+Pazartesi | 13:40 - 17:30
+"
+INAR301,A,İç Mimarlık Tasarım Stüdyosu III,Mimarlık ve Tasarım Fakültesi,8,SELİN ÜST,"Pazartesi | 08:40 - 12:30
+Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+INAR301,B,İç Mimarlık Tasarım Stüdyosu III,Mimarlık ve Tasarım Fakültesi,8,SELİN ÜST,"Pazartesi | 08:40 - 12:30
+Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+INAR301,C,İç Mimarlık Tasarım Stüdyosu III,Mimarlık ve Tasarım Fakültesi,8,PINAR ARTIKOĞLU,"Pazartesi | 08:40 - 12:30
+Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+INAR302,A,İç Mimarlık Tasarım Stüdyosu IV,Mimarlık ve Tasarım Fakültesi,8,PINAR ARTIKOĞLU,"Pazartesi | 08:40 - 12:30
+Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+INAR303,A,İç Mimari Detayları I,Mimarlık ve Tasarım Fakültesi,5,SELİN ÜST,"Cuma | 08:40 - 12:30
+Cuma | 08:40 - 12:30
+"
+INAR303,B,İç Mimari Detayları I,Mimarlık ve Tasarım Fakültesi,5,PINAR ARTIKOĞLU,"Cuma | 08:40 - 12:30
+Cuma | 08:40 - 12:30
+"
+INAR313,A,İç Mimarlar için Renk,Mimarlık ve Tasarım Fakültesi,3,MİNE ARBAY,"Perşembe | 13:40 - 16:30
+"
+INAR315,A,İleri Sunum Teknikleri,Mimarlık ve Tasarım Fakültesi,3,MİNE ARBAY,"Cuma | 09:40 - 12:30
+"
+INAR316,A,Aydınlatma Tasarımı,Mimarlık ve Tasarım Fakültesi,3,FARUK UYAN,"Çarşamba | 13:40 - 16:30
+"
+INAR319,A,Mobilya Tasarımı Tarihi,Mimarlık ve Tasarım Fakültesi,3,PINAR ARTIKOĞLU,"Perşembe | 13:40 - 16:30
+"
+INAR401,A,İç Mimarlık Tasarım Stüdyosu V,Mimarlık ve Tasarım Fakültesi,10,ZEYNEP CEYLANLI,"Pazartesi | 08:40 - 12:30
+Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+INAR401,B,İç Mimarlık Tasarım Stüdyosu V,Mimarlık ve Tasarım Fakültesi,10,EZGİ ÇİÇEK,"Pazartesi | 08:40 - 12:30
+Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+INAR402,A,Mezuniyet Projesi,Mimarlık ve Tasarım Fakültesi,12,MİNE ARBAY,"Pazartesi | 08:40 - 12:30
+Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+INAR403,A,Sürdürülebilir Tasarım Araştırmaları,Mimarlık ve Tasarım Fakültesi,4,ELİF AKTAŞ YANAŞ,"Çarşamba | 09:40 - 12:30
+"
+INAR405,A,"Meslek Pratiği, Hukuku ve Etiği",Mimarlık ve Tasarım Fakültesi,5,ZEYNEP CEYLANLI,"Salı | 13:40 - 16:30
+"
+INAR412,A,Düşey Dolaşım Sistemleri,Mimarlık ve Tasarım Fakültesi,3,SELİN ÜST,"Perşembe | 13:40 - 16:30
+"
+INAR422,A,İç Mimarlıkta Yapı Bilgi Modellemesi Uygulamaları,Mimarlık ve Tasarım Fakültesi,3,ZEYNEP CEYLANLI,"Pazartesi | 13:40 - 16:30
+"
+MİM101,A,Tasarım,Mimarlık ve Tasarım Fakültesi,8,SEMRA AYDINLI,"Pazartesi | 08:40 - 12:30
+Perşembe | 12:40 - 16:30
+"
+MİM102,A,Mimari Tasarım Stüdyosu I,Mimarlık ve Tasarım Fakültesi,8,SEMRA TOKAY,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+MİM105,A,Mimarlık Kültürü,Mimarlık ve Tasarım Fakültesi,3,MURAT ŞAHİN,"Salı | 13:40 - 16:30
+"
+MİM107,A,Mimari Anlatım Teknikleri,Mimarlık ve Tasarım Fakültesi,5,SEMRA TOKAY,"Salı | 08:40 - 12:30
+"
+MİM110,A,Bilgisayar Destekli Tasarım,Mimarlık ve Tasarım Fakültesi,4,CANSU GÜNAYDIN DONDURAN,"Salı | 12:40 - 16:30
+"
+MİM110,B,Bilgisayar Destekli Tasarım,Mimarlık ve Tasarım Fakültesi,4,FARUK CAN ÜNAL,"Cuma | 08:40 - 12:30
+"
+MİM201,A,Mimari Tasarım Stüdyosu II,Mimarlık ve Tasarım Fakültesi,8,EBRU KARAHAN,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+MİM201,B,Mimari Tasarım Stüdyosu II,Mimarlık ve Tasarım Fakültesi,8,SEMRA TOKAY,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+MİM201,C,Mimari Tasarım Stüdyosu II,Mimarlık ve Tasarım Fakültesi,8,SERHAT ULUBAY,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+MİM202,A,Mimari Tasarım Stüdyosu III,Mimarlık ve Tasarım Fakültesi,8,TUĞBA GÜLFEM KAYA,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+MİM205,A,Yapı Bilgisi ve Malzeme,Mimarlık ve Tasarım Fakültesi,5,FERHAN HASMADEN,"Pazartesi | 13:40 - 15:30
+Perşembe | 13:40 - 16:30
+"
+MİM207,A,Statik ve Mukavemet,Mimarlık ve Tasarım Fakültesi,5,ÖMER KARADAĞ,"Salı | 08:40 - 11:30
+"
+MİM209,A,Mimarlık Tarihi I,Mimarlık ve Tasarım Fakültesi,3,DİDEM BOYACIOĞLU,"Salı | 13:40 - 15:30
+"
+MİM209,B,Mimarlık Tarihi I,Mimarlık ve Tasarım Fakültesi,3,AYŞE BİKE BAYKARA,"Salı | 13:40 - 15:30
+"
+MİM212,A,Çevre Analizi ve Sürdürülebilir Peyzaj Tasarımı,Mimarlık ve Tasarım Fakültesi,3,BEYZA ŞAT,"Cuma | 14:40 - 17:30
+"
+MİM212,B,Çevre Analizi ve Sürdürülebilir Peyzaj Tasarımı,Mimarlık ve Tasarım Fakültesi,3,ABDULKADİR KAAN ÖZGÜN,"Cuma | 14:40 - 17:30
+"
+MİM301,A,Mimari Tasarım Stüdyosu IV,Mimarlık ve Tasarım Fakültesi,8,HÜLYA TURGUT,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+MİM301,B,Mimari Tasarım Stüdyosu IV,Mimarlık ve Tasarım Fakültesi,8,TUĞBA GÜLFEM KAYA,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+MİM301,C,Mimari Tasarım Stüdyosu IV,Mimarlık ve Tasarım Fakültesi,8,NAGEHAN AÇIMUZ İŞBAKAN,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+MİM301,D,Mimari Tasarım Stüdyosu IV,Mimarlık ve Tasarım Fakültesi,8,NESLİNUR HIZLI ERKILIÇ,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+MİM302,A,Mimari Tasarım Stüdyosu V,Mimarlık ve Tasarım Fakültesi,8,GÜLTEN ASLIHAN ÜNLÜ,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+MİM303,A,Kentsel Planlama ve Tasarım,Mimarlık ve Tasarım Fakültesi,5,BURÇİN MIZRAK BİLEN,"Salı | 08:40 - 12:30
+"
+MİM303,B,Kentsel Planlama ve Tasarım,Mimarlık ve Tasarım Fakültesi,5,TOLGA KAYACAN,"Salı | 08:40 - 12:30
+"
+MİM304,A,Mimari Koruma ve Rölöve,Mimarlık ve Tasarım Fakültesi,5,AYŞE CEREN BİLGE,"Çarşamba | 08:40 - 12:30
+"
+MİM305,A,Fiziksel Çevre Kontrolü,Mimarlık ve Tasarım Fakültesi,5,FERHAN HASMADEN,"Salı | 13:40 - 17:30
+Salı | 13:40 - 17:30
+"
+MİM305,B,Fiziksel Çevre Kontrolü,Mimarlık ve Tasarım Fakültesi,5,BEGÜM DİKER,"Salı | 13:40 - 17:30
+Salı | 13:40 - 17:30
+"
+MİM313,A,Maket Yapımı ve Modlaj,Mimarlık ve Tasarım Fakültesi,3,SEMRA TOKAY,"Çarşamba | 09:40 - 12:30
+Çarşamba | 09:40 - 12:30
+"
+MİM317,A,Geleneksel Mimari,Mimarlık ve Tasarım Fakültesi,3,GÜLİZ ÖZORHON,"Pazartesi | 13:40 - 16:30
+"
+MİM322,A,"Ütopyalar-Distopyalar, Ütopik Kentler ve Mimarlıkta Ütopya",Mimarlık ve Tasarım Fakültesi,3,MAHMUT ŞENOL,"Cuma | 14:40 - 17:30
+"
+MİM401,A,Mimari Tasarım Stüdyosu VI,Mimarlık ve Tasarım Fakültesi,8,GÜLİZ ÖZORHON,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+MİM401,B,Mimari Tasarım Stüdyosu VI,Mimarlık ve Tasarım Fakültesi,8,ALİ KEMAL TERLEMEZ,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+MİM401,C,Mimari Tasarım Stüdyosu VI,Mimarlık ve Tasarım Fakültesi,8,EMRE İŞLEK,"Pazartesi | 08:40 - 12:30
+Perşembe | 08:40 - 12:30
+"
+MİM402,A,Mezuniyet Projesi,Mimarlık ve Tasarım Fakültesi,12,BURÇİN MIZRAK BİLEN,
+MİM403,A,Yapım Yönetimi ve Ekonomisi,Mimarlık ve Tasarım Fakültesi,5,EBRU KARAHAN,"Salı | 08:40 - 12:30
+"
+MİM420,A,İstanbul,Mimarlık ve Tasarım Fakültesi,3,AYŞE CEREN BİLGE,"Salı | 09:40 - 12:30
+"
+MİM434,A,Parametrik Tasarım,Mimarlık ve Tasarım Fakültesi,3,NEVŞET GÜL ÇANAKÇIOĞLU,"Pazartesi | 13:40 - 16:30
+"
+MİM436,A,"Mimari Tasarımda Yer, Kavram ve Bağlam",Mimarlık ve Tasarım Fakültesi,3,HÜLYA TURGUT,"Perşembe | 13:40 - 16:30
+"
+MİM463,A,Aydınlatma Tasarımı,Mimarlık ve Tasarım Fakültesi,3,FARUK UYAN,"Çarşamba | 09:40 - 12:30
+"
+MİM466,A,Mimarlıkta Karma Sunum Teknikleri,Mimarlık ve Tasarım Fakültesi,3,MUSTAFA BATU KEPEKCİOĞLU,"Salı | 13:40 - 16:30
+"
+ANTH201,A,Antropolojik Düşünce Tarihi,Sosyal Bilimler Fakültesi,6,EZGİCAN ÖZDEMİR KELLY,"Çarşamba | 08:40 - 11:30
+"
+ANTH203,A,Araştırma Yöntemleri I,Sosyal Bilimler Fakültesi,6,EZGİCAN ÖZDEMİR KELLY,"Çarşamba | 13:40 - 16:30
+"
+ANTH205,A,"Ekonomi, Kültür, Siyaset",Sosyal Bilimler Fakültesi,6,ALPKAN BİRELMA,"Cuma | 08:40 - 11:30
+"
+ANTH303,A,"Toplumsal Cinsiyet, Toplum, Siyaset",Sosyal Bilimler Fakültesi,6,BERNA ARSLAN,"Perşembe | 08:40 - 11:30
+"
+ART100,A,Karakalem,Sosyal Bilimler Fakültesi,4,MARTIN HARRISON,"Perşembe | 15:40 - 18:30
+"
+ART101,A,Resim I,Sosyal Bilimler Fakültesi,4,MARTIN HARRISON,"Salı | 08:40 - 11:30
+"
+ART101,B,Resim I,Sosyal Bilimler Fakültesi,4,MARTIN HARRISON,"Perşembe | 08:40 - 11:30
+"
+ART102,A,Resim II,Sosyal Bilimler Fakültesi,4,MARTIN HARRISON,"Salı | 15:40 - 18:30
+"
+ART111,A,Yazmacılık Sanatı,Sosyal Bilimler Fakültesi,2,MÜZEYYEN TÜYSÜZ PULAT,"Cuma | 10:40 - 12:30
+"
+BE101,A,Tenis,Sosyal Bilimler Fakültesi,2,BARKIN YALÇINKALE,"Salı | 17:40 - 19:30
+"
+BE102,A,Yüzme,Sosyal Bilimler Fakültesi,2,DOĞUCAN BİLGETÜRK,"Cuma | 14:40 - 16:30
+"
+BE107,A,Satranç,Sosyal Bilimler Fakültesi,2,ERSİN BAYSAN,"Perşembe | 16:40 - 18:30
+"
+BE114,A,Hakemlik,Sosyal Bilimler Fakültesi,2,AYBERK DİLMEN,"Perşembe | 18:40 - 20:30
+"
+BE116,A,Bireysel Savunma,Sosyal Bilimler Fakültesi,2,VLADİMİR SELİM KOÇ,"Cuma | 14:40 - 16:30
+"
+BE119,A,Temel Fitness Eğitimi,Sosyal Bilimler Fakültesi,2,SEÇKİN ALAY,"Salı | 08:40 - 10:30
+"
+BE121,A,Suda Hayat Kurtarma ve İlk Yardım,Sosyal Bilimler Fakültesi,2,ŞAHİN ÖZEN,"Salı | 17:40 - 19:30
+"
+BE123,A,Temel Afet Eğitimi ve İlkyardım,Sosyal Bilimler Fakültesi,2,BURÇAK TÜRKAY,"Cuma | 18:40 - 20:30
+"
+HIST103,A,Dünya Tarihi I,Sosyal Bilimler Fakültesi,6,FERAY COŞKUN,"Salı | 15:40 - 18:30
+"
+HIST103,B,Dünya Tarihi I,Sosyal Bilimler Fakültesi,6,FERAY COŞKUN,"Perşembe | 10:40 - 13:30
+"
+HIST104,A,Dünya Tarihi II,Sosyal Bilimler Fakültesi,6,OYA İKLİL SELÇUK,"Çarşamba | 11:40 - 14:30
+"
+HIST104,B,Dünya Tarihi II,Sosyal Bilimler Fakültesi,6,MERİH EROL,"Salı | 12:40 - 15:30
+"
+HIST201,A,Atatürk İlkeleri ve İnkılap Tarihi I,Sosyal Bilimler Fakültesi,4,ÖZKAN AKPINAR,"Çarşamba | 14:40 - 16:30
+"
+HIST201,B,Atatürk İlkeleri ve İnkılap Tarihi I,Sosyal Bilimler Fakültesi,4,MUSTAFA BATMAN,"Perşembe | 11:40 - 13:30
+"
+HIST201,C,Atatürk İlkeleri ve İnkılap Tarihi I,Sosyal Bilimler Fakültesi,4,ELİF KEVSER ÖZER ALBAYRAK,"Çarşamba | 14:40 - 16:30
+"
+HIST201,D,Atatürk İlkeleri ve İnkılap Tarihi I,Sosyal Bilimler Fakültesi,4,BAŞAK AKGÜL KOVANKAYA,"Cuma | 16:40 - 18:30
+"
+HIST201,E,Atatürk İlkeleri ve İnkılap Tarihi I,Sosyal Bilimler Fakültesi,4,ALİ SİPAHİ,"Cuma | 14:40 - 16:30
+"
+HIST201,F,Atatürk İlkeleri ve İnkılap Tarihi I,Sosyal Bilimler Fakültesi,4,ÖZKAN AKPINAR,"Çarşamba | 16:40 - 18:30
+"
+HIST201,G,Atatürk İlkeleri ve İnkılap Tarihi I,Sosyal Bilimler Fakültesi,4,ÖZKAN AKPINAR,"Pazartesi | 16:40 - 18:30
+"
+HIST201,H,Atatürk İlkeleri ve İnkılap Tarihi I,Sosyal Bilimler Fakültesi,4,BAŞAK AKGÜL KOVANKAYA,"Pazartesi | 16:40 - 18:30
+"
+HIST201,I,Atatürk İlkeleri ve İnkılap Tarihi I,Sosyal Bilimler Fakültesi,4,ÖZLEM DİLBER,"Perşembe | 11:40 - 13:30
+"
+HIST201,J,Atatürk İlkeleri ve İnkılap Tarihi I,Sosyal Bilimler Fakültesi,4,ÖZLEM DİLBER,"Cuma | 16:40 - 18:30
+"
+HIST201,K,Atatürk İlkeleri ve İnkılap Tarihi I,Sosyal Bilimler Fakültesi,4,ÖZLEM DİLBER,"Perşembe | 16:40 - 18:30
+"
+HIST202,A,Atatürk İlkeleri ve İnkılap Tarihi II,Sosyal Bilimler Fakültesi,4,ELİF KEVSER ÖZER ALBAYRAK,"Çarşamba | 12:40 - 14:30
+"
+HIST202,B,Atatürk İlkeleri ve İnkılap Tarihi II,Sosyal Bilimler Fakültesi,4,ALİ SİPAHİ,"Çarşamba | 16:40 - 18:30
+"
+HIST202,C,Atatürk İlkeleri ve İnkılap Tarihi II,Sosyal Bilimler Fakültesi,4,ALPKAN BİRELMA,"Pazartesi | 16:40 - 18:30
+"
+HIST202,D,Atatürk İlkeleri ve İnkılap Tarihi II,Sosyal Bilimler Fakültesi,4,ALİ SİPAHİ,"Cuma | 10:40 - 12:30
+"
+HIST202,E,Atatürk İlkeleri ve İnkılap Tarihi II,Sosyal Bilimler Fakültesi,4,BAŞAK AKGÜL KOVANKAYA,"Cuma | 10:40 - 12:30
+"
+HIST303,A,Atatürk İlkeleri ve İnkılap Tarihi I (Yabancılar için),Sosyal Bilimler Fakültesi,4,MUSTAFA BATMAN,"Perşembe | 18:40 - 20:30
+"
+HIST303,B,Atatürk İlkeleri ve İnkılap Tarihi I (Yabancılar için),Sosyal Bilimler Fakültesi,4,ÖZLEM DİLBER,"Cuma | 18:40 - 20:30
+"
+HIST303,C,Atatürk İlkeleri ve İnkılap Tarihi I (Yabancılar için),Sosyal Bilimler Fakültesi,4,MUSTAFA BATMAN,"Cuma | 18:40 - 20:30
+"
+HIST304,A,Atatürk İlkeleri ve İnkılap Tarihi II (Yabancılar için),Sosyal Bilimler Fakültesi,4,MUSTAFA BATMAN,"Çarşamba | 18:40 - 20:30
+"
+HIST310,A,Balkan Tarihi,Sosyal Bilimler Fakültesi,6,MERİH EROL,"Salı | 15:40 - 18:30
+"
+HUM319,A,Filmlerle Felsefe: Felsefeye Giriş,Sosyal Bilimler Fakültesi,6,SİBEL OKTAR THOMAS,"Salı | 08:40 - 11:30
+"
+HUM353,A,Edebiyat ve Modernizm,Sosyal Bilimler Fakültesi,6,ÇİMEN GÜNAY ERKOL,"Salı | 08:40 - 11:30
+"
+IR101,A,Siyaset Bilimine Giriş,Sosyal Bilimler Fakültesi,6,DENİZ SERT,"Salı | 09:40 - 12:30
+"
+IR201,A,Araştırma Yöntemleri I,Sosyal Bilimler Fakültesi,6,EZGİ ELÇİ,"Pazartesi | 15:40 - 18:30
+"
+IR201R,A,Araştırma Yöntemleri I - Recitation,Sosyal Bilimler Fakültesi,0,EZGİ ELÇİ,"Çarşamba | 14:40 - 15:30
+"
+IR201R,B,Araştırma Yöntemleri I - Recitation,Sosyal Bilimler Fakültesi,0,EZGİ ELÇİ,"Çarşamba | 13:40 - 14:30
+"
+IR203,A,Karşılaştırmalı Siyasete Giriş,Sosyal Bilimler Fakültesi,6,TÜLAY DENİZ ERKMEN,"Çarşamba | 08:40 - 11:30
+"
+IR205,A,Uluslararası İlişkilere Giriş,Sosyal Bilimler Fakültesi,6,KATELYN CASSIN,"Perşembe | 08:40 - 11:30
+"
+IR301,A,Diplomasi Tarihi,Sosyal Bilimler Fakültesi,6,BEHLÜL ÖZKAN,"Salı | 12:40 - 15:30
+"
+IR303,A,Türkiye'de Siyaset,Sosyal Bilimler Fakültesi,6,FAİK GÜR,"Perşembe | 12:40 - 15:30
+"
+IR305,A,Uluslararası İlişkiler Teorisi,Sosyal Bilimler Fakültesi,6,SAMARJIT GHOSH,"Pazartesi | 10:40 - 13:30
+"
+IR311,A,Uluslararası Çatışma Analizi,Sosyal Bilimler Fakültesi,6,ESRA DİLEK,"Salı | 15:40 - 18:30
+"
+IR328,A,Otoriter Rejimler,Sosyal Bilimler Fakültesi,6,TÜLAY DENİZ ERKMEN,"Perşembe | 15:40 - 18:30
+"
+IR329,A,Demokrasi ve Demokratikleşme,Sosyal Bilimler Fakültesi,6,MURAT SOMER,"Çarşamba | 15:40 - 18:30
+"
+IR331,A,Uluslararası Krizlerde İnsani Müdahale ,Sosyal Bilimler Fakültesi,6,KATELYN CASSIN,"Perşembe | 15:40 - 18:30
+"
+IR400,A,Uluslararası İlişkilerde Bağımsız Çalışma,Sosyal Bilimler Fakültesi,6,SAMARJIT GHOSH,
+IR401,A,Uluslararası Ekonomi Politikası,Sosyal Bilimler Fakültesi,6,MURAT SOMER,"Pazartesi | 15:40 - 18:30
+"
+IR402,A,Uluslararası Çevre Siyaseti,Sosyal Bilimler Fakültesi,6,ESRA DİLEK,"Salı | 08:40 - 11:30
+"
+IR405,A,Türkiye Siyasetinde Seçilmiş Konular,Sosyal Bilimler Fakültesi,6,BEHLÜL ÖZKAN,"Perşembe | 08:40 - 11:30
+"
+IR410,A,İktidar: Siyaset Teorisi Üzerine Bir Çalışma,Sosyal Bilimler Fakültesi,6,SAMARJIT GHOSH,"Cuma | 08:40 - 11:30
+"
+IR421,A,Programlamalı Sosyal Bilimler,Sosyal Bilimler Fakültesi,6,HAMİD AKIN ÜNVER,"Salı | 15:40 - 18:30
+"
+MUSIC103,A,Dünya Müzikleri,Sosyal Bilimler Fakültesi,6,KAMİL ERDEM,"Salı | 15:40 - 18:30
+"
+PE101,A,Tenis,Sosyal Bilimler Fakültesi,2,BARKIN YALÇINKALE,"Salı | 15:40 - 17:30
+"
+PE101,B,Tenis,Sosyal Bilimler Fakültesi,2,BARKIN YALÇINKALE,"Perşembe | 15:40 - 17:30
+"
+PE101,C,Tenis,Sosyal Bilimler Fakültesi,2,BARKIN YALÇINKALE,"Perşembe | 17:40 - 19:30
+"
+PE101,D,Tenis,Sosyal Bilimler Fakültesi,2,BARKIN YALÇINKALE,"Cuma | 16:40 - 18:30
+"
+PE101,E,Tenis,Sosyal Bilimler Fakültesi,2,BARKIN YALÇINKALE,"Cuma | 18:40 - 20:30
+"
+PE102,A,Yüzme,Sosyal Bilimler Fakültesi,2,LALE MEMDUHA ALPTOĞAN,"Cuma | 08:40 - 10:30
+"
+PE102,B,Yüzme,Sosyal Bilimler Fakültesi,2,LALE MEMDUHA ALPTOĞAN,"Cuma | 10:40 - 12:30
+"
+PE104,A,Bilardo I,Sosyal Bilimler Fakültesi,2,İLBAY DAĞDELEN,"Cuma | 14:40 - 16:30
+"
+PE104,B,Bilardo I,Sosyal Bilimler Fakültesi,2,İLBAY DAĞDELEN,"Cuma | 16:40 - 18:30
+"
+PE105,A,Yelken,Sosyal Bilimler Fakültesi,2,GÜRAY ZÜNBÜL,"Salı | 08:40 - 10:30
+"
+PE105,B,Yelken,Sosyal Bilimler Fakültesi,2,GÜRAY ZÜNBÜL,"Perşembe | 08:40 - 10:30
+"
+PE105,C,Yelken,Sosyal Bilimler Fakültesi,2,GÜRAY ZÜNBÜL,"Cuma | 08:40 - 10:30
+"
+PE105,D,Yelken,Sosyal Bilimler Fakültesi,2,GÜRAY ZÜNBÜL,"Cuma | 10:40 - 12:30
+"
+PE106,A,Eskrim I,Sosyal Bilimler Fakültesi,2,YİĞİT ALİ DÖRTBUDAK,"Perşembe | 08:40 - 10:30
+"
+PE106,B,Eskrim I,Sosyal Bilimler Fakültesi,2,YİĞİT ALİ DÖRTBUDAK,"Perşembe | 10:40 - 12:30
+"
+PE107,A,Satranç,Sosyal Bilimler Fakültesi,2,ERSİN BAYSAN,"Perşembe | 18:40 - 20:30
+"
+PE107,B,Satranç,Sosyal Bilimler Fakültesi,2,ERSİN BAYSAN,"Perşembe | 08:40 - 10:30
+"
+PE107,C,Satranç,Sosyal Bilimler Fakültesi,2,ERSİN BAYSAN,"Perşembe | 10:40 - 12:30
+"
+PE112,A,Masa Tenisi,Sosyal Bilimler Fakültesi,2,KERİM ÖZAY,"Salı | 18:40 - 20:30
+"
+PE112,B,Masa Tenisi,Sosyal Bilimler Fakültesi,2,KERİM ÖZAY,"Perşembe | 18:40 - 20:30
+"
+PE114,A,Hakemlik,Sosyal Bilimler Fakültesi,2,AYBERK DİLMEN,"Perşembe | 16:40 - 18:30
+"
+PE116,A,Bireysel Savunma,Sosyal Bilimler Fakültesi,2,VLADİMİR SELİM KOÇ,"Cuma | 10:40 - 12:30
+"
+PE119,A,Temel Fitnes Eğitimi,Sosyal Bilimler Fakültesi,2,GİZEM NURBAY,"Perşembe | 08:40 - 10:30
+"
+PE120,A,Briç,Sosyal Bilimler Fakültesi,2,SÜLEYMAN KOLATA,"Salı | 16:40 - 18:30
+"
+PE120,B,Briç,Sosyal Bilimler Fakültesi,2,SÜLEYMAN KOLATA,"Salı | 18:40 - 20:30
+"
+PE120,C,Briç,Sosyal Bilimler Fakültesi,2,SÜLEYMAN KOLATA,"Cuma | 16:40 - 18:30
+"
+PE120,D,Briç,Sosyal Bilimler Fakültesi,2,SÜLEYMAN KOLATA,"Cuma | 18:40 - 20:30
+"
+PE121,A,Suda Hayat Kurtarma ve İlk Yardım,Sosyal Bilimler Fakültesi,2,ŞAHİN ÖZEN,"Salı | 15:40 - 17:30
+"
+PE123,A,Temel Afet Eğitimi ve İlkyardım,Sosyal Bilimler Fakültesi,2,BURÇAK TÜRKAY,"Cuma | 16:40 - 18:30
+"
+PHIL102,A,Felsefeye Giriş,Sosyal Bilimler Fakültesi,4,SİBEL OKTAR THOMAS,"Perşembe | 08:40 - 11:30
+"
+PHIL104,A,"Doğruluk, Bilgi ve Etik Karar Verme",Sosyal Bilimler Fakültesi,6,SİBEL OKTAR THOMAS,"Cuma | 08:40 - 11:30
+"
+PHIL210,A,Bilim Felsefesi,Sosyal Bilimler Fakültesi,6, ,"Salı | 15:40 - 18:30
+"
+PSY100,A,Genel Psikoloji,Sosyal Bilimler Fakültesi,6,GÜL CANAN ERGİN,"Salı | 08:40 - 09:30
+Cuma | 14:40 - 16:30
+"
+PSY101,A,Psikolojiye Giriş I,Sosyal Bilimler Fakültesi,6,DUYGU GÜRLEYİK,"Salı | 11:40 - 14:30
+"
+PSY103,A,Psikoloji için İstatistik I,Sosyal Bilimler Fakültesi,6,ALİ TEKCAN,"Pazartesi | 16:40 - 18:30
+Salı | 14:40 - 15:30
+"
+PSY103R,A,Psikoloji için İstatistik I - Uygulama,Sosyal Bilimler Fakültesi,0,ALİ TEKCAN,"Salı | 15:40 - 16:30
+"
+PSY105,A,Davranışsal Biyoloji,Sosyal Bilimler Fakültesi,4,ALPER AÇIK,"Çarşamba | 08:40 - 10:30
+Perşembe | 12:40 - 13:30
+"
+PSY201,A,Bilişsel Psikoloji,Sosyal Bilimler Fakültesi,6,ALİ TEKCAN,"Pazartesi | 12:40 - 13:30
+Salı | 16:40 - 18:30
+"
+PSY203,A,Gelişim Psikolojisi I,Sosyal Bilimler Fakültesi,6,ASİYE KUMRU,"Salı | 11:40 - 14:30
+"
+PSY205,A,Sosyal Psikoloji I,Sosyal Bilimler Fakültesi,6,CELİA KATRİNE NAİVAR ŞEN,"Salı | 08:40 - 11:30
+"
+PSY207,A,Araştırma Yöntemleri I,Sosyal Bilimler Fakültesi,6,NESİBE PINAR UĞURLAR,"Cuma | 14:40 - 17:30
+"
+PSY301,A,Kişilik Kuramları ve Bireysel Farklılıklar,Sosyal Bilimler Fakültesi,6,GÖKÇE TARCAN KUMKALE,"Perşembe | 13:40 - 16:30
+"
+PSY303,A,Yetişkin Psikopatalojisi,Sosyal Bilimler Fakültesi,6,GİZEM ARIKAN,"Çarşamba | 11:40 - 14:30
+"
+PSY305,A,İş ve Örgüt Psikolojisi,Sosyal Bilimler Fakültesi,6,HAYRİYE CANAN SÜMER,"Pazartesi | 10:40 - 12:30
+Çarşamba | 10:40 - 11:30
+"
+PSY313,A,Motivasyon ve Öz-Düzenleme,Sosyal Bilimler Fakültesi,6,AYFER DOST GÖZKAN,"Perşembe | 10:40 - 13:30
+"
+PSY322,A,Bilişsel Gelişim,Sosyal Bilimler Fakültesi,6,BERNA ARSLAN UZUNDAĞ,"Cuma | 09:40 - 12:30
+"
+PSY323,A,Erken Çocukluk Eğitiminde Psikoloji,Sosyal Bilimler Fakültesi,6,İBRAHİM HAKKI ACAR,"Salı | 13:40 - 16:30
+"
+PSY325,A,Uygulamalı Sosyal Psikoloji: Davranış Değişimi,Sosyal Bilimler Fakültesi,6,CELİA KATRİNE NAİVAR ŞEN,"Pazartesi | 15:40 - 18:30
+"
+PSY404,A,Klinik Değerlendirme ve Görüşme Tekniklerine Giriş,Sosyal Bilimler Fakültesi,6,GİZEM ARIKAN,"Pazartesi | 09:40 - 12:30
+"
+PSY405,A,Kamu Sağlığı ve Egzersiz Psikolojisi,Sosyal Bilimler Fakültesi,6,DUYGU GÜRLEYİK,"Çarşamba | 14:40 - 17:30
+"
+PSY406,A,Psikoterapi Sistemleri,Sosyal Bilimler Fakültesi,6,AYŞE ALTAN ATALAY,"Perşembe | 10:40 - 13:30
+"
+PSY416,A,Sosyal ve Kişilik Gelişimi,Sosyal Bilimler Fakültesi,6,ASİYE KUMRU,"Çarşamba | 11:40 - 14:30
+"
+PSY422,A,Aile Psikolojisi,Sosyal Bilimler Fakültesi,6,MÜNEVVER SELENGA GÜRMEN ACAR,"Cuma | 15:40 - 18:30
+"
+PSY429,A,İş Hayatında Liderlik ve Motivasyon,Sosyal Bilimler Fakültesi,6,GÜL CANAN ERGİN,"Pazartesi | 12:40 - 15:30
+"
+PSY433,A,Pozitif Psikoloji,Sosyal Bilimler Fakültesi,6,AYŞE ALTAN ATALAY,"Salı | 08:40 - 11:30
+"
+PSY461-01,A,Sosyal Psikolojide Seçme Konular - 01,Sosyal Bilimler Fakültesi,6,GÖKÇE TARCAN KUMKALE,"Çarşamba | 08:40 - 11:30
+"
+SOC104,A,Sosyolojiye Giriş,Sosyal Bilimler Fakültesi,6,BERNA ARSLAN,"Çarşamba | 15:40 - 18:30
+"
+SOC201,A,Sosyal Bilimlere Giriş,Sosyal Bilimler Fakültesi,6,BURCU MUTLU,"Çarşamba | 12:40 - 15:30
+"
+SOC201,B,Sosyal Bilimlere Giriş,Sosyal Bilimler Fakültesi,6,BURCU MUTLU,"Cuma | 09:40 - 12:30
+"
+SOC201,C,Sosyal Bilimlere Giriş,Sosyal Bilimler Fakültesi,6,AYŞE DENİZ ÜNAN GÖKTAN,"Çarşamba | 12:40 - 15:30
+"
+TLL101,A,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,YAĞMUR YILDIRIMAY,"Pazartesi | 12:40 - 14:30
+"
+TLL101,AA,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,ŞENAY ÇINAR,"Çarşamba | 13:40 - 15:30
+"
+TLL101,AB,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,ŞENAY ÇINAR,"Çarşamba | 16:40 - 18:30
+"
+TLL101,AC,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,ŞENAY ÇINAR,"Perşembe | 14:40 - 16:30
+"
+TLL101,AD,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,SENEM TİMUROĞLU,"Cuma | 16:40 - 18:30
+"
+TLL101,AE,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,EZGİ HAMZAÇEBİ,"Çarşamba | 12:40 - 14:30
+"
+TLL101,B,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,YAĞMUR YILDIRIMAY,"Salı | 08:40 - 10:30
+"
+TLL101,C,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,SENEM TİMUROĞLU,"Cuma | 09:40 - 11:30
+"
+TLL101,D,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,YAĞMUR YILDIRIMAY,"Çarşamba | 16:40 - 18:30
+"
+TLL101,E,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,FATMA DAMAK,"Pazartesi | 12:40 - 14:30
+"
+TLL101,F,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,FATMA DAMAK,"Salı | 08:40 - 10:30
+"
+TLL101,G,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,ŞERİFE SEDA YÜCEKURT ÜNLÜ,"Cuma | 09:40 - 11:30
+"
+TLL101,H,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,EGEM ATİK,"Salı | 13:40 - 15:30
+"
+TLL101,I,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,ŞERİFE SEDA YÜCEKURT ÜNLÜ,"Cuma | 16:40 - 18:30
+"
+TLL101,J,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,ŞERİFE SEDA YÜCEKURT ÜNLÜ,"Salı | 08:40 - 10:30
+"
+TLL101,K,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,ŞERİFE SEDA YÜCEKURT ÜNLÜ,"Çarşamba | 12:40 - 14:30
+"
+TLL101,L,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,FATMA DAMAK,"Çarşamba | 14:40 - 16:30
+"
+TLL101,M,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,MURAT NARCI,"Çarşamba | 13:40 - 15:30
+"
+TLL101,N,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,MURAT NARCI,"Pazartesi | 16:40 - 18:30
+"
+TLL101,O,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,MURAT NARCI,"Pazartesi | 14:40 - 16:30
+"
+TLL101,P,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,MURAT NARCI,"Perşembe | 12:40 - 14:30
+"
+TLL101,Q,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,GÜNEŞ SEZEN,"Çarşamba | 13:40 - 15:30
+"
+TLL101,R,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,GÜNEŞ SEZEN,"Pazartesi | 16:40 - 18:30
+"
+TLL101,S,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,GÜNEŞ SEZEN,"Pazartesi | 14:40 - 16:30
+"
+TLL101,T,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,GÜNEŞ SEZEN,"Perşembe | 12:40 - 14:30
+"
+TLL101,U,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,EGEM ATİK,"Çarşamba | 13:40 - 15:30
+"
+TLL101,V,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,EGEM ATİK,"Salı | 16:40 - 18:30
+"
+TLL101,W,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,FATMA DAMAK,"Pazartesi | 14:40 - 16:30
+"
+TLL101,X,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,EZGİ HAMZAÇEBİ,"Salı | 13:40 - 15:30
+"
+TLL101,Y,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,SENEM TİMUROĞLU,"Salı | 08:40 - 10:30
+"
+TLL101,Z,Türk Dili ve Edebiyatı I,Sosyal Bilimler Fakültesi,3,ŞENAY ÇINAR,"Pazartesi | 12:40 - 14:30
+"
+TLL102,A,Türk Dili ve Edebiyatı II,Sosyal Bilimler Fakültesi,3,YAĞMUR YILDIRIMAY,"Salı | 16:40 - 18:30
+"
+TLL102,B,Türk Dili ve Edebiyatı II,Sosyal Bilimler Fakültesi,3,ŞERİFE SEDA YÜCEKURT ÜNLÜ,"Salı | 12:40 - 14:30
+"
+TLL102,C,Türk Dili ve Edebiyatı II,Sosyal Bilimler Fakültesi,3,EZGİ HAMZAÇEBİ,"Salı | 16:40 - 18:30
+"
+TLL102,D,Türk Dili ve Edebiyatı II,Sosyal Bilimler Fakültesi,3,ALİ SERDAR,"Pazartesi | 12:40 - 14:30
+"
+TLL102,E,Türk Dili ve Edebiyatı II,Sosyal Bilimler Fakültesi,3,EZGİ HAMZAÇEBİ,"Cuma | 08:40 - 10:30
+"
+TLL102,F,Türk Dili ve Edebiyatı II,Sosyal Bilimler Fakültesi,3,EZGİ HAMZAÇEBİ,"Cuma | 10:40 - 12:30
+"
+TLL102,G,Türk Dili ve Edebiyatı II,Sosyal Bilimler Fakültesi,3,ALİ SERDAR,"Perşembe | 14:40 - 16:30
+"
+TLL102,H,Türk Dili ve Edebiyatı II,Sosyal Bilimler Fakültesi,3,YAĞMUR YILDIRIMAY,"Çarşamba | 12:40 - 14:30
+"
+TLL102,I,Türk Dili ve Edebiyatı II,Sosyal Bilimler Fakültesi,3,ALİ SERDAR,"Cuma | 16:40 - 18:30
+"
+TLL102,J,Türk Dili ve Edebiyatı II,Sosyal Bilimler Fakültesi,3,ŞENAY ÇINAR,"Perşembe | 16:40 - 18:30
+"
+TLL102,K,Türk Dili ve Edebiyatı II,Sosyal Bilimler Fakültesi,3,FATMA DAMAK,"Çarşamba | 08:40 - 10:30
+"
+TLL102,L,Türk Dili ve Edebiyatı II,Sosyal Bilimler Fakültesi,3,MURAT NARCI,"Perşembe | 14:40 - 16:30
+"
+TLL102,M,Türk Dili ve Edebiyatı II,Sosyal Bilimler Fakültesi,3,GÜNEŞ SEZEN,"Perşembe | 08:40 - 10:30
+"
+İTB201,A,İşaret Dili,Sosyal Bilimler Fakültesi,2,AHMET TOMBUL,"Perşembe | 16:40 - 18:30
+"
+İTB301,A,Cumhuriyet'in Yüzyılına Panoramik Bir Bakış,Sosyal Bilimler Fakültesi,6,MURAT NARCI,"Perşembe | 17:40 - 20:30
+"
+GARM103,A,İş Güvenliği ve Hijyen,Uygulamalı Bilimler Fakültesi,6,ASLI ZULUĞ,"Pazartesi | 13:40 - 16:30
+"
+GARM121,A,Gıda Bilimi,Uygulamalı Bilimler Fakültesi,6,SUZAN TİREKİ,"Çarşamba | 13:40 - 15:30
+Cuma | 09:40 - 11:30
+"
+GARM204,A,Beslenme,Uygulamalı Bilimler Fakültesi,5,GİZEM AĞIR,"Cuma | 08:40 - 11:30
+"
+GARM221,A,Klasik Pastacılık Teknik ve Becerilerinin Temelleri,Uygulamalı Bilimler Fakültesi,6,DEFNE ERTAN TÜYSÜZOĞLU,"Pazartesi | 08:40 - 11:30
+Pazartesi | 11:40 - 15:30
+Salı | 11:40 - 15:30
+Salı | 15:40 - 18:30
+"
+GARM221,B,Klasik Pastacılık Teknik ve Becerilerinin Temelleri,Uygulamalı Bilimler Fakültesi,6,DEFNE ERTAN TÜYSÜZOĞLU,"Pazartesi | 08:40 - 11:30
+Pazartesi | 15:40 - 18:30
+Salı | 11:40 - 15:30
+Çarşamba | 08:40 - 11:30
+"
+GARM221,C,Klasik Pastacılık Teknik ve Becerilerinin Temelleri,Uygulamalı Bilimler Fakültesi,6,DEFNE ERTAN TÜYSÜZOĞLU,"Pazartesi | 08:40 - 11:30
+Salı | 08:40 - 11:30
+Salı | 11:40 - 15:30
+Çarşamba | 08:40 - 11:30
+"
+GARM221,D,Klasik Pastacılık Teknik ve Becerilerinin Temelleri,Uygulamalı Bilimler Fakültesi,6,DEFNE ERTAN TÜYSÜZOĞLU,"Pazartesi | 08:40 - 11:30
+Salı | 11:40 - 15:30
+Çarşamba | 11:40 - 14:30
+Perşembe | 08:40 - 11:30
+"
+GARM222,A,Uluslararası Mutfaklar,Uygulamalı Bilimler Fakültesi,5,ÖZGE SAMANCI,"Perşembe | 08:40 - 14:30
+"
+GARM223,B,Şarap ve İçecek Yönetimi,Uygulamalı Bilimler Fakültesi,5,AYSELİ İZMEN,"Çarşamba | 15:40 - 18:30
+"
+GARM224,A,Gıda ve Sürdürülebilirlik,Uygulamalı Bilimler Fakültesi,5,CANDAN TÜRKKAN,"Pazartesi | 08:40 - 11:30
+"
+GARM321,A,Geleneksel Mutfak Teknik ve Becerilerinin Bölgesel Uygulamaları,Uygulamalı Bilimler Fakültesi,8,SUZAN TİREKİ,"Pazartesi | 11:40 - 15:30
+Pazartesi | 11:40 - 15:30
+Pazartesi | 15:40 - 18:30
+Pazartesi | 15:40 - 18:30
+Salı | 08:40 - 11:30
+Salı | 08:40 - 11:30
+Salı | 18:40 - 22:30
+Salı | 18:40 - 22:30
+Çarşamba | 08:40 - 11:30
+Çarşamba | 08:40 - 11:30
+Cuma | 15:40 - 19:30
+Cuma | 15:40 - 19:30
+"
+GARM321,B,Geleneksel Mutfak Teknik ve Becerilerinin Bölgesel Uygulamaları,Uygulamalı Bilimler Fakültesi,8,SUZAN TİREKİ,"Pazartesi | 11:40 - 15:30
+Pazartesi | 18:40 - 22:30
+Salı | 08:40 - 11:30
+Çarşamba | 08:40 - 11:30
+Çarşamba | 15:40 - 18:30
+Cuma | 08:40 - 11:30
+"
+GARM321,C,Geleneksel Mutfak Teknik ve Becerilerinin Bölgesel Uygulamaları,Uygulamalı Bilimler Fakültesi,8,ASLI ZULUĞ,"Pazartesi | 11:40 - 15:30
+Salı | 08:40 - 11:30
+Salı | 15:40 - 18:30
+Çarşamba | 08:40 - 11:30
+Perşembe | 18:40 - 22:30
+Cuma | 11:40 - 15:30
+"
+GARM321,D,Geleneksel Mutfak Teknik ve Becerilerinin Bölgesel Uygulamaları,Uygulamalı Bilimler Fakültesi,8,ASLI ZULUĞ,"Pazartesi | 11:40 - 15:30
+Salı | 08:40 - 11:30
+Salı | 11:40 - 15:30
+Çarşamba | 08:40 - 11:30
+Çarşamba | 18:40 - 22:30
+Cuma | 08:40 - 11:30
+"
+GARM322,A,A La Carte Yiyecek Üretimi ,Uygulamalı Bilimler Fakültesi,5,ÖZGE SAMANCI,"Salı | 15:40 - 22:30
+Çarşamba | 15:40 - 22:30
+Perşembe | 15:40 - 22:30
+Cuma | 15:40 - 22:30
+"
+GARM324,A,Tesis Yönetimi ve Tasarımı,Uygulamalı Bilimler Fakültesi,5,MİNE ARBAY,"Çarşamba | 08:40 - 11:30
+"
+GARM361,A,Türk Mutfak Kültürü Mirası ve Uygulamaları,Uygulamalı Bilimler Fakültesi,5,ÖZGE SAMANCI,"Pazartesi | 08:40 - 11:30
+Perşembe | 11:40 - 14:30
+"
+GARM361,B,Türk Mutfak Kültürü Mirası ve Uygulamaları,Uygulamalı Bilimler Fakültesi,5,ÖZGE SAMANCI,"Pazartesi | 08:40 - 11:30
+Perşembe | 11:40 - 14:30
+"
+GARM361,C,Türk Mutfak Kültürü Mirası ve Uygulamaları,Uygulamalı Bilimler Fakültesi,5,ÖZGE SAMANCI,"Perşembe | 11:40 - 14:30
+Perşembe | 15:40 - 18:30
+"
+GARM361,D,Türk Mutfak Kültürü Mirası ve Uygulamaları,Uygulamalı Bilimler Fakültesi,5,ÖZGE SAMANCI,"Perşembe | 11:40 - 14:30
+Perşembe | 18:40 - 22:30
+"
+GARM421,A,Gastronomide Girişimcilik ve Yenileşim,Uygulamalı Bilimler Fakültesi,5,ASLI ZULUĞ,"Çarşamba | 12:40 - 15:30
+"
+GARM423,A,Mutfak Gösterileri,Uygulamalı Bilimler Fakültesi,5,SUZAN TİREKİ,"Salı | 08:40 - 12:30
+"
+GARM423,B,Mutfak Gösterileri,Uygulamalı Bilimler Fakültesi,5,SUZAN TİREKİ,"Cuma | 08:40 - 12:30
+"
+GARM473,A,Anadolunun Yerel Ürünleri ve Gastronomideki Yeri,Uygulamalı Bilimler Fakültesi,5,TANGÖR TAN,"Pazartesi | 12:40 - 15:30
+"
+GARM479,A,Görsel Sanatlar İçin Yemek Stilistliği,Uygulamalı Bilimler Fakültesi,5,OYA KARABAL RAPAYAZDIÇ,"Pazartesi | 09:40 - 12:30
+"
+GARM483,A,Yemek Yazarlığı,Uygulamalı Bilimler Fakültesi,5,ÇİMEN GÜNAY ERKOL,"Pazartesi | 13:40 - 16:30
+"
+GARM484,A,Türkiye Tarımının Ekonomi Politiği,Uygulamalı Bilimler Fakültesi,5,CANDAN TÜRKKAN,"Salı | 12:40 - 15:30
+"
+GARM486,A,Zeytin ve Zeytinyağının Bilim ve Kültürü,Uygulamalı Bilimler Fakültesi,5,ZEYNEP DELEN NİRCAN,"Perşembe | 09:40 - 12:30
+"
+HMAN131,A,Turizm Sosyolojisi,Uygulamalı Bilimler Fakültesi,4,EBRU TEKİN BİLBİL,"Pazartesi | 13:40 - 16:30
+"
+HMAN132,A,Odalar Bölümü Yönetimi ve Teknolojileri,Uygulamalı Bilimler Fakültesi,6,HANIM KADER ŞANLIÖZ ÖZGEN,"Pazartesi | 11:40 - 13:30
+Pazartesi | 11:40 - 13:30
+Salı | 10:40 - 12:30
+Salı | 10:40 - 12:30
+"
+HMAN204,A,Otel Yönetimi,Uygulamalı Bilimler Fakültesi,6,MEHMET TEOMAN ALEMDAR,"Pazartesi | 08:40 - 11:30
+"
+HMAN304,A,İkram ve Etkinlik Yönetimi,Uygulamalı Bilimler Fakültesi,5,ZEKİYE SİNEM KARAPINAR,"Salı | 13:40 - 16:30
+"
+HMAN331,A,Otel ve Yiyecek İçecek İşletmelerinde Dijital Pazarlama ve Yeni Medya Yönetim,Uygulamalı Bilimler Fakültesi,6,AYDIN BEYHAN,"Pazartesi | 14:40 - 17:30
+"
+HMAN333,A,Otellerde Gelir ve Çevrimiçi Dağıtım Kanalları Yönetimi,Uygulamalı Bilimler Fakültesi,6,HANIM KADER ŞANLIÖZ ÖZGEN,"Pazartesi | 09:40 - 11:30
+Cuma | 09:40 - 11:30
+"
+HMAN336,A,Sanat Tarihi,Uygulamalı Bilimler Fakültesi,5,AYGEN DEMİRİZ KAYAALP,"Cuma | 14:40 - 17:30
+"
+HMAN404,A,Otellerde Yönetim Uygulamaları,Uygulamalı Bilimler Fakültesi,6,MEHMET TEOMAN ALEMDAR,"Pazartesi | 13:40 - 16:30
+"
+HMAN460,A,Turizm ve Otel Endüstrileri Üzerine Tartışmalar,Uygulamalı Bilimler Fakültesi,5,ANTHONY BETTS,"Perşembe | 11:40 - 14:30
+"
+HMAN466,A,Geleceğin Otel Odasını Tasarlamak ,Uygulamalı Bilimler Fakültesi,5,ÖZGÜR ÖLCE,"Çarşamba | 11:40 - 14:30
+"
+SAS101,A,Otel ve Yiyecek İçecek Endüstrisi,Uygulamalı Bilimler Fakültesi,5,AYDIN BEYHAN,"Pazartesi | 10:40 - 13:30
+"
+SAS102,A,Otellerde ve Yiyecek İşletmelerinde Finansal Muhasebe,Uygulamalı Bilimler Fakültesi,6,NİDA TÜREGÜN,"Pazartesi | 13:40 - 16:30
+"
+SAS105,A,Uygulamalı Bilimler için Matematik,Uygulamalı Bilimler Fakültesi,5,BESTE MADRAN,"Perşembe | 11:40 - 14:30
+"
+SAS201,A,Hizmet Pazarlaması,Uygulamalı Bilimler Fakültesi,5,AYDIN BEYHAN,"Çarşamba | 14:40 - 17:30
+"
+SAS202,A,Otel ve Yiyecek İçecek İşletmelerinde Yönetim Muhasebesi ve Finans,Uygulamalı Bilimler Fakültesi,6,NİDA TÜREGÜN,"Salı | 12:40 - 15:30
+"
+SAS203,A,Yiyecek ve İçecek Yönetimi ve Servisi,Uygulamalı Bilimler Fakültesi,5,AYDIN BEYHAN,"Pazartesi | 11:40 - 13:30
+Perşembe | 10:40 - 14:30
+"
+SAS203,B,Yiyecek ve İçecek Yönetimi ve Servisi,Uygulamalı Bilimler Fakültesi,5,AYDIN BEYHAN,"Pazartesi | 11:40 - 13:30
+Salı | 17:40 - 20:30
+Çarşamba | 17:40 - 20:30
+Perşembe | 17:40 - 20:30
+Cuma | 17:40 - 20:30
+"
+SAS205,A,Uygulamalı Bilimler için Ekonomi,Uygulamalı Bilimler Fakültesi,5,ÖZCAN CEYLAN,"Perşembe | 11:40 - 14:30
+"
+SAS301,A,Yiyecek ve İçecek İşletmelerinde Planlama ve Denetim,Uygulamalı Bilimler Fakültesi,6,ÖZCAN CEYLAN,"Perşembe | 08:40 - 11:30
+"
+SAS303,A,Otel ve Yiyecek İçecek İşletmelerinde Küresel İnsan Gücü Yönetimi,Uygulamalı Bilimler Fakültesi,6,AYŞIN PAŞAMEHMETOĞLU,"Çarşamba | 12:40 - 15:30
+"
+SAS352,A,Sayısal Karar Verme Teknikleri,Uygulamalı Bilimler Fakültesi,6,ÖZCAN CEYLAN,"Pazartesi | 09:40 - 12:30
+"
+SAS353,A,Araştırma Yöntemleri,Uygulamalı Bilimler Fakültesi,5,EBRU TEKİN BİLBİL,"Çarşamba | 14:40 - 17:30
+"
+SAS405,A,Otel Yöneticiliği ve Gastronomi Seminerleri,Uygulamalı Bilimler Fakültesi,1,EBRU TEKİN BİLBİL,"Perşembe | 14:40 - 15:30
+"
+SAS405_U,A,Otel Yöneticiliği ve Gastronomi Seminerleri,Uygulamalı Bilimler Fakültesi,0,EBRU TEKİN BİLBİL,"Perşembe | 14:40 - 15:30
+"
+SAS453,A,Müzik,Uygulamalı Bilimler Fakültesi,6,AYGEN DEMİRİZ KAYAALP,"Cuma | 08:40 - 11:30
+"
+AI111,A,Python'a Giriş,Mühendislik Fakültesi,6,MEHMET KAAN ÖZTÜRK,"Salı | 08:40 - 11:30
+Cuma | 14:40 - 16:30
+"
+AI112,A,Yapay Zeka ve Toplum,Mühendislik Fakültesi,4,REYHAN AYDOĞAN,"Salı | 15:40 - 18:30
+"
+AI425,A,Büyük dil Modelleri,Mühendislik Fakültesi,6,CENK DEMİROĞLU,"Salı | 09:40 - 11:30
+Perşembe | 08:40 - 09:30
+"
+CE112,A,Statik,Mühendislik Fakültesi,6,TANER YILMAZ,"Pazartesi | 12:40 - 14:30
+Perşembe | 12:40 - 14:30
+"
+CE208,A,Yapı İşletmesi,Mühendislik Fakültesi,6,SENEM SEYİS KAZAZOĞLU,"Pazartesi | 10:40 - 12:30
+Cuma | 10:40 - 12:30
+"
+CE210,A,Akışkanlar Mekaniği,Mühendislik Fakültesi,6,YİĞİT CAN ALTAN,"Pazartesi | 12:40 - 14:30
+Çarşamba | 12:40 - 14:30
+"
+CE211,A,Dinamik,Mühendislik Fakültesi,4,DERYA DENİZ,"Perşembe | 15:40 - 18:30
+"
+CE301,A,Yapı Statiği,Mühendislik Fakültesi,6,BÜLENT ERKMEN,"Pazartesi | 08:40 - 10:30
+Çarşamba | 08:40 - 10:30
+"
+CE302,A,Zemin Mekaniği,Mühendislik Fakültesi,6,SAFİYE FEYZA ÇİNİCİOĞLU,"Pazartesi | 16:40 - 18:30
+Salı | 14:40 - 16:30
+"
+CE302L,A,Zemin Mekaniği - Lab.,Mühendislik Fakültesi,0,AYŞEN ÇELEBİ,"Çarşamba | 16:40 - 18:30
+"
+CE302L,B,Zemin Mekaniği - Lab.,Mühendislik Fakültesi,0,AYŞEN ÇELEBİ,"Cuma | 10:40 - 12:30
+"
+CE302L,C,Zemin Mekaniği - Lab.,Mühendislik Fakültesi,0,AYŞEN ÇELEBİ,"Perşembe | 11:40 - 13:30
+"
+CE302L,D,Zemin Mekaniği - Lab.,Mühendislik Fakültesi,0,AYŞEN ÇELEBİ,"Perşembe | 13:40 - 15:30
+"
+CE302L,E,Zemin Mekaniği - Lab.,Mühendislik Fakültesi,0,AYŞEN ÇELEBİ,"Çarşamba | 10:40 - 12:30
+"
+CE304,A,Betonarme,Mühendislik Fakültesi,6,BÜLENT ERKMEN,"Salı | 11:40 - 13:30
+Çarşamba | 10:40 - 12:30
+"
+CE307,A,Çelik Yapılar 1,Mühendislik Fakültesi,6,GÜLAY ALTAY,"Pazartesi | 14:40 - 16:30
+Cuma | 14:40 - 16:30
+"
+CE310,A,Ulaştırma Mühendisliği,Mühendislik Fakültesi,4,BEKİR OĞUZ BARTIN,"Pazartesi | 12:40 - 15:30
+"
+CE311,A,Hidrolik,Mühendislik Fakültesi,4,YİĞİT CAN ALTAN,"Salı | 08:40 - 11:30
+"
+CE412,A,Plastik Analiz ve Tasarım,Mühendislik Fakültesi,6,GÜLAY ALTAY,"Salı | 13:40 - 16:30
+"
+CE420,A,Geoteknik Deprem Mühendisliği,Mühendislik Fakültesi,6,MUSTAFA ATİLLA ANSAL,"Çarşamba | 15:40 - 18:30
+"
+CE423,A,İleri Yapı Analizi,Mühendislik Fakültesi,6,DERYA DENİZ,"Pazartesi | 15:40 - 18:30
+"
+CE424,A,Geoteknik Yapılar,Mühendislik Fakültesi,6,SAFİYE FEYZA ÇİNİCİOĞLU,"Perşembe | 13:40 - 16:30
+"
+CE426,A,Yapı Malzemeleri için Dijital Çözümler,Mühendislik Fakültesi,6,ZEYNEP BAŞARAN BUNDUR,"Perşembe | 10:40 - 13:30
+"
+CE469,A,Trafik Mühendisliğinde Simülasyon ve Makine Öğrenmesi ,Mühendislik Fakültesi,6,BEKİR OĞUZ BARTIN,"Perşembe | 10:40 - 13:30
+"
+CEC397,A,Yalın İnşaat Yönetimi (Sertifika Seçmeli),Mühendislik Fakültesi,4,SENEM SEYİS KAZAZOĞLU,"Perşembe | 13:40 - 16:30
+"
+CHEM111,A,Kimya,Mühendislik Fakültesi,6,İLKNUR ERUÇAR FINDIKÇI,"Pazartesi | 12:40 - 14:30
+Çarşamba | 12:40 - 14:30
+"
+CHEM111,B,Kimya,Mühendislik Fakültesi,6,İLKNUR ERUÇAR FINDIKÇI,"Pazartesi | 08:40 - 10:30
+Çarşamba | 08:40 - 10:30
+"
+CHEM111L,A1,Mühendisler için Kimya - Lab.,Mühendislik Fakültesi,0,İLKNUR ERUÇAR FINDIKÇI,"Perşembe | 08:40 - 10:30
+"
+CHEM111L,A2,Mühendisler için Kimya - Lab.,Mühendislik Fakültesi,0,İLKNUR ERUÇAR FINDIKÇI,"Perşembe | 08:40 - 10:30
+"
+CHEM111L,B1,Mühendisler için Kimya - Lab.,Mühendislik Fakültesi,0,İLKNUR ERUÇAR FINDIKÇI,"Cuma | 08:40 - 10:30
+"
+CHEM111L,B2,Mühendisler için Kimya - Lab.,Mühendislik Fakültesi,0,İLKNUR ERUÇAR FINDIKÇI,"Cuma | 08:40 - 10:30
+"
+CHEM111L,C1,Mühendisler için Kimya - Lab.,Mühendislik Fakültesi,0,İLKNUR ERUÇAR FINDIKÇI,"Perşembe | 10:40 - 12:30
+"
+CHEM111L,C2,Mühendisler için Kimya - Lab.,Mühendislik Fakültesi,0,İLKNUR ERUÇAR FINDIKÇI,"Perşembe | 10:40 - 12:30
+"
+CHEM111L,D1,Mühendisler için Kimya - Lab.,Mühendislik Fakültesi,0,İLKNUR ERUÇAR FINDIKÇI,"Cuma | 14:40 - 16:30
+"
+CHEM111L,D2,Mühendisler için Kimya - Lab.,Mühendislik Fakültesi,0,İLKNUR ERUÇAR FINDIKÇI,"Cuma | 14:40 - 16:30
+"
+CS101,A,Bilgisayar Programlama,Mühendislik Fakültesi,6,ZEYNEP İLKNUR KARADENİZ EROL,"Pazartesi | 12:40 - 14:30
+"
+CS101,B,Bilgisayar Programlama,Mühendislik Fakültesi,6,ALİ ERKAN,"Pazartesi | 12:40 - 14:30
+"
+CS101L,A,Bilgisayar Proglamlama - Lab.,Mühendislik Fakültesi,0,ZEYNEP İLKNUR KARADENİZ EROL,"Salı | 14:40 - 16:30
+"
+CS101L,B,Bilgisayar Proglamlama - Lab.,Mühendislik Fakültesi,0,ZEYNEP İLKNUR KARADENİZ EROL,"Salı | 14:40 - 16:30
+"
+CS101L,C,Bilgisayar Proglamlama - Lab.,Mühendislik Fakültesi,0,ALİ ERKAN,"Salı | 14:40 - 16:30
+"
+CS102,A,Nesneye Dayalı Programlama,Mühendislik Fakültesi,6,KÜBRA KALKAN ÇAKMAKCİ,"Pazartesi | 12:40 - 14:30
+Salı | 14:40 - 16:30
+"
+CS104,A,Programlamaya Giriş,Mühendislik Fakültesi,6,ALİ ERKAN,"Pazartesi | 08:40 - 10:30
+Pazartesi | 08:40 - 10:30
+"
+CS104L,A,Programlamaya Giriş - Lab.,Mühendislik Fakültesi,0,ALİ ERKAN,"Salı | 12:40 - 14:30
+"
+CS104L,B,Programlamaya Giriş - Lab.,Mühendislik Fakültesi,0,ALİ ERKAN,"Salı | 12:40 - 14:30
+"
+CS104L,C,Programlamaya Giriş - Lab.,Mühendislik Fakültesi,0,ALİ ERKAN,"Salı | 12:40 - 14:30
+"
+CS105,A,Nesne-Yönelimli Programlamaya Giriş,Mühendislik Fakültesi,6,NİTEL MUHTAROĞLU,"Salı | 08:40 - 10:30
+Cuma | 08:40 - 10:30
+"
+CS112,A,Bilgisayar Bilimi için Ayrık Matematik,Mühendislik Fakültesi,6,HASAN FEHMİ ATEŞ,"Çarşamba | 12:40 - 14:30
+Perşembe | 13:40 - 14:30
+"
+CS201,A,Veri Yapıları ve Algoritmalar,Mühendislik Fakültesi,6,OLCAY TANER YILDIZ,"Salı | 09:40 - 11:30
+"
+CS201,B,Veri Yapıları ve Algoritmalar,Mühendislik Fakültesi,6,EMRE SEFER,"Salı | 09:40 - 11:30
+"
+CS201L,A,Veri Yapıları ve Algoritmalar - Lab.,Mühendislik Fakültesi,0,OLCAY TANER YILDIZ,"Çarşamba | 12:40 - 14:30
+"
+CS201L,B,Veri Yapıları ve Algoritmalar - Lab.,Mühendislik Fakültesi,0,OLCAY TANER YILDIZ,"Çarşamba | 12:40 - 14:30
+"
+CS201L,C,Veri Yapıları ve Algoritmalar - Lab.,Mühendislik Fakültesi,0,EMRE SEFER,"Çarşamba | 12:40 - 14:30
+"
+CS202,A,Veritabanı Yönetim Sistemleri,Mühendislik Fakültesi,6,HÜSEYİN ULUSOY,"Çarşamba | 12:40 - 15:30
+"
+CS240,A,Bilgisayar Mimarisi,Mühendislik Fakültesi,6,İSMAİL AKTÜRK,"Salı | 14:40 - 17:30
+"
+CS240L,A,Bilgisayar Mimarisi- Lab.,Mühendislik Fakültesi,0,İSMAİL AKTÜRK,"Perşembe | 16:40 - 18:30
+"
+CS240L,B,Bilgisayar Mimarisi- Lab.,Mühendislik Fakültesi,0,İSMAİL AKTÜRK,"Perşembe | 14:40 - 16:30
+"
+CS304,A,"Yapay Zeka, Makina Öğrenmesi ve Veri Bilimine Giriş",Mühendislik Fakültesi,6,ÇİĞDEM EROĞLU ERDEM,"Çarşamba | 15:40 - 18:30
+"
+CS320,A,Yazılım Mühendisliği,Mühendislik Fakültesi,6,HASAN SÖZER,"Çarşamba | 09:40 - 12:30
+"
+CS321,A,Programlama Paradigmaları,Mühendislik Fakültesi,6,MUSTAFA FURKAN KIRAÇ,"Salı | 08:40 - 11:30
+"
+CS350,A,İşletim Sistemleri,Mühendislik Fakültesi,6,İSMAİL ARI,"Çarşamba | 15:40 - 18:30
+"
+CS410,A,Otomat Kuramı ve Biçimsel Diller,Mühendislik Fakültesi,6,OLCAY TANER YILDIZ,"Salı | 14:40 - 16:30
+Perşembe | 14:40 - 16:30
+"
+CS423,A,Bilgisayarla Görme,Mühendislik Fakültesi,6,HASAN FEHMİ ATEŞ,"Pazartesi | 11:40 - 14:30
+"
+CS434,A,Yazılım Tasarım Örüntüleri,Mühendislik Fakültesi,6,EMRE KAPLAN,"Cuma | 14:40 - 17:30
+"
+CS435,A,Çok Çekirdek Programlama,Mühendislik Fakültesi,6,İSMAİL AKTÜRK,"Cuma | 09:40 - 12:30
+"
+CS440,A,Finansta Makine Öğrenmesi,Mühendislik Fakültesi,6,EMRE SEFER,"Salı | 12:40 - 15:30
+"
+CS447,A,Bilgisayar Ağları,Mühendislik Fakültesi,6,MEHMET REHA CİVANLAR,"Pazartesi | 20:40 - 21:30
+Salı | 20:40 - 22:30
+"
+CS452,A,Python ile Veri Bilimi,Mühendislik Fakültesi,6,OLCAY TANER YILDIZ,"Pazartesi | 08:40 - 11:30
+"
+CS454,A,Yapay Sinir Ağları ve Otomatik Öğrenmeye Giriş,Mühendislik Fakültesi,6,AHMET İBRAHİM ETHEM ALPAYDIN,"Perşembe | 10:40 - 13:30
+"
+CS460,A,Bilgi Erişim Sistemleri ve Arama Motorları,Mühendislik Fakültesi,6,ZEYNEP İLKNUR KARADENİZ EROL,"Pazartesi | 15:40 - 18:30
+"
+CS462,A,Çok Etmenli Sistemlerde Ortak Karar Alma,Mühendislik Fakültesi,6,REYHAN AYDOĞAN,"Çarşamba | 11:40 - 14:30
+"
+CS468,A,Ağ Üzerine Güncel Konular,Mühendislik Fakültesi,6,ALİ CENGİZ BEĞEN,"Çarşamba | 14:40 - 17:30
+"
+CSC393,A,Spring Framework ile Backend Uygulamaları Geliştirmek (Sertifika Seçmeli),Mühendislik Fakültesi,4,ESMA MERAL,"Pazartesi | 15:40 - 18:30
+"
+CSC399,A,Haberleşme Güvenliği (Sertifika Seçmeli),Mühendislik Fakültesi,4,HACI HAKAN KILINÇ,"Cuma | 09:40 - 12:30
+"
+EE101,A,Elektrik Elektronik Mühendisliğine Giriş,Mühendislik Fakültesi,2,GÖKTÜRK POYRAZOĞLU,"Pazartesi | 10:40 - 12:30
+"
+EE201,A,Sinyaller ve Sistemler,Mühendislik Fakültesi,6,EVŞEN YANMAZ ADAM,"Perşembe | 11:40 - 14:30
+"
+EE202,A,Devre Analizi,Mühendislik Fakültesi,6,UMUT BAŞARAN,"Salı | 08:40 - 10:30
+Çarşamba | 08:40 - 10:30
+"
+EE202L,A,Devre Analizi - Lab.,Mühendislik Fakültesi,0,UMUT BAŞARAN,"Cuma | 14:40 - 17:30
+"
+EE203,A,Sayısal Sistemler,Mühendislik Fakültesi,6,İLKER HAMZAOĞLU,"Salı | 11:40 - 14:30
+"
+EE203L,A,Sayısal Sistemler - Lab.,Mühendislik Fakültesi,0,İLKER HAMZAOĞLU,"Perşembe | 08:40 - 11:30
+"
+EE203L,B,Sayısal Sistemler - Lab.,Mühendislik Fakültesi,0,İLKER HAMZAOĞLU,"Cuma | 08:40 - 11:30
+"
+EE203L,C,Sayısal Sistemler - Lab.,Mühendislik Fakültesi,0,İLKER HAMZAOĞLU,"Perşembe | 15:40 - 18:30
+"
+EE301,A,Elektronik I,Mühendislik Fakültesi,6,KADİR DURAK,"Pazartesi | 13:40 - 16:30
+"
+EE301L,A,Elektronik 1 - Lab.,Mühendislik Fakültesi,0,KADİR DURAK,"Çarşamba | 12:40 - 15:30
+"
+EE301L,B,Elektronik 1 - Lab.,Mühendislik Fakültesi,0,KADİR DURAK,"Perşembe | 11:40 - 14:30
+"
+EE301L,C,Elektronik 1 - Lab.,Mühendislik Fakültesi,0,KADİR DURAK,"Salı | 08:40 - 11:30
+"
+EE303,A,Güç Sistemlerinin Temelleri,Mühendislik Fakültesi,6,GÖKTÜRK POYRAZOĞLU,"Salı | 11:40 - 14:30
+"
+EE341,A,Haberleşme Sistemlerinin Temelleri,Mühendislik Fakültesi,6,EVŞEN YANMAZ ADAM,"Pazartesi | 09:40 - 12:30
+"
+EE341L,A,Haberleşme Sistemlerinin Temelleri - Lab.,Mühendislik Fakültesi,0,EVŞEN YANMAZ ADAM,"Perşembe | 08:40 - 11:30
+"
+EE341L,B,Haberleşme Sistemlerinin Temelleri - Lab.,Mühendislik Fakültesi,0,EVŞEN YANMAZ ADAM,"Cuma | 15:40 - 18:30
+"
+EE341L,C,Haberleşme Sistemlerinin Temelleri - Lab.,Mühendislik Fakültesi,0,EVŞEN YANMAZ ADAM,"Çarşamba | 12:40 - 15:30
+"
+EE421,A,Sayısal Görüntü İşleme,Mühendislik Fakültesi,6,ÇİĞDEM EROĞLU ERDEM,"Perşembe | 13:40 - 16:30
+"
+EE423,A,Sinyal İşleme için Derin Öğrenme ,Mühendislik Fakültesi,6,CENK DEMİROĞLU,"Pazartesi | 16:40 - 18:30
+Salı | 15:40 - 16:30
+"
+EE442,A,Sayısal Haberleşmeye Giriş,Mühendislik Fakültesi,6,MOHAMMED ELAMASSIE,"Perşembe | 08:40 - 11:30
+"
+EE462,A,HDL Tabanlı Sayısal Sistemler Tasarımı,Mühendislik Fakültesi,6,İLKER HAMZAOĞLU,"Pazartesi | 15:40 - 18:30
+"
+EE462L,A,HDL Tabanlı Sayısal Sistemler Tasarımı,Mühendislik Fakültesi,0,İLKER HAMZAOĞLU,"Salı | 08:40 - 11:30
+"
+EE491,A,Kontrol sistemleri,Mühendislik Fakültesi,6,HAMZA AHMED MOUSA MAKHAMREH HAMZA AHMED MOUSA MAKHAMREH,"Perşembe | 08:40 - 11:30
+"
+EE493,A,Güç Elektroniği,Mühendislik Fakültesi,6,HAMZA AHMED MOUSA MAKHAMREH HAMZA AHMED MOUSA MAKHAMREH,"Cuma | 09:40 - 12:30
+"
+EE497,A,Otomotiv Gömülü Yazılımına Giriş,Mühendislik Fakültesi,6,UMUT BAŞARAN,"Pazartesi | 08:40 - 11:30
+"
+EEC394,A,Kablosuz İletişim Mühendisliği Teknolojileri,Mühendislik Fakültesi,4,MOHAMMED ELAMASSIE,"Cuma | 14:40 - 17:30
+"
+EEC398,A,Sürdürülebilir Elektronik ve Döngüsel Ekonomi,Mühendislik Fakültesi,4,İSMAİL AKTÜRK,"Çarşamba | 09:40 - 12:30
+"
+IE201,A,Yöneylem Araştırması I,Mühendislik Fakültesi,6,MEHMET ÖNAL,"Salı | 11:40 - 14:30
+"
+IE201R,A,Yöneylem Araştırması I - Rec.,Mühendislik Fakültesi,0,MEHMET ÖNAL,"Perşembe | 14:40 - 16:30
+"
+IE203,A,Mühendislik Ekonomisi,Mühendislik Fakültesi,6,ALİ EKİCİ,"Çarşamba | 08:40 - 11:30
+"
+IE203R,A,Mühendislik Ekonomisi - Uygulama ,Mühendislik Fakültesi,0,ALİ EKİCİ,"Perşembe | 14:40 - 16:30
+"
+IE203R,B,Mühendislik Ekonomisi - Uygulama ,Mühendislik Fakültesi,0,ALİ EKİCİ,"Cuma | 09:40 - 11:30
+"
+IE246,A,Yöneylem Araştırması için Programlama,Mühendislik Fakültesi,6,İSMAİL BAŞOĞLU,"Salı | 08:40 - 11:30
+"
+IE246R,A,Yöneylem Araştırması için Programlama - Uygulama,Mühendislik Fakültesi,0,İSMAİL BAŞOĞLU,"Perşembe | 16:40 - 18:30
+"
+IE246R,B,Yöneylem Araştırması için Programlama - Uygulama,Mühendislik Fakültesi,0,İSMAİL BAŞOĞLU,"Cuma | 16:40 - 18:30
+"
+IE301,A,Yöneylem Araştırması II,Mühendislik Fakültesi,6,GÖKALP ERBEYOĞLU,"Pazartesi | 14:40 - 17:30
+"
+IE301R,A,Yöneylem Araştırması 2 - Uygulama,Mühendislik Fakültesi,0,GÖKALP ERBEYOĞLU,"Perşembe | 13:40 - 15:30
+"
+IE301R,B,Yöneylem Araştırması 2 - Uygulama,Mühendislik Fakültesi,0,GÖKALP ERBEYOĞLU,"Cuma | 08:40 - 10:30
+"
+IE302,A,Üretim Sistemleri Analizi,Mühendislik Fakültesi,6,BURCU BALÇIK KOYUNCU,"Salı | 08:40 - 11:30
+"
+IE302R,A,Üretim Sistemleri Analizi - Uygulama ,Mühendislik Fakültesi,0,BURCU BALÇIK KOYUNCU,"Perşembe | 08:40 - 10:30
+"
+IE302R,B,Üretim Sistemleri Analizi - Uygulama ,Mühendislik Fakültesi,0,BURCU BALÇIK KOYUNCU,"Cuma | 10:40 - 12:30
+"
+IE325,A,Benzetişim Modellemesi ve Analizi,Mühendislik Fakültesi,6,İSMAİL BAŞOĞLU,"Salı | 13:40 - 16:30
+"
+IE325R,A,Benzetişim Modellemesi ve Analizi - Uygulama,Mühendislik Fakültesi,0,İSMAİL BAŞOĞLU,"Cuma | 14:40 - 16:30
+"
+IE342,A,Matematiksel Modelleme ve Kesin Metodlar,Mühendislik Fakültesi,6,ALİ EKİCİ,"Çarşamba | 08:40 - 11:30
+"
+IE342R,A,Matematiksel Modelleme ve Kesin Metodlar Uygulama,Mühendislik Fakültesi,0,ALİ EKİCİ,"Perşembe | 11:40 - 13:30
+"
+IE342R,B,Matematiksel Modelleme ve Kesin Metodlar Uygulama,Mühendislik Fakültesi,0,ALİ EKİCİ,"Perşembe | 16:40 - 18:30
+"
+IE343,A,Yöneylem Araştırması Algoritmaları,Mühendislik Fakültesi,6,MILAD ELYASI,"Perşembe | 11:40 - 14:30
+"
+IE352,A,Tedarik Zinciri Yönetimi,Mühendislik Fakültesi,6,ESRA GÖKBAYRAK,"Salı | 10:40 - 13:30
+"
+IE354,A,Envanter Yönetimi,Mühendislik Fakültesi,6,İSMAİL BAŞOĞLU,"Pazartesi | 15:40 - 18:30
+"
+IE362,A,Risk Yönetimi,Mühendislik Fakültesi,6,ELVİN ÇOBAN GÖKTÜRK,"Cuma | 14:40 - 17:30
+"
+IE363,A,Sayısal Finans,Mühendislik Fakültesi,6,ALİ EKİCİ,"Perşembe | 14:40 - 17:30
+"
+IE366,A,Optimizasyon için Sezgisel Yöntemler,Mühendislik Fakültesi,6,EKREM DUMAN,"Perşembe | 10:40 - 13:30
+"
+IE368,A,Bilgisayarla Tümleşik Üretim,Mühendislik Fakültesi,6,GÖKALP ERBEYOĞLU,"Perşembe | 14:40 - 17:30
+"
+IE372,A,Üretim Planlama ve Çizelgeleme,Mühendislik Fakültesi,6,GÖKALP ERBEYOĞLU,"Çarşamba | 15:40 - 18:30
+"
+IE383,A,Karar Destek Sistemleri,Mühendislik Fakültesi,6,ELVİN ÇOBAN GÖKTÜRK,"Çarşamba | 15:40 - 18:30
+"
+IE411,A,Finansta Yapay Zeka,Mühendislik Fakültesi,6,YUSUF SERKAN KIRAÇ,"Çarşamba | 12:40 - 15:30
+"
+IE490,A,Endüstri Mühendisliğinde Araştırmaya Giriş,Mühendislik Fakültesi,6,ELVİN ÇOBAN GÖKTÜRK,
+IEC391,A,Proje Yönetimi (Sertifika Seçmeli),Mühendislik Fakültesi,4,AYDIN GÖKHAN KAHRAMAN,"Çarşamba | 17:40 - 20:30
+"
+IEC399,A,İnovasyon ve Teknoloji Yönetimi,Mühendislik Fakültesi,4,ESRA GÖKBAYRAK,"Perşembe | 08:40 - 11:30
+"
+MATH101,A,Sosyal Bilimler için Matematik I,Mühendislik Fakültesi,6,JÜLİDE MİRAY ÖZKAN,"Pazartesi | 10:40 - 12:30
+Çarşamba | 14:40 - 15:30
+"
+MATH101,B,Sosyal Bilimler için Matematik I,Mühendislik Fakültesi,6,JÜLİDE MİRAY ÖZKAN,"Pazartesi | 14:40 - 16:30
+Çarşamba | 10:40 - 11:30
+"
+MATH101,C,Sosyal Bilimler için Matematik I,Mühendislik Fakültesi,6,AYÇA ÇEŞMELİOĞLU GÜL,"Pazartesi | 10:40 - 12:30
+Çarşamba | 14:40 - 15:30
+"
+MATH101,D,Sosyal Bilimler için Matematik I,Mühendislik Fakültesi,6,AYÇA ÇEŞMELİOĞLU GÜL,"Pazartesi | 14:40 - 16:30
+Çarşamba | 10:40 - 11:30
+"
+MATH101,E,Sosyal Bilimler için Matematik I,Mühendislik Fakültesi,6,BURÇİN GÜNEŞ,"Pazartesi | 10:40 - 12:30
+Çarşamba | 14:40 - 15:30
+"
+MATH101,F,Sosyal Bilimler için Matematik I,Mühendislik Fakültesi,6,BURÇİN GÜNEŞ,"Pazartesi | 14:40 - 16:30
+Çarşamba | 10:40 - 11:30
+"
+MATH101,G,Sosyal Bilimler için Matematik I,Mühendislik Fakültesi,6,CAN DEHA KARIKSIZ,"Pazartesi | 10:40 - 12:30
+Çarşamba | 14:40 - 15:30
+"
+MATH101,H,Sosyal Bilimler için Matematik I,Mühendislik Fakültesi,6,CAN DEHA KARIKSIZ,"Pazartesi | 14:40 - 16:30
+Çarşamba | 10:40 - 11:30
+"
+MATH101,I,Sosyal Bilimler için Matematik I,Mühendislik Fakültesi,6,SELÇUK DEMİR,"Pazartesi | 10:40 - 12:30
+Çarşamba | 14:40 - 15:30
+"
+MATH101,J,Sosyal Bilimler için Matematik I,Mühendislik Fakültesi,6,SELÇUK DEMİR,"Pazartesi | 14:40 - 16:30
+Çarşamba | 10:40 - 11:30
+"
+MATH101R,A,Sosyal Bilimler için Matematik I - Rec.,Mühendislik Fakültesi,0, ,"Çarşamba | 15:40 - 16:30
+"
+MATH101R,B,Sosyal Bilimler için Matematik I - Rec.,Mühendislik Fakültesi,0, ,"Çarşamba | 11:40 - 12:30
+"
+MATH101R,C,Sosyal Bilimler için Matematik I - Rec.,Mühendislik Fakültesi,0, ,"Çarşamba | 15:40 - 16:30
+"
+MATH101R,D,Sosyal Bilimler için Matematik I - Rec.,Mühendislik Fakültesi,0, ,"Çarşamba | 11:40 - 12:30
+"
+MATH101R,E,Sosyal Bilimler için Matematik I - Rec.,Mühendislik Fakültesi,0, ,"Çarşamba | 15:40 - 16:30
+"
+MATH101R,F,Sosyal Bilimler için Matematik I - Rec.,Mühendislik Fakültesi,0, ,"Çarşamba | 11:40 - 12:30
+"
+MATH101R,G,Sosyal Bilimler için Matematik I - Rec.,Mühendislik Fakültesi,0, ,"Çarşamba | 15:40 - 16:30
+"
+MATH101R,H,Sosyal Bilimler için Matematik I - Rec.,Mühendislik Fakültesi,0, ,"Çarşamba | 11:40 - 12:30
+"
+MATH101R,I,Sosyal Bilimler için Matematik I - Rec.,Mühendislik Fakültesi,0, ,"Çarşamba | 15:40 - 16:30
+"
+MATH101R,J,Sosyal Bilimler için Matematik I - Rec.,Mühendislik Fakültesi,0, ,"Çarşamba | 11:40 - 12:30
+"
+MATH102,A,Sosyal Bilimler için Matematik II,Mühendislik Fakültesi,6,CÜNEYT FERAHLAR,"Pazartesi | 14:40 - 16:30
+Çarşamba | 10:40 - 11:30
+"
+MATH102,B,Sosyal Bilimler için Matematik II,Mühendislik Fakültesi,6,CÜNEYT FERAHLAR,"Pazartesi | 10:40 - 12:30
+Çarşamba | 14:40 - 15:30
+"
+MATH102R,A,Sosyal Bilimler için Matematik II - Rec.,Mühendislik Fakültesi,0, ,"Çarşamba | 11:40 - 12:30
+"
+MATH102R,B,Sosyal Bilimler için Matematik II - Rec.,Mühendislik Fakültesi,0, ,"Çarşamba | 15:40 - 16:30
+"
+MATH103,A,Mühendislik için Yüksek Matematik I,Mühendislik Fakültesi,8,MEHMET ÖZ,"Pazartesi | 10:40 - 12:30
+Çarşamba | 14:40 - 16:30
+"
+MATH103,B,Mühendislik için Yüksek Matematik I,Mühendislik Fakültesi,8,MEHMET ÖZ,"Pazartesi | 14:40 - 16:30
+Çarşamba | 10:40 - 12:30
+"
+MATH103,C,Mühendislik için Yüksek Matematik I,Mühendislik Fakültesi,8,BERKAY ANAHTARCI,"Pazartesi | 10:40 - 12:30
+Çarşamba | 14:40 - 16:30
+"
+MATH103,D,Mühendislik için Yüksek Matematik I,Mühendislik Fakültesi,8,BERKAY ANAHTARCI,"Pazartesi | 14:40 - 16:30
+Çarşamba | 10:40 - 12:30
+"
+MATH103R,A,Mühendislik için Yüksek Matematik I - Uygulama,Mühendislik Fakültesi,0,JÜLİDE MİRAY ÖZKAN,"Perşembe | 12:40 - 14:30
+"
+MATH103R,B,Mühendislik için Yüksek Matematik I - Uygulama,Mühendislik Fakültesi,0,JÜLİDE MİRAY ÖZKAN,"Perşembe | 14:40 - 16:30
+"
+MATH103R,C,Mühendislik için Yüksek Matematik I - Uygulama,Mühendislik Fakültesi,0,CÜNEYT FERAHLAR,"Perşembe | 12:40 - 14:30
+"
+MATH103R,D,Mühendislik için Yüksek Matematik I - Uygulama,Mühendislik Fakültesi,0,CÜNEYT FERAHLAR,"Perşembe | 14:40 - 16:30
+"
+MATH104,A,Mühendislik için Yüksek Matematik II,Mühendislik Fakültesi,8,SAADET ERBAY,"Pazartesi | 14:40 - 16:30
+Çarşamba | 10:40 - 12:30
+"
+MATH104,B,Mühendislik için Yüksek Matematik II,Mühendislik Fakültesi,8,SAADET ERBAY,"Pazartesi | 10:40 - 12:30
+Çarşamba | 14:40 - 16:30
+"
+MATH104R,A,Mühendislik için Yüksek Matematik II - Rec.,Mühendislik Fakültesi,0,SONGÜL ESİN,"Perşembe | 14:40 - 16:30
+"
+MATH104R,B,Mühendislik için Yüksek Matematik II - Rec.,Mühendislik Fakültesi,0,SONGÜL ESİN,"Perşembe | 12:40 - 14:30
+"
+MATH107,A,Sosyal Bilimler için Matematik I,Mühendislik Fakültesi,6,SONGÜL ESİN,"Perşembe | 08:40 - 11:30
+"
+MATH107R,A,Sosyal Bilimler için Matematik I - Rec.,Mühendislik Fakültesi,0, ,"Cuma | 14:40 - 15:30
+"
+MATH112,A,Ayrık Matematik,Mühendislik Fakültesi,6,SELÇUK DEMİR,"Çarşamba | 08:40 - 10:30
+Cuma | 14:40 - 16:30
+"
+MATH112,B,Ayrık Matematik,Mühendislik Fakültesi,6,SELÇUK DEMİR,"Pazartesi | 08:40 - 10:30
+Cuma | 08:40 - 10:30
+"
+MATH201,A,Sosyal Bilimler için Olasılık,Mühendislik Fakültesi,6,SEÇKİN ÖZBİLEN,"Çarşamba | 15:40 - 18:30
+"
+MATH201,B,Sosyal Bilimler için Olasılık,Mühendislik Fakültesi,6,SEÇKİN ÖZBİLEN,"Salı | 11:40 - 14:30
+"
+MATH201,C,Sosyal Bilimler için Olasılık,Mühendislik Fakültesi,6,ZEHRA ZEYNEP ŞAHİNBAŞOĞLU,"Çarşamba | 15:40 - 18:30
+"
+MATH201R,A,Sosyal Bilimler için Olasılık - Rec.,Mühendislik Fakültesi,0,SEÇKİN ÖZBİLEN,"Cuma | 17:40 - 18:30
+"
+MATH201R,B,Sosyal Bilimler için Olasılık - Rec.,Mühendislik Fakültesi,0,SEÇKİN ÖZBİLEN,"Cuma | 14:40 - 15:30
+"
+MATH201R,C,Sosyal Bilimler için Olasılık - Rec.,Mühendislik Fakültesi,0,ZEHRA ZEYNEP ŞAHİNBAŞOĞLU,"Cuma | 11:40 - 12:30
+"
+MATH202,A,Sosyal Bilimler için İstatistik,Mühendislik Fakültesi,6,SEÇKİN ÖZBİLEN,"Çarşamba | 12:40 - 15:30
+"
+MATH202,B,Sosyal Bilimler için İstatistik,Mühendislik Fakültesi,6,SEÇKİN ÖZBİLEN,"Pazartesi | 13:40 - 16:30
+"
+MATH202R,A,Sosyal Bilimler İçin İstatistik - Uygulama,Mühendislik Fakültesi,0,SEÇKİN ÖZBİLEN,"Cuma | 08:40 - 09:30
+"
+MATH202R,B,Sosyal Bilimler İçin İstatistik - Uygulama,Mühendislik Fakültesi,0,SEÇKİN ÖZBİLEN,"Cuma | 11:40 - 12:30
+"
+MATH211,A,Doğrusal Cebir,Mühendislik Fakültesi,6,BURÇİN GÜNEŞ,"Çarşamba | 16:40 - 18:30
+Cuma | 16:40 - 17:30
+"
+MATH211,B,Doğrusal Cebir,Mühendislik Fakültesi,6,BURÇİN GÜNEŞ,"Pazartesi | 16:40 - 18:30
+Salı | 14:40 - 15:30
+"
+MATH211R,A,Doğrusal Cebir - Uygulama,Mühendislik Fakültesi,0,BURÇİN GÜNEŞ,"Cuma | 17:40 - 18:30
+"
+MATH211R,B,Doğrusal Cebir - Uygulama,Mühendislik Fakültesi,0,BURÇİN GÜNEŞ,"Salı | 15:40 - 16:30
+"
+MATH212,A,Diferansiyel Denklemler,Mühendislik Fakültesi,6,HANDAN BORLUK,"Pazartesi | 14:40 - 16:30
+Çarşamba | 10:40 - 12:30
+"
+MATH212,B,Diferansiyel Denklemler,Mühendislik Fakültesi,6,HANDAN BORLUK,"Pazartesi | 10:40 - 12:30
+Çarşamba | 14:40 - 16:30
+"
+MATH215,A,Olasılık ve Rassal Değişkenler,Mühendislik Fakültesi,6,ENİS KAYIŞ,"Çarşamba | 15:40 - 18:30
+"
+MATH215R,A,Olasılık ve Rassal Değişkenler - Rec.,Mühendislik Fakültesi,0,ENİS KAYIŞ,"Perşembe | 08:40 - 10:30
+"
+MATH215R,B,Olasılık ve Rassal Değişkenler - Rec.,Mühendislik Fakültesi,0,ENİS KAYIŞ,"Perşembe | 08:40 - 10:30
+"
+MATH216,A,Uygulamalı İstatistik,Mühendislik Fakültesi,6,DİLEK GÜNNEÇ DANIŞ,"Çarşamba | 08:40 - 11:30
+"
+MATH216R,A,Uygulamalı istatistik - Uygulama ,Mühendislik Fakültesi,0,DİLEK GÜNNEÇ DANIŞ,"Cuma | 08:40 - 10:30
+"
+MATH217,A,Olasılık ve İstatistik,Mühendislik Fakültesi,6,ÇAĞATAY EDEMEN,"Perşembe | 16:40 - 19:30
+"
+ME111,A,Mühendislik Çizim ve Tasarımı,Mühendislik Fakültesi,6,RAMAZAN ÜNAL,"Cuma | 14:40 - 17:30
+"
+ME202,A,Termodinamik,Mühendislik Fakültesi,6,MUSTAFA PINAR MENGÜÇ,"Salı | 14:40 - 16:30
+Perşembe | 16:40 - 18:30
+"
+ME211,A,Mühendislik Mekaniği: Statik,Mühendislik Fakültesi,4,ÖZKAN BEBEK,"Salı | 08:40 - 10:30
+Çarşamba | 08:40 - 10:30
+"
+ME212,A,Katı Mekaniği,Mühendislik Fakültesi,6,POLAT ŞENDUR,"Çarşamba | 08:40 - 10:30
+Perşembe | 10:40 - 12:30
+"
+ME256,A,Malzeme Bilimi,Mühendislik Fakültesi,6,HANDE ÖZTÜRK KAYMAKSÜT,"Pazartesi | 16:40 - 18:30
+Salı | 16:40 - 18:30
+"
+ME256L,A,Malzeme Bilimi - Lab.,Mühendislik Fakültesi,0,HANDE ÖZTÜRK KAYMAKSÜT,"Çarşamba | 10:40 - 12:30
+"
+ME256L,B,Malzeme Bilimi - Lab.,Mühendislik Fakültesi,0,HANDE ÖZTÜRK KAYMAKSÜT,"Perşembe | 16:40 - 18:30
+"
+ME301,A,Deneysel Mühendislik,Mühendislik Fakültesi,6,GÜNEY GÜVEN YAPICI,"Salı | 14:40 - 16:30
+"
+ME301L,A,Deneysel Mühendislik-Lab.,Mühendislik Fakültesi,0,GÜNEY GÜVEN YAPICI,"Perşembe | 13:40 - 16:30
+"
+ME301L,B,Deneysel Mühendislik-Lab.,Mühendislik Fakültesi,0,GÜNEY GÜVEN YAPICI,"Çarşamba | 12:40 - 15:30
+"
+ME311,A,Mühendislik Mekaniği: Dinamik,Mühendislik Fakültesi,6,REGAİP BARKAN UĞURLU,"Salı | 10:40 - 12:30
+Perşembe | 08:40 - 10:30
+"
+ME312,A,Makina Sistemleri ve Kontrol,Mühendislik Fakültesi,6,REGAİP BARKAN UĞURLU,"Pazartesi | 08:40 - 10:30
+Salı | 08:40 - 10:30
+"
+ME323,A,"Isı Transferi: İletim, Taşınım ve Isınım",Mühendislik Fakültesi,6,MEHMED RAFET ÖZDEMİR,"Pazartesi | 10:40 - 12:30
+Çarşamba | 10:40 - 12:30
+"
+ME334,A,Makina Tasarımı,Mühendislik Fakültesi,6,POLAT ŞENDUR,"Pazartesi | 16:40 - 18:30
+Çarşamba | 16:40 - 18:30
+"
+ME334R,A,Makine Tasarımı  - Uygulama,Mühendislik Fakültesi,0,POLAT ŞENDUR,"Perşembe | 14:40 - 16:30
+"
+ME405,A,İnsan-Merkezli Tasarım ve Mekanizma Uygulamaları,Mühendislik Fakültesi,6,RAMAZAN ÜNAL,"Çarşamba | 09:40 - 12:30
+"
+ME410,A,Turbomakine Tasarımı,Mühendislik Fakültesi,6,ALTUĞ MELİK BAŞOL,"Pazartesi | 08:40 - 10:30
+Salı | 08:40 - 10:30
+"
+ME415,A,Veri Toplama ve Sayısal Kontrol,Mühendislik Fakültesi,6,ÖZKAN BEBEK,"Pazartesi | 12:40 - 14:30
+Pazartesi | 12:40 - 14:30
+Çarşamba | 16:40 - 18:30
+Çarşamba | 16:40 - 18:30
+"
+ME419,A,Muhendisler icin Hesaplamali Metotlar,Mühendislik Fakültesi,6,ALTUĞ MELİK BAŞOL,"Pazartesi | 10:40 - 12:30
+Pazartesi | 10:40 - 12:30
+Perşembe | 08:40 - 10:30
+Perşembe | 08:40 - 10:30
+"
+ME435,A,Malzemelerin Fiziksel Özellikleri,Mühendislik Fakültesi,6,HANDE ÖZTÜRK KAYMAKSÜT,"Salı | 10:40 - 13:30
+"
+MEC396,A,Hesaplamalı Akışkanlar Dinamiği için Profesyonel Simulasyon Yazılımı Kullanımı (Sertifika Seçmeli),Mühendislik Fakültesi,4,ÖZGÜR ERTUNÇ,"Pazartesi | 12:40 - 15:30
+"
+PHYS101,A,Fizik I,Mühendislik Fakültesi,8,PARVIZ ELAHI,"Salı | 10:40 - 12:30
+Perşembe | 10:40 - 12:30
+"
+PHYS101,B,Fizik I,Mühendislik Fakültesi,8,KAAN GÜVEN,"Çarşamba | 10:40 - 12:30
+Cuma | 10:40 - 12:30
+"
+PHYS101,C,Fizik I,Mühendislik Fakültesi,8,PARVIZ ELAHI,"Çarşamba | 14:40 - 16:30
+Cuma | 14:40 - 16:30
+"
+PHYS101,D,Fizik I,Mühendislik Fakültesi,8,KAAN GÜVEN,"Salı | 10:40 - 12:30
+Perşembe | 10:40 - 12:30
+"
+PHYS101,E,Fizik I,Mühendislik Fakültesi,8,SUEDA SAYLAN,"Çarşamba | 10:40 - 12:30
+Cuma | 10:40 - 12:30
+"
+PHYS101,F,Fizik I,Mühendislik Fakültesi,8,SUEDA SAYLAN,"Çarşamba | 14:40 - 16:30
+Cuma | 14:40 - 16:30
+"
+PHYS101L,A1,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Çarşamba | 10:40 - 12:30
+"
+PHYS101L,A2,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Çarşamba | 10:40 - 12:30
+"
+PHYS101L,A3,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Çarşamba | 10:40 - 12:30
+"
+PHYS101L,A4,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Çarşamba | 10:40 - 12:30
+"
+PHYS101L,B1,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Salı | 10:40 - 12:30
+"
+PHYS101L,B2,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Salı | 10:40 - 12:30
+"
+PHYS101L,B3,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Salı | 10:40 - 12:30
+"
+PHYS101L,B4,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Salı | 10:40 - 12:30
+"
+PHYS101L,C1,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Çarşamba | 14:40 - 16:30
+"
+PHYS101L,C2,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Çarşamba | 14:40 - 16:30
+"
+PHYS101L,C3,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Çarşamba | 14:40 - 16:30
+"
+PHYS101L,C4,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Çarşamba | 14:40 - 16:30
+"
+PHYS101L,D1,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Perşembe | 10:40 - 12:30
+"
+PHYS101L,D2,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Perşembe | 10:40 - 12:30
+"
+PHYS101L,D3,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Perşembe | 10:40 - 12:30
+"
+PHYS101L,D4,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Perşembe | 10:40 - 12:30
+"
+PHYS101L,E1,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Perşembe | 12:40 - 14:30
+"
+PHYS101L,E2,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Perşembe | 12:40 - 14:30
+"
+PHYS101L,E3,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Perşembe | 12:40 - 14:30
+"
+PHYS101L,E4,Fizik I - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Perşembe | 12:40 - 14:30
+"
+PHYS102,A,Fizik II,Mühendislik Fakültesi,8,TAYLAN AKDOĞAN,"Salı | 10:40 - 12:30
+Perşembe | 10:40 - 12:30
+"
+PHYS102,B,Fizik II,Mühendislik Fakültesi,8,BARIŞ DEMİRBAY,"Çarşamba | 10:40 - 12:30
+Cuma | 10:40 - 12:30
+"
+PHYS102,C,Fizik II,Mühendislik Fakültesi,8,BARIŞ DEMİRBAY,"Çarşamba | 14:40 - 16:30
+Cuma | 14:40 - 16:30
+"
+PHYS102L,A1,Fizik II - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Cuma | 14:40 - 16:30
+"
+PHYS102L,A2,Fizik II - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Cuma | 14:40 - 16:30
+"
+PHYS102L,A3,Fizik II - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Cuma | 14:40 - 16:30
+"
+PHYS102L,A4,Fizik II - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Cuma | 14:40 - 16:30
+"
+PHYS102L,B1,Fizik II - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Cuma | 10:40 - 12:30
+"
+PHYS102L,B2,Fizik II - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Cuma | 10:40 - 12:30
+"
+PHYS102L,B3,Fizik II - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Cuma | 10:40 - 12:30
+"
+PHYS102L,B4,Fizik II - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Cuma | 10:40 - 12:30
+"
+PHYS102L,C1,Fizik II - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Salı | 08:40 - 10:30
+"
+PHYS102L,C2,Fizik II - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Salı | 08:40 - 10:30
+"
+PHYS102L,C3,Fizik II - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Salı | 08:40 - 10:30
+"
+PHYS102L,C4,Fizik II - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Salı | 08:40 - 10:30
+"
+PHYS103,A,Havacılık için Fizik I,Mühendislik Fakültesi,6,BARIŞ DEMİRBAY,"Pazartesi | 08:40 - 10:30
+"
+PHYS103L,A,Havacılık için Fizik 1 - Lab.,Mühendislik Fakültesi,0,FATİH ILGIN,"Salı | 12:40 - 14:30
+"
+PHYS103R,A,Havacılık için Fizik 1 - Rec.,Mühendislik Fakültesi,0,BARIŞ DEMİRBAY,"Cuma | 08:40 - 10:30
+"
+PHYS221,A,Modern Fiziğe Giriş,Mühendislik Fakültesi,6,KAAN GÜVEN,"Salı | 12:40 - 14:30
+Çarşamba | 12:40 - 14:30
+"
+ACCT201,A,Finansal Muhasebe,İşletme Fakültesi,6,ALİNA TARAN,"Perşembe | 13:40 - 16:30
+"
+ACCT201,B,Finansal Muhasebe,İşletme Fakültesi,6,ALİNA TARAN,"Pazartesi | 08:40 - 11:30
+"
+ACCT201,C,Finansal Muhasebe,İşletme Fakültesi,6,ALİNA TARAN,"Çarşamba | 08:40 - 11:30
+"
+ACCT301,A,Yönetim Muhasebesi,İşletme Fakültesi,6,ALİNA TARAN,"Salı | 11:40 - 14:30
+"
+ACCT301,B,Yönetim Muhasebesi,İşletme Fakültesi,6,ALİNA TARAN,"Salı | 15:40 - 18:30
+"
+ACCT412,A,Bağımsız Denetim,İşletme Fakültesi,6,SEBAHATTİN DEMİRKAN,"Çarşamba | 12:40 - 15:30
+"
+BUS100,A,İşletmenin Temelleri,İşletme Fakültesi,4,AHMET MURAT FİŞ,"Salı | 14:40 - 16:30
+Perşembe | 16:40 - 17:30
+"
+BUS100,B,İşletmenin Temelleri,İşletme Fakültesi,4,AHMET MURAT FİŞ,"Salı | 16:40 - 18:30
+Perşembe | 16:40 - 17:30
+"
+BUS101,A,İşletmeye Giriş I (Karar Verme),İşletme Fakültesi,4,PELİN ATAHAN DEMİRCİLER,"Salı | 16:40 - 18:30
+"
+BUS101L,A,İşletmeye Giriş I (Karar Verme) - Lab.,İşletme Fakültesi,0,PELİN ATAHAN DEMİRCİLER,"Cuma | 10:40 - 12:30
+"
+BUS101L,B,İşletmeye Giriş I (Karar Verme) - Lab.,İşletme Fakültesi,0,PELİN ATAHAN DEMİRCİLER,"Çarşamba | 12:40 - 14:30
+"
+BUS101L,C,İşletmeye Giriş I (Karar Verme) - Lab.,İşletme Fakültesi,0,PELİN ATAHAN DEMİRCİLER,"Perşembe | 08:40 - 10:30
+"
+BUS101L,D,İşletmeye Giriş I (Karar Verme) - Lab.,İşletme Fakültesi,0,PELİN ATAHAN DEMİRCİLER,"Cuma | 08:40 - 10:30
+"
+BUS101L,E,İşletmeye Giriş I (Karar Verme) - Lab.,İşletme Fakültesi,0,PELİN ATAHAN DEMİRCİLER,"Cuma | 14:40 - 16:30
+"
+BUS101L,F,İşletmeye Giriş I (Karar Verme) - Lab.,İşletme Fakültesi,0,PELİN ATAHAN DEMİRCİLER,"Çarşamba | 10:40 - 12:30
+"
+BUS101L,G,İşletmeye Giriş I (Karar Verme) - Lab.,İşletme Fakültesi,0,PELİN ATAHAN DEMİRCİLER,"Cuma | 16:40 - 18:30
+"
+BUS102,A,İşletmeye Giriş II (Girişimcilik),İşletme Fakültesi,4,BOCHRA IDRIS,"Salı | 16:40 - 18:30
+"
+BUS102,B,İşletmeye Giriş II (Girişimcilik),İşletme Fakültesi,4,BOCHRA IDRIS,"Salı | 14:40 - 16:30
+"
+BUS102L,A,İşletmeye Giriş II (Girişimcilik) - Lab.,İşletme Fakültesi,0,BOCHRA IDRIS,"Perşembe | 17:40 - 18:30
+"
+BUS102L,B,İşletmeye Giriş II (Girişimcilik) - Lab.,İşletme Fakültesi,0,BOCHRA IDRIS,"Perşembe | 17:40 - 18:30
+"
+BUS190,A,İşletme Bilişimine Giriş,İşletme Fakültesi,2,PELİN ATAHAN DEMİRCİLER,"Salı | 11:40 - 12:30
+"
+BUS190,B,İşletme Bilişimine Giriş,İşletme Fakültesi,2,PELİN ATAHAN DEMİRCİLER,"Salı | 12:40 - 13:30
+"
+BUS190,C,İşletme Bilişimine Giriş,İşletme Fakültesi,2,PELİN ATAHAN DEMİRCİLER,"Salı | 13:40 - 14:30
+"
+BUS190,D,İşletme Bilişimine Giriş,İşletme Fakültesi,2,PELİN ATAHAN DEMİRCİLER,"Salı | 11:40 - 12:30
+"
+BUS190,E,İşletme Bilişimine Giriş,İşletme Fakültesi,2,PELİN ATAHAN DEMİRCİLER,"Salı | 12:40 - 13:30
+"
+BUS190,F,İşletme Bilişimine Giriş,İşletme Fakültesi,2,PELİN ATAHAN DEMİRCİLER,"Salı | 13:40 - 14:30
+"
+BUS199,A,Problem Çözümü İçin Algoritma Tasarımı,İşletme Fakültesi,4,YAVUZ SELİM HİNDİSTAN,"Çarşamba | 16:40 - 18:30
+"
+BUS199,B,Problem Çözümü İçin Algoritma Tasarımı,İşletme Fakültesi,4,YAVUZ SELİM HİNDİSTAN,"Perşembe | 14:40 - 16:30
+"
+BUS201,A,İş Kararı Modelleme,İşletme Fakültesi,6,BO WEI,"Çarşamba | 14:40 - 17:30
+"
+BUS201,B,İş Kararı Modelleme,İşletme Fakültesi,6,NAGİHAN ÇÖMEZ DOLGAN,"Pazartesi | 08:40 - 11:30
+"
+BUS301,A,İş Analitiği,İşletme Fakültesi,6,AYŞE ÇETİNEL,"Çarşamba | 12:40 - 15:30
+"
+ECON101,A,Mikroekonomi,İşletme Fakültesi,6,BAŞAK ALTAN ÖZENER,"Çarşamba | 08:40 - 11:30
+"
+ECON101,B,Mikroekonomi,İşletme Fakültesi,6,ÖZGÜN EKİCİ,"Cuma | 09:40 - 12:30
+"
+ECON101,C,Mikroekonomi,İşletme Fakültesi,6,YUSUF KULU,"Çarşamba | 08:40 - 11:30
+"
+ECON101,D,Mikroekonomi,İşletme Fakültesi,6,YUSUF KULU,"Cuma | 09:40 - 12:30
+"
+ECON101,E,Mikroekonomi,İşletme Fakültesi,6,YUSUF KULU,"Pazartesi | 08:40 - 11:30
+"
+ECON101,F,Mikroekonomi,İşletme Fakültesi,6,ÖZGÜN EKİCİ,"Perşembe | 13:40 - 16:30
+"
+ECON102,A,Makroekonomi,İşletme Fakültesi,6,GÖNÜL ŞENGÜL,"Çarşamba | 08:40 - 11:30
+"
+ECON102,B,Makroekonomi,İşletme Fakültesi,6,GÖNÜL ŞENGÜL,"Cuma | 09:40 - 12:30
+"
+ECON102,C,Makroekonomi,İşletme Fakültesi,6,ONURSAL BAĞIRGAN,"Cuma | 09:40 - 12:30
+"
+ECON201,A,İleri Mikroekonomi,İşletme Fakültesi,6,BEGÜM GÜNEY,"Perşembe | 08:40 - 11:30
+"
+ECON202,A,İleri Makroekonomi,İşletme Fakültesi,6,ONURSAL BAĞIRGAN,"Pazartesi | 09:40 - 12:30
+Salı | 09:40 - 10:30
+"
+ECON210,A,İktisada Giriş,İşletme Fakültesi,6,ERCAN ASLAN,"Pazartesi | 12:40 - 15:30
+"
+ECON210,B,İktisada Giriş,İşletme Fakültesi,6,ERCAN ASLAN,"Perşembe | 10:40 - 13:30
+"
+ECON210,C,İktisada Giriş,İşletme Fakültesi,6,ERCAN ASLAN,"Cuma | 15:40 - 18:30
+"
+ECON301,A,Ekonometri I,İşletme Fakültesi,6,UMUT AKOVALI,"Salı | 13:40 - 16:30
+Cuma | 11:40 - 12:30
+"
+ECON302,A,Ekonometri II,İşletme Fakültesi,6,GÖZDE ÇÖREKÇİOĞLU İSHAKOĞLU,"Salı | 11:40 - 14:30
+Cuma | 11:40 - 12:30
+"
+ECON307,A,Oyun Kuramı,İşletme Fakültesi,6,ÖZGÜN EKİCİ,"Perşembe | 10:40 - 13:30
+"
+ECON309,A,Para ve Bankacılık,İşletme Fakültesi,6,UMUT AKOVALI,"Pazartesi | 08:40 - 11:30
+"
+ECON311,A,Deneysel İktisat,İşletme Fakültesi,6,BEGÜM GÜNEY,"Çarşamba | 08:40 - 11:30
+"
+ECON402,A,Türkiye Ekonomisi,İşletme Fakültesi,6,GÖNÜL ŞENGÜL,"Pazartesi | 13:40 - 16:30
+"
+ECON403,A,Bağımsız Araştırma - ECON,İşletme Fakültesi,6,CEYDA MADEN EYİUSTA,
+ENTR303,A,Yaratıcılık ve Fikir Geliştirme,İşletme Fakültesi,6,MERİÇ BIÇAKCIOĞLU,"Çarşamba | 08:40 - 11:30
+"
+ENTR305,A,Girişimci Pazarlama,İşletme Fakültesi,6,XIAOHAN WEN,"Pazartesi | 09:40 - 12:30
+"
+ENTR308,A,Girişimci Finans,İşletme Fakültesi,6,MEHMET ERKAN SAVRAN,"Perşembe | 13:40 - 16:30
+"
+ENTR310,A,Yeni Girişimlerde Liderlik ve Yönetim,İşletme Fakültesi,6,BOCHRA IDRIS,"Perşembe | 10:40 - 13:30
+"
+ENTR403,A,Sosyal Girişimcilik ve Yenilikçilik,İşletme Fakültesi,6,MERİÇ BIÇAKCIOĞLU,"Perşembe | 13:40 - 16:30
+"
+ENTR405,A,Bağımsız Araştırma - ENTR,İşletme Fakültesi,6,CEYDA MADEN EYİUSTA,
+ENTR407,A,Aile Şirketlerinde Girişimci Yönetim,İşletme Fakültesi,6,SEVGİ PEREK,"Pazartesi | 12:40 - 15:30
+"
+ENTR408,A,Kurum İçi Girişimcilik,İşletme Fakültesi,6,BOCHRA IDRIS,"Pazartesi | 15:40 - 18:30
+"
+FIN202,A,Finans,İşletme Fakültesi,6,ÖZLEM AKIN,"Cuma | 09:40 - 12:30
+"
+FIN202,B,Finans,İşletme Fakültesi,6,CANSU İSKENDEROĞLU ŞAHİN,"Perşembe | 13:40 - 16:30
+"
+FIN204,A,Finansal Tablolar Analizi,İşletme Fakültesi,4,CANSU İSKENDEROĞLU ŞAHİN,"Salı | 10:40 - 13:30
+"
+FIN301,A,Yatırımlar,İşletme Fakültesi,6,ERRIKOS MELISSINOS,"Cuma | 08:40 - 11:30
+"
+FIN302,A,Kurumsal Finans,İşletme Fakültesi,6,ÖZLEM AKIN,"Perşembe | 10:40 - 13:30
+"
+FIN401,A,Uluslararası Finans,İşletme Fakültesi,6,ERRIKOS MELISSINOS,"Cuma | 15:40 - 18:30
+"
+FIN403,A,Bağımsız Araştırma - FIN,İşletme Fakültesi,6,CEYDA MADEN EYİUSTA,
+FIN404,A,Sabit Getirili Menkul Kıymetler,İşletme Fakültesi,6,EMRAH AHİ,"Pazartesi | 08:40 - 11:30
+"
+FIN419,A,Şirket Değerleme,İşletme Fakültesi,6,MEHMET ERKAN SAVRAN,"Çarşamba | 09:40 - 12:30
+"
+IBUS104,A,Küresel Yöneticiliğe ilk Adım,İşletme Fakültesi,6,MEHMET ERDEM GENÇ,"Cuma | 14:40 - 17:30
+"
+IBUS203,A,Dünyayı Anlamak: Kısa Bir Giriş,İşletme Fakültesi,6,ELDAR SEDAGHATPARAST SALEH,"Perşembe | 09:40 - 12:30
+"
+IBUS204,A,Uluslararası İşletme,İşletme Fakültesi,6,İLAYDA NEMLİOĞLU ÖNCÜ,"Perşembe | 13:40 - 16:30
+"
+IBUS301,A,İhracat ve İthalat Yönetimi,İşletme Fakültesi,6,ARİF ORÇUN SÖYLEMEZ,"Çarşamba | 08:40 - 11:30
+"
+IBUS303,A,Global Organizasyonlarda Farklılık ve Dahiliyet,İşletme Fakültesi,6,ZEYNEP KABADAYI KUŞCU,"Perşembe | 13:40 - 16:30
+"
+IBUS305,A,Uluslararası Lojistik ,İşletme Fakültesi,6,ZEYNEP ATA,"Perşembe | 10:40 - 13:30
+"
+IBUS306,A,Çok Uluslu Şirketlerin Yönetimi,İşletme Fakültesi,6,ARİF ORÇUN SÖYLEMEZ,"Cuma | 16:40 - 19:30
+"
+IBUS307,A,Uluslararası İşletme ve Ticaret Hukuku,İşletme Fakültesi,4,GÜLFER MERİÇ,"Perşembe | 10:40 - 13:30
+"
+IBUS402,A,Küresel Stratejik Yönetim,İşletme Fakültesi,6,MEHMET ERDEM GENÇ,"Pazartesi | 12:40 - 15:30
+"
+IBUS404,A,Küresel İşletme Entegrasyonu,İşletme Fakültesi,6,MEHMET ERDEM GENÇ,"Çarşamba | 15:40 - 18:30
+"
+IBUS405,A,Bağımsız Araştırma - IBUS,İşletme Fakültesi,6,CEYDA MADEN EYİUSTA,
+IBUS406,A,Küresel Rekabetçi Stratejisi ve Dinamikleri,İşletme Fakültesi,6,NİLÜFER YAPICI,"Pazartesi | 09:40 - 12:30
+"
+IBUS407,A,Küresel Endüstrileri Anlamak,İşletme Fakültesi,6,ELDAR SEDAGHATPARAST SALEH,"Salı | 10:40 - 13:30
+"
+IBUS411,A,Doğrudan Dış Yatırım için Ülke Analizi,İşletme Fakültesi,6,İLAYDA NEMLİOĞLU ÖNCÜ,"Çarşamba | 09:40 - 12:30
+"
+MGMT202,A,Örgütler,İşletme Fakültesi,6,AYBİKE MERGEN,"Perşembe | 10:40 - 13:30
+"
+MGMT202,B,Örgütler,İşletme Fakültesi,6,CEYDA MADEN EYİUSTA,"Cuma | 08:40 - 11:30
+"
+MGMT202,C,Örgütler,İşletme Fakültesi,6,NERİMAN GÖKÇAY,"Perşembe | 10:40 - 13:30
+"
+MGMT311,A,Proje Yönetimi,İşletme Fakültesi,6,ERIK DEN HARTIGH,"Salı | 10:40 - 13:30
+"
+MGMT314,A,Örgütlerde Liderlik ve İnsan Yönetimi,İşletme Fakültesi,6,AYBİKE MERGEN,"Çarşamba | 08:40 - 11:30
+"
+MGMT401,A,Teknoloji ve İnovasyon Yönetimi,İşletme Fakültesi,6,ERIK DEN HARTIGH,"Çarşamba | 15:40 - 18:30
+"
+MGMT402,A,Strateji,İşletme Fakültesi,6,ALPTEGİN ALBAYRAKTAROĞLU,"Perşembe | 10:40 - 13:30
+"
+MGMT404,A,Uluslararası Yönetim,İşletme Fakültesi,6,NİLÜFER YAPICI,"Salı | 15:40 - 18:30
+"
+MGMT405,A,Bağımsız Araştırma - MGMT,İşletme Fakültesi,6,CEYDA MADEN EYİUSTA,
+MIS100,A,Bilişim Teknolojilerine Giriş,İşletme Fakültesi,4,YAVUZ SELİM HİNDİSTAN,"Perşembe | 11:40 - 13:30
+"
+MIS103,A,Bilgisayar Programlamaya Giriş,İşletme Fakültesi,6,YAVUZ SELİM HİNDİSTAN,"Cuma | 08:40 - 11:30
+"
+MIS203,A,Veritabanı Yönetimi,İşletme Fakültesi,6, ,"Salı | 13:40 - 16:30
+"
+MIS301,A,Kurumsal Bilgi Sistemleri,İşletme Fakültesi,6,ORÇUN TEMİZKAN,"Salı | 13:40 - 16:30
+"
+MIS305,A,İşletmelerde Dijital Dönüşüm,İşletme Fakültesi,6,MELİKE NUR FINDIKOĞLU,"Çarşamba | 12:40 - 15:30
+"
+MIS309,A,Sistem Analizi ve Tasarımı,İşletme Fakültesi,6,MELTEM ÖZTURAN,"Salı | 08:40 - 11:30
+"
+MIS311,A,Yönetim Bilişim Sistemlerine Giriş,İşletme Fakültesi,6,MESUT SAYIN,"Pazartesi | 15:40 - 18:30
+"
+MIS311,B,Yönetim Bilişim Sistemlerine Giriş,İşletme Fakültesi,6,MESUT SAYIN,"Çarşamba | 15:40 - 18:30
+"
+MIS403,A,Bağımsız Araştırma - MIS,İşletme Fakültesi,6,CEYDA MADEN EYİUSTA,
+MKTG201,A,Pazarlama,İşletme Fakültesi,6,ZEYNEP MÜGE GÜZEL,"Pazartesi | 13:40 - 16:30
+"
+MKTG201,B,Pazarlama,İşletme Fakültesi,6,ZEYNEP MÜGE GÜZEL,"Çarşamba | 12:40 - 15:30
+"
+MKTG201,D,Pazarlama,İşletme Fakültesi,6,CEREN HAYRAN ŞANLI,"Çarşamba | 12:40 - 15:30
+"
+MKTG201,E,Pazarlama,İşletme Fakültesi,6,CEREN HAYRAN ŞANLI,"Salı | 10:40 - 13:30
+"
+MKTG313,A,Pazarlama Stratejileri,İşletme Fakültesi,6,MÜNİR TOLGA AKÇURA,"Pazartesi | 15:40 - 18:30
+"
+MKTG314,A,Tüketici Davranışları,İşletme Fakültesi,6,BİGE SAATÇİOĞLU,"Çarşamba | 08:40 - 11:30
+"
+MKTG315,A,Uluslararası Pazarlama,İşletme Fakültesi,6,XIAOHAN WEN,"Çarşamba | 12:40 - 15:30
+"
+MKTG322,A,Marka Yönetimi,İşletme Fakültesi,6,KIVILCIM DÖĞERLİOĞLU DEMİR,"Çarşamba | 09:40 - 12:30
+"
+MKTG403,A,Bağımsız Araştırma - MKTG,İşletme Fakültesi,6,CEYDA MADEN EYİUSTA,
+MKTG416,A,Kişisel Satış ve Satış Yönetimi,İşletme Fakültesi,6,VOLKAN YENİARAS,"Salı | 10:40 - 13:30
+"
+OPER202,A,Operasyon Yönetimi,İşletme Fakültesi,6,NAGİHAN ÇÖMEZ DOLGAN,"Salı | 08:40 - 11:30
+Perşembe | 18:40 - 19:30
+"
+OPER202,B,Operasyon Yönetimi,İşletme Fakültesi,6,AYŞE ÇETİNEL,"Pazartesi | 08:40 - 11:30
+Perşembe | 18:40 - 19:30
+"
+OPER202,C,Operasyon Yönetimi,İşletme Fakültesi,6,HALUK YENER,"Çarşamba | 15:40 - 18:30
+Perşembe | 18:40 - 19:30
+"
+OPER312,A,Tedarik Zinciri Yönetimi,İşletme Fakültesi,6,HALUK YENER,"Pazartesi | 10:40 - 13:30
+"
+OPER312,B,Tedarik Zinciri Yönetimi,İşletme Fakültesi,6,ZEYNEP ATA,"Perşembe | 13:40 - 16:30
+"
+OPER313,A,Gelir Yönetimi,İşletme Fakültesi,6,BAHRİYE CESARET,"Pazartesi | 13:40 - 16:30
+"
+OPER318,A,Perakende Operasyonları,İşletme Fakültesi,6,BAHRİYE CESARET,"Çarşamba | 08:40 - 11:30
+"
+OPER403,A,Bağımsız Araştırma - OPER,İşletme Fakültesi,6,CEYDA MADEN EYİUSTA,
+HUK105,A,Anayasa Hukuku I,Hukuk Fakültesi,4,DİDEM KÖSE,"Perşembe | 08:40 - 11:30
+"
+HUK105,B,Anayasa Hukuku I,Hukuk Fakültesi,4,HAMİDE BAĞÇECİ,"Pazartesi | 12:40 - 15:30
+"
+HUK107,A,"Medeni Hukuk I: Giriş, Temel Kavramlar,  Kişiler Hukuku",Hukuk Fakültesi,6,SENDİ YAKUPPUR,"Pazartesi | 08:40 - 10:30
+Perşembe | 11:40 - 13:30
+"
+HUK109,A,Temel Hukuk Bilgisi,Hukuk Fakültesi,4,MELDA KÖSE,"Çarşamba | 10:40 - 12:30
+"
+HUK110,A,Hukukçular İçin İktisat,Hukuk Fakültesi,4,HANİFE NİLÜFER UĞUR DALAY,"Perşembe | 09:40 - 11:30
+"
+HUK111,A,Roma Hukuku,Hukuk Fakültesi,4,İPEK SEVDA SÖĞÜT,"Cuma | 14:40 - 17:30
+"
+HUK111,B,Roma Hukuku,Hukuk Fakültesi,4,İPEK SEVDA SÖĞÜT,"Perşembe | 15:40 - 18:30
+"
+HUK131,A,Hukuk ve Sinema,Hukuk Fakültesi,4,AYÇA KÜÇÜK,"Salı | 11:40 - 13:30
+"
+HUK134,A,Hukuk ve Edebiyat,Hukuk Fakültesi,4,ÖZGE YÜCEL DERİCİLER,"Cuma | 14:40 - 16:30
+"
+HUK137,A,Hükümet Sistemleri,Hukuk Fakültesi,4,HAMİDE BAĞÇECİ,"Perşembe | 10:40 - 12:30
+"
+HUK201,A,Ceza Hukuku Genel Hükümler I,Hukuk Fakültesi,6,ÖZLEM YENERER ÇAKMUT,"Salı | 08:40 - 10:30
+Çarşamba | 10:40 - 12:30
+"
+HUK201,B,Ceza Hukuku Genel Hükümler I,Hukuk Fakültesi,6,ARAS TÜRAY,"Perşembe | 14:40 - 16:30
+Cuma | 16:40 - 18:30
+"
+HUK202,A,Ceza Hukuku Genel Hükümler II,Hukuk Fakültesi,6,LEVENT EMRE ÖZGÜÇ,"Salı | 11:40 - 13:30
+Cuma | 14:40 - 16:30
+"
+HUK203,A,İdare Hukuku,Hukuk Fakültesi,6,HULÜSİ ALPHAN DİNÇKOL,"Çarşamba | 16:40 - 18:30
+Perşembe | 16:40 - 18:30
+"
+HUK203,B,İdare Hukuku,Hukuk Fakültesi,6,ELİF ALTINOK ÇALIŞKAN,"Çarşamba | 12:40 - 14:30
+Perşembe | 12:40 - 14:30
+"
+HUK205,A,Borçlar Hukuku Genel Hükümler I,Hukuk Fakültesi,4,SEVGİ USTA,"Pazartesi | 13:40 - 16:30
+"
+HUK205,B,Borçlar Hukuku Genel Hükümler I,Hukuk Fakültesi,4,SEVGİ USTA,"Perşembe | 09:40 - 12:30
+"
+HUK206,A,Borçlar Hukuku Genel Hükümler II,Hukuk Fakültesi,6,EVRİM KERMAN,"Salı | 16:40 - 18:30
+Çarşamba | 14:40 - 16:30
+"
+HUK215,A,Bilişim Teknolojileri ve Hukuk,Hukuk Fakültesi,4,BAŞAK OZAN ÖZPARLAK,"Perşembe | 13:40 - 16:30
+"
+HUK217,A,Devletler Genel Hukuku,Hukuk Fakültesi,4,HANDE GÜR,"Perşembe | 13:40 - 16:30
+"
+HUK217,B,Devletler Genel Hukuku,Hukuk Fakültesi,4,HANDE GÜR,"Çarşamba | 09:40 - 12:30
+"
+HUK218,A,Hukuk Felsefesi ve Sosyolojisi,Hukuk Fakültesi,4,AYÇA KÜÇÜK,"Cuma | 09:40 - 12:30
+"
+HUK218,B,Hukuk Felsefesi ve Sosyolojisi,Hukuk Fakültesi,4,AYÇA KÜÇÜK,"Perşembe | 10:40 - 13:30
+"
+HUK225,A,Viktimoloji,Hukuk Fakültesi,4,ALEV ÖZEROĞLU,"Salı | 11:40 - 13:30
+"
+HUK230,A,Reklam Hukuku,Hukuk Fakültesi,4,FERHAT YILDIRIM,"Çarşamba | 14:40 - 16:30
+"
+HUK241,A,Disiplin Hukuku,Hukuk Fakültesi,4,ELİF ALTINOK ÇALIŞKAN,"Perşembe | 15:40 - 17:30
+"
+HUK245,A,Sosyal Medya Hukuku,Hukuk Fakültesi,4,MÜGE ÇETİN,"Çarşamba | 10:40 - 12:30
+"
+HUK249,A,Yargılamada Dijitalleşme ve Adli Bilişim,Hukuk Fakültesi,4,MÜGE ÇETİN,"Pazartesi | 10:40 - 12:30
+"
+HUK263,A,İspat Hukuku,Hukuk Fakültesi,4,AYŞE ECE ACAR,"Pazartesi | 08:40 - 10:30
+"
+HUK264,A,Uluslararası İnsancıl Hukuk,Hukuk Fakültesi,4,HANDE GÜR,"Perşembe | 10:40 - 12:30
+"
+HUK306,A,Ticaret Hukuku II,Hukuk Fakültesi,5,MUSTAFA TOPALOĞLU,"Çarşamba | 10:40 - 12:30
+Perşembe | 08:40 - 10:30
+"
+HUK307,A,Eşya Hukuku I,Hukuk Fakültesi,4,AYŞE NİLAY ŞENOL,"Pazartesi | 10:40 - 13:30
+"
+HUK307,B,Eşya Hukuku I,Hukuk Fakültesi,4,AYŞE NİLAY ŞENOL,"Salı | 13:40 - 16:30
+"
+HUK309,A,Genel Kamu Hukuku,Hukuk Fakültesi,4,MELDA KÖSE,"Pazartesi | 10:40 - 13:30
+"
+HUK309,B,Genel Kamu Hukuku,Hukuk Fakültesi,4,MELDA KÖSE,"Pazartesi | 14:40 - 17:30
+"
+HUK310,A,İnsan Hakları Hukuku,Hukuk Fakültesi,5,ÖZGE YÜCEL DERİCİLER,"Pazartesi | 08:40 - 10:30
+Salı | 08:40 - 10:30
+"
+HUK313,A,Ceza Hukuku Özel Hükümler,Hukuk Fakültesi,4,ŞEYMA CEBECİ BİNGÖL,"Pazartesi | 13:40 - 16:30
+"
+HUK313,B,Ceza Hukuku Özel Hükümler,Hukuk Fakültesi,4,ŞEYMA CEBECİ BİNGÖL,"Salı | 10:40 - 13:30
+"
+HUK331,A,Ceza Hukuku Uygulamaları,Hukuk Fakültesi,4,ARAS TÜRAY,"Cuma | 10:40 - 12:30
+"
+HUK352,A,Hukuk Klinikleri,Hukuk Fakültesi,4,SELMİN CANSU DEMİR YILDIZ,"Çarşamba | 08:40 - 10:30
+"
+HUK357,A,Ticaret Hukuku I,Hukuk Fakültesi,5,IŞIK ÖZER,"Salı | 14:40 - 16:30
+Perşembe | 16:40 - 18:30
+"
+HUK357,B,Ticaret Hukuku I,Hukuk Fakültesi,5,SAMİ KOCABIYIK,"Salı | 16:40 - 18:30
+Çarşamba | 14:40 - 16:30
+"
+HUK359,A,Vergi Hukuku,Hukuk Fakültesi,5,HAMDİ DENİZ EGE GÖKTUNA,"Çarşamba | 12:40 - 14:30
+Cuma | 16:40 - 18:30
+"
+HUK359,B,Vergi Hukuku,Hukuk Fakültesi,5,HAMDİ DENİZ EGE GÖKTUNA,"Çarşamba | 08:40 - 10:30
+Cuma | 10:40 - 12:30
+"
+HUK365,A,Adli Görüşme ve Etkili İletişim,Hukuk Fakültesi,4,SELMİN CANSU DEMİR YILDIZ,"Çarşamba | 14:40 - 16:30
+"
+HUK394,A,Özel Hukukta Güncel Sorunlar I,Hukuk Fakültesi,4,FERHAT YILDIRIM,"Çarşamba | 16:40 - 18:30
+"
+HUK401,A,Ceza Muhakemesi Hukuku I,Hukuk Fakültesi,5,LEVENT EMRE ÖZGÜÇ,"Salı | 08:40 - 10:30
+Cuma | 08:40 - 10:30
+"
+HUK401,B,Ceza Muhakemesi Hukuku I,Hukuk Fakültesi,5,ALEV ÖZEROĞLU,"Pazartesi | 08:40 - 10:30
+Salı | 08:40 - 10:30
+"
+HUK403,A,Miras Hukuku,Hukuk Fakültesi,4,EVRİM KERMAN,"Cuma | 15:40 - 18:30
+"
+HUK403,B,Miras Hukuku,Hukuk Fakültesi,4,EVRİM KERMAN,"Salı | 12:40 - 15:30
+"
+HUK409,A,İş Hukuku I,Hukuk Fakültesi,4,AKIN KIVRAKDAL,"Pazartesi | 10:40 - 13:30
+"
+HUK409,B,İş Hukuku I,Hukuk Fakültesi,4,ŞÜKRİYE ESRA BASKAN,"Salı | 15:40 - 18:30
+"
+HUK413,A,Sigorta Hukuku,Hukuk Fakültesi,4,GÜLFER MERİÇ,"Cuma | 08:40 - 11:30
+"
+HUK415,A,Fikri ve Sinai Mülkiyet Hukuku,Hukuk Fakültesi,4,SAMİ KOCABIYIK,"Çarşamba | 10:40 - 12:30
+"
+HUK416,A,İcra ve İflas Hukuku,Hukuk Fakültesi,5,AYŞE ECE ACAR,"Pazartesi | 13:40 - 15:30
+Çarşamba | 12:40 - 14:30
+"
+HUK416,B,İcra ve İflas Hukuku,Hukuk Fakültesi,5,AYŞE ECE ACAR,"Pazartesi | 10:40 - 12:30
+Salı | 10:40 - 12:30
+"
+HUK417,A,Kıymetli Evrak Hukuku,Hukuk Fakültesi,4,IŞIK ÖZER,"Perşembe | 14:40 - 16:30
+"
+HUK418,A,Milletlerarası Özel Hukuk,Hukuk Fakültesi,4,EKİN DENİZ İLHAN,"Pazartesi | 15:40 - 18:30
+"
+HUK418,B,Milletlerarası Özel Hukuk,Hukuk Fakültesi,4,EKİN DENİZ İLHAN,"Çarşamba | 13:40 - 16:30
+"
+HUK419,A,Alternatif Uyuşmazlık Çözüm Yolları,Hukuk Fakültesi,4,FERHAT YILDIRIM,"Perşembe | 10:40 - 13:30
+"
+HUK430,A,Yargı Kararlarında Kadının İnsan Hakları,Hukuk Fakültesi,4,ZEYNEP REVA,"Çarşamba | 10:40 - 12:30
+"
+HUK431,A,Proje Döngüsü,Hukuk Fakültesi,4,ZEYNEP REVA,"Perşembe | 13:40 - 15:30
+"
+HUK435,A,Güvenilir Yapay Zeka İçin Yasal Düzenlemeler,Hukuk Fakültesi,4,BAŞAK OZAN ÖZPARLAK,"Perşembe | 08:40 - 10:30
+"
+HUK447,A,Deniz Ticaret Hukuku I,Hukuk Fakültesi,4,GÜLFER MERİÇ,"Perşembe | 14:40 - 16:30
+"
+LAW102,A,Hukuk ve Etik,Hukuk Fakültesi,4,AYÇA KÜÇÜK,"Salı | 14:40 - 16:30
+"
+LAW203,A,Tahkim Kuralları,Hukuk Fakültesi,4,EKİN DENİZ İLHAN,"Salı | 12:40 - 14:30
+"
+SEC101,A,Üniversite Yaşamına Giriş,Rektörlük,1, ,
+SEC101,B,Üniversite Yaşamına Giriş,Rektörlük,1,NURKAN DİKMEN,
+SEC101,C,Üniversite Yaşamına Giriş,Rektörlük,1,ZELİHA AYDIN ŞAHİN,
+SEC150,A,Farkındalık/Mindfulness ile Yaşamak,Rektörlük,2,AYŞE ZADİL,"Salı | 10:40 - 12:30
+"
+SEC150,B,Farkındalık/Mindfulness ile Yaşamak,Rektörlük,2,AYŞE ZADİL,"Cuma | 10:40 - 12:30
+"
+SEC201,A,Sektörel Hazırlık,Rektörlük,2,MERİÇ BIÇAKCIOĞLU,"Pazartesi | 20:40 - 21:30
+"
+SEC201L,A,Sektörel Hazırlık Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Pazartesi | 15:40 - 16:30
+"
+SEC201L,B,Sektörel Hazırlık Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Pazartesi | 16:40 - 17:30
+"
+SEC201L,C,Sektörel Hazırlık Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Salı | 15:40 - 16:30
+"
+SEC201L,D,Sektörel Hazırlık Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Salı | 16:40 - 17:30
+"
+SEC201L,E,Sektörel Hazırlık Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Çarşamba | 16:40 - 17:30
+"
+SEC201L,F,Sektörel Hazırlık Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Perşembe | 15:40 - 16:30
+"
+SEC201L,G,Sektörel Hazırlık Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Perşembe | 16:40 - 17:30
+"
+SEC201L,H,Sektörel Hazırlık Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Cuma | 11:40 - 12:30
+"
+SEC201L,I,Sektörel Hazırlık Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Cuma | 14:40 - 15:30
+"
+SEC201L,J,Sektörel Hazırlık Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Cuma | 16:40 - 17:30
+"
+SEC203,A,Sektörel Hazırlık,Rektörlük,2,MERİÇ BIÇAKCIOĞLU,"Pazartesi | 20:40 - 21:30
+"
+SEC203L,A,Sektörlere Giriş Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Pazartesi | 15:40 - 16:30
+"
+SEC203L,B,Sektörlere Giriş Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Pazartesi | 16:40 - 17:30
+"
+SEC203L,C,Sektörlere Giriş Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Salı | 15:40 - 16:30
+"
+SEC203L,D,Sektörlere Giriş Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Salı | 16:40 - 17:30
+"
+SEC203L,E,Sektörlere Giriş Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Çarşamba | 16:40 - 17:30
+"
+SEC203L,F,Sektörlere Giriş Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Perşembe | 15:40 - 16:30
+"
+SEC203L,G,Sektörlere Giriş Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Perşembe | 16:40 - 17:30
+"
+SEC203L,H,Sektörlere Giriş Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Cuma | 11:40 - 12:30
+"
+SEC203L,I,Sektörlere Giriş Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Cuma | 14:40 - 15:30
+"
+SEC203L,J,Sektörlere Giriş Lab.,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Cuma | 16:40 - 17:30
+"
+SEC280,A,Dijital Dönüşüm,Rektörlük,4,ŞİRİN AKTAŞ,"Çarşamba | 16:40 - 18:30
+"
+SEC302,A,Sektörel Çözümler: Yerel Uzmanlık,Rektörlük,4,MERİÇ BIÇAKCIOĞLU,"Pazartesi | 13:40 - 15:30
+"
+SEC302,B,Sektörel Çözümler: Yerel Uzmanlık,Rektörlük,4,MERİÇ BIÇAKCIOĞLU,"Perşembe | 08:40 - 10:30
+"
+SEC302L,A,Sektörel Çözümler: Yerel Uzmanlık -Lab,Rektörlük,0,MERİÇ BIÇAKCIOĞLU,"Cuma | 15:40 - 16:30
+"
+SEC401-6,A,Sektörel Uygulama-Psikoloji,Rektörlük,6, ,"Salı | 18:40 - 21:30
+"
+SEC401,A,İşletmede Sektörel Uygulamalar,Rektörlük,6,PELİN ATAHAN DEMİRCİLER,"Perşembe | 18:40 - 21:30
+"
+SEC401,B,İşletmede Sektörel Uygulamalar,Rektörlük,6,PELİN ATAHAN DEMİRCİLER,"Perşembe | 18:40 - 21:30
+"
+SEC401,C,İşletmede Sektörel Uygulamalar,Rektörlük,6,PELİN ATAHAN DEMİRCİLER,"Perşembe | 18:40 - 21:30
+"
+SEC401,D,İşletmede Sektörel Uygulamalar,Rektörlük,6,PELİN ATAHAN DEMİRCİLER,"Perşembe | 18:40 - 21:30
+"
+SEC401,E,İşletmede Sektörel Uygulamalar,Rektörlük,6,PELİN ATAHAN DEMİRCİLER,"Perşembe | 18:40 - 21:30
+"
+SEC401,F,İşletmede Sektörel Uygulamalar,Rektörlük,6,PELİN ATAHAN DEMİRCİLER,"Perşembe | 18:40 - 21:30
+"
+SEC401,G,İşletmede Sektörel Uygulamalar,Rektörlük,6,PELİN ATAHAN DEMİRCİLER,"Perşembe | 18:40 - 21:30
+"
+SEC401,H,İşletmede Sektörel Uygulamalar,Rektörlük,6,PELİN ATAHAN DEMİRCİLER,"Salı | 15:40 - 18:30
+"
+SEC401,I,İşletmede Sektörel Uygulamalar,Rektörlük,6,PELİN ATAHAN DEMİRCİLER,"Salı | 15:40 - 18:30
+"
+SEC401,J,İşletmede Sektörel Uygulamalar,Rektörlük,6,PELİN ATAHAN DEMİRCİLER,"Salı | 15:40 - 18:30
+"
+SEC401,K,İşletmede Sektörel Uygulamalar,Rektörlük,6,PELİN ATAHAN DEMİRCİLER,"Salı | 15:40 - 18:30
+"
+SEC401,L,İşletmede Sektörel Uygulamalar,Rektörlük,6,PELİN ATAHAN DEMİRCİLER,"Salı | 15:40 - 18:30
+"
+SEC402,A,İşletme Entegrasyonu,Rektörlük,6,ALPTEGİN ALBAYRAKTAROĞLU,"Salı | 13:40 - 16:30
+"
+SEC404,A,Sektörel Uygulama,Rektörlük,6,ÖZLEM BAHADIR,"Perşembe | 16:40 - 19:30
+"
+TRL101,A1,Üniversite Yaşamına Giriş,Rektörlük,1, ,"Çarşamba | 16:40 - 17:30
+"
+TRL101,A2,Üniversite Yaşamına Giriş,Rektörlük,1, ,"Çarşamba | 16:40 - 17:30
+"
+TRL101,B1,Üniversite Yaşamına Giriş,Rektörlük,1, ,"Perşembe | 14:40 - 15:30
+"
+TRL101,B2,Üniversite Yaşamına Giriş,Rektörlük,1, ,"Perşembe | 14:40 - 15:30
+"
+TRL101,C1,Üniversite Yaşamına Giriş,Rektörlük,1, ,"Perşembe | 15:40 - 16:30
+"
+TRL101,C2,Üniversite Yaşamına Giriş,Rektörlük,1, ,"Perşembe | 15:40 - 16:30
+"
+TRL101,D1,Üniversite Yaşamına Giriş,Rektörlük,1,ZELİHA AYDIN ŞAHİN,"Pazartesi | 16:40 - 17:30
+"
+TRL101,D2,Üniversite Yaşamına Giriş,Rektörlük,1,ZELİHA AYDIN ŞAHİN,"Pazartesi | 16:40 - 17:30
+"
+TRL101,E1,Üniversite Yaşamına Giriş,Rektörlük,1, ,"Perşembe | 16:40 - 17:30
+"
+TRL101,E2,Üniversite Yaşamına Giriş,Rektörlük,1, ,"Perşembe | 16:40 - 17:30
+"
+TRL101,F1,Üniversite Yaşamına Giriş,Rektörlük,1,NURKAN DİKMEN,"Salı | 16:40 - 17:30
+"
+TRL101,F2,Üniversite Yaşamına Giriş,Rektörlük,1,NURKAN DİKMEN,"Salı | 16:40 - 17:30
+"
+TRL101,G1,Üniversite Yaşamına Giriş,Rektörlük,1,NURKAN DİKMEN,"Salı | 15:40 - 16:30
+"
+TRL103,A1,Üniversite Yaşamına Giriş,Rektörlük,1, ,"Pazartesi | 15:40 - 16:30
+"
+TRL103,A2,Üniversite Yaşamına Giriş,Rektörlük,1, ,"Pazartesi | 15:40 - 16:30
+"
+TRL202,A,Sorumlu Yurttaşlık,Rektörlük,2,NERGİS UYAN,"Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+"
+TRL202,B,Sorumlu Yurttaşlık,Rektörlük,2,NERGİS UYAN,"Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+"
+TRL202,C,Sorumlu Yurttaşlık,Rektörlük,2,DİDEM TARTAN,"Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+"
+TRL202,D,Sorumlu Yurttaşlık,Rektörlük,2,DİDEM TARTAN,"Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+"
+TRL202,E,Sorumlu Yurttaşlık,Rektörlük,2,DİDEM TARTAN,"Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+"
+TRL202,F,Sorumlu Yurttaşlık,Rektörlük,2,DİDEM TARTAN,"Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+"
+TRL202,G,Sorumlu Yurttaşlık,Rektörlük,2,DİDEM TARTAN,"Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+"
+TRL202,H,Sorumlu Yurttaşlık,Rektörlük,2, ,"Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+"
+TRL202,I,Sorumlu Yurttaşlık,Rektörlük,2, ,"Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+"
+TRL202,J,Sorumlu Yurttaşlık,Rektörlük,2, ,"Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+"
+TRL202,K,Sorumlu Yurttaşlık,Rektörlük,2, ,"Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+Pazartesi | 19:40 - 20:30
+"
+TRL204,A,Sorumlu Yurttaşlık,Rektörlük,2, ,"Pazartesi | 18:40 - 19:30
+"
+TRL204,B,Sorumlu Yurttaşlık,Rektörlük,2, ,"Pazartesi | 18:40 - 19:30
+"
+TRL204,C,Sorumlu Yurttaşlık,Rektörlük,2, ,"Pazartesi | 18:40 - 19:30
+"
+TRL204,D,Sorumlu Yurttaşlık,Rektörlük,2, ,"Pazartesi | 18:40 - 19:30
+"
+TRL204,E,Sorumlu Yurttaşlık,Rektörlük,2, ,"Pazartesi | 18:40 - 19:30
+"
+TRL381,A,Harnessing Generative AI: From Prompt to Proof,Rektörlük,6,TAYLAN AKDOĞAN,
+ARB101,A,Arapça I,Yabancı Diller Yüksekokulu,4,SALMA JEHAD AWAD ALAMASSI,"Salı | 13:40 - 15:30
+Cuma | 14:40 - 16:30
+"
+CHN101,A,Çince I,Yabancı Diller Yüksekokulu,4,LALE GÜNER,"Pazartesi | 10:40 - 12:30
+Çarşamba | 10:40 - 12:30
+"
+CHN202,A,Çince IV,Yabancı Diller Yüksekokulu,4,LALE GÜNER,"Pazartesi | 13:40 - 15:30
+Çarşamba | 15:40 - 17:30
+"
+ENG101,A,İngilizce I,Yabancı Diller Yüksekokulu,4,GITI AMININAJAFI,"Pazartesi | 14:40 - 16:30
+Perşembe | 12:40 - 14:30
+"
+ENG101,AA,İngilizce I,Yabancı Diller Yüksekokulu,4,ZEYNEP ŞEBNEM BAYRAKTAR,"Pazartesi | 10:40 - 12:30
+Çarşamba | 12:40 - 14:30
+"
+ENG101,AB,İngilizce I,Yabancı Diller Yüksekokulu,4,ALI NEZAMI,"Pazartesi | 12:40 - 14:30
+Çarşamba | 14:40 - 16:30
+"
+ENG101,AC,İngilizce I,Yabancı Diller Yüksekokulu,4,ALI NEZAMI,"Çarşamba | 16:40 - 18:30
+Cuma | 16:40 - 18:30
+"
+ENG101,AD,İngilizce I,Yabancı Diller Yüksekokulu,4,ALI NEZAMI,"Pazartesi | 16:40 - 18:30
+Perşembe | 16:40 - 18:30
+"
+ENG101,AE,İngilizce I,Yabancı Diller Yüksekokulu,4,MELTEM AKPINAR YILMAZ,"Pazartesi | 12:40 - 14:30
+Perşembe | 08:40 - 10:30
+"
+ENG101,AF,İngilizce I,Yabancı Diller Yüksekokulu,4,MELTEM AKPINAR YILMAZ,"Çarşamba | 12:40 - 14:30
+Cuma | 10:40 - 12:30
+"
+ENG101,AG,İngilizce I,Yabancı Diller Yüksekokulu,4,MELTEM AKPINAR YILMAZ,"Çarşamba | 08:40 - 10:30
+Cuma | 14:40 - 16:30
+"
+ENG101,AH,İngilizce I,Yabancı Diller Yüksekokulu,4,MERVE ELBİRLİK TÜLEK,"Pazartesi | 12:40 - 14:30
+Perşembe | 08:40 - 10:30
+"
+ENG101,AI,İngilizce I,Yabancı Diller Yüksekokulu,4,MERVE ELBİRLİK TÜLEK,"Çarşamba | 12:40 - 14:30
+Cuma | 10:40 - 12:30
+"
+ENG101,AJ,İngilizce I,Yabancı Diller Yüksekokulu,4,MERVE ELBİRLİK TÜLEK,"Çarşamba | 08:40 - 10:30
+Cuma | 14:40 - 16:30
+"
+ENG101,AK,İngilizce I,Yabancı Diller Yüksekokulu,4,SELEN YILDIZ,"Pazartesi | 14:40 - 16:30
+Perşembe | 12:40 - 14:30
+"
+ENG101,AL,İngilizce I,Yabancı Diller Yüksekokulu,4,SELEN YILDIZ,"Çarşamba | 16:40 - 18:30
+Cuma | 08:40 - 10:30
+"
+ENG101,AM,İngilizce I,Yabancı Diller Yüksekokulu,4,SELEN YILDIZ,"Pazartesi | 11:40 - 13:30
+Çarşamba | 11:40 - 13:30
+"
+ENG101,AN,İngilizce I,Yabancı Diller Yüksekokulu,4,SHIVA KHOEI OSKOUEI,"Pazartesi | 14:40 - 16:30
+Perşembe | 12:40 - 14:30
+"
+ENG101,AO,İngilizce I,Yabancı Diller Yüksekokulu,4,SHIVA KHOEI OSKOUEI,"Çarşamba | 16:40 - 18:30
+Cuma | 08:40 - 10:30
+"
+ENG101,AP,İngilizce I,Yabancı Diller Yüksekokulu,4,SHIVA KHOEI OSKOUEI,"Pazartesi | 11:40 - 13:30
+Çarşamba | 11:40 - 13:30
+"
+ENG101,AR,İngilizce I,Yabancı Diller Yüksekokulu,4,ÖMER MAHİR SARIGÜL,"Pazartesi | 10:40 - 12:30
+Çarşamba | 12:40 - 14:30
+"
+ENG101,AS,İngilizce I,Yabancı Diller Yüksekokulu,4,ÖMER MAHİR SARIGÜL,"Pazartesi | 16:40 - 18:30
+Çarşamba | 16:40 - 18:30
+"
+ENG101,AT,İngilizce I,Yabancı Diller Yüksekokulu,4,DİDEM TARTAN,"Pazartesi | 12:40 - 14:30
+Perşembe | 08:40 - 10:30
+"
+ENG101,AU,İngilizce I,Yabancı Diller Yüksekokulu,4,ERAY SEVİNGİL BİLİCİ,"Çarşamba | 12:40 - 14:30
+Cuma | 10:40 - 12:30
+"
+ENG101,AV,İngilizce I,Yabancı Diller Yüksekokulu,4,ERAY SEVİNGİL BİLİCİ,"Pazartesi | 08:40 - 10:30
+Cuma | 14:40 - 16:30
+"
+ENG101,AW,İngilizce I,Yabancı Diller Yüksekokulu,4,MİNA DOST,"Pazartesi | 12:40 - 14:30
+Perşembe | 08:40 - 10:30
+"
+ENG101,AX,İngilizce I,Yabancı Diller Yüksekokulu,4,MİNA DOST,"Çarşamba | 12:40 - 14:30
+Cuma | 10:40 - 12:30
+"
+ENG101,AY,İngilizce I,Yabancı Diller Yüksekokulu,4,MİNA DOST,"Pazartesi | 08:40 - 10:30
+Cuma | 08:40 - 10:30
+"
+ENG101,B,İngilizce I,Yabancı Diller Yüksekokulu,4,GITI AMININAJAFI,"Çarşamba | 16:40 - 18:30
+Cuma | 08:40 - 10:30
+"
+ENG101,C,İngilizce I,Yabancı Diller Yüksekokulu,4,GITI AMININAJAFI,"Pazartesi | 10:40 - 12:30
+Çarşamba | 12:40 - 14:30
+"
+ENG101,D,İngilizce I,Yabancı Diller Yüksekokulu,4,ELMAS ONBAŞI GÜL,"Pazartesi | 14:40 - 16:30
+Perşembe | 12:40 - 14:30
+"
+ENG101,E,İngilizce I,Yabancı Diller Yüksekokulu,4,ELMAS ONBAŞI GÜL,"Çarşamba | 16:40 - 18:30
+Cuma | 08:40 - 10:30
+"
+ENG101,F,İngilizce I,Yabancı Diller Yüksekokulu,4,ELMAS ONBAŞI GÜL,"Pazartesi | 10:40 - 12:30
+Çarşamba | 12:40 - 14:30
+"
+ENG101,G,İngilizce I,Yabancı Diller Yüksekokulu,4,BEDRA BETÜL ŞENOL,"Pazartesi | 14:40 - 16:30
+Perşembe | 12:40 - 14:30
+"
+ENG101,H,İngilizce I,Yabancı Diller Yüksekokulu,4,BEDRA BETÜL ŞENOL,"Çarşamba | 16:40 - 18:30
+Cuma | 08:40 - 10:30
+"
+ENG101,I,İngilizce I,Yabancı Diller Yüksekokulu,4,BEDRA BETÜL ŞENOL,"Pazartesi | 10:40 - 12:30
+Çarşamba | 12:40 - 14:30
+"
+ENG101,J,İngilizce I,Yabancı Diller Yüksekokulu,4,ÖZLEM BAYKAN BÜLBÜL,"Pazartesi | 14:40 - 16:30
+Perşembe | 12:40 - 14:30
+"
+ENG101,K,İngilizce I,Yabancı Diller Yüksekokulu,4,ÖZLEM BAYKAN BÜLBÜL,"Çarşamba | 16:40 - 18:30
+Cuma | 08:40 - 10:30
+"
+ENG101,L,İngilizce I,Yabancı Diller Yüksekokulu,4,ÖZLEM BAYKAN BÜLBÜL,"Pazartesi | 10:40 - 12:30
+Çarşamba | 12:40 - 14:30
+"
+ENG101,M,İngilizce I,Yabancı Diller Yüksekokulu,4,IŞIL ÖZDEMİR,"Pazartesi | 12:40 - 14:30
+Perşembe | 08:40 - 10:30
+"
+ENG101,N,İngilizce I,Yabancı Diller Yüksekokulu,4,IŞIL ÖZDEMİR,"Çarşamba | 12:40 - 14:30
+Cuma | 10:40 - 12:30
+"
+ENG101,O,İngilizce I,Yabancı Diller Yüksekokulu,4,IŞIL ÖZDEMİR,"Pazartesi | 08:40 - 10:30
+Cuma | 14:40 - 16:30
+"
+ENG101,P,İngilizce I,Yabancı Diller Yüksekokulu,4,AYŞE NESLİHAN SABUNCU,"Pazartesi | 12:40 - 14:30
+Perşembe | 08:40 - 10:30
+"
+ENG101,Q,İngilizce I,Yabancı Diller Yüksekokulu,4,AYŞE NESLİHAN SABUNCU,"Çarşamba | 12:40 - 14:30
+Cuma | 10:40 - 12:30
+"
+ENG101,R,İngilizce I,Yabancı Diller Yüksekokulu,4,AYŞE NESLİHAN SABUNCU,"Pazartesi | 08:40 - 10:30
+Cuma | 14:40 - 16:30
+"
+ENG101,S,İngilizce I,Yabancı Diller Yüksekokulu,4,HALİME KUTLUTAN AK,"Pazartesi | 12:40 - 14:30
+Perşembe | 08:40 - 10:30
+"
+ENG101,T,İngilizce I,Yabancı Diller Yüksekokulu,4,HALİME KUTLUTAN AK,"Çarşamba | 12:40 - 14:30
+Cuma | 10:40 - 12:30
+"
+ENG101,U,İngilizce I,Yabancı Diller Yüksekokulu,4,HALİME KUTLUTAN AK,"Pazartesi | 08:40 - 10:30
+Cuma | 14:40 - 16:30
+"
+ENG101,V,İngilizce I,Yabancı Diller Yüksekokulu,4,DENİZ KILAVUZ,"Pazartesi | 12:40 - 14:30
+Perşembe | 08:40 - 10:30
+"
+ENG101,W,İngilizce I,Yabancı Diller Yüksekokulu,4,DENİZ KILAVUZ,"Çarşamba | 12:40 - 14:30
+Cuma | 10:40 - 12:30
+"
+ENG101,X,İngilizce I,Yabancı Diller Yüksekokulu,4,DENİZ KILAVUZ,"Pazartesi | 08:40 - 10:30
+Cuma | 14:40 - 16:30
+"
+ENG101,Y,İngilizce I,Yabancı Diller Yüksekokulu,4,ZEYNEP ŞEBNEM BAYRAKTAR,"Pazartesi | 14:40 - 16:30
+Cuma | 14:40 - 16:30
+"
+ENG101,Z,İngilizce I,Yabancı Diller Yüksekokulu,4,ZEYNEP ŞEBNEM BAYRAKTAR,"Çarşamba | 08:40 - 10:30
+Perşembe | 08:40 - 10:30
+"
+ENG102,A,İngilizce II,Yabancı Diller Yüksekokulu,4,BURAK ŞENEL,"Pazartesi | 12:40 - 14:30
+Perşembe | 10:40 - 12:30
+"
+ENG102,B,İngilizce II,Yabancı Diller Yüksekokulu,4,BURAK ŞENEL,"Pazartesi | 16:40 - 18:30
+Cuma | 16:40 - 18:30
+"
+ENG102,C,İngilizce II,Yabancı Diller Yüksekokulu,4,BURAK ŞENEL,"Çarşamba | 12:40 - 14:30
+Perşembe | 12:40 - 14:30
+"
+ENG102,D,İngilizce II,Yabancı Diller Yüksekokulu,4,NİL ALGAN BİLEN,"Pazartesi | 13:40 - 15:30
+Perşembe | 11:40 - 13:30
+"
+ENG102,E,İngilizce II,Yabancı Diller Yüksekokulu,4,NİL ALGAN BİLEN,"Çarşamba | 08:40 - 10:30
+Cuma | 08:40 - 10:30
+"
+ENG102,F,İngilizce II,Yabancı Diller Yüksekokulu,4,NİL ALGAN BİLEN,"Pazartesi | 16:40 - 18:30
+Çarşamba | 12:40 - 14:30
+"
+ENG102,G,İngilizce II,Yabancı Diller Yüksekokulu,4,SANİYE ÇANCI ÇALIŞANELLER,"Pazartesi | 08:40 - 10:30
+Cuma | 10:40 - 12:30
+"
+ENG102,H,İngilizce II,Yabancı Diller Yüksekokulu,4,SANİYE ÇANCI ÇALIŞANELLER,"Salı | 08:40 - 10:30
+Cuma | 08:40 - 10:30
+"
+ENG102,I,İngilizce II,Yabancı Diller Yüksekokulu,4,SANİYE ÇANCI ÇALIŞANELLER,"Pazartesi | 13:40 - 15:30
+Perşembe | 12:40 - 14:30
+"
+ENG102,J,İngilizce II,Yabancı Diller Yüksekokulu,4,PETEK ŞİRİN,"Çarşamba | 08:40 - 10:30
+Perşembe | 08:40 - 10:30
+"
+ENG102,K,İngilizce II,Yabancı Diller Yüksekokulu,4,PETEK ŞİRİN,"Pazartesi | 16:40 - 18:30
+Çarşamba | 16:40 - 18:30
+"
+ENG102,L,İngilizce II,Yabancı Diller Yüksekokulu,4,SEVGÜL AKBUZ EZGİN,"Salı | 10:40 - 12:30
+Çarşamba | 08:40 - 10:30
+"
+ENG102,M,İngilizce II,Yabancı Diller Yüksekokulu,4,SEVGÜL AKBUZ EZGİN,"Perşembe | 08:40 - 10:30
+Cuma | 16:40 - 18:30
+"
+ENG102,N,İngilizce II,Yabancı Diller Yüksekokulu,4,SAADET TIKAÇ ANDIÇ,"Salı | 16:40 - 18:30
+Çarşamba | 08:40 - 10:30
+"
+ENG102,O,İngilizce II,Yabancı Diller Yüksekokulu,4,SAADET TIKAÇ ANDIÇ,"Salı | 12:40 - 14:30
+Cuma | 08:40 - 10:30
+"
+ENG102,P,İngilizce II,Yabancı Diller Yüksekokulu,4,SULTAN ZEYDAN,"Perşembe | 08:40 - 10:30
+Cuma | 08:40 - 10:30
+"
+ENG103,A,İngilizce I (Öğrenim dili Türkçe programlar),Yabancı Diller Yüksekokulu,4,AZRA NİHAL YILMAZ,"Salı | 09:40 - 12:30
+"
+ENG103,B,İngilizce I (Öğrenim dili Türkçe programlar),Yabancı Diller Yüksekokulu,4,AZRA NİHAL YILMAZ,"Perşembe | 12:40 - 15:30
+"
+ENG103,C,İngilizce I (Öğrenim dili Türkçe programlar),Yabancı Diller Yüksekokulu,4,AZRA NİHAL YILMAZ,"Salı | 13:40 - 16:30
+"
+ENG103,D,İngilizce I (Öğrenim dili Türkçe programlar),Yabancı Diller Yüksekokulu,4, ,"Salı | 09:40 - 12:30
+"
+ENG103,E,İngilizce I (Öğrenim dili Türkçe programlar),Yabancı Diller Yüksekokulu,4, ,"Perşembe | 12:40 - 15:30
+"
+ENG103,F,İngilizce I (Öğrenim dili Türkçe programlar),Yabancı Diller Yüksekokulu,4,HAMDUNE NERGİZ ENMUTLU,"Çarşamba | 11:40 - 14:30
+"
+ENG104,A,İngilizce II (Öğrenim dili Türkçe programlar),Yabancı Diller Yüksekokulu,4,AZRA NİHAL YILMAZ,"Çarşamba | 10:40 - 13:30
+"
+ENG104,B,İngilizce II (Öğrenim dili Türkçe programlar),Yabancı Diller Yüksekokulu,4,HAMDUNE NERGİZ ENMUTLU,"Salı | 13:40 - 16:30
+"
+ENG105,A,İngilizce Konuşma Becerileri I,Yabancı Diller Yüksekokulu,4,PETEK ŞİRİN,"Perşembe | 12:40 - 15:30
+"
+ENG105,B,İngilizce Konuşma Becerileri I,Yabancı Diller Yüksekokulu,4,SEVGÜL AKBUZ EZGİN,"Perşembe | 12:40 - 15:30
+"
+ENG105,C,İngilizce Konuşma Becerileri I,Yabancı Diller Yüksekokulu,4,SAADET TIKAÇ ANDIÇ,"Perşembe | 08:40 - 11:30
+"
+ENG303,A,Teknik İletişim,Yabancı Diller Yüksekokulu,2,ELİF KANDEMİR,"Salı | 15:40 - 18:30
+"
+ENG303,B,Teknik İletişim,Yabancı Diller Yüksekokulu,2,ELİF KANDEMİR,"Perşembe | 12:40 - 15:30
+"
+ENG303,C,Teknik İletişim,Yabancı Diller Yüksekokulu,2,ELİF KANDEMİR,"Çarşamba | 11:40 - 14:30
+"
+ENG303,D,Teknik İletişim,Yabancı Diller Yüksekokulu,2,ELİF KANDEMİR,"Perşembe | 08:40 - 11:30
+"
+ENG303,E,Teknik İletişim,Yabancı Diller Yüksekokulu,2,İLKAY TUZCU TIĞLI,"Salı | 15:40 - 18:30
+"
+ENG303,F,Teknik İletişim,Yabancı Diller Yüksekokulu,2,İLKAY TUZCU TIĞLI,"Cuma | 08:40 - 11:30
+"
+ENG303,G,Teknik İletişim,Yabancı Diller Yüksekokulu,2,İLKAY TUZCU TIĞLI,"Çarşamba | 11:40 - 14:30
+"
+ENG303,H,Teknik İletişim,Yabancı Diller Yüksekokulu,2,İLKAY TUZCU TIĞLI,"Perşembe | 08:40 - 11:30
+"
+ENG303,I,Teknik İletişim,Yabancı Diller Yüksekokulu,2,SEDEF ERDOĞAN GIOVANELLI,"Perşembe | 12:40 - 15:30
+"
+ENG303,J,Teknik İletişim,Yabancı Diller Yüksekokulu,2,SEDEF ERDOĞAN GIOVANELLI,"Cuma | 08:40 - 11:30
+"
+ENG303,K,Teknik İletişim,Yabancı Diller Yüksekokulu,2,SEDEF ERDOĞAN GIOVANELLI,"Perşembe | 08:40 - 11:30
+"
+ENG303,L,Teknik İletişim,Yabancı Diller Yüksekokulu,2,SEDEF ERDOĞAN GIOVANELLI,"Pazartesi | 08:40 - 11:30
+"
+FRE101,A,Fransızca I,Yabancı Diller Yüksekokulu,4,SALMA JEHAD AWAD ALAMASSI,"Salı | 11:40 - 13:30
+Perşembe | 08:40 - 10:30
+"
+FRE101,B,Fransızca I,Yabancı Diller Yüksekokulu,4,OLGA SOKOLOVA,"Salı | 14:40 - 16:30
+Cuma | 14:40 - 16:30
+"
+FRE101,C,Fransızca I,Yabancı Diller Yüksekokulu,4,OLGA SOKOLOVA,"Pazartesi | 11:40 - 13:30
+Perşembe | 12:40 - 14:30
+"
+FRE101,D,Fransızca I,Yabancı Diller Yüksekokulu,4,OLGA SOKOLOVA,"Salı | 08:40 - 10:30
+Cuma | 08:40 - 10:30
+"
+FRE102,A,Fransızca II,Yabancı Diller Yüksekokulu,4,SALMA JEHAD AWAD ALAMASSI,"Pazartesi | 08:40 - 10:30
+Perşembe | 10:40 - 12:30
+"
+FRE201,A,Fransızca III,Yabancı Diller Yüksekokulu,4,OLGA SOKOLOVA,"Pazartesi | 14:40 - 16:30
+Cuma | 10:40 - 12:30
+"
+GER101,A,Almanca I,Yabancı Diller Yüksekokulu,4,ŞEVVAL BEGÜM KARAVİT,"Salı | 11:40 - 13:30
+Cuma | 10:40 - 12:30
+"
+GER101,B,Almanca I,Yabancı Diller Yüksekokulu,4,Katharina Andrea Hartmann,"Salı | 08:40 - 10:30
+Perşembe | 14:40 - 16:30
+"
+GER101,C,Almanca I,Yabancı Diller Yüksekokulu,4,Katharina Andrea Hartmann,"Salı | 11:40 - 13:30
+Cuma | 16:40 - 18:30
+"
+GER102,A,Almanca II,Yabancı Diller Yüksekokulu,4,Katharina Andrea Hartmann,"Pazartesi | 08:40 - 10:30
+Perşembe | 10:40 - 12:30
+"
+GER102,B,Almanca II,Yabancı Diller Yüksekokulu,4,ŞEVVAL BEGÜM KARAVİT,"Pazartesi | 08:40 - 10:30
+Perşembe | 10:40 - 12:30
+"
+GER201,A,Almanca III,Yabancı Diller Yüksekokulu,4,ŞEVVAL BEGÜM KARAVİT,"Salı | 08:40 - 10:30
+Perşembe | 08:40 - 10:30
+"
+GER201,B,Almanca III,Yabancı Diller Yüksekokulu,4,ŞEVVAL BEGÜM KARAVİT,"Pazartesi | 16:40 - 18:30
+Perşembe | 16:40 - 18:30
+"
+GER202,A,Almanca IV,Yabancı Diller Yüksekokulu,4,Katharina Andrea Hartmann,"Pazartesi | 13:40 - 15:30
+Cuma | 08:40 - 10:30
+"
+ITA101,A,İtalyanca I,Yabancı Diller Yüksekokulu,4,IRENE CAMPARI,"Salı | 14:40 - 16:30
+Cuma | 14:40 - 16:30
+"
+ITA101,B,İtalyanca I,Yabancı Diller Yüksekokulu,4,ARCO JANNUZZİ,"Pazartesi | 12:40 - 14:30
+Perşembe | 16:40 - 18:30
+"
+ITA101,C,İtalyanca I,Yabancı Diller Yüksekokulu,4,IRENE CAMPARI,"Pazartesi | 11:40 - 13:30
+Perşembe | 12:40 - 14:30
+"
+ITA101,D,İtalyanca I,Yabancı Diller Yüksekokulu,4,IRENE CAMPARI,"Salı | 08:40 - 10:30
+Cuma | 08:40 - 10:30
+"
+ITA102,A,İtalyanca II,Yabancı Diller Yüksekokulu,4,ARCO JANNUZZİ,"Pazartesi | 08:40 - 10:30
+Perşembe | 10:40 - 12:30
+"
+ITA102,B,İtalyanca II,Yabancı Diller Yüksekokulu,4,ARCO JANNUZZİ,"Çarşamba | 11:40 - 13:30
+Cuma | 14:40 - 16:30
+"
+ITA201,A,İtalyanca III,Yabancı Diller Yüksekokulu,4,IRENE CAMPARI,"Pazartesi | 14:40 - 16:30
+Cuma | 10:40 - 12:30
+"
+ITA202,A,İtalyanca IV,Yabancı Diller Yüksekokulu,4,ARCO JANNUZZİ,"Çarşamba | 08:40 - 10:30
+Cuma | 08:40 - 10:30
+"
+RUS101,A,Rusça I,Yabancı Diller Yüksekokulu,4,ANNA EKICI,"Salı | 11:40 - 13:30
+Perşembe | 08:40 - 10:30
+"
+RUS101,B,Rusça I,Yabancı Diller Yüksekokulu,4,ANNA EKICI,"Salı | 14:40 - 16:30
+Cuma | 14:40 - 16:30
+"
+RUS102,A,Rusça II,Yabancı Diller Yüksekokulu,4,ANNA EKICI,"Pazartesi | 08:40 - 10:30
+Perşembe | 10:40 - 12:30
+"
+RUS201,A,Rusça III,Yabancı Diller Yüksekokulu,4,ANNA EKICI,"Pazartesi | 14:40 - 16:30
+Cuma | 10:40 - 12:30
+"
+SPA101,A,İspanyolca I,Yabancı Diller Yüksekokulu,4,ERVIN DALETH OSTOS SANTOS,"Salı | 11:40 - 13:30
+Cuma | 10:40 - 12:30
+"
+SPA101,B,İspanyolca I,Yabancı Diller Yüksekokulu,4,MELTEM MICHELE MARTINEZ VELASCO,"Salı | 08:40 - 10:30
+Perşembe | 14:40 - 16:30
+"
+SPA101,C,İspanyolca I,Yabancı Diller Yüksekokulu,4,FABIANA CARINA ZALAZAR,"Salı | 11:40 - 13:30
+Cuma | 08:40 - 10:30
+"
+SPA102,A,İspanyolca II,Yabancı Diller Yüksekokulu,4,MELTEM MICHELE MARTINEZ VELASCO,"Pazartesi | 08:40 - 10:30
+Perşembe | 10:40 - 12:30
+"
+SPA102,B,İspanyolca II,Yabancı Diller Yüksekokulu,4,ERVIN DALETH OSTOS SANTOS,"Pazartesi | 08:40 - 10:30
+Perşembe | 10:40 - 12:30
+"
+SPA102,C,İspanyolca II,Yabancı Diller Yüksekokulu,4,FABIANA CARINA ZALAZAR,"Pazartesi | 08:40 - 10:30
+Çarşamba | 08:40 - 10:30
+"
+SPA201,A,İspanyolca III,Yabancı Diller Yüksekokulu,4,ERVIN DALETH OSTOS SANTOS,"Salı | 08:40 - 10:30
+Perşembe | 08:40 - 10:30
+"
+SPA201,B,İspanyolca III,Yabancı Diller Yüksekokulu,4,MELTEM MICHELE MARTINEZ VELASCO,"Pazartesi | 16:40 - 18:30
+Perşembe | 16:40 - 18:30
+"
+SPA201,C,İspanyolca III,Yabancı Diller Yüksekokulu,4,FABIANA CARINA ZALAZAR,"Pazartesi | 13:40 - 15:30
+Çarşamba | 13:40 - 15:30
+"
+SPA201,D,İspanyolca III,Yabancı Diller Yüksekokulu,4,FABIANA CARINA ZALAZAR,"Çarşamba | 10:40 - 12:30
+Cuma | 10:40 - 12:30
+"
+SPA202,A,İspanyolca IV,Yabancı Diller Yüksekokulu,4,MELTEM MICHELE MARTINEZ VELASCO,"Pazartesi | 13:40 - 15:30
+Cuma | 08:40 - 10:30
+"
+SPA202,B,İspanyolca IV,Yabancı Diller Yüksekokulu,4,ERVIN DALETH OSTOS SANTOS,"Pazartesi | 13:40 - 15:30
+Cuma | 08:40 - 10:30
+"
+TURK101,A,Yabancılar için Türkçe I,Yabancı Diller Yüksekokulu,3,İLAYDA ENGİN UYSAL,"Pazartesi | 12:40 - 15:30
+"
+TURK101,B,Yabancılar için Türkçe I,Yabancı Diller Yüksekokulu,3,İLAYDA ENGİN UYSAL,"Cuma | 14:40 - 17:30
+"
+TURK101,C,Yabancılar için Türkçe I,Yabancı Diller Yüksekokulu,3,İLAYDA ENGİN UYSAL,"Çarşamba | 16:40 - 19:30
+"
+TURK101,D,Yabancılar için Türkçe I,Yabancı Diller Yüksekokulu,3,İLAYDA ENGİN UYSAL,"Pazartesi | 16:40 - 19:30
+"
+TURK101,E,Yabancılar için Türkçe I,Yabancı Diller Yüksekokulu,3,MEHMET ŞAMİL DAYANÇ,"Cuma | 14:40 - 17:30
+"
+TURK101,F,Yabancılar için Türkçe I,Yabancı Diller Yüksekokulu,3,MEHMET ŞAMİL DAYANÇ,"Çarşamba | 16:40 - 19:30
+"
+TURK101,G,Yabancılar için Türkçe I,Yabancı Diller Yüksekokulu,3,MEHMET ŞAMİL DAYANÇ,"Pazartesi | 16:40 - 19:30
+"
+TURK101,H,Yabancılar için Türkçe I,Yabancı Diller Yüksekokulu,3,MEHMET ŞAMİL DAYANÇ,"Pazartesi | 12:40 - 15:30
+"
+TURK102,A,Yabancılar için Türkçe II,Yabancı Diller Yüksekokulu,3,İLAYDA ENGİN UYSAL,"Salı | 16:40 - 19:30
+"
+TURK102,B,Yabancılar için Türkçe II,Yabancı Diller Yüksekokulu,3,MEHMET ŞAMİL DAYANÇ,"Perşembe | 16:40 - 19:30
+"
