@@ -195,6 +195,9 @@ def add_courses_from_csv(csv_file):
             
             for idx, row in enumerate(data[1:], 1):  # Skip header
                 try:
+                    # create a savepoint before each insert
+                    cursor.execute("SAVEPOINT before_row")
+
                     course_name = row[0]
                     section_name = row[0] + row[1]
                     faculty = row[2]
@@ -254,13 +257,15 @@ def add_courses_from_csv(csv_file):
                     
                     if idx % 10 == 0:
                         print(f"  Processed {idx} courses...")
-                    
+
                 except Exception as e:
                     print(f"❌ Error processing row {idx}: {e}")
                     print(f"   Row data: {row}")
-                    conn.rollback()
+                    # rollback only this row, not the entire transaction
+                    cursor.execute("ROLLBACK TO SAVEPOINT before_row")
                     continue
-            
+
+
             conn.commit()
             
             # Verify
