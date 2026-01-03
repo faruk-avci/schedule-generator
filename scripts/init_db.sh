@@ -31,7 +31,7 @@ DB_NAME=${DB_NAME}
 
 # Security
 SESSION_SECRET=${SESSION_SECRET}
-ALLOWED_ORIGINS=http://localhost:5173,https://${DOMAIN},https://www.${DOMAIN}
+ALLOWED_ORIGINS=http://localhost:5173,https://${DOMAIN},https://www.${DOMAIN},http://${DOMAIN},http://www.${DOMAIN}
 EOF
 
 echo "✓ .env file generated in ${BACKEND_DIR}"
@@ -66,11 +66,20 @@ python3 database.py
 deactivate
 cd ../..
 
-# 5. Initialize Session Table (Using Node)
-echo "Initializing session table..."
+# 5. Initialize Mission-Critical Tables (Logs, Settings, Sessions)
+echo "Initializing mission-critical tables..."
 cd "${BACKEND_DIR}"
 npm install
+
+# Run JS initializers
+echo "Running JS initializers..."
 node init_session_table.js
+node init_db_logs.js
+
+# Run SQL initializers (using psql)
+echo "Running SQL initializers..."
+PGPASSWORD="${DB_PASSWORD}" psql -h localhost -U "${DB_USER}" -d "${DB_NAME}" -f db_setup_settings.sql
+
 cd ..
 
 echo "✅ Database initialization complete!"

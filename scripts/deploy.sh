@@ -29,9 +29,8 @@ echo "Updating Frontend..."
 cd frontend
 npm install
 npm run build
-# Copy built files to public folder to be served by backend/nginx
-# Option A: Backend serves public folder
-cp -r dist/* ../backend/public/
+# Copy built files to public folder (Legacy skip - Nginx serves frontend/dist directly)
+# cp -r dist/* ../backend/public/
 cd ..
 
 echo "✅ Deployment successful!"

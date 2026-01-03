@@ -20,11 +20,17 @@ const PORT = process.env.PORT || 8081;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Serve static files (HTML, CSS, JS)
-app.use(express.static('public'));
+// Health check or API root
+app.get('/', (req, res) => {
+    res.json({
+        status: 'online',
+        message: 'OzuPlanner API is running',
+        version: '2.0.0'
+    });
+});
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS
-    ? process.env.ALLOWED_ORIGINS.split(',')
+    ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
     : ['http://localhost:5173'];
 
 app.use(cors({
@@ -32,6 +38,7 @@ app.use(cors({
         // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
         if (allowedOrigins.indexOf(origin) === -1) {
+            console.error(`❌ CORS blocked for origin: ${origin}`);
             const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
             return callback(new Error(msg), false);
         }
@@ -40,6 +47,9 @@ app.use(cors({
     credentials: true  // Allow cookies
 }));
 
+// Trust proxy (Crucial for secure cookies behind Nginx)
+app.set('trust proxy', 1);
+
 // Session configuration
 const sessionStore = new PgSession({
     pool: pool,
@@ -47,6 +57,8 @@ const sessionStore = new PgSession({
     createTableIfMissing: false // Already created by script
 });
 app.set('sessionStore', sessionStore);
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 app.use(session({
     name: '_sid', // Custom name to hide tech stack
@@ -57,8 +69,9 @@ app.use(session({
     cookie: {
         maxAge: 1000 * 60 * 60 * 24, // 24 hours
         httpOnly: true, // Prevents XSS script access
-        secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-        sameSite: 'lax' // CSRF protection
+        secure: isProduction, // Use secure cookies in production
+        sameSite: isProduction ? 'lax' : 'lax', // Consistent sameSite
+        domain: isProduction ? '.ozuplanner.com' : 'localhost' // Share cookie across subdomains in prod
     }
 }));
 
