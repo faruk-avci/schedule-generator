@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { pool } = require('../database/db');
+const { logActivity } = require('../services/loggerService');
 
 // ============================================
 // POST /api/courses/search
@@ -9,31 +10,36 @@ const { pool } = require('../database/db');
 router.post('/search', async (req, res) => {
     try {
         const { courseName } = req.body;
-        
+
         // Validation
         if (!courseName) {
-            return res.status(400).json({ 
+            return res.status(400).json({
                 success: false,
-                error: 'Course name is required' 
+                error: 'Course name is required'
             });
         }
 
         if (courseName.trim().length < 2) {
-            return res.status(400).json({ 
+            return res.status(400).json({
                 success: false,
-                error: 'Course name must be at least 2 characters' 
+                error: 'Course name must be at least 2 characters'
             });
         }
 
-        console.log('🔍 Searching for courses:', courseName);
 
-        // Query database with time information
+        // Normalize input: remove all spaces
+        const normalizedInput = courseName.replace(/\s+/g, '');
+
+        console.log('🔍 Searching for courses:', normalizedInput);
+
+        // Query database with normalized space handling
         const query = `
             SELECT 
                 c.course_name, 
                 c.credits, 
                 c.section_name, 
                 c.lecturer,
+                c.faculty,
                 c.description,
                 c.id as course_id,
                 ts_start.day_of_week,
@@ -48,27 +54,29 @@ router.post('/search', async (req, res) => {
             LEFT JOIN course_time_slots cts ON c.id = cts.course_id
             LEFT JOIN time_slots ts_start ON cts.start_time_id = ts_start.time_id
             LEFT JOIN time_slots ts_end ON cts.end_time_id = ts_end.time_id
-            WHERE c.course_name ILIKE $1
+            WHERE REPLACE(c.course_name, ' ', '') ILIKE $1
             ORDER BY c.course_name, c.section_name, ts_start.day_of_week, ts_start.hour_of_day
         `;
 
-        const result = await pool.query(query, [`%${courseName}%`]);
-        
+        const result = await pool.query(query, [`%${normalizedInput}%`]);
+
         // Group sections by course name and include time slots
         const courseMap = new Map();
-        
+
+
         result.rows.forEach(row => {
             if (!courseMap.has(row.course_name)) {
                 courseMap.set(row.course_name, {
                     course_name: row.course_name,
                     credits: row.credits,
+                    faculty: row.faculty,
                     description: row.description,
                     sections: new Map()
                 });
             }
-            
+
             const course = courseMap.get(row.course_name);
-            
+
             // Initialize section if it doesn't exist
             if (!course.sections.has(row.section_name)) {
                 course.sections.set(row.section_name, {
@@ -77,7 +85,7 @@ router.post('/search', async (req, res) => {
                     times: []
                 });
             }
-            
+
             // Add time slot if it exists
             if (row.day_of_week && row.start_time && row.end_time) {
                 course.sections.get(row.section_name).times.push({
@@ -87,11 +95,12 @@ router.post('/search', async (req, res) => {
                 });
             }
         });
-        
+
         // Convert nested Maps to arrays
         const courses = Array.from(courseMap.values()).map(course => ({
             course_name: course.course_name,
             credits: course.credits,
+            faculty: course.faculty,
             description: course.description,
             sections: Array.from(course.sections.values())
         }));
@@ -99,18 +108,25 @@ router.post('/search', async (req, res) => {
 
         console.log(`✓ Found ${courses.length} courses with ${result.rows.length} total sections`);
 
-        res.json({ 
+        // Log search activity
+        logActivity(req, 'SEARCH', {
+            query: courseName,
+            normalized: normalizedInput,
+            resultsCount: courses.length
+        });
+
+        res.json({
             success: true,
             count: courses.length,
-            courses: courses 
+            courses: courses
         });
 
     } catch (error) {
-        console.error('❌ Search error:', error);
-        res.status(500).json({ 
+        console.error('Search error:', error);
+        res.status(500).json({
             success: false,
             error: 'Database error',
-            message: error.message 
+            message: error.message
         });
     }
 });
@@ -119,44 +135,67 @@ router.post('/search', async (req, res) => {
 // POST /api/courses/add
 // Add a course or section to basket
 // ============================================
-router.post('/add', (req, res) => {
+router.post('/add', async (req, res) => {
     try {
         const { course, section } = req.body;
 
         // Validation
         if (!course) {
-            return res.status(400).json({ 
+            return res.status(400).json({
                 success: false,
-                error: 'Course name is required' 
+                error: 'Course name is required'
             });
         }
 
         // Case 1: Adding entire course (section is null)
         if (section === null || section === undefined) {
-            
-            // Check if course already added
-            if (req.session.addedCourses.includes(course)) {
-                return res.status(400).json({ 
+            // [SECURITY] Verify course exists in database
+            const courseExists = await pool.query(
+                "SELECT id FROM courses WHERE course_name = $1 LIMIT 1",
+                [course]
+            );
+
+            if (courseExists.rows.length === 0) {
+                logActivity(req, 'SECURITY_ALERT', {
+                    type: 'INVALID_COURSE',
+                    course,
+                    message: 'Attempted to add non-existent course'
+                });
+                return res.status(404).json({
                     success: false,
-                    error: `Course "${course}" is already in your basket` 
+                    error: `Course "${course}" not found in database.`
+                });
+            }
+
+            // Check if course already added
+            if ((req.session.addedCourses || []).includes(course)) {
+                return res.status(400).json({
+                    success: false,
+                    error: `Course "${course}" is already in your basket`
                 });
             }
 
             // Check if any section of this course is already added
-            const hasSection = req.session.addedSections.some(s => s.course === course);
+            const hasSection = (req.session.addedSections || []).some(s => s.course === course);
             if (hasSection) {
-                return res.status(400).json({ 
+                return res.status(400).json({
                     success: false,
-                    error: `A section of "${course}" is already in your basket. Remove the section first.` 
+                    error: `A section of "${course}" is already in your basket. Remove the section first.`
                 });
             }
+
+            // [SECURITY] Initialize session arrays if they don't exist (triggers session save)
+            if (!req.session.addedCourses) req.session.addedCourses = [];
+            if (!req.session.addedSections) req.session.addedSections = [];
 
             // Add course
             req.session.addedCourses.push(course);
             console.log(`✓ Added course: ${course}`);
-            
-            return res.json({ 
-                success: true, 
+
+            logActivity(req, 'ADD_COURSE', { course });
+
+            return res.json({
+                success: true,
                 message: `Course "${course}" added to basket`,
                 basket: {
                     courses: req.session.addedCourses,
@@ -166,33 +205,72 @@ router.post('/add', (req, res) => {
         }
 
         // Case 2: Adding specific section
-        
+
+        // [SECURITY] Verify section exists and belongs to this course
+        const sectionExists = await pool.query(
+            "SELECT id FROM courses WHERE course_name = $1 AND section_name = $2 LIMIT 1",
+            [course, section]
+        );
+
+        if (sectionExists.rows.length === 0) {
+            logActivity(req, 'SECURITY_ALERT', {
+                type: 'INVALID_SECTION',
+                course,
+                section,
+                message: 'Attempted to add non-existent or mismatched section'
+            });
+            return res.status(404).json({
+                success: false,
+                error: `Security Alert: Section "${section}" for course "${course}" not found or mismatched.`
+            });
+        }
+
+        // [SECURITY] Heuristic check: section name usually starts with or contains course name
+        if (!section.includes(course)) {
+            logActivity(req, 'SECURITY_ALERT', {
+                type: 'HEURISTIC_MISMATCH',
+                course,
+                section,
+                message: 'Section name does not contain course name'
+            });
+            return res.status(400).json({
+                success: false,
+                error: `Security Alert: Section "${section}" does not seem to belong to course "${course}".`
+            });
+        }
+
         // Check if this specific section already added
-        const existingSection = req.session.addedSections.find(
+        const existingSection = (req.session.addedSections || []).find(
             s => s.course === course && s.section === section
         );
-        
+
         if (existingSection) {
-            return res.status(400).json({ 
+            return res.status(400).json({
                 success: false,
-                error: `Section "${section}" of "${course}" is already in your basket` 
+                error: `Section "${section}" of "${course}" is already in your basket`
             });
         }
 
         // Check if entire course is already added
-        if (req.session.addedCourses.includes(course)) {
-            return res.status(400).json({ 
+        if ((req.session.addedCourses || []).includes(course)) {
+            return res.status(400).json({
                 success: false,
-                error: `The entire course "${course}" is already in your basket. Cannot add individual sections.` 
+                error: `The entire course "${course}" is already in your basket. Cannot add individual sections.`
             });
         }
+
+        // [SECURITY] Initialize session arrays if they don't exist (triggers session save)
+        if (!req.session.addedCourses) req.session.addedCourses = [];
+        if (!req.session.addedSections) req.session.addedSections = [];
 
         // Add section
         req.session.addedSections.push({ course, section });
         console.log(`✓ Added section: ${course} - ${section}`);
-        
-        return res.json({ 
-            success: true, 
+
+        logActivity(req, 'ADD_SECTION', { course, section });
+
+        return res.json({
+            success: true,
             message: `Section "${section}" of "${course}" added to basket`,
             basket: {
                 courses: req.session.addedCourses,
@@ -201,11 +279,11 @@ router.post('/add', (req, res) => {
         });
 
     } catch (error) {
-        console.error('❌ Add error:', error);
-        res.status(500).json({ 
+        console.error('Add error:', error);
+        res.status(500).json({
             success: false,
             error: 'Server error',
-            message: error.message 
+            message: error.message
         });
     }
 });
@@ -220,28 +298,30 @@ router.post('/remove', (req, res) => {
 
         // Validation
         if (!course) {
-            return res.status(400).json({ 
+            return res.status(400).json({
                 success: false,
-                error: 'Course name is required' 
+                error: 'Course name is required'
             });
         }
 
         // Case 1: Removing entire course
         if (section === null || section === undefined) {
-            
-            if (!req.session.addedCourses.includes(course)) {
-                return res.status(400).json({ 
+
+            if (!req.session.addedCourses || !req.session.addedCourses.includes(course)) {
+                return res.status(400).json({
                     success: false,
-                    error: `Course "${course}" is not in your basket` 
+                    error: `Course "${course}" is not in your basket`
                 });
             }
 
             // Remove course
             req.session.addedCourses = req.session.addedCourses.filter(c => c !== course);
             console.log(`✓ Removed course: ${course}`);
-            
-            return res.json({ 
-                success: true, 
+
+            logActivity(req, 'REMOVE_COURSE', { course });
+
+            return res.json({
+                success: true,
                 message: `Course "${course}" removed from basket`,
                 basket: {
                     courses: req.session.addedCourses,
@@ -251,24 +331,33 @@ router.post('/remove', (req, res) => {
         }
 
         // Case 2: Removing specific section
-        
+
+        if (!req.session.addedSections) {
+            return res.status(400).json({
+                success: false,
+                error: `Section "${section}" of "${course}" is not in your basket`
+            });
+        }
+
         const sectionIndex = req.session.addedSections.findIndex(
             s => s.course === course && s.section === section
         );
 
         if (sectionIndex === -1) {
-            return res.status(400).json({ 
+            return res.status(400).json({
                 success: false,
-                error: `Section "${section}" of "${course}" is not in your basket` 
+                error: `Section "${section}" of "${course}" is not in your basket`
             });
         }
 
         // Remove section
         req.session.addedSections.splice(sectionIndex, 1);
         console.log(`✓ Removed section: ${course} - ${section}`);
-        
-        return res.json({ 
-            success: true, 
+
+        logActivity(req, 'REMOVE_SECTION', { course, section });
+
+        return res.json({
+            success: true,
             message: `Section "${section}" of "${course}" removed from basket`,
             basket: {
                 courses: req.session.addedCourses,
@@ -277,11 +366,11 @@ router.post('/remove', (req, res) => {
         });
 
     } catch (error) {
-        console.error('❌ Remove error:', error);
-        res.status(500).json({ 
+        console.error('Remove error:', error);
+        res.status(500).json({
             success: false,
             error: 'Server error',
-            message: error.message 
+            message: error.message
         });
     }
 });
@@ -292,24 +381,27 @@ router.post('/remove', (req, res) => {
 // ============================================
 router.get('/basket', (req, res) => {
     try {
-        const totalCourses = req.session.addedCourses.length;
-        const totalSections = req.session.addedSections.length;
-        
+        const addedCourses = req.session.addedCourses || [];
+        const addedSections = req.session.addedSections || [];
+        const totalCourses = addedCourses.length;
+        const totalSections = addedSections.length;
+
         res.json({
             success: true,
             basket: {
-                courses: req.session.addedCourses,
-                sections: req.session.addedSections,
-                totalItems: totalCourses + totalSections
+                courses: req.session.addedCourses || [],
+                sections: req.session.addedSections || [],
+                major: req.session.major || null, // Include major info
+                totalItems: (req.session.addedCourses?.length || 0) + (req.session.addedSections?.length || 0)
             }
         });
 
     } catch (error) {
-        console.error('❌ Basket error:', error);
-        res.status(500).json({ 
+        console.error('Basket error:', error);
+        res.status(500).json({
             success: false,
             error: 'Server error',
-            message: error.message 
+            message: error.message
         });
     }
 });
@@ -322,9 +414,11 @@ router.delete('/basket/clear', (req, res) => {
     try {
         req.session.addedCourses = [];
         req.session.addedSections = [];
-        
+
         console.log('✓ Basket cleared');
-        
+
+        logActivity(req, 'CLEAR_BASKET', {});
+
         res.json({
             success: true,
             message: 'Basket cleared',
@@ -336,11 +430,210 @@ router.delete('/basket/clear', (req, res) => {
         });
 
     } catch (error) {
-        console.error('❌ Clear basket error:', error);
-        res.status(500).json({ 
+        console.error('Clear basket error:', error);
+        res.status(500).json({
             success: false,
             error: 'Server error',
-            message: error.message 
+            message: error.message
+        });
+    }
+});
+
+// ============================================
+// POST /api/courses/major
+// Set student's major for analytics
+// ============================================
+router.post('/major', async (req, res) => {
+    try {
+        const { major } = req.body;
+
+        if (!major) {
+            return res.status(400).json({
+                success: false,
+                error: 'Major is required'
+            });
+        }
+
+        // Set major in session (this triggers a session save even if it was uninitialized)
+        req.session.major = major;
+
+        console.log(`🎓 Major set: ${major}`);
+
+        logActivity(req, 'SET_MAJOR', { major });
+
+        res.json({
+            success: true,
+            message: `Major set to "${major}"`,
+            major: req.session.major
+        });
+
+    } catch (error) {
+        console.error('Major set error:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Server error',
+            message: error.message
+        });
+    }
+});
+
+// ============================================
+// GET /api/courses/admin/logs
+// View recent activity logs (Debug/Admin tool)
+// TODO: Add Admin Authentication/Middleware here before deploying to production!
+// ============================================
+router.get('/admin/logs', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT * FROM activity_logs 
+            ORDER BY created_at DESC 
+        `);
+
+        res.json({
+            success: true,
+            count: result.rows.length,
+            logs: result.rows
+        });
+    } catch (error) {
+        console.error('Log view error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// ============================================
+// SAVED BASKETS (MULTI-BASKET SUPPORT)
+// ============================================
+
+// POST /api/courses/baskets/save
+// Save current session basket with a name
+router.post('/baskets/save', (req, res) => {
+    try {
+        const { name } = req.body;
+        if (!name || name.trim() === '') {
+            return res.status(400).json({ success: false, error: 'Basket name is required' });
+        }
+
+        if (!req.session.savedBaskets) req.session.savedBaskets = {};
+
+        req.session.savedBaskets[name] = {
+            courses: req.session.addedCourses || [],
+            sections: req.session.addedSections || [],
+            savedAt: new Date().toISOString()
+        };
+
+        console.log(`💾 Basket saved: ${name}`);
+        logActivity(req, 'SAVE_BASKET', { name });
+
+        res.json({
+            success: true,
+            message: `Basket "${name}" saved`,
+            savedBaskets: Object.keys(req.session.savedBaskets)
+        });
+    } catch (error) {
+        console.error('Save basket error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// GET /api/courses/baskets
+// List all saved basket names
+router.get('/baskets', (req, res) => {
+    try {
+        const savedBaskets = req.session.savedBaskets || {};
+        const basketList = Object.keys(savedBaskets).map(name => ({
+            name,
+            courseCount: savedBaskets[name].courses.length,
+            sectionCount: savedBaskets[name].sections.length,
+            totalItems: savedBaskets[name].courses.length + savedBaskets[name].sections.length,
+            savedAt: savedBaskets[name].savedAt
+        }));
+
+        res.json({ success: true, baskets: basketList });
+    } catch (error) {
+        console.error('Get baskets error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// POST /api/courses/baskets/load
+// Replace current session basket with a saved one
+router.post('/baskets/load', (req, res) => {
+    try {
+        const { name } = req.body;
+        if (!name || !req.session.savedBaskets || !req.session.savedBaskets[name]) {
+            return res.status(404).json({ success: false, error: 'Saved basket not found' });
+        }
+
+        const target = req.session.savedBaskets[name];
+        req.session.addedCourses = [...target.courses];
+        req.session.addedSections = [...target.sections];
+
+        console.log(`📂 Basket loaded: ${name}`);
+        logActivity(req, 'LOAD_BASKET', { name });
+
+        res.json({
+            success: true,
+            message: `Basket "${name}" loaded`,
+            basket: {
+                courses: req.session.addedCourses,
+                sections: req.session.addedSections,
+                totalItems: req.session.addedCourses.length + req.session.addedSections.length
+            }
+        });
+    } catch (error) {
+        console.error('Load basket error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// POST /api/courses/baskets/remove
+// Delete a saved basket
+router.post('/baskets/remove', (req, res) => {
+    try {
+        const { name } = req.body;
+        if (!name || !req.session.savedBaskets || !req.session.savedBaskets[name]) {
+            return res.status(404).json({ success: false, error: 'Saved basket not found' });
+        }
+
+        delete req.session.savedBaskets[name];
+        console.log(`🗑️ Basket removed: ${name}`);
+        logActivity(req, 'REMOVE_SAVED_BASKET', { name });
+
+        res.json({
+            success: true,
+            message: `Basket "${name}" removed`,
+            savedBaskets: Object.keys(req.session.savedBaskets)
+        });
+    } catch (error) {
+        console.error('Remove saved basket error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// ============================================
+// GET /api/courses/term
+// Get currently active academic term
+// ============================================
+router.get('/term', async (req, res) => {
+    try {
+        const result = await pool.query("SELECT value FROM site_settings WHERE key = 'current_term'");
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                success: false,
+                error: 'Term information not found'
+            });
+        }
+
+        res.json({
+            success: true,
+            term: result.rows[0].value
+        });
+    } catch (error) {
+        console.error('Term fetch error:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Server error',
+            message: error.message
         });
     }
 });

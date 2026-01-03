@@ -3,8 +3,12 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
-const cors = require('cors'); 
-const { testConnection } = require('./src/database/db');
+const cors = require('cors');
+const { pool, testConnection } = require('./src/database/db');
+const PgSession = require('connect-pg-simple')(session);
+const logRoutes = require('./src/routes/logRoutes');
+const courseRoutes = require('./src/routes/courseRoutes');
+const scheduleRoutes = require('./src/routes/scheduleRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -19,32 +23,44 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Serve static files (HTML, CSS, JS)
 app.use(express.static('public'));
 
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+    ? process.env.ALLOWED_ORIGINS.split(',')
+    : ['http://localhost:5173'];
+
 app.use(cors({
-    origin: 'http://localhost:5173',  // React dev server
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
     credentials: true  // Allow cookies
 }));
 
 // Session configuration
+const sessionStore = new PgSession({
+    pool: pool,
+    tableName: 'session',
+    createTableIfMissing: false // Already created by script
+});
+app.set('sessionStore', sessionStore);
+
 app.use(session({
+    name: '_sid', // Custom name to hide tech stack
     secret: process.env.SESSION_SECRET || 'default-secret-change-this',
     resave: false,
-    saveUninitialized: true,
-    cookie: { 
-        maxAge: 1000 * 60 * 60, // 1 hour
-        httpOnly: true
+    saveUninitialized: false, // Only save session when something is added to basket
+    store: sessionStore,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24, // 24 hours
+        httpOnly: true, // Prevents XSS script access
+        secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+        sameSite: 'lax' // CSRF protection
     }
 }));
-
-// Initialize session arrays
-app.use((req, res, next) => {
-    if (!req.session.addedCourses) {
-        req.session.addedCourses = [];
-    }
-    if (!req.session.addedSections) {
-        req.session.addedSections = [];
-    }
-    next();
-});
 
 // Simple request logger
 app.use((req, res, next) => {
@@ -58,11 +74,15 @@ app.use((req, res, next) => {
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-    res.json({ 
-        status: 'ok', 
+    res.json({
+        status: 'ok',
         message: 'Server is running',
         timestamp: new Date().toISOString()
     });
+});
+
+app.get('/api/test', (req, res) => {
+    res.json({ message: 'API test works' });
 });
 
 // Home page
@@ -75,10 +95,11 @@ app.get('/', (req, res) => {
 // ============================================
 
 // Course routes (search, add, remove, basket)
-app.use('/api/courses', require('./src/routes/courseRoutes'));
+app.use('/api/courses', courseRoutes);
 
 // Schedule routes (generate)
-app.use('/api/schedule', require('./src/routes/scheduleRoutes'));
+app.use('/api/schedule', scheduleRoutes);
+app.use('/api/logs', logRoutes);
 
 // ============================================
 // ERROR HANDLING
@@ -86,18 +107,18 @@ app.use('/api/schedule', require('./src/routes/scheduleRoutes'));
 
 // 404 handler
 app.use((req, res) => {
-    res.status(404).json({ 
+    res.status(404).json({
         error: 'Route not found',
-        path: req.path 
+        path: req.path
     });
 });
 
 // General error handler
 app.use((err, req, res, next) => {
     console.error('Error:', err);
-    res.status(500).json({ 
+    res.status(500).json({
         error: 'Internal server error',
-        message: err.message 
+        message: err.message
     });
 });
 
@@ -109,14 +130,14 @@ async function startServer() {
     try {
         // Test database connection first
         const dbConnected = await testConnection();
-        
+
         if (!dbConnected) {
             console.error('❌ Cannot start server - database connection failed');
             process.exit(1);
         }
 
         // Start server
-        app.listen(PORT, '0.0.0.0',() => {
+        app.listen(PORT, () => {
             console.log('=================================');
             console.log(`🚀 Server running on http://localhost:${PORT}`);
             console.log(`📊 Environment: ${process.env.NODE_ENV}`);

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { translations, getDayName } from '../utils/translations';
 
-function SearchResults({ courses, onAddCourse, onAddSection, loading, language = 'tr' }) {
+function SearchResults({ courses, onAddCourse, onAddSection, loading, language = 'tr', hasSearched = false }) {
   const t = translations[language] || translations.tr;
   const [expandedCourses, setExpandedCourses] = useState(new Set());
 
@@ -22,12 +22,16 @@ function SearchResults({ courses, onAddCourse, onAddSection, loading, language =
   const collapseAll = () => {
     setExpandedCourses(new Set());
   };
-  
+
   if (loading) {
     return <div className="loading">{t.searching}</div>;
   }
 
   if (!courses || courses.length === 0) {
+    // Only show "no results" if user has actually performed a search
+    if (!hasSearched) {
+      return null; // Don't show anything if user hasn't searched yet
+    }
     return <div className="no-results">{t.noResults}</div>;
   }
 
@@ -48,7 +52,7 @@ function SearchResults({ courses, onAddCourse, onAddSection, loading, language =
       <div className="results-list">
         {courses.map((course, index) => {
           const isExpanded = expandedCourses.has(course.course_name);
-          
+
           return (
             <div key={index} className="course-card">
               <div className="course-header">
@@ -62,10 +66,10 @@ function SearchResults({ courses, onAddCourse, onAddSection, loading, language =
                 </div>
                 <span className="credits">{course.credits} {t.credits}</span>
               </div>
-              
+
               <div className="course-actions">
                 <div className="course-actions-left">
-                  <button 
+                  <button
                     className="add-course-btn"
                     onClick={() => onAddCourse(course.course_name)}
                   >
@@ -73,17 +77,17 @@ function SearchResults({ courses, onAddCourse, onAddSection, loading, language =
                   </button>
                 </div>
                 <div className="course-actions-right">
-                  <button 
+                  <button
                     className="add-course-btn"
                     onClick={() => toggleCourse(course.course_name)}
                   >
-                    {isExpanded 
+                    {isExpanded
                       ? (language === 'tr' ? 'Şubeleri Gizle' : 'Hide Sections')
                       : (language === 'tr' ? 'Şubeleri Göster' : 'Show Sections')
                     }
                   </button>
                   <span className="section-count">
-                    {course.sections.length} {language === 'tr' ? 'bölüm' : 'sections'}
+                    {course.sections.length} {language === 'tr' ? 'şube' : 'sections'}
                   </span>
                 </div>
               </div>
@@ -97,7 +101,7 @@ function SearchResults({ courses, onAddCourse, onAddSection, loading, language =
                       <div className="section-info">
                         <strong>{section.section_name}</strong>
                         <span className="lecturer">{section.lecturer}</span>
-                        
+
                         {section.times && section.times.length > 0 && (
                           <div className="times">
                             {section.times.map((time, tIdx) => (
@@ -108,8 +112,8 @@ function SearchResults({ courses, onAddCourse, onAddSection, loading, language =
                           </div>
                         )}
                       </div>
-                      
-                      <button 
+
+                      <button
                         className="add-section-btn"
                         onClick={() => onAddSection(course.course_name, section.section_name)}
                       >

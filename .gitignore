@@ -4,6 +4,9 @@
 .env.development
 .env.production
 
+# Dependencies
+node_modules/
+
 # OS
 .DS_Store
 Thumbs.db
@@ -12,3 +15,7 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Project specific
+photos/
+dist/

@@ -1,116 +1,122 @@
+import { useEffect, useRef } from 'react';
+import { logPageView } from '../services/api';
+
 function HowToUse({ language, onNavigate }) {
+  const hasLogged = useRef(false);
+
+  useEffect(() => {
+    if (!hasLogged.current) {
+      logPageView('how-to-use');
+      hasLogged.current = true;
+    }
+  }, []);
+
   const content = {
     tr: {
       title: "Nasıl Kullanılır?",
       backToHome: "Ana Sayfaya Dön",
       sections: [
         {
-          emoji: "🔍",
-          title: "Ders Arama",
-          steps: [
-            "Ders kodu veya ders adı ile arama yapabilirsiniz",
-            "Aramak istediğiniz metni girin ve Enter'a basın veya Ara butonuna tıklayın",
-            "Sonuçlar otomatik olarak görüntülenecektir"
+          number: "1",
+          title: "Ders Ara",
+          items: [
+            "Arama kutusuna ders kodunu yazın.",
+            "Örnek: BUS, BUS101, BUS 101 veya Bus 101 L",
+            "Enter'a bastığınızda ilgili dersler listelenir."
           ]
         },
         {
-          emoji: "➕",
-          title: "Ders Ekleme",
-          steps: [
-            "'Tüm Dersi Ekle' butonu ile dersin tüm bölümlerini ekleyebilirsiniz",
-            "'Bölüm Ekle' butonu ile sadece istediğiniz bölümü ekleyebilirsiniz",
-            "Eklenen dersler otomatik olarak programınıza yerleştirilecektir"
+          number: "2",
+          title: "Ders Ekle",
+          intro: "Bir dersi eklerken iki seçeneğiniz var:",
+          options: [
+            {
+              name: "Dersi Ekle",
+              desc: "Dersin tüm şubelerini sepete ekler. (Hangi şubenin uygun olduğuna sistem daha sonra karar verir.)"
+            },
+            {
+              name: "Şubeleri Göster",
+              desc: "Dersin şubelerini tek tek görürsünüz. Sadece istediğiniz şubeyi seçip ekleyebilirsiniz."
+            }
+          ],
+          note: "Yani isterseniz dersi genel olarak, isterseniz belirli bir şubesiyle ekleyebilirsiniz."
+        },
+        {
+          number: "3",
+          title: "Program Oluştur",
+          items: [
+            'Tüm derslerinizi ekledikten sonra "Program Oluştur" butonuna tıklayın.',
+            "Sistem:",
+            "• Saatleri çakışmayan",
+            "• Olası tüm program kombinasyonlarını sizin için hesaplar."
           ]
         },
         {
-          emoji: "📅",
-          title: "Program Görüntüleme",
-          steps: [
-            "Haftalık programınız saat dilimlerine göre görüntülenir",
-            "Her ders kutusu dersin adını, bölümünü ve hocasını gösterir",
-            "Çakışan dersler kırmızı renkle işaretlenir"
-          ]
-        },
-        {
-          emoji: "🗑️",
-          title: "Ders Silme",
-          steps: [
-            "Program üzerindeki 'X' butonuna tıklayarak dersi silebilirsiniz",
-            "Silinen dersler anında programdan kaldırılır"
-          ]
-        },
-        {
-          emoji: "🌙",
-          title: "Tema Değiştirme",
-          steps: [
-            "Sağ üstteki güneş/ay ikonuna tıklayarak tema değiştirebilirsiniz",
-            "Açık ve koyu tema seçenekleri mevcuttur"
-          ]
-        },
-        {
-          emoji: "🌐",
-          title: "Dil Değiştirme",
-          steps: [
-            "Sağ üstteki dil seçici ile Türkçe ve İngilizce arasında geçiş yapabilirsiniz"
+          number: "4",
+          title: "Programları İncele",
+          items: [
+            "Oluşturulan programlar arasında geçiş yapabilirsiniz.",
+            "Beğendiğiniz programı PDF veya resim olarak indirebilirsiniz."
           ]
         }
-      ]
+      ],
+      warning: {
+        title: "Önemli Not:",
+        text: "OzuPlanner sadece bir planlama aracıdır. Resmi ders kayıt işlemleri için sis.ozyegin.edu.tr kullanılmalıdır."
+      }
     },
     en: {
       title: "How to Use?",
       backToHome: "Back to Home",
       sections: [
         {
-          emoji: "🔍",
-          title: "Course Search",
-          steps: [
-            "You can search by course code or course name",
-            "Enter the text you want to search and press Enter or click the Search button",
-            "Results will be displayed automatically"
+          number: "1",
+          title: "Search Courses",
+          items: [
+            "Type the course code in the search box.",
+            "Example: BUS, BUS101, BUS 101 or BUS 101 L",
+            "Press Enter to see the relevant courses."
           ]
         },
         {
-          emoji: "➕",
-          title: "Adding Courses",
-          steps: [
-            "Use 'Add Entire Course' button to add all sections of the course",
-            "Use 'Add Section' button to add only the section you want",
-            "Added courses will be automatically placed in your schedule"
+          number: "2",
+          title: "Add Course",
+          intro: "When adding a course, you have two options:",
+          options: [
+            {
+              name: "Add Course",
+              desc: "Adds all sections of the course to your basket. (The system will decide which section is suitable later.)"
+            },
+            {
+              name: "Show Sections",
+              desc: "You see the sections one by one. You can select and add only the section you want."
+            }
+          ],
+          note: "So you can add the course either generally or with a specific section."
+        },
+        {
+          number: "3",
+          title: "Generate Schedules",
+          items: [
+            'After adding all your courses, click the "Generate Schedules" button.',
+            "The system:",
+            "• Finds all schedules without time conflicts",
+            "• Calculates all possible schedule combinations for you."
           ]
         },
         {
-          emoji: "📅",
-          title: "Viewing Schedule",
-          steps: [
-            "Your weekly schedule is displayed by time slots",
-            "Each course box shows the course name, section, and instructor",
-            "Conflicting courses are marked in red"
-          ]
-        },
-        {
-          emoji: "🗑️",
-          title: "Removing Courses",
-          steps: [
-            "Click the 'X' button on the schedule to remove a course",
-            "Removed courses are instantly deleted from the schedule"
-          ]
-        },
-        {
-          emoji: "🌙",
-          title: "Theme Switching",
-          steps: [
-            "Click the sun/moon icon in the top right to change the theme",
-            "Light and dark theme options are available"
-          ]
-        },
-        {
-          emoji: "🌐",
-          title: "Language Switching",
-          steps: [
-            "Use the language selector in the top right to switch between Turkish and English"
+          number: "4",
+          title: "Review Schedules",
+          items: [
+            "You can switch between the generated schedules.",
+            "You can download your preferred schedule as PDF or image."
           ]
         }
-      ]
+      ],
+      warning: {
+        title: "Important Note:",
+        text: "OzuPlanner is only a planning tool. sis.ozyegin.edu.tr must be used for official course registration."
+      }
     }
   };
 
@@ -122,23 +128,45 @@ function HowToUse({ language, onNavigate }) {
         <button className="back-button" onClick={() => onNavigate('home')}>
           ← {t.backToHome}
         </button>
-        
+
         <h1 className="page-title">{t.title}</h1>
-        
-        <div className="sections-grid">
+
+        <div className="guide-sections">
           {t.sections.map((section, index) => (
-            <div key={index} className="info-card">
-              <div className="card-header">
-                <span className="card-emoji">{section.emoji}</span>
-                <h2>{section.title}</h2>
-              </div>
-              <ul className="steps-list">
-                {section.steps.map((step, stepIndex) => (
-                  <li key={stepIndex}>{step}</li>
-                ))}
-              </ul>
+            <div key={index} className="guide-section">
+              <h2 className="section-title">
+                {section.number}. {section.title}
+              </h2>
+
+              {section.intro && <p className="section-intro">{section.intro}</p>}
+
+              {section.items && (
+                <ul className="section-items">
+                  {section.items.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              )}
+
+              {section.options && (
+                <div className="options-list">
+                  {section.options.map((option, idx) => (
+                    <div key={idx} className="option-item">
+                      <strong>{option.name}</strong>
+                      <p>→ {option.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {section.note && <p className="section-note">{section.note}</p>}
             </div>
           ))}
+        </div>
+
+        <div className="warning-banner">
+          <strong>{t.warning.title}</strong>
+          <p>{t.warning.text}</p>
         </div>
       </div>
     </div>

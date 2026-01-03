@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { generateSchedule } = require('../services/scheduleService');
+const { logActivity } = require('../services/loggerService');
 
 /**
  * POST /api/schedule/generate
@@ -19,18 +20,40 @@ router.post('/generate', async (req, res) => {
             });
         }
 
+        const { preferences } = req.body;
+
         console.log('🎯 Generating schedules...');
         console.log('   Courses:', addedCourses);
         console.log('   Sections:', addedSections);
+        console.log('   Preferences:', preferences || 'None');
 
         // Generate schedules
-        const result = await generateSchedule(addedCourses, addedSections);
+        const result = await generateSchedule(addedCourses, addedSections, preferences);
 
         if (!result.success) {
             return res.status(400).json(result);
         }
 
-        console.log(`✅ Successfully generated ${result.totalSchedules} schedules`);
+        if (result.totalSchedules === 0) {
+            console.log('⚠️ No schedules found - logging conflicts');
+            // Log conflicts for analytics
+            logActivity(req, 'GENERATE_CONFLICT', {
+                courseCount: addedCourses.length,
+                sectionCount: addedSections.length,
+                conflicts: result.conflicts || [],
+                preferences: preferences || {}
+            });
+        } else {
+            console.log(`✅ Successfully generated ${result.totalSchedules} schedules`);
+            // Log successful generation activity
+            logActivity(req, 'GENERATE_SCHEDULE', {
+                courseCount: addedCourses.length,
+                sectionCount: addedSections.length,
+                schedulesFound: result.totalSchedules,
+                limited: result.limited,
+                preferences: preferences || {}
+            });
+        }
 
         res.json(result);
 

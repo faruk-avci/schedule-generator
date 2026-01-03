@@ -3,37 +3,38 @@ export const translations = {
     // Header
     darkMode: 'Karanlık Mod',
     lightMode: 'Aydınlık Mod',
-    
+    academicTerm: 'Akademik Dönem:',
+
     // Search Section
     searchTitle: 'Ders Ara',
-    searchPlaceholder: 'Ders kodu girin (örn: CS, EE, MATH)',
+    searchPlaceholder: 'Ders kodu girin (örn: BUS101, MATH101)',
     searchButton: 'Ara',
     clearButton: 'Temizle',
     searching: 'Aranıyor...',
-    noResults: 'Ders bulunamadı. CS, EE veya MATH deneyin.',
-    
+    noResults: 'Ders bulunamadı. BUS veya MATH deneyin.',
+
     // Course Card
-    credits: 'kredi',
-    addEntireCourse: 'Tüm Dersi Ekle',
+    credits: 'Kredi',
+    addEntireCourse: 'Dersi Ekle',
     sections: 'Şubeler:',
     addSection: 'Ekle',
-    
+
     // Days
     monday: 'Pazartesi',
     tuesday: 'Salı',
     wednesday: 'Çarşamba',
     thursday: 'Perşembe',
     friday: 'Cuma',
-    
+
     // Basket
     myBasket: 'Sepetim',
     clearAll: 'Tümünü Temizle',
     emptyBasket: 'Henüz ders eklenmedi. Arama yapıp ders ekleyerek başlayın!',
-    entireCourses: 'Tüm Dersler:',
+    entireCourses: 'Dersler:',
     specificSections: 'Belirli Şubeler:',
     generateSchedules: 'Program Oluştur',
     totalItems: 'toplam',
-    
+
     // Messages
     courseAdded: 'eklendi',
     sectionAdded: 'bölümü eklendi',
@@ -46,8 +47,10 @@ export const translations = {
     sectionExistsRemoveFirst: 'bölümü zaten sepetinizde. Önce bölümü kaldırın.',
     cannotAddSection: 'Tüm ders eklendiği için şube eklenemez.',
     pleaseEnterCourseName: 'Lütfen bir ders adı girin',
+    minTwoCharacters: 'En az 2 karakter girmelisiniz',
+    noResults: 'Ders bulunamadı. BUS veya MATH deneyin.',
     errorSearching: 'Arama hatası. Backend çalıştığından emin olun.',
-    
+
     // Schedule Generation
     generatingSchedules: 'Programlar oluşturuluyor... Lütfen bekleyin...',
     noSchedulesYet: 'Henüz program oluşturulmadı.',
@@ -57,7 +60,7 @@ export const translations = {
     noValidSchedules: 'Geçerli program bulunamadı (tüm kombinasyonlarda çakışma var)',
     scheduleGenerationError: 'Program oluştururken hata',
     basketEmpty: 'Sepet boş. Lütfen önce ders ekleyin.',
-    
+
     // Schedule Display
     schedule: 'Program',
     totalCredits: 'Toplam Kredi',
@@ -65,42 +68,52 @@ export const translations = {
     section: 'Şube',
     lecturer: 'Öğretim Üyesi',
     weeklySchedule: 'Haftalık Program',
-    
+
     // Export
     exportPDF: 'PDF İndir',
     exportImage: 'Resim İndir',
     exportCalendar: 'Takvime Ekle',
-    
+
     // Confirmation
-    confirmClearBasket: 'Tüm sepeti temizlemek istediğinizden emin misiniz?'
+    confirmClearBasket: 'Tüm sepeti temizlemek istediğinizden emin misiniz?',
+
+    // Saved Baskets
+    yourSavedBaskets: 'Kayıtlı Sepetlerim',
+    saveThisBasket: 'Bu Sepeti Kaydet',
+    basketNamePlaceholder: 'Sepet adı...',
+    load: 'Yükle',
+    delete: 'Sil',
+    save: 'Kaydet',
+    cancel: 'İptal'
   },
-  
+
   en: {
     // Header
     darkMode: 'Dark Mode',
     lightMode: 'Light Mode',
-    
+    academicTerm: 'Academic Term:',
+
     // Search Section
     searchTitle: 'Search Courses',
-    searchPlaceholder: 'Enter course code (e.g., CS, EE, MATH)',
+    searchPlaceholder: 'Enter course code (e.g. BUS, MATH)',
     searchButton: 'Search',
     clearButton: 'Clear',
     searching: 'Searching...',
-    noResults: 'No courses found. Try CS, EE, or MATH.',
-    
+    noResults: 'No courses found. Try BUS or MATH.',
+
     // Course Card
     credits: 'credits',
     addEntireCourse: 'Add Entire Course',
     sections: 'Sections:',
     addSection: 'Add',
-    
+
     // Days
     monday: 'Monday',
     tuesday: 'Tuesday',
     wednesday: 'Wednesday',
     thursday: 'Thursday',
     friday: 'Friday',
-    
+
     // Basket
     myBasket: 'My Basket',
     clearAll: 'Clear All',
@@ -109,7 +122,7 @@ export const translations = {
     specificSections: 'Specific Sections:',
     generateSchedules: 'Generate Schedules',
     totalItems: 'items',
-    
+
     // Messages
     courseAdded: 'added',
     sectionAdded: 'section added',
@@ -122,8 +135,10 @@ export const translations = {
     sectionExistsRemoveFirst: 'section is already in your basket. Remove the section first.',
     cannotAddSection: 'Cannot add section when entire course is added.',
     pleaseEnterCourseName: 'Please enter a course name',
+    minTwoCharacters: 'Please enter at least 2 characters',
+    noResults: 'No courses found. Try BUS or MATH.',
     errorSearching: 'Search error. Make sure backend is running.',
-    
+
     // Schedule Generation
     generatingSchedules: 'Generating schedules... Please wait...',
     noSchedulesYet: 'No schedules generated yet.',
@@ -133,7 +148,7 @@ export const translations = {
     noValidSchedules: 'No valid schedules found (all combinations have time conflicts)',
     scheduleGenerationError: 'Error generating schedules',
     basketEmpty: 'Basket is empty. Please add courses first.',
-    
+
     // Schedule Display
     schedule: 'Schedule',
     totalCredits: 'Total Credits',
@@ -141,14 +156,23 @@ export const translations = {
     section: 'Section',
     lecturer: 'Lecturer',
     weeklySchedule: 'Weekly Schedule',
-    
+
     // Export
     exportPDF: 'Export PDF',
     exportImage: 'Export Image',
     exportCalendar: 'Add to Calendar',
-    
+
     // Confirmation
-    confirmClearBasket: 'Are you sure you want to clear the entire basket?'
+    confirmClearBasket: 'Are you sure you want to clear the entire basket?',
+
+    // Saved Baskets
+    yourSavedBaskets: 'My Saved Baskets',
+    saveThisBasket: 'Save This Basket',
+    basketNamePlaceholder: 'Basket name...',
+    load: 'Load',
+    delete: 'Delete',
+    save: 'Save',
+    cancel: 'Cancel'
   }
 };
 
@@ -161,6 +185,6 @@ export const getDayName = (turkishDay, language) => {
     'Perşembe': { tr: 'Perşembe', en: 'Thursday' },
     'Cuma': { tr: 'Cuma', en: 'Friday' }
   };
-  
+
   return dayMap[turkishDay]?.[language] || turkishDay;
 };

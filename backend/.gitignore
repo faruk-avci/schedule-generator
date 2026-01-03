@@ -17,6 +17,9 @@ ENV/
 .env.development
 .env.production
 
+# Dependencies
+node_modules/
+
 # Database
 *.db
 *.sqlite
