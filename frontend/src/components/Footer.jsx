@@ -1,3 +1,5 @@
+import Analytics from '../utils/analytics';
+
 function Footer({ onNavigate, language }) {
   const isTr = language === 'tr';
 
@@ -23,6 +25,7 @@ function Footer({ onNavigate, language }) {
                   target="_blank"
                   href="https://sis.ozyegin.edu.tr/OZU_GWT/WEB/CourseCatalogOfferUI?locale=en"
                   className="footer-link"
+                  onClick={() => Analytics.track('CLICK_SIS_LINK')}
                 >
                   Özyeğin Üniversitesi Ders Kataloğu
                 </a>
@@ -34,6 +37,7 @@ function Footer({ onNavigate, language }) {
                   target="_blank"
                   href="https://sis.ozyegin.edu.tr/OZU_GWT/WEB/CourseCatalogOfferUI?locale=en"
                   className="footer-link"
+                  onClick={() => Analytics.track('CLICK_SIS_LINK')}
                 >
                   Özyeğin University Course Catalog
                 </a>.
@@ -70,6 +74,7 @@ function Footer({ onNavigate, language }) {
             target="_blank"
             rel="noopener noreferrer"
             className="footer-link footer-author"
+            onClick={() => Analytics.track(Analytics.Events.CLICK_GITHUB_AUTHOR)}
           >
             @faruk.avci
           </a>

@@ -114,6 +114,11 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/schedule', scheduleRoutes);
 app.use('/api/logs', logRoutes);
 
+// Admin Debug Dashboard (Hidden)
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'admin.html'));
+});
+
 // ============================================
 // ERROR HANDLING
 // ============================================

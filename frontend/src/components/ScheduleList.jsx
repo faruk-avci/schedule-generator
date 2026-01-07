@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { exportAsImage, exportAsPDF, exportAsICS } from '../utils/exportSchedule';
 import { translations, getDayName } from '../utils/translations';
+import Analytics from '../utils/analytics';
 
 function ScheduleList({ schedules, conflicts = [], loading, language = 'tr' }) {
   const [selectedSchedule, setSelectedSchedule] = useState(0);
@@ -134,19 +134,28 @@ function ScheduleList({ schedules, conflicts = [], loading, language = 'tr' }) {
           <div className="export-buttons">
             <button
               className="export-btn export-pdf"
-              onClick={() => exportAsPDF(`schedule-${selectedSchedule}`, `OZU-${t.schedule}-${selectedSchedule + 1}`)}
+              onClick={() => {
+                Analytics.track(Analytics.Events.CLICK_EXPORT_PDF);
+                exportAsPDF(`schedule-${selectedSchedule}`, `OZU-${t.schedule}-${selectedSchedule + 1}`);
+              }}
             >
               📄 {t.exportPDF}
             </button>
             <button
               className="export-btn export-image"
-              onClick={() => exportAsImage(`schedule-${selectedSchedule}`, `OZU-${t.schedule}-${selectedSchedule + 1}`)}
+              onClick={() => {
+                Analytics.track(Analytics.Events.CLICK_EXPORT_IMAGE);
+                exportAsImage(`schedule-${selectedSchedule}`, `OZU-${t.schedule}-${selectedSchedule + 1}`);
+              }}
             >
               🖼️ {t.exportImage}
             </button>
             <button
               className="export-btn export-calendar"
-              onClick={() => exportAsICS(currentSchedule, 'Spring 2025')}
+              onClick={() => {
+                Analytics.track(Analytics.Events.CLICK_EXPORT_CALENDAR);
+                exportAsICS(currentSchedule, 'Spring 2025');
+              }}
             >
               📅 {t.exportCalendar}
             </button>

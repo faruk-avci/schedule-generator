@@ -101,4 +101,22 @@ export const logPageView = async (page) => {
     }
 };
 
+export const logEvent = async (eventName, details = {}) => {
+    try {
+        const response = await api.post('/logs/event', { eventName, details });
+        return response.data;
+    } catch (error) {
+        return { success: false };
+    }
+};
+
+export const logError = async (error, stack = '', url = window.location.href) => {
+    try {
+        const response = await api.post('/logs/error', { error, stack, url });
+        return response.data;
+    } catch (err) {
+        return { success: false };
+    }
+};
+
 export default api;

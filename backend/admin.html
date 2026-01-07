@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OzuPlanner | Admin Debug</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+            --accent: #38bdf8;
+            --border: #334155;
+            --success: #10b981;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .refresh-btn {
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .refresh-btn:active {
+            transform: scale(0.95);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 2px solid var(--border);
+            color: #94a3b8;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .json-cell {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .json-cell:hover {
+            white-space: normal;
+            background: #334155;
+            border-radius: 4px;
+            padding: 4px;
+        }
+
+        .session-id {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .badge {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-get {
+            background: #0ea5e9;
+            color: white;
+        }
+
+        .badge-post {
+            background: var(--success);
+            color: white;
+        }
+
+        .badge-event {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .badge-error {
+            background: #ef4444;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🛠️ OzuPlanner Admin Debug</h1>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Live Activity Logs</h2>
+                    <button class="refresh-btn" onclick="fetchLogs()">Refresh</button>
+                </div>
+                <div class="table-container">
+                    <table id="logs-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Session</th>
+                                <th>Action</th>
+                                <th>Details</th>
+                                <th>IP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5">Loading logs...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Active Database Sessions</h2>
+                    <button class="refresh-btn" onclick="fetchSessions()">Refresh</button>
+                </div>
+                <div class="table-container">
+                    <table id="sessions-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Data (Basket Content)</th>
+                                <th>Expires</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3">Loading sessions...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = window.location.origin;
+
+        async function fetchLogs() {
+            try {
+                const response = await fetch(`${API_BASE}/api/logs`);
+                const data = await response.json();
+                const tbody = document.querySelector('#logs-table tbody');
+                if (!data.logs || data.logs.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5">No logs found.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = data.logs.map(log => {
+                    let badgeClass = 'badge-post';
+                    if (log.action === 'SEARCH' || log.action === 'PAGE_VIEW') badgeClass = 'badge-get';
+                    if (log.action === 'EVENT') badgeClass = 'badge-event';
+                    if (log.action === 'CLIENT_ERROR') badgeClass = 'badge-error';
+
+                    return `
+                    <tr>
+                        <td>${new Date(log.created_at).toLocaleTimeString()}</td>
+                        <td class="session-id">${log.session_id ? log.session_id.substring(0, 8) + '...' : 'N/A'}</td>
+                        <td><span class="badge ${badgeClass}">${log.action}</span></td>
+                        <td class="json-cell" title='${JSON.stringify(log.details)}'>${JSON.stringify(log.details)}</td>
+                        <td>${log.ip_address}</td>
+                    </tr>
+                `}).join('');
+            } catch (e) {
+                console.error('Error fetching logs', e);
+                document.querySelector('#logs-table tbody').innerHTML = `<tr><td colspan="5" style="color:red">Error: ${e.message}</td></tr>`;
+            }
+        }
+
+        async function fetchSessions() {
+            try {
+                const response = await fetch(`${API_BASE}/api/logs/sessions`);
+                const data = await response.json();
+                const tbody = document.querySelector('#sessions-table tbody');
+                if (!data.sessions || data.sessions.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="3">No active sessions.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = data.sessions.map(s => {
+                    let sessionData;
+                    try {
+                        sessionData = typeof s.sess === 'string' ? JSON.parse(s.sess) : s.sess;
+                    } catch (err) { sessionData = { error: 'Parse Error' }; }
+
+                    return `
+                    <tr>
+                        <td class="session-id">${s.sid.substring(0, 8)}...</td>
+                        <td class="json-cell" title='${JSON.stringify(sessionData)}'>
+                            Courses: ${sessionData.addedCourses?.join(', ') || 'None'}
+                        </td>
+                        <td>${new Date(s.expire).toLocaleString()}</td>
+                    </tr>
+                `}).join('');
+            } catch (e) {
+                console.error('Error fetching sessions', e);
+                document.querySelector('#sessions-table tbody').innerHTML = `<tr><td colspan="3" style="color:red">Error: ${e.message}</td></tr>`;
+            }
+        }
+
+        fetchLogs();
+        fetchSessions();
+    </script>
+</body>
+
+</html>

@@ -13,6 +13,7 @@ import CookieBanner from './components/CookieBanner';
 import TermsOfService from './components/TermsOfService';
 import { translations } from './utils/translations'
 import { searchCourses, addCourse, removeCourse, clearBasket, getBasket, generateSchedule, getTermInfo, setMajor as apiSetMajor, saveBasket as apiSaveBasket, getSavedBaskets as apiGetSavedBaskets, loadBasket as apiLoadSavedBasket, removeSavedBasket as apiRemoveSavedBasket } from './services/api'
+import Analytics from './utils/analytics';
 
 const MAJORS = [
   {
@@ -132,10 +133,18 @@ function App() {
 
   // Load basket and term info on mount
   useEffect(() => {
+    Analytics.initGlobalErrorTracking();
+    Analytics.track('APP_START');
     refreshBasket();
     loadTermInfo();
     loadSavedBaskets();
   }, []);
+
+  // Track page navigation (simplified since we use routes)
+  useEffect(() => {
+    const page = window.location.pathname === '/' ? 'Home' : window.location.pathname.substring(1);
+    Analytics.track('PAGE_VIEW', { page });
+  }, [navigate]);
 
   const loadTermInfo = async () => {
     try {
@@ -431,6 +440,7 @@ function App() {
         setMajor(selectedMajor);
         localStorage.setItem('student_major', selectedMajor);
         setShowMajorModal(false);
+        Analytics.track('SELECT_MAJOR', { major: selectedMajor });
         // Continue with the generation if there were pending preferences
         if (pendingPreferences !== null) {
           handleGenerate(pendingPreferences, true); // Pass true to bypass the check
@@ -439,6 +449,7 @@ function App() {
       }
     } catch (error) {
       console.error('Error saving major:', error);
+      Analytics.trackError(error, 'handleSaveMajor');
       showMessage(null, 'error', language === 'tr' ? 'Bölüm kaydedilemedi' : 'Could not save major');
     }
   };

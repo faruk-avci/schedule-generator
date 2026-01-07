@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { translations } from '../utils/translations';
+import Analytics from '../utils/analytics';
 
 function Header({ language, setLanguage, theme, setTheme, onNavigate, term }) {
   const [showLangDropdown, setShowLangDropdown] = useState(false);
@@ -58,6 +58,7 @@ function Header({ language, setLanguage, theme, setTheme, onNavigate, term }) {
               rel="noopener noreferrer"
               className="header-link github-link"
               title="GitHub Repository"
+              onClick={() => Analytics.track(Analytics.Events.CLICK_GITHUB)}
             >
               GitHub
             </a>
