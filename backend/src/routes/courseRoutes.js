@@ -3,6 +3,35 @@ const router = express.Router();
 const { pool } = require('../database/db');
 const { logActivity } = require('../services/loggerService');
 
+const ALLOWED_MAJORS = [
+    'Computer Engineering',
+    'Electrical - Electronics Engineering',
+    'Industrial Engineering',
+    'Civil Engineering',
+    'Mechanical Engineering',
+    'Artificial Intelligence and Data Engineering',
+    'Economics',
+    'Entrepreneurship',
+    'Business Administration',
+    'International Finance',
+    'International Trade and Business Management',
+    'Management Information Systems',
+    'Industrial Design',
+    'Interior Architecture and Environmental Design',
+    'Communication and Design',
+    'Architecture (English)',
+    'Architecture (Turkish)',
+    'Aviation Management',
+    'Pilot Training',
+    'Psychology',
+    'International Relations',
+    'Anthropology',
+    'Gastronomy and Culinary Arts',
+    'Hotel Management',
+    'Law',
+    'Prefer not to share'
+];
+
 // ============================================
 // POST /api/courses/search
 // Search for courses by name
@@ -440,13 +469,11 @@ router.delete('/basket/clear', (req, res) => {
 });
 
 // ============================================
-// POST /api/courses/major
-// Set student's major for analytics
-// ============================================
 router.post('/major', async (req, res) => {
     try {
         const { major } = req.body;
 
+        // 1. Basic Validation
         if (!major) {
             return res.status(400).json({
                 success: false,
@@ -454,7 +481,34 @@ router.post('/major', async (req, res) => {
             });
         }
 
-        // Set major in session (this triggers a session save even if it was uninitialized)
+        // 2. Immutability Check: If major is already set, don't allow change
+        if (req.session.major) {
+            logActivity(req, 'SECURITY_ALERT', {
+                type: 'MAJOR_CHANGE_ATTEMPT',
+                original: req.session.major,
+                attempted: major,
+                message: 'Attempted to change an already set major'
+            });
+            return res.status(403).json({
+                success: false,
+                error: 'Major cannot be changed once set'
+            });
+        }
+
+        // 3. Strict Validation: Check against ALLOWED_MAJORS list
+        if (!ALLOWED_MAJORS.includes(major)) {
+            logActivity(req, 'SECURITY_ALERT', {
+                type: 'INVALID_MAJOR',
+                attempted: major,
+                message: 'Attempted to set an invalid major'
+            });
+            return res.status(400).json({
+                success: false,
+                error: 'Invalid major selected'
+            });
+        }
+
+        // Set major in session
         req.session.major = major;
 
         console.log(`🎓 Major set: ${major}`);

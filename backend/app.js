@@ -75,9 +75,12 @@ app.use(session({
     }
 }));
 
-// Simple request logger
+// Detailed request logger
 app.use((req, res, next) => {
-    console.log(`${req.method} ${req.path}`);
+    const timestamp = new Date().toISOString();
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    const ua = req.headers['user-agent'] || 'No-UA';
+    console.log(`[${timestamp}] ${ip} - ${req.method} ${req.path} - ${ua}`);
     next();
 });
 
