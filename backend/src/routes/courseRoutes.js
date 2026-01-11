@@ -61,7 +61,11 @@ router.post('/search', async (req, res) => {
 
         console.log('🔍 Searching for courses:', normalizedInput);
 
-        // Query database with normalized space handling
+        // Get current academic term from settings
+        const termResult = await pool.query("SELECT value FROM site_settings WHERE key = 'current_term'");
+        const currentTerm = termResult.rows[0]?.value || '';
+
+        // Query database with normalized space handling and term filtering
         const query = `
             SELECT 
                 c.course_name, 
@@ -70,6 +74,8 @@ router.post('/search', async (req, res) => {
                 c.lecturer,
                 c.faculty,
                 c.description,
+                c.prerequisites,
+                c.corequisites,
                 c.id as course_id,
                 ts_start.day_of_week,
                 ts_start.hour_of_day as start_time,
@@ -84,10 +90,11 @@ router.post('/search', async (req, res) => {
             LEFT JOIN time_slots ts_start ON cts.start_time_id = ts_start.time_id
             LEFT JOIN time_slots ts_end ON cts.end_time_id = ts_end.time_id
             WHERE REPLACE(c.course_name, ' ', '') ILIKE $1
+            AND (c.term = $2 OR $2 = '')
             ORDER BY c.course_name, c.section_name, ts_start.day_of_week, ts_start.hour_of_day
         `;
 
-        const result = await pool.query(query, [`%${normalizedInput}%`]);
+        const result = await pool.query(query, [`%${normalizedInput}%`, currentTerm]);
 
         // Group sections by course name and include time slots
         const courseMap = new Map();
@@ -178,10 +185,13 @@ router.post('/add', async (req, res) => {
 
         // Case 1: Adding entire course (section is null)
         if (section === null || section === undefined) {
-            // [SECURITY] Verify course exists in database
+            // [SECURITY] Verify course exists in database and belongs to current term
+            const termResult = await pool.query("SELECT value FROM site_settings WHERE key = 'current_term'");
+            const currentTerm = termResult.rows[0]?.value || '';
+
             const courseExists = await pool.query(
-                "SELECT id FROM courses WHERE course_name = $1 LIMIT 1",
-                [course]
+                "SELECT id FROM courses WHERE course_name = $1 AND (term = $2 OR $2 = '') LIMIT 1",
+                [course, currentTerm]
             );
 
             if (courseExists.rows.length === 0) {
@@ -235,10 +245,13 @@ router.post('/add', async (req, res) => {
 
         // Case 2: Adding specific section
 
-        // [SECURITY] Verify section exists and belongs to this course
+        // [SECURITY] Verify section exists and belongs to this course and term
+        const termResult = await pool.query("SELECT value FROM site_settings WHERE key = 'current_term'");
+        const currentTerm = termResult.rows[0]?.value || '';
+
         const sectionExists = await pool.query(
-            "SELECT id FROM courses WHERE course_name = $1 AND section_name = $2 LIMIT 1",
-            [course, section]
+            "SELECT id FROM courses WHERE course_name = $1 AND section_name = $2 AND (term = $3 OR $3 = '') LIMIT 1",
+            [course, section, currentTerm]
         );
 
         if (sectionExists.rows.length === 0) {

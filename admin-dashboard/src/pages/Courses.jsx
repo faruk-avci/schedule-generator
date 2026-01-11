@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import AdminAPI from '../api';
-import { Search, Plus, Edit2, Trash2, X, Check } from 'lucide-react';
+import { Search, Plus, Edit2, Trash2, X, Check, Filter } from 'lucide-react';
 
 const Courses = () => {
     const [courses, setCourses] = useState([]);
+    const [terms, setTerms] = useState([]);
+    const [selectedTerm, setSelectedTerm] = useState('');
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
-    const [editingId, setEditingId] = useState(null);
+    const [editingCourse, setEditingCourse] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
-    const fetchCourses = async () => {
+    const fetchData = async () => {
         setLoading(true);
         try {
-            const res = await AdminAPI.getCourses(search);
-            setCourses(res.data.courses || []);
+            const [coursesRes, termsRes] = await Promise.all([
+                AdminAPI.getCourses(search, selectedTerm),
+                AdminAPI.getTerms()
+            ]);
+            setCourses(coursesRes.data.courses || []);
+            setTerms(termsRes.data.terms || []);
         } catch (err) {
-            console.error('Failed to fetch courses');
+            console.error('Failed to fetch data');
         } finally {
             setLoading(false);
         }
@@ -22,18 +29,38 @@ const Courses = () => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            fetchCourses();
+            fetchData();
         }, 300);
         return () => clearTimeout(timer);
-    }, [search]);
+    }, [search, selectedTerm]);
 
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure you want to delete this course?')) return;
         try {
             await AdminAPI.deleteCourse(id);
-            fetchCourses();
+            fetchData();
         } catch (err) {
             alert('Failed to delete course');
+        }
+    };
+
+    const handleEdit = (course) => {
+        setEditingCourse({ ...course });
+        setShowModal(true);
+    };
+
+    const handleSave = async (e) => {
+        e.preventDefault();
+        try {
+            if (editingCourse.id) {
+                await AdminAPI.updateCourse(editingCourse.id, editingCourse);
+            } else {
+                await AdminAPI.addCourse(editingCourse);
+            }
+            setShowModal(false);
+            fetchData();
+        } catch (err) {
+            alert('Failed to save course');
         }
     };
 
@@ -44,20 +71,30 @@ const Courses = () => {
                     <h1>Course Management</h1>
                     <p className="subtitle">Search, edit, and manage the course database</p>
                 </div>
-                <button className="add-btn">
+                <button className="add-btn" onClick={() => { setEditingCourse({ course_name: '', section_name: '', faculty: '', term: '', lecturer: '', credits: 0, prerequisites: '', corequisites: '' }); setShowModal(true); }}>
                     <Plus size={18} />
                     <span>Add New Course</span>
                 </button>
             </header>
 
-            <div className="search-bar">
-                <Search size={20} className="search-icon" />
-                <input
-                    type="text"
-                    placeholder="Search by course name, section, or lecturer..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                />
+            <div className="filters-row">
+                <div className="search-bar">
+                    <Search size={20} className="search-icon" />
+                    <input
+                        type="text"
+                        placeholder="Search by name, section, or lecturer..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                </div>
+
+                <div className="term-filter">
+                    <Filter size={18} className="filter-icon" />
+                    <select value={selectedTerm} onChange={(e) => setSelectedTerm(e.target.value)}>
+                        <option value="">All Terms</option>
+                        {terms.map(t => <option key={t} value={t}>{t}</option>)}
+                    </select>
+                </div>
             </div>
 
             <div className="data-table-card">
@@ -65,6 +102,7 @@ const Courses = () => {
                     <table>
                         <thead>
                             <tr>
+                                <th>Term</th>
                                 <th>Course Name</th>
                                 <th>Section</th>
                                 <th>Lecturer</th>
@@ -75,16 +113,13 @@ const Courses = () => {
                         </thead>
                         <tbody>
                             {loading ? (
-                                <tr>
-                                    <td colSpan="6" className="loading-row">Searching database...</td>
-                                </tr>
+                                <tr><td colSpan="7" className="loading-row">Updating list...</td></tr>
                             ) : courses.length === 0 ? (
-                                <tr>
-                                    <td colSpan="6" className="empty-row">No courses found matching your search.</td>
-                                </tr>
+                                <tr><td colSpan="7" className="empty-row">No courses found matching your criteria.</td></tr>
                             ) : (
                                 courses.map(course => (
                                     <tr key={course.id}>
+                                        <td className="term-tag"><span>{course.term || 'N/A'}</span></td>
                                         <td className="font-semibold">{course.course_name}</td>
                                         <td className="mono">{course.section_name}</td>
                                         <td>{course.lecturer}</td>
@@ -92,7 +127,7 @@ const Courses = () => {
                                         <td>{course.credits}</td>
                                         <td className="actions-cell">
                                             <div className="action-btns">
-                                                <button className="icon-btn edit">
+                                                <button className="icon-btn edit" onClick={() => handleEdit(course)}>
                                                     <Edit2 size={16} />
                                                 </button>
                                                 <button className="icon-btn delete" onClick={() => handleDelete(course.id)}>
@@ -108,119 +143,101 @@ const Courses = () => {
                 </div>
             </div>
 
+            {showModal && (
+                <div className="modal-overlay">
+                    <div className="modal-card">
+                        <div className="modal-header">
+                            <h2>{editingCourse.id ? 'Edit Course' : 'Add New Course'}</h2>
+                            <button className="close-btn" onClick={() => setShowModal(false)}><X size={20} /></button>
+                        </div>
+                        <form onSubmit={handleSave}>
+                            <div className="modal-grid">
+                                <div className="form-group">
+                                    <label>Academic Term</label>
+                                    <input type="text" value={editingCourse.term} onChange={e => setEditingCourse({ ...editingCourse, term: e.target.value })} placeholder="e.g. 2024-2025 Spring" required />
+                                </div>
+                                <div className="form-group">
+                                    <label>Course Name</label>
+                                    <input type="text" value={editingCourse.course_name} onChange={e => setEditingCourse({ ...editingCourse, course_name: e.target.value })} required />
+                                </div>
+                                <div className="form-group">
+                                    <label>Section Name</label>
+                                    <input type="text" value={editingCourse.section_name} onChange={e => setEditingCourse({ ...editingCourse, section_name: e.target.value })} required />
+                                </div>
+                                <div className="form-group">
+                                    <label>Lecturer</label>
+                                    <input type="text" value={editingCourse.lecturer} onChange={e => setEditingCourse({ ...editingCourse, lecturer: e.target.value })} required />
+                                </div>
+                                <div className="form-group">
+                                    <label>Faculty</label>
+                                    <input type="text" value={editingCourse.faculty} onChange={e => setEditingCourse({ ...editingCourse, faculty: e.target.value })} required />
+                                </div>
+                                <div className="form-group">
+                                    <label>Credits</label>
+                                    <input type="number" step="0.5" value={editingCourse.credits} onChange={e => setEditingCourse({ ...editingCourse, credits: parseFloat(e.target.value) })} required />
+                                </div>
+                                <div className="form-group full-width">
+                                    <label>Description</label>
+                                    <textarea value={editingCourse.description} onChange={e => setEditingCourse({ ...editingCourse, description: e.target.value })} rows="3" />
+                                </div>
+                                <div className="form-group">
+                                    <label>Prerequisites</label>
+                                    <input type="text" value={editingCourse.prerequisites} onChange={e => setEditingCourse({ ...editingCourse, prerequisites: e.target.value })} placeholder="e.g. CS101" />
+                                </div>
+                                <div className="form-group">
+                                    <label>Corequisites</label>
+                                    <input type="text" value={editingCourse.corequisites} onChange={e => setEditingCourse({ ...editingCourse, corequisites: e.target.value })} placeholder="e.g. CS101L" />
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="cancel-btn" onClick={() => setShowModal(false)}>Cancel</button>
+                                <button type="submit" className="save-btn">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+
             <style>{`
-                .courses-page {
-                    max-width: 1200px;
-                    margin: 0 auto;
-                }
-                .flex-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: flex-start;
-                    margin-bottom: 2rem;
-                }
-                .subtitle {
-                    color: #888;
-                    margin-top: -1.5rem;
-                }
-                .add-btn {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    background: #3b82f6;
-                    color: white;
-                    border: none;
-                    padding: 0.75rem 1.25rem;
-                    border-radius: 0.75rem;
-                    cursor: pointer;
-                    font-weight: 600;
-                    transition: all 0.2s;
-                }
-                .add-btn:hover {
-                    background: #2563eb;
-                    transform: translateY(-1px);
-                }
-                .search-bar {
-                    position: relative;
-                    margin-bottom: 1.5rem;
-                }
-                .search-icon {
-                    position: absolute;
-                    left: 1rem;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    color: #555;
-                }
-                .search-bar input {
-                    width: 100%;
-                    padding: 1rem 1rem 1rem 3rem;
-                    background: #111114;
-                    border: 1px solid #1f1f23;
-                    border-radius: 1rem;
-                    color: white;
-                    font-size: 1rem;
-                    transition: border-color 0.2s;
-                    box-sizing: border-box;
-                }
-                .search-bar input:focus {
-                    outline: none;
-                    border-color: #3b82f6;
-                }
-                .data-table-card {
-                    background: #111114;
-                    border-radius: 1.25rem;
-                    border: 1px solid #1f1f23;
-                    overflow: hidden;
-                }
-                .table-wrapper {
-                    overflow-x: auto;
-                }
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    text-align: left;
-                    font-size: 0.875rem;
-                }
-                th {
-                    padding: 1.25rem 1.5rem;
-                    color: #555;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    font-size: 0.75rem;
-                    border-bottom: 1px solid #1f1f23;
-                }
-                td {
-                    padding: 1.125rem 1.5rem;
-                    border-bottom: 1px solid #1f1f23;
-                    color: #ccc;
-                }
+                .courses-page { max-width: 1200px; margin: 0 auto; }
+                .flex-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; }
+                .subtitle { color: #888; margin-top: -1.5rem; }
+                .add-btn { display: flex; align-items: center; gap: 0.5rem; background: #3b82f6; color: white; border: none; padding: 0.75rem 1.25rem; border-radius: 0.75rem; cursor: pointer; font-weight: 600; }
+                
+                .filters-row { display: grid; grid-template-columns: 1fr 200px; gap: 1rem; margin-bottom: 1.5rem; }
+                .search-bar { position: relative; }
+                .search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #555; }
+                .search-bar input { width: 100%; padding: 0.75rem 1rem 0.75rem 3rem; background: #111114; border: 1px solid #1f1f23; border-radius: 0.75rem; color: white; }
+                
+                .term-filter { position: relative; }
+                .filter-icon { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: #555; pointer-events: none; }
+                .term-filter select { width: 100%; padding: 0.75rem 0.75rem 0.75rem 2.5rem; background: #111114; border: 1px solid #1f1f23; border-radius: 0.75rem; color: white; appearance: none; cursor: pointer; }
+                
+                .data-table-card { background: #111114; border-radius: 1.25rem; border: 1px solid #1f1f23; overflow: hidden; }
+                table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem; }
+                th { padding: 1.25rem 1.5rem; color: #555; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; border-bottom: 1px solid #1f1f23; }
+                td { padding: 1.125rem 1.5rem; border-bottom: 1px solid #1f1f23; color: #ccc; }
+                
+                .term-tag span { background: #3b82f620; color: #3b82f6; padding: 0.25rem 0.625rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 700; }
                 .font-semibold { font-weight: 600; color: white; }
-                .mono { font-family: ui-monospace, sans-serif; color: #888; }
-                .text-muted { color: #666; font-size: 0.8125rem; }
-                .actions-header { text-align: right; }
+                .mono { font-family: monospace; color: #888; }
                 .actions-cell { text-align: right; }
-                .action-btns {
-                    display: flex;
-                    justify-content: flex-end;
-                    gap: 0.5rem;
-                }
-                .icon-btn {
-                    padding: 0.5rem;
-                    border-radius: 0.5rem;
-                    border: 1px solid #1f1f23;
-                    background: #1a1a1e;
-                    color: #888;
-                    cursor: pointer;
-                    transition: all 0.2s;
-                }
-                .icon-btn:hover { color: white; background: #25252b; }
-                .icon-btn.delete:hover { color: #ef4444; border-color: #ef444440; background: #ef444410; }
-                .loading-row, .empty-row {
-                    padding: 4rem !important;
-                    text-align: center;
-                    color: #555;
-                    font-style: italic;
-                }
+                .action-btns { display: flex; justify-content: flex-end; gap: 0.5rem; }
+                .icon-btn { padding: 0.5rem; border-radius: 0.5rem; border: 1px solid #1f1f23; background: #1a1a1e; color: #888; cursor: pointer; }
+                .icon-btn.edit:hover { background: #2563eb10; color: #3b82f6; border-color: #3b82f640; }
+                .icon-btn.delete:hover { background: #ef444410; color: #ef4444; border-color: #ef444440; }
+                
+                .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
+                .modal-card { background: #111114; border: 1px solid #1f1f23; border-radius: 1.5rem; width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; }
+                .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem; border-bottom: 1px solid #1f1f23; }
+                .modal-grid { padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+                .full-width { grid-column: span 2; }
+                .form-group label { display: block; font-size: 0.8125rem; font-weight: 600; color: #555; margin-bottom: 0.5rem; text-transform: uppercase; }
+                .form-group input, .form-group textarea { width: 100%; background: #1a1a1e; border: 1px solid #2a2a2f; border-radius: 0.75rem; padding: 0.75rem 1rem; color: white; box-sizing: border-box; }
+                .modal-footer { padding: 1.5rem 2rem; display: flex; justify-content: flex-end; gap: 1rem; border-top: 1px solid #1f1f23; }
+                .cancel-btn { background: none; border: 1px solid #1f1f23; color: #888; padding: 0.75rem 1.5rem; border-radius: 0.75rem; cursor: pointer; font-weight: 600; }
+                .save-btn { background: #3b82f6; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; cursor: pointer; font-weight: 600; }
+                .close-btn { background: none; border: none; color: #555; cursor: pointer; }
             `}</style>
         </div>
     );

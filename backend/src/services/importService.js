@@ -44,6 +44,8 @@ const importService = {
                     const credits = parseFloat(row['CREDITS']) || 0;
                     const lecturer = row['INSTRUCTORFULLNAME'] || 'TBA';
                     const description = row['DESCRIPTION'] || '';
+                    const prerequisites = row['PREREQUISITE'] || '';
+                    const corequisites = row['COREQUISITE'] || '';
                     const timeInfo = row['SCHEDULEFORPRINT'] || '';
 
                     if (!subject || !courseNo) {
@@ -67,10 +69,10 @@ const importService = {
 
                     // 2. Insert Course
                     const courseInsertRes = await client.query(
-                        `INSERT INTO courses (course_name, section_name, faculty, description, credits, lecturer, required)
-                         VALUES ($1, $2, $3, $4, $5, $6, $7)
+                        `INSERT INTO courses (course_name, section_name, faculty, description, credits, lecturer, required, term, prerequisites, corequisites)
+                         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
                          RETURNING id`,
-                        [courseName, sectionName, faculty, description, credits, lecturer, requiredHours]
+                        [courseName, sectionName, faculty, description, credits, lecturer, requiredHours, term, prerequisites, corequisites]
                     );
                     const courseId = courseInsertRes.rows[0].id;
 

@@ -106,6 +106,16 @@ router.get('/settings', authAdmin, async (req, res) => {
     }
 });
 
+// GET /api/admin/terms
+router.get('/terms', authAdmin, async (req, res) => {
+    try {
+        const result = await pool.query('SELECT DISTINCT term FROM courses WHERE term IS NOT NULL AND term != \'\' ORDER BY term DESC');
+        res.json({ success: true, terms: result.rows.map(r => r.term) });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
 // PUT /api/admin/settings/:key
 router.put('/settings/:key', authAdmin, async (req, res) => {
     try {
@@ -129,16 +139,21 @@ router.put('/settings/:key', authAdmin, async (req, res) => {
 // GET /api/admin/courses (Search/List)
 router.get('/courses', authAdmin, async (req, res) => {
     try {
-        const { search, limit = 50, offset = 0 } = req.query;
-        let query = 'SELECT * FROM courses';
+        const { search, term, limit = 50, offset = 0 } = req.query;
+        let query = 'SELECT * FROM courses WHERE 1=1';
         const params = [];
 
-        if (search) {
-            query += ' WHERE course_name ILIKE $1 OR section_name ILIKE $1 OR lecturer ILIKE $1';
-            params.push(`%${search}%`);
+        if (term) {
+            params.push(term);
+            query += ` AND term = $${params.length}`;
         }
 
-        query += ` ORDER BY course_name ASC, section_name ASC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
+        if (search) {
+            params.push(`%${search}%`);
+            query += ` AND (course_name ILIKE $${params.length} OR section_name ILIKE $${params.length} OR lecturer ILIKE $${params.length})`;
+        }
+
+        query += ` ORDER BY term DESC, course_name ASC, section_name ASC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
         params.push(limit, offset);
 
         const result = await pool.query(query, params);
@@ -151,10 +166,10 @@ router.get('/courses', authAdmin, async (req, res) => {
 // POST /api/admin/courses (Add)
 router.post('/courses', authAdmin, async (req, res) => {
     try {
-        const { course_name, section_name, lecturer, credits, faculty, description } = req.body;
+        const { course_name, section_name, lecturer, credits, faculty, description, term, prerequisites, corequisites } = req.body;
         const result = await pool.query(
-            'INSERT INTO courses (course_name, section_name, lecturer, credits, faculty, description) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-            [course_name, section_name, lecturer, credits, faculty, description]
+            'INSERT INTO courses (course_name, section_name, lecturer, credits, faculty, description, term, prerequisites, corequisites) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
+            [course_name, section_name, lecturer, credits, faculty, description, term, prerequisites, corequisites]
         );
         logActivity(req, 'ADD_COURSE_ADMIN', { id: result.rows[0].id, course_name });
         res.json({ success: true, course: result.rows[0] });
@@ -167,10 +182,10 @@ router.post('/courses', authAdmin, async (req, res) => {
 router.put('/courses/:id', authAdmin, async (req, res) => {
     try {
         const { id } = req.params;
-        const { course_name, section_name, lecturer, credits, faculty, description } = req.body;
+        const { course_name, section_name, lecturer, credits, faculty, description, term, prerequisites, corequisites } = req.body;
         const result = await pool.query(
-            'UPDATE courses SET course_name = $1, section_name = $2, lecturer = $3, credits = $4, faculty = $5, description = $6 WHERE id = $7 RETURNING *',
-            [course_name, section_name, lecturer, credits, faculty, description, id]
+            'UPDATE courses SET course_name = $1, section_name = $2, lecturer = $3, credits = $4, faculty = $5, description = $6, term = $7, prerequisites = $8, corequisites = $9 WHERE id = $10 RETURNING *',
+            [course_name, section_name, lecturer, credits, faculty, description, term, prerequisites, corequisites, id]
         );
         logActivity(req, 'UPDATE_COURSE_ADMIN', { id, course_name });
         res.json({ success: true, course: result.rows[0] });

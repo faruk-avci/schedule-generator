@@ -25,8 +25,8 @@ export const AdminAPI = {
     updateSetting: (key, value) => api.put(`/api/admin/settings/${key}`, { value }),
 
     // Courses
-    getCourses: (search = '', limit = 50, offset = 0) =>
-        api.get('/api/admin/courses', { params: { search, limit, offset } }),
+    getCourses: (search, term, limit, offset) => api.get('/api/admin/courses', { params: { search, term, limit, offset } }),
+    getTerms: () => api.get('/api/admin/terms'),
 
     // Course CRUD (Stubs for now)
     addCourse: (data) => api.post('/api/admin/courses', data),
