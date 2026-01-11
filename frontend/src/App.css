@@ -348,17 +348,35 @@ body.dark-mode .schedules-container {
   flex: 1;
 }
 
-.course-header h3 {
+.course-title-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.course-code-display {
   font-size: 20px;
   color: var(--ozu-burgundy);
-  margin-bottom: 5px;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.course-name-display {
+  font-size: 15px;
+  color: #555;
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
 .course-desc {
-  font-size: 14px;
-  color: var(--ozu-gray);
-  margin: 0;
+  font-size: 13px;
+  color: var(--ozu-gray-light);
+  margin-top: 10px;
   line-height: 1.4;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 8px;
 }
 
 .credits {

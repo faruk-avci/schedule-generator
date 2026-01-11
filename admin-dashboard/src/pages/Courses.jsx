@@ -71,7 +71,7 @@ const Courses = () => {
                     <h1>Course Management</h1>
                     <p className="subtitle">Search, edit, and manage the course database</p>
                 </div>
-                <button className="add-btn" onClick={() => { setEditingCourse({ course_name: '', section_name: '', faculty: '', term: '', lecturer: '', credits: 0, prerequisites: '', corequisites: '' }); setShowModal(true); }}>
+                <button className="add-btn" onClick={() => { setEditingCourse({ course_code: '', course_name: '', section_name: '', faculty: '', term: '', lecturer: '', credits: 0, prerequisites: '', corequisites: '' }); setShowModal(true); }}>
                     <Plus size={18} />
                     <span>Add New Course</span>
                 </button>
@@ -103,10 +103,10 @@ const Courses = () => {
                         <thead>
                             <tr>
                                 <th>Term</th>
-                                <th>Course Name</th>
+                                <th>Code</th>
+                                <th>Course Title</th>
                                 <th>Section</th>
                                 <th>Lecturer</th>
-                                <th>Faculty</th>
                                 <th>Credits</th>
                                 <th className="actions-header">Actions</th>
                             </tr>
@@ -120,10 +120,10 @@ const Courses = () => {
                                 courses.map(course => (
                                     <tr key={course.id}>
                                         <td className="term-tag"><span>{course.term || 'N/A'}</span></td>
+                                        <td className="mono font-bold" style={{ color: '#3b82f6' }}>{course.course_code}</td>
                                         <td className="font-semibold">{course.course_name}</td>
                                         <td className="mono">{course.section_name}</td>
                                         <td>{course.lecturer}</td>
-                                        <td className="text-muted">{course.faculty}</td>
                                         <td>{course.credits}</td>
                                         <td className="actions-cell">
                                             <div className="action-btns">
@@ -157,8 +157,12 @@ const Courses = () => {
                                     <input type="text" value={editingCourse.term} onChange={e => setEditingCourse({ ...editingCourse, term: e.target.value })} placeholder="e.g. 2024-2025 Spring" required />
                                 </div>
                                 <div className="form-group">
-                                    <label>Course Name</label>
-                                    <input type="text" value={editingCourse.course_name} onChange={e => setEditingCourse({ ...editingCourse, course_name: e.target.value })} required />
+                                    <label>Course Code</label>
+                                    <input type="text" value={editingCourse.course_code} onChange={e => setEditingCourse({ ...editingCourse, course_code: e.target.value })} placeholder="e.g. MATH101" required />
+                                </div>
+                                <div className="form-group full-width">
+                                    <label>Course Title</label>
+                                    <input type="text" value={editingCourse.course_name} onChange={e => setEditingCourse({ ...editingCourse, course_name: e.target.value })} placeholder="e.g. Mathematics for Social Sciences I" required />
                                 </div>
                                 <div className="form-group">
                                     <label>Section Name</label>

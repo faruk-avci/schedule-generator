@@ -28,6 +28,21 @@ const importService = {
 
             results.total = data.length;
 
+            const sanitizedTerm = term.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+            const coursesTable = `courses_${sanitizedTerm}`;
+            const slotsTable = `course_time_slots_${sanitizedTerm}`;
+
+            const setupClient = await pool.connect();
+            try {
+                // Ensure tables exist for this term
+                await setupClient.query(`
+                    CREATE TABLE IF NOT EXISTS ${coursesTable} (LIKE courses INCLUDING ALL);
+                    CREATE TABLE IF NOT EXISTS ${slotsTable} (LIKE course_time_slots INCLUDING ALL);
+                `);
+            } finally {
+                setupClient.release();
+            }
+
             for (let i = 0; i < data.length; i++) {
                 const row = data[i];
                 const client = await pool.connect();
@@ -52,7 +67,8 @@ const importService = {
                         throw new Error('Missing SUBJECT or COURSENO');
                     }
 
-                    const courseName = `${subject} ${courseNo} - ${title}`;
+                    const courseCode = `${subject}${courseNo}`;
+                    const courseName = title;
                     const sectionName = `${subject}${courseNo}${sectionNo}`;
 
                     // 1. Calculate required hours (mimicking database.py logic)
@@ -69,10 +85,10 @@ const importService = {
 
                     // 2. Insert Course
                     const courseInsertRes = await client.query(
-                        `INSERT INTO courses (course_name, section_name, faculty, description, credits, lecturer, required, term, prerequisites, corequisites)
-                         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+                        `INSERT INTO ${coursesTable} (course_code, course_name, section_name, faculty, description, credits, lecturer, required, term, prerequisites, corequisites)
+                         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
                          RETURNING id`,
-                        [courseName, sectionName, faculty, description, credits, lecturer, requiredHours, term, prerequisites, corequisites]
+                        [courseCode, courseName, sectionName, faculty, description, credits, lecturer, requiredHours, term, prerequisites, corequisites]
                     );
                     const courseId = courseInsertRes.rows[0].id;
 
@@ -99,7 +115,7 @@ const importService = {
                         const endTimeId = (endHour - 8) + dayOffset;
 
                         await client.query(
-                            `INSERT INTO course_time_slots (course_id, start_time_id, end_time_id)
+                            `INSERT INTO ${slotsTable} (course_id, start_time_id, end_time_id)
                              VALUES ($1, $2, $3)`,
                             [courseId, startTimeId, endTimeId]
                         );

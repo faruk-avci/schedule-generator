@@ -60,26 +60,88 @@ const Settings = () => {
             <div className="settings-grid">
                 <section className="settings-card">
                     <div className="card-header">
+                        <h3>Term Isolation Engine</h3>
+                    </div>
+                    <div className="card-body">
+                        <div className="setting-item isolation-item">
+                            <div className="label-area">
+                                <label>Current Academic Term</label>
+                                <p>Defining a term here isolates the data into its own database tables (e.g. courses_2025_fall).</p>
+                            </div>
+                            <div className="input-area">
+                                <div className="term-input-group">
+                                    <input
+                                        type="text"
+                                        value={settings.find(s => s.key === 'current_term')?.value || ''}
+                                        onChange={(e) => {
+                                            const newVal = e.target.value;
+                                            setSettings(prev => prev.map(s => s.key === 'current_term' ? { ...s, value: newVal } : s));
+                                        }}
+                                        placeholder="e.g. 2024-2025-Fall"
+                                    />
+                                    <button
+                                        className="apply-btn"
+                                        onClick={() => handleUpdate('current_term', settings.find(s => s.key === 'current_term')?.value)}
+                                        disabled={saving}
+                                    >
+                                        Apply Term
+                                    </button>
+                                </div>
+                                <div className="maintenance-actions">
+                                    <button
+                                        className="initialize-btn"
+                                        onClick={async () => {
+                                            const term = settings.find(s => s.key === 'current_term')?.value;
+                                            if (!term) {
+                                                setMessage({ type: 'error', text: 'Please define a current term before initializing.' });
+                                                return;
+                                            }
+                                            setSaving(true);
+                                            setMessage({ type: '', text: '' }); // Clear previous messages
+                                            try {
+                                                const res = await AdminAPI.initializeTerm(term);
+                                                setMessage({ type: 'success', text: res.data.message });
+                                            } catch (err) {
+                                                setMessage({ type: 'error', text: 'Failed to initialize term tables' });
+                                            } finally {
+                                                setSaving(false);
+                                            }
+                                        }}
+                                        disabled={saving || !settings.find(s => s.key === 'current_term')?.value}
+                                    >
+                                        Initialize Tables for this Term
+                                    </button>
+                                </div>
+                                <span className="input-hint">Initializing creates the courses_[term] and course_time_slots_[term] tables.</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="settings-card">
+                    <div className="card-header">
                         <h3>Academic Configuration</h3>
                     </div>
                     <div className="card-body">
                         <div className="setting-item">
                             <div className="label-area">
-                                <label>Current Academic Term</label>
-                                <p>This controls which term is displayed to students and used for schedule generation.</p>
+                                <label>Available Academic Terms</label>
+                                <p>These terms are available for selection by students. Add new terms as needed.</p>
                             </div>
                             <div className="input-area">
+                                {/* This input is for 'available_terms' now, not 'current_term' */}
                                 <input
                                     type="text"
-                                    defaultValue={currentTerm}
+                                    defaultValue={settings.find(s => s.key === 'available_terms')?.value || ''}
                                     onBlur={(e) => {
-                                        if (e.target.value !== currentTerm) {
-                                            handleUpdate('current_term', e.target.value);
+                                        const currentAvailableTerms = settings.find(s => s.key === 'available_terms')?.value || '';
+                                        if (e.target.value !== currentAvailableTerms) {
+                                            handleUpdate('available_terms', e.target.value);
                                         }
                                     }}
-                                    placeholder="e.g. 2024-2025 Spring"
+                                    placeholder="e.g. 2024-2025 Fall, 2024-2025 Spring"
                                 />
-                                <span className="input-hint">Changes are saved automatically on focus loss (blur).</span>
+                                <span className="input-hint">Separate terms with commas. Changes are saved automatically on focus loss (blur).</span>
                             </div>
                         </div>
                     </div>
@@ -179,6 +241,53 @@ const Settings = () => {
                 input:focus {
                     outline: none;
                     border-color: #3b82f6;
+                }
+                .term-input-group {
+                    display: flex;
+                    gap: 0.5rem;
+                }
+                .term-input-group input {
+                    flex: 1;
+                }
+                .apply-btn {
+                    padding: 0 1.25rem;
+                    background: #3b82f6;
+                    color: white;
+                    border: none;
+                    border-radius: 0.75rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: opacity 0.2s;
+                    white-space: nowrap;
+                }
+                .apply-btn:hover {
+                    opacity: 0.9;
+                }
+                .apply-btn:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+                .maintenance-actions {
+                    margin-top: 1rem;
+                }
+                .initialize-btn {
+                    width: 100%;
+                    padding: 0.75rem;
+                    background: transparent;
+                    color: #fff;
+                    border: 1px solid #3b82f6;
+                    border-radius: 0.75rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                }
+                .initialize-btn:hover:not(:disabled) {
+                    background: #3b82f6;
+                    color: white;
+                }
+                .initialize-btn:disabled {
+                    opacity: 0.3;
+                    cursor: not-allowed;
                 }
                 .input-hint {
                     display: block;

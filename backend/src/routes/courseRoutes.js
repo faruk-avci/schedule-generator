@@ -64,10 +64,36 @@ router.post('/search', async (req, res) => {
         // Get current academic term from settings
         const termResult = await pool.query("SELECT value FROM site_settings WHERE key = 'current_term'");
         const currentTerm = termResult.rows[0]?.value || '';
+        const sanitizedTerm = currentTerm.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+
+        // Use term-specific tables if currentTerm is set, otherwise fallback to main tables
+        let coursesTable = currentTerm ? `courses_${sanitizedTerm}` : 'courses';
+        let slotsTable = currentTerm ? `course_time_slots_${sanitizedTerm}` : 'course_time_slots';
+
+        // Check if term-specific table exists, fallback to global table if not
+        if (currentTerm) {
+            const tableCheck = await pool.query("SELECT to_regclass($1)", [coursesTable]);
+            if (!tableCheck.rows[0].to_regclass) {
+                coursesTable = 'courses';
+                slotsTable = 'course_time_slots';
+            }
+        }
+
+        // Check if course_code column exists (fallback logic for migration period)
+        const colCheck = await pool.query(`
+            SELECT column_name FROM information_schema.columns 
+            WHERE table_name = $1 AND column_name = 'course_code'
+        `, [coursesTable]);
+        const hasCourseCode = colCheck.rows.length > 0;
+        const codeField = hasCourseCode ? 'c.course_code' : 'c.course_name as course_code';
+        const searchCondition = hasCourseCode
+            ? "(REPLACE(c.course_name, ' ', '') ILIKE $1 OR REPLACE(c.course_code, ' ', '') ILIKE $1)"
+            : "REPLACE(c.course_name, ' ', '') ILIKE $1";
 
         // Query database with normalized space handling and term filtering
         const query = `
             SELECT 
+                ${codeField},
                 c.course_name, 
                 c.credits, 
                 c.section_name, 
@@ -85,13 +111,13 @@ router.post('/search', async (req, res) => {
                 ELSE 
                     ts_end.hour_of_day
                 END as end_time
-            FROM courses c
-            LEFT JOIN course_time_slots cts ON c.id = cts.course_id
+            FROM ${coursesTable} c
+            LEFT JOIN ${slotsTable} cts ON c.id = cts.course_id
             LEFT JOIN time_slots ts_start ON cts.start_time_id = ts_start.time_id
             LEFT JOIN time_slots ts_end ON cts.end_time_id = ts_end.time_id
-            WHERE REPLACE(c.course_name, ' ', '') ILIKE $1
+            WHERE ${searchCondition}
             AND (c.term = $2 OR $2 = '')
-            ORDER BY c.course_name, c.section_name, ts_start.day_of_week, ts_start.hour_of_day
+            ORDER BY c.course_code, c.course_name, c.section_name, ts_start.day_of_week, ts_start.hour_of_day
         `;
 
         const result = await pool.query(query, [`%${normalizedInput}%`, currentTerm]);
@@ -101,8 +127,9 @@ router.post('/search', async (req, res) => {
 
 
         result.rows.forEach(row => {
-            if (!courseMap.has(row.course_name)) {
-                courseMap.set(row.course_name, {
+            if (!courseMap.has(row.course_code)) {
+                courseMap.set(row.course_code, {
+                    course_code: row.course_code,
                     course_name: row.course_name,
                     credits: row.credits,
                     faculty: row.faculty,
@@ -111,7 +138,7 @@ router.post('/search', async (req, res) => {
                 });
             }
 
-            const course = courseMap.get(row.course_name);
+            const course = courseMap.get(row.course_code);
 
             // Initialize section if it doesn't exist
             if (!course.sections.has(row.section_name)) {
@@ -134,6 +161,7 @@ router.post('/search', async (req, res) => {
 
         // Convert nested Maps to arrays
         const courses = Array.from(courseMap.values()).map(course => ({
+            course_code: course.course_code,
             course_name: course.course_name,
             credits: course.credits,
             faculty: course.faculty,
@@ -173,24 +201,35 @@ router.post('/search', async (req, res) => {
 // ============================================
 router.post('/add', async (req, res) => {
     try {
-        const { course, section } = req.body;
+        const { course, section } = req.body; // 'course' here refers to course_code
 
         // Validation
         if (!course) {
             return res.status(400).json({
                 success: false,
-                error: 'Course name is required'
+                error: 'Course code is required'
             });
         }
 
-        // Case 1: Adding entire course (section is null)
+        // Get current academic term from settings
+        const termResult = await pool.query("SELECT value FROM site_settings WHERE key = 'current_term'");
+        const currentTerm = termResult.rows[0]?.value || '';
+        const sanitizedTerm = currentTerm.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+        let coursesTable = currentTerm ? `courses_${sanitizedTerm}` : 'courses';
+
+        // Check if term-specific table exists, fallback to global table if not
+        if (currentTerm) {
+            const tableCheck = await pool.query("SELECT to_regclass($1)", [coursesTable]);
+            if (!tableCheck.rows[0].to_regclass) {
+                coursesTable = 'courses';
+            }
+        }
+
+        // Case 1: Adding entire course (section is null or undefined)
         if (section === null || section === undefined) {
             // [SECURITY] Verify course exists in database and belongs to current term
-            const termResult = await pool.query("SELECT value FROM site_settings WHERE key = 'current_term'");
-            const currentTerm = termResult.rows[0]?.value || '';
-
             const courseExists = await pool.query(
-                "SELECT id FROM courses WHERE course_name = $1 AND (term = $2 OR $2 = '') LIMIT 1",
+                `SELECT id FROM ${coursesTable} WHERE course_code = $1 AND (term = $2 OR $2 = '') LIMIT 1`,
                 [course, currentTerm]
             );
 
@@ -246,11 +285,8 @@ router.post('/add', async (req, res) => {
         // Case 2: Adding specific section
 
         // [SECURITY] Verify section exists and belongs to this course and term
-        const termResult = await pool.query("SELECT value FROM site_settings WHERE key = 'current_term'");
-        const currentTerm = termResult.rows[0]?.value || '';
-
         const sectionExists = await pool.query(
-            "SELECT id FROM courses WHERE course_name = $1 AND section_name = $2 AND (term = $3 OR $3 = '') LIMIT 1",
+            `SELECT id FROM ${coursesTable} WHERE course_code = $1 AND section_name = $2 AND (term = $3 OR $3 = '') LIMIT 1`,
             [course, section, currentTerm]
         );
 
@@ -267,17 +303,17 @@ router.post('/add', async (req, res) => {
             });
         }
 
-        // [SECURITY] Heuristic check: section name usually starts with or contains course name
-        if (!section.includes(course)) {
+        // Check if section name matches the course code pattern (e.g. MATH101A contains MATH101)
+        if (!section.toUpperCase().replace(/\s+/g, '').includes(course.toUpperCase().replace(/\s+/g, ''))) {
             logActivity(req, 'SECURITY_ALERT', {
                 type: 'HEURISTIC_MISMATCH',
                 course,
                 section,
-                message: 'Section name does not contain course name'
+                message: 'Section name does not match course code'
             });
             return res.status(400).json({
                 success: false,
-                error: `Security Alert: Section "${section}" does not seem to belong to course "${course}".`
+                error: `Security Alert: Section "${section}" does not seem to belong to course code "${course}".`
             });
         }
 

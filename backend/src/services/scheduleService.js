@@ -18,10 +18,33 @@ function timeToIndex(timeString) {
 /**
  * Fetch all course data with time slots from database
  */
-async function fetchCoursesData(courseNames) {
+async function fetchCoursesData(courseCodes, currentTerm) {
+    const sanitizedTerm = currentTerm.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+    let coursesTable = currentTerm ? `courses_${sanitizedTerm}` : 'courses';
+    let slotsTable = currentTerm ? `course_time_slots_${sanitizedTerm}` : 'course_time_slots';
+
+    // Check if term-specific table exists, fallback to global table if not
+    if (currentTerm) {
+        const tableCheck = await pool.query("SELECT to_regclass($1)", [coursesTable]);
+        if (!tableCheck.rows[0].to_regclass) {
+            coursesTable = 'courses';
+            slotsTable = 'course_time_slots';
+        }
+    }
+
+    // Check if course_code column exists
+    const colCheck = await pool.query(`
+        SELECT column_name FROM information_schema.columns 
+        WHERE table_name = $1 AND column_name = 'course_code'
+    `, [coursesTable]);
+    const hasCourseCode = colCheck.rows.length > 0;
+    const codeField = hasCourseCode ? 'c.course_code' : 'c.course_name as course_code';
+    const filterField = hasCourseCode ? 'c.course_code' : 'c.course_name';
+
     const query = `
         SELECT 
             c.id,
+            ${codeField},
             c.course_name,
             c.section_name,
             c.lecturer,
@@ -36,15 +59,15 @@ async function fetchCoursesData(courseNames) {
             ELSE 
                 ts_end.hour_of_day
                 END as end_time
-            FROM courses c
-        LEFT JOIN course_time_slots cts ON c.id = cts.course_id
+            FROM ${coursesTable} c
+        LEFT JOIN ${slotsTable} cts ON c.id = cts.course_id
         LEFT JOIN time_slots ts_start ON cts.start_time_id = ts_start.time_id
         LEFT JOIN time_slots ts_end ON cts.end_time_id = ts_end.time_id
-        WHERE c.course_name = ANY($1)
-        ORDER BY c.course_name, c.section_name, ts_start.day_of_week
+        WHERE ${filterField} = ANY($1)
+        ORDER BY ${filterField}, c.section_name, ts_start.day_of_week
     `;
 
-    const result = await pool.query(query, [courseNames]);
+    const result = await pool.query(query, [courseCodes]);
     return result.rows;
 }
 
@@ -56,16 +79,18 @@ function organizeCourseData(rows, addedCourses, addedSections) {
     const rawCourses = {};
 
     rows.forEach(row => {
+        const courseCode = row.course_code;
         const courseName = row.course_name;
         const sectionName = row.section_name;
 
-        if (!rawCourses[courseName]) {
-            rawCourses[courseName] = {};
+        if (!rawCourses[courseCode]) {
+            rawCourses[courseCode] = {};
         }
 
-        if (!rawCourses[courseName][sectionName]) {
-            rawCourses[courseName][sectionName] = {
+        if (!rawCourses[courseCode][sectionName]) {
+            rawCourses[courseCode][sectionName] = {
                 id: row.id,
+                course_code: courseCode,
                 course_name: courseName,
                 section_name: sectionName,
                 lecturer: row.lecturer,
@@ -99,19 +124,19 @@ function organizeCourseData(rows, addedCourses, addedSections) {
     });
 
     const filteredCourses = {};
-    for (const [courseName, sections] of Object.entries(rawCourses)) {
-        if (addedCourses.includes(courseName)) {
-            filteredCourses[courseName] = sections;
+    for (const [courseCode, sections] of Object.entries(rawCourses)) {
+        if (addedCourses.includes(courseCode)) {
+            filteredCourses[courseCode] = sections;
         } else {
             const selectedSections = addedSections
-                .filter(s => s.course === courseName)
+                .filter(s => s.course === courseCode)
                 .map(s => s.section);
 
             if (selectedSections.length > 0) {
-                filteredCourses[courseName] = {};
+                filteredCourses[courseCode] = {};
                 selectedSections.forEach(sectionName => {
                     if (sections[sectionName]) {
-                        filteredCourses[courseName][sectionName] = sections[sectionName];
+                        filteredCourses[courseCode][sectionName] = sections[sectionName];
                     }
                 });
             }
@@ -296,6 +321,7 @@ function transformSchedules(scheduleLists) {
 
         const lessons = sections.map(section => ({
             id: section.id,
+            course_code: section.course_code,
             course_name: section.course_name,
             section_name: section.section_name,
             lecturer: section.lecturer,
@@ -330,17 +356,21 @@ async function generateSchedule(addedCourses, addedSections, preferences = {}) {
             };
         }
 
-        // Get all unique course names
-        const allCourseNames = [
+        // Get currently active academic term
+        const termResult = await pool.query("SELECT value FROM site_settings WHERE key = 'current_term'");
+        const currentTerm = termResult.rows[0]?.value || '';
+
+        // Get all unique course codes
+        const allCourseCodes = [
             ...(addedCourses || []),
             ...(addedSections || []).map(s => s.course)
         ];
-        const uniqueCourseNames = [...new Set(allCourseNames)];
+        const uniqueCourseCodes = [...new Set(allCourseCodes)];
 
-        console.log('📚 Generating schedules for:', uniqueCourseNames);
+        console.log('📚 Generating schedules for codes:', uniqueCourseCodes);
 
         // Fetch course data from database
-        const rows = await fetchCoursesData(uniqueCourseNames);
+        const rows = await fetchCoursesData(uniqueCourseCodes, currentTerm);
 
         if (rows.length === 0) {
             return {

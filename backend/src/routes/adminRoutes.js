@@ -109,8 +109,27 @@ router.get('/settings', authAdmin, async (req, res) => {
 // GET /api/admin/terms
 router.get('/terms', authAdmin, async (req, res) => {
     try {
-        const result = await pool.query('SELECT DISTINCT term FROM courses WHERE term IS NOT NULL AND term != \'\' ORDER BY term DESC');
-        res.json({ success: true, terms: result.rows.map(r => r.term) });
+        // 1. Get terms from the main courses table
+        const mainTermRes = await pool.query('SELECT DISTINCT term FROM courses WHERE term IS NOT NULL AND term != \'\'');
+        const terms = mainTermRes.rows.map(r => r.term);
+
+        // 2. Scan for term-specific tables (courses_2025_fall etc)
+        const tableRes = await pool.query(`
+            SELECT table_name 
+            FROM information_schema.tables 
+            WHERE table_schema = 'public' 
+            AND table_name LIKE 'courses_%'
+        `);
+
+        // Convert courses_2025_fall back to 2025_fall (approximate representation)
+        tableRes.rows.forEach(row => {
+            const termFromTable = row.table_name.replace('courses_', '');
+            if (!terms.includes(termFromTable)) {
+                terms.push(termFromTable);
+            }
+        });
+
+        res.json({ success: true, terms: terms.sort().reverse() });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
@@ -140,20 +159,34 @@ router.put('/settings/:key', authAdmin, async (req, res) => {
 router.get('/courses', authAdmin, async (req, res) => {
     try {
         const { search, term, limit = 50, offset = 0 } = req.query;
-        let query = 'SELECT * FROM courses WHERE 1=1';
+        const sanitizedTerm = term ? term.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : null;
+        const coursesTable = sanitizedTerm ? `courses_${sanitizedTerm}` : 'courses';
+
+        // Check if table exists
+        const tableCheck = await pool.query("SELECT to_regclass($1)", [coursesTable]);
+        if (!tableCheck.rows[0].to_regclass) {
+            return res.json({ success: true, courses: [], message: 'Term table does not exist yet.' });
+        }
+
+        let query = `
+            SELECT * FROM ${coursesTable}
+            WHERE 1=1
+        `;
         const params = [];
 
-        if (term) {
+        // If the table is term-specific, we don't need to filter by term in the WHERE clause
+        // If it's the default 'courses' table, we might still want to filter by term if provided
+        if (!sanitizedTerm && term) { // Only apply term filter if using the generic 'courses' table
             params.push(term);
             query += ` AND term = $${params.length}`;
         }
 
         if (search) {
             params.push(`%${search}%`);
-            query += ` AND (course_name ILIKE $${params.length} OR section_name ILIKE $${params.length} OR lecturer ILIKE $${params.length})`;
+            query += ` AND (course_name ILIKE $${params.length} OR course_code ILIKE $${params.length} OR section_name ILIKE $${params.length} OR lecturer ILIKE $${params.length})`;
         }
 
-        query += ` ORDER BY term DESC, course_name ASC, section_name ASC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
+        query += ` ORDER BY term DESC, course_code ASC, section_name ASC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
         params.push(limit, offset);
 
         const result = await pool.query(query, params);
@@ -166,10 +199,14 @@ router.get('/courses', authAdmin, async (req, res) => {
 // POST /api/admin/courses (Add)
 router.post('/courses', authAdmin, async (req, res) => {
     try {
-        const { course_name, section_name, lecturer, credits, faculty, description, term, prerequisites, corequisites } = req.body;
+        const { course_code, course_name, section_name, lecturer, credits, faculty, description, term, prerequisites, corequisites } = req.body;
+        const sanitizedTerm = term ? term.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : null;
+        const coursesTable = sanitizedTerm ? `courses_${sanitizedTerm}` : 'courses';
+
         const result = await pool.query(
-            'INSERT INTO courses (course_name, section_name, lecturer, credits, faculty, description, term, prerequisites, corequisites) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
-            [course_name, section_name, lecturer, credits, faculty, description, term, prerequisites, corequisites]
+            `INSERT INTO ${coursesTable} (course_code, course_name, section_name, faculty, description, credits, lecturer, term, prerequisites, corequisites)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
+            [course_code, course_name, section_name, faculty, description, credits, lecturer, term, prerequisites, corequisites]
         );
         logActivity(req, 'ADD_COURSE_ADMIN', { id: result.rows[0].id, course_name });
         res.json({ success: true, course: result.rows[0] });
@@ -182,10 +219,13 @@ router.post('/courses', authAdmin, async (req, res) => {
 router.put('/courses/:id', authAdmin, async (req, res) => {
     try {
         const { id } = req.params;
-        const { course_name, section_name, lecturer, credits, faculty, description, term, prerequisites, corequisites } = req.body;
+        const { course_code, course_name, section_name, lecturer, credits, faculty, description, term, prerequisites, corequisites } = req.body;
+        const sanitizedTerm = term ? term.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : null;
+        const coursesTable = sanitizedTerm ? `courses_${sanitizedTerm}` : 'courses';
+
         const result = await pool.query(
-            'UPDATE courses SET course_name = $1, section_name = $2, lecturer = $3, credits = $4, faculty = $5, description = $6, term = $7, prerequisites = $8, corequisites = $9 WHERE id = $10 RETURNING *',
-            [course_name, section_name, lecturer, credits, faculty, description, term, prerequisites, corequisites, id]
+            `UPDATE ${coursesTable} SET course_code = $1, course_name = $2, section_name = $3, faculty = $4, description = $5, credits = $6, lecturer = $7, term = $8, prerequisites = $9, corequisites = $10 WHERE id = $11 RETURNING *`,
+            [course_code, course_name, section_name, faculty, description, credits, lecturer, term, prerequisites, corequisites, id]
         );
         logActivity(req, 'UPDATE_COURSE_ADMIN', { id, course_name });
         res.json({ success: true, course: result.rows[0] });
@@ -198,7 +238,11 @@ router.put('/courses/:id', authAdmin, async (req, res) => {
 router.delete('/courses/:id', authAdmin, async (req, res) => {
     try {
         const { id } = req.params;
-        await pool.query('DELETE FROM courses WHERE id = $1', [id]);
+        const { term } = req.query; // Admin panel should pass term for correct table deletion
+        const sanitizedTerm = term ? term.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : null;
+        const coursesTable = sanitizedTerm ? `courses_${sanitizedTerm}` : 'courses';
+
+        await pool.query(`DELETE FROM ${coursesTable} WHERE id = $1`, [id]);
         logActivity(req, 'DELETE_COURSE_ADMIN', { id });
         res.json({ success: true, message: 'Course deleted successfully' });
     } catch (error) {
@@ -218,9 +262,13 @@ router.post('/import', authAdmin, upload.array('files'), async (req, res) => {
             return res.status(400).json({ success: false, error: 'No files uploaded' });
         }
 
+        const sanitizedTerm = term ? term.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : null;
+        const coursesTable = sanitizedTerm ? `courses_${sanitizedTerm}` : 'courses';
+        const slotsTable = sanitizedTerm ? `course_time_slots_${sanitizedTerm}` : 'course_time_slots';
+
         if (clearExisting === 'true') {
             // Option to clear old courses before new import
-            await pool.query('TRUNCATE TABLE course_time_slots, courses RESTART IDENTITY CASCADE');
+            await pool.query(`TRUNCATE TABLE ${slotsTable}, ${coursesTable} RESTART IDENTITY CASCADE`);
             logActivity(req, 'CLEAR_DATABASE_ADMIN', { term });
         }
 
@@ -246,6 +294,36 @@ router.post('/import', authAdmin, upload.array('files'), async (req, res) => {
 
     } catch (error) {
         console.error('Import Route Error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// --- MAINTENANCE ---
+
+router.post('/maintenance/initialize-term', authAdmin, async (req, res) => {
+    try {
+        const { term } = req.body;
+        if (!term) return res.status(400).json({ success: false, error: 'Term name is required' });
+
+        const sanitizedTerm = term.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+        const coursesTable = `courses_${sanitizedTerm}`;
+        const slotsTable = `course_time_slots_${sanitizedTerm}`;
+
+        // Create tables by cloning the structure of the main tables
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS ${coursesTable} (LIKE courses INCLUDING ALL);
+            CREATE TABLE IF NOT EXISTS ${slotsTable} (LIKE course_time_slots INCLUDING ALL);
+        `);
+
+        logActivity(req, 'INITIALIZE_TERM_TABLES', { term, coursesTable, slotsTable });
+
+        res.json({
+            success: true,
+            message: `Tables ${coursesTable} and ${slotsTable} created or already exist.`,
+            tables: [coursesTable, slotsTable]
+        });
+    } catch (error) {
+        console.error('Initialization error:', error);
         res.status(500).json({ success: false, error: error.message });
     }
 });

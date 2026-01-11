@@ -5,18 +5,18 @@ function SearchResults({ courses, onAddCourse, onAddSection, loading, language =
   const t = translations[language] || translations.tr;
   const [expandedCourses, setExpandedCourses] = useState(new Set());
 
-  const toggleCourse = (courseName) => {
+  const toggleCourse = (courseCode) => {
     const newExpanded = new Set(expandedCourses);
-    if (newExpanded.has(courseName)) {
-      newExpanded.delete(courseName);
+    if (newExpanded.has(courseCode)) {
+      newExpanded.delete(courseCode);
     } else {
-      newExpanded.add(courseName);
+      newExpanded.add(courseCode);
     }
     setExpandedCourses(newExpanded);
   };
 
   const expandAll = () => {
-    setExpandedCourses(new Set(courses.map(c => c.course_name)));
+    setExpandedCourses(new Set(courses.map(c => c.course_code)));
   };
 
   const collapseAll = () => {
@@ -51,14 +51,15 @@ function SearchResults({ courses, onAddCourse, onAddSection, loading, language =
 
       <div className="results-list">
         {courses.map((course, index) => {
-          const isExpanded = expandedCourses.has(course.course_name);
+          const isExpanded = expandedCourses.has(course.course_code);
 
           return (
             <div key={index} className="course-card">
               <div className="course-header">
                 <div className="course-title-section">
                   <div className="course-title-row">
-                    <h3>{course.course_name}</h3>
+                    <h3 className="course-code-display">{course.course_code}</h3>
+                    <h4 className="course-name-display">{course.course_name}</h4>
                   </div>
                   {course.description && (
                     <p className="course-desc">{course.description}</p>
@@ -71,7 +72,7 @@ function SearchResults({ courses, onAddCourse, onAddSection, loading, language =
                 <div className="course-actions-left">
                   <button
                     className="add-course-btn"
-                    onClick={() => onAddCourse(course.course_name)}
+                    onClick={() => onAddCourse(course.course_code)}
                   >
                     + {t.addEntireCourse}
                   </button>
@@ -79,9 +80,9 @@ function SearchResults({ courses, onAddCourse, onAddSection, loading, language =
                 <div className="course-actions-right">
                   <button
                     className="add-course-btn"
-                    onClick={() => toggleCourse(course.course_name)}
+                    onClick={() => toggleCourse(course.course_code)}
                   >
-                    {isExpanded
+                    {expandedCourses.has(course.course_code)
                       ? (language === 'tr' ? 'Şubeleri Gizle' : 'Hide Sections')
                       : (language === 'tr' ? 'Şubeleri Göster' : 'Show Sections')
                     }
@@ -115,7 +116,7 @@ function SearchResults({ courses, onAddCourse, onAddSection, loading, language =
 
                       <button
                         className="add-section-btn"
-                        onClick={() => onAddSection(course.course_name, section.section_name)}
+                        onClick={() => onAddSection(course.course_code, section.section_name)}
                       >
                         + {t.addSection}
                       </button>
