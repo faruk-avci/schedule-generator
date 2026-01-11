@@ -9,6 +9,7 @@ const PgSession = require('connect-pg-simple')(session);
 const logRoutes = require('./src/routes/logRoutes');
 const courseRoutes = require('./src/routes/courseRoutes');
 const scheduleRoutes = require('./src/routes/scheduleRoutes');
+const adminRoutes = require('./src/routes/adminRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -114,8 +115,9 @@ app.get('/', (req, res) => {
 app.use('/api/courses', courseRoutes);
 
 // Schedule routes (generate)
-app.use('/api/schedule', scheduleRoutes);
+app.use('/api/schedules', scheduleRoutes);
 app.use('/api/logs', logRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Admin Debug Dashboard (Hidden)
 app.get('/admin', (req, res) => {
