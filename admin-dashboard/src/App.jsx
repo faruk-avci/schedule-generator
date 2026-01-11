@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import Login from './pages/Login';
 import AdminAPI from './api';
-import { LayoutDashboard, BookOpen, Settings as SettingsIcon, LogOut, Users } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Settings as SettingsIcon, LogOut, Users, FileUp } from 'lucide-react';
 
 import Dashboard from './pages/Dashboard';
 import Courses from './pages/Courses';
 import Settings from './pages/Settings';
+import DataImport from './pages/DataImport';
 
 const Layout = ({ children, onLogout }) => {
   const location = useLocation();
@@ -14,6 +15,7 @@ const Layout = ({ children, onLogout }) => {
   const menuItems = [
     { path: '/', name: 'Dashboard', icon: <LayoutDashboard size={20} /> },
     { path: '/courses', name: 'Courses', icon: <BookOpen size={20} /> },
+    { path: '/import', name: 'Data Import', icon: <FileUp size={20} /> },
     { path: '/settings', name: 'Settings', icon: <SettingsIcon size={20} /> },
   ];
 
@@ -30,7 +32,7 @@ const Layout = ({ children, onLogout }) => {
             <Link
               key={item.path}
               to={item.path}
-              className={`nav-item \${location.pathname === item.path ? 'active' : ''}`}
+              className={`nav-item ${location.pathname === item.path ? 'active' : ''}`}
             >
               {item.icon}
               <span>{item.name}</span>
@@ -184,6 +186,7 @@ const App = () => {
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/courses" element={<Courses />} />
+                  <Route path="/import" element={<DataImport />} />
                   <Route path="/settings" element={<Settings />} />
                 </Routes>
               </Layout>

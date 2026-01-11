@@ -2,6 +2,37 @@ const express = require('express');
 const router = express.Router();
 const { pool } = require('../database/db');
 const { logActivity } = require('../services/loggerService');
+const importService = require('../services/importService');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const uploadDir = path.join(__dirname, '../../uploads');
+        if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, { recursive: true });
+        }
+        cb(null, uploadDir);
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        const ext = path.extname(file.originalname).toLowerCase();
+        if (ext === '.xls' || ext === '.xlsx') {
+            cb(null, true);
+        } else {
+            cb(new Error('Only Excel files are allowed (.xls, .xlsx)'), false);
+        }
+    }
+});
 
 // Middleware to check if user is authenticated as Admin
 const authAdmin = (req, res, next) => {
@@ -160,6 +191,48 @@ router.delete('/courses/:id', authAdmin, async (req, res) => {
     }
 });
 
-// ... More CRUD (Add/Update/Delete) can be added here as we build the UI
+// --- BATCH IMPORT ---
+
+// POST /api/admin/import
+router.post('/import', authAdmin, upload.array('files'), async (req, res) => {
+    try {
+        const { term, clearExisting } = req.body;
+        const files = req.files;
+
+        if (!files || files.length === 0) {
+            return res.status(400).json({ success: false, error: 'No files uploaded' });
+        }
+
+        if (clearExisting === 'true') {
+            // Option to clear old courses before new import
+            await pool.query('TRUNCATE TABLE course_time_slots, courses RESTART IDENTITY CASCADE');
+            logActivity(req, 'CLEAR_DATABASE_ADMIN', { term });
+        }
+
+        const summaries = [];
+
+        for (const file of files) {
+            const result = await importService.importFromExcel(file.path, term);
+            summaries.push({
+                fileName: file.originalname,
+                ...result
+            });
+
+            // Clean up file after processing
+            fs.unlinkSync(file.path);
+        }
+
+        logActivity(req, 'BATCH_IMPORT_ADMIN', { term, fileCount: files.length });
+
+        res.json({
+            success: true,
+            summaries: summaries
+        });
+
+    } catch (error) {
+        console.error('Import Route Error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
 
 module.exports = router;

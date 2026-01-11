@@ -31,7 +31,14 @@ export const AdminAPI = {
     // Course CRUD (Stubs for now)
     addCourse: (data) => api.post('/api/admin/courses', data),
     updateCourse: (id, data) => api.put(`/api/admin/courses/${id}`, data),
-    deleteCourse: (id) => api.delete(`/api/admin/courses/${id}`)
+    deleteCourse: (id) => api.delete(`/api/admin/courses/${id}`),
+
+    // Batch Import
+    batchImport: (formData) => api.post('/api/admin/import', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
 };
 
 export default AdminAPI;
