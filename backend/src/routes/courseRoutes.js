@@ -239,12 +239,19 @@ router.post('/add', async (req, res) => {
                 coursesTable = 'courses';
             }
         }
+        // Check if course_code column exists
+        const colCheck = await pool.query(`
+            SELECT column_name FROM information_schema.columns 
+            WHERE table_name = $1 AND column_name = 'course_code'
+        `, [coursesTable]);
+        const hasCourseCode = colCheck.rows.length > 0;
+        const codeCol = hasCourseCode ? 'course_code' : 'course_name';
 
         // Case 1: Adding entire course (section is null or undefined)
         if (section === null || section === undefined) {
             // [SECURITY] Verify course exists in database and belongs to current term
             const courseExists = await pool.query(
-                `SELECT id FROM ${coursesTable} WHERE course_code = $1 AND (term = $2 OR $2 = '') LIMIT 1`,
+                `SELECT id FROM ${coursesTable} WHERE ${codeCol} = $1 AND (term = $2 OR $2 = '') LIMIT 1`,
                 [course, currentTerm]
             );
 
@@ -301,7 +308,7 @@ router.post('/add', async (req, res) => {
 
         // [SECURITY] Verify section exists and belongs to this course and term
         const sectionExists = await pool.query(
-            `SELECT id FROM ${coursesTable} WHERE course_code = $1 AND section_name = $2 AND (term = $3 OR $3 = '') LIMIT 1`,
+            `SELECT id FROM ${coursesTable} WHERE ${codeCol} = $1 AND section_name = $2 AND (term = $3 OR $3 = '') LIMIT 1`,
             [course, section, currentTerm]
         );
 
@@ -318,8 +325,11 @@ router.post('/add', async (req, res) => {
             });
         }
 
-        // Check if section name matches the course code pattern (e.g. MATH101A contains MATH101)
-        if (!section.toUpperCase().replace(/\s+/g, '').includes(course.toUpperCase().replace(/\s+/g, ''))) {
+        // HEURISTIC: Verify section name contains the course code/name (e.g. COMP101A contains COMP101)
+        const normalizedCourse = course.replace(/\s+/g, '').toUpperCase();
+        const normalizedSection = section.replace(/\s+/g, '').toUpperCase();
+
+        if (!normalizedSection.includes(normalizedCourse)) {
             logActivity(req, 'SECURITY_ALERT', {
                 type: 'HEURISTIC_MISMATCH',
                 course,
