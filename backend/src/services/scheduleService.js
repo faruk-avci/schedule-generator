@@ -32,12 +32,15 @@ async function fetchCoursesData(courseCodes, currentTerm) {
         }
     }
 
-    // Check if course_code column exists
+    // Check for available columns
     const colCheck = await pool.query(`
         SELECT column_name FROM information_schema.columns 
-        WHERE table_name = $1 AND column_name = 'course_code'
+        WHERE table_name = $1
     `, [coursesTable]);
-    const hasCourseCode = colCheck.rows.length > 0;
+    const cols = colCheck.rows.map(r => r.column_name);
+
+    const hasCourseCode = cols.includes('course_code');
+    const hasTerm = cols.includes('term');
     const codeField = hasCourseCode ? 'c.course_code' : 'c.course_name as course_code';
     const filterField = hasCourseCode ? 'c.course_code' : 'c.course_name';
 

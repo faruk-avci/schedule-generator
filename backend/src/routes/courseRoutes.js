@@ -79,16 +79,26 @@ router.post('/search', async (req, res) => {
             }
         }
 
-        // Check if course_code column exists (fallback logic for migration period)
+        // Check for available columns to prevent 500s during migrations
         const colCheck = await pool.query(`
             SELECT column_name FROM information_schema.columns 
-            WHERE table_name = $1 AND column_name = 'course_code'
+            WHERE table_name = $1
         `, [coursesTable]);
-        const hasCourseCode = colCheck.rows.length > 0;
+        const cols = colCheck.rows.map(r => r.column_name);
+
+        const hasCourseCode = cols.includes('course_code');
+        const hasTerm = cols.includes('term');
+        const hasPrereq = cols.includes('prerequisites');
+        const hasCoreq = cols.includes('corequisites');
+
         const codeField = hasCourseCode ? 'c.course_code' : 'c.course_name as course_code';
+        const prereqField = hasPrereq ? 'c.prerequisites' : "'' as prerequisites";
+        const coreqField = hasCoreq ? 'c.corequisites' : "'' as corequisites";
+
         const searchCondition = hasCourseCode
             ? "(REPLACE(c.course_name, ' ', '') ILIKE $1 OR REPLACE(c.course_code, ' ', '') ILIKE $1)"
             : "REPLACE(c.course_name, ' ', '') ILIKE $1";
+        const termCondition = hasTerm ? "AND (c.term = $2 OR $2 = '')" : "";
 
         // Query database with normalized space handling and term filtering
         const query = `
@@ -100,8 +110,8 @@ router.post('/search', async (req, res) => {
                 c.lecturer,
                 c.faculty,
                 c.description,
-                c.prerequisites,
-                c.corequisites,
+                ${prereqField},
+                ${coreqField},
                 c.id as course_id,
                 ts_start.day_of_week,
                 ts_start.hour_of_day as start_time,
@@ -116,8 +126,8 @@ router.post('/search', async (req, res) => {
             LEFT JOIN time_slots ts_start ON cts.start_time_id = ts_start.time_id
             LEFT JOIN time_slots ts_end ON cts.end_time_id = ts_end.time_id
             WHERE ${searchCondition}
-            AND (c.term = $2 OR $2 = '')
-            ORDER BY c.course_code, c.course_name, c.section_name, ts_start.day_of_week, ts_start.hour_of_day
+            ${termCondition}
+            ORDER BY c.course_name, c.section_name, ts_start.day_of_week, ts_start.hour_of_day
         `;
 
         const result = await pool.query(query, [`%${normalizedInput}%`, currentTerm]);
