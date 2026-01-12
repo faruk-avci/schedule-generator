@@ -30,22 +30,40 @@ app.get('/', (req, res) => {
     });
 });
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS
-    ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
-    : ['http://localhost:5173'];
+const allowedOrigins = [
+    'https://ozuplanner.com',
+    'https://www.ozuplanner.com',
+    'https://admin.ozuplanner.com',
+    'https://api.ozuplanner.com',
+    'http://localhost:5173',
+    'http://localhost:3000'
+];
+
+if (process.env.ALLOWED_ORIGINS) {
+    process.env.ALLOWED_ORIGINS.split(',').forEach(o => {
+        const trimmed = o.trim();
+        if (trimmed && !allowedOrigins.includes(trimmed)) {
+            allowedOrigins.push(trimmed);
+        }
+    });
+}
 
 app.use(cors({
     origin: (origin, callback) => {
         // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
+
+        // Simple check for ozuplanner.com subdomains
+        const isOzuSubdomain = origin.endsWith('.ozuplanner.com') || origin === 'https://ozuplanner.com';
+
+        if (allowedOrigins.indexOf(origin) !== -1 || isOzuSubdomain) {
+            return callback(null, true);
+        } else {
             console.error(`❌ CORS blocked for origin: ${origin}`);
-            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-            return callback(new Error(msg), false);
+            return callback(new Error('CORS not allowed'), false);
         }
-        return callback(null, true);
     },
-    credentials: true  // Allow cookies
+    credentials: true
 }));
 
 // Trust proxy (Crucial for secure cookies behind Nginx)
@@ -139,6 +157,14 @@ app.use((req, res) => {
 // General error handler
 app.use((err, req, res, next) => {
     console.error('Error:', err);
+
+    // Add CORS headers even for errors!
+    const origin = req.headers.origin;
+    if (origin) {
+        res.header('Access-Control-Allow-Origin', origin);
+        res.header('Access-Control-Allow-Credentials', 'true');
+    }
+
     res.status(500).json({
         error: 'Internal server error',
         message: err.message

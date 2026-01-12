@@ -19,7 +19,7 @@ function timeToIndex(timeString) {
  * Fetch all course data with time slots from database
  */
 async function fetchCoursesData(courseCodes, currentTerm) {
-    const sanitizedTerm = currentTerm.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+    const sanitizedTerm = (currentTerm || '').replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
     let coursesTable = currentTerm ? `courses_${sanitizedTerm}` : 'courses';
     let slotsTable = currentTerm ? `course_time_slots_${sanitizedTerm}` : 'course_time_slots';
 
