@@ -130,7 +130,12 @@ router.post('/search', async (req, res) => {
             ORDER BY c.course_name, c.section_name, ts_start.day_of_week, ts_start.hour_of_day
         `;
 
-        const result = await pool.query(query, [`%${normalizedInput}%`, currentTerm]);
+        const params = [`%${normalizedInput}%`];
+        if (hasTerm) {
+            params.push(currentTerm);
+        }
+
+        const result = await pool.query(query, params);
 
         // Group sections by course name and include time slots
         const courseMap = new Map();
