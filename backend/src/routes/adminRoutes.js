@@ -158,7 +158,7 @@ router.put('/settings/:key', authAdmin, async (req, res) => {
 // GET /api/admin/courses (Search/List)
 router.get('/courses', authAdmin, async (req, res) => {
     try {
-        const { search, term, limit = 50, offset = 0 } = req.query;
+        const { search, term = process.env.CURRENT_TERM, limit = 50, offset = 0 } = req.query;
         const sanitizedTerm = term ? term.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : null;
         const coursesTable = sanitizedTerm ? `courses_${sanitizedTerm}` : 'courses';
 

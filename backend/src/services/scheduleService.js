@@ -359,9 +359,8 @@ async function generateSchedule(addedCourses, addedSections, preferences = {}) {
             };
         }
 
-        // Get currently active academic term
-        const termResult = await pool.query("SELECT value FROM site_settings WHERE key = 'current_term'");
-        const currentTerm = termResult.rows[0]?.value || '';
+        // Get current academic term from environment
+        const currentTerm = process.env.CURRENT_TERM || "";
 
         // Get all unique course codes
         const allCourseCodes = [

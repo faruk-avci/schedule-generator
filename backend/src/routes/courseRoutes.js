@@ -61,9 +61,8 @@ router.post('/search', async (req, res) => {
 
         console.log('🔍 Searching for courses:', normalizedInput);
 
-        // Get current academic term from settings
-        const termResult = await pool.query("SELECT value FROM site_settings WHERE key = 'current_term'");
-        const currentTerm = termResult.rows[0]?.value || '';
+        // Get current academic term from environment
+        const currentTerm = process.env.CURRENT_TERM || "";
         const sanitizedTerm = currentTerm.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
 
         // Use term-specific tables if currentTerm is set, otherwise fallback to main tables
@@ -227,9 +226,8 @@ router.post('/add', async (req, res) => {
         }
 
         // Get current academic term from settings
-        const termResult = await pool.query("SELECT value FROM site_settings WHERE key = 'current_term'");
-        const currentTerm = termResult.rows[0]?.value || '';
-        const sanitizedTerm = currentTerm.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+        // Get current academic term from environment
+        const currentTerm = process.env.CURRENT_TERM || "";
         let coursesTable = currentTerm ? `courses_${sanitizedTerm}` : 'courses';
 
         // Check if term-specific table exists, fallback to global table if not
@@ -744,8 +742,8 @@ router.post('/baskets/remove', (req, res) => {
 // ============================================
 router.get('/term', async (req, res) => {
     try {
-        const result = await pool.query("SELECT value FROM site_settings WHERE key = 'current_term'");
-        if (result.rows.length === 0) {
+        const currentTerm = process.env.CURRENT_TERM || '';
+        if (!currentTerm) {
             return res.status(404).json({
                 success: false,
                 error: 'Term information not found'
@@ -754,7 +752,7 @@ router.get('/term', async (req, res) => {
 
         res.json({
             success: true,
-            term: result.rows[0].value
+            term: currentTerm
         });
     } catch (error) {
         console.error('Term fetch error:', error);
