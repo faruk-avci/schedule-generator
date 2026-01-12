@@ -125,7 +125,7 @@ router.post('/search', async (req, res) => {
             LEFT JOIN time_slots ts_end ON cts.end_time_id = ts_end.time_id
             WHERE ${searchCondition}
             ${termCondition}
-            ORDER BY c.course_name, c.section_name, ts_start.day_of_week, ts_start.hour_of_day
+            ORDER BY c.course_code, c.section_name, ts_start.day_of_week, ts_start.hour_of_day
         `;
 
         const params = [`%${normalizedInput}%`];
@@ -146,7 +146,6 @@ router.post('/search', async (req, res) => {
                     course_name: row.course_name,
                     credits: row.credits,
                     faculty: row.faculty,
-                    description: row.description,
                     sections: new Map()
                 });
             }
@@ -178,7 +177,6 @@ router.post('/search', async (req, res) => {
             course_name: course.course_name,
             credits: course.credits,
             faculty: course.faculty,
-            description: course.description,
             sections: Array.from(course.sections.values())
         }));
 
