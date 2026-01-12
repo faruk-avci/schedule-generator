@@ -95,8 +95,8 @@ router.post('/search', async (req, res) => {
         const coreqField = hasCoreq ? 'c.corequisites' : "'' as corequisites";
 
         const searchCondition = hasCourseCode
-            ? "(REPLACE(c.course_name, ' ', '') ILIKE $1 OR REPLACE(c.course_code, ' ', '') ILIKE $1)"
-            : "REPLACE(c.course_name, ' ', '') ILIKE $1";
+            ? "c.course_code ILIKE $1"
+            : "c.course_name ILIKE $1";
         const termCondition = hasTerm ? "AND (c.term = $2 OR $2 = '')" : "";
 
         // Query database with normalized space handling and term filtering
@@ -108,7 +108,6 @@ router.post('/search', async (req, res) => {
                 c.section_name, 
                 c.lecturer,
                 c.faculty,
-                c.description,
                 ${prereqField},
                 ${coreqField},
                 c.id as course_id,

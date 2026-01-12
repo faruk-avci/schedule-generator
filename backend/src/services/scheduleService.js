@@ -53,7 +53,6 @@ async function fetchCoursesData(courseCodes, currentTerm) {
             c.lecturer,
             c.credits,
             c.faculty,
-            c.description,
             ts_start.day_of_week,
             ts_start.hour_of_day as start_time,
             CASE 
@@ -328,8 +327,7 @@ function transformSchedules(scheduleLists) {
             course_name: section.course_name,
             section_name: section.section_name,
             lecturer: section.lecturer,
-            credits: section.credits,
-            description: section.description
+            credits: section.credits
         }));
 
         // Calculate total credits
