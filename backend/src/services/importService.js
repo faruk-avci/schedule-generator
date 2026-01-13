@@ -99,11 +99,11 @@ const importService = {
                         // Day ID mapping from database.py
                         let dayOffset = 0;
                         switch (day) {
-                            case 'Pazartesi': dayOffset = 1; break;
-                            case 'Salı': dayOffset = 14; break;
-                            case 'Çarşamba': dayOffset = 27; break;
-                            case 'Perşembe': dayOffset = 40; break;
-                            case 'Cuma': dayOffset = 53; break;
+                            case 'Pazartesi': case 'Monday': dayOffset = 1; break;
+                            case 'Salı': case 'Tuesday': dayOffset = 14; break;
+                            case 'Çarşamba': case 'Wednesday': dayOffset = 27; break;
+                            case 'Perşembe': case 'Thursday': dayOffset = 40; break;
+                            case 'Cuma': case 'Friday': dayOffset = 53; break;
                             default: continue; // Skip days not in standard schedule
                         }
 
