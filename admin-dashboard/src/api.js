@@ -28,6 +28,7 @@ export const AdminAPI = {
     getCourses: (search, term, limit, offset) => api.get('/api/admin/courses', { params: { search, term, limit, offset } }),
     getTerms: () => api.get('/api/admin/terms'),
     initializeTerm: (term) => api.post('/api/admin/maintenance/initialize-term', { term }),
+    cleanupNoSlots: (term) => api.post('/api/admin/maintenance/cleanup-no-slots', { term }),
 
     // Course CRUD (Stubs for now)
     addCourse: (data) => api.post('/api/admin/courses', data),

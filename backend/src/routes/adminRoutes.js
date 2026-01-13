@@ -328,4 +328,69 @@ router.post('/maintenance/initialize-term', authAdmin, async (req, res) => {
     }
 });
 
+// POST /api/admin/maintenance/cleanup-no-slots
+router.post('/maintenance/cleanup-no-slots', authAdmin, async (req, res) => {
+    try {
+        const { term } = req.body;
+        if (!term) return res.status(400).json({ success: false, error: 'Term name is required' });
+
+        const sanitizedTerm = term.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+        const coursesTable = `courses_${sanitizedTerm}`;
+        const slotsTable = `course_time_slots_${sanitizedTerm}`;
+
+        // 1. Identify courses with no time slots
+        const findQuery = `
+            SELECT id, course_code, course_name, section_name 
+            FROM ${coursesTable} c
+            WHERE NOT EXISTS (
+                SELECT 1 FROM ${slotsTable} s 
+                WHERE s.course_code = c.course_code 
+                AND s.section_name = c.section_name
+            )
+        `;
+        const toDelete = await pool.query(findQuery);
+
+        if (toDelete.rows.length === 0) {
+            return res.json({
+                success: true,
+                message: 'No courses without time slots were found.',
+                deletedCount: 0,
+                deletedCourses: []
+            });
+        }
+
+        // 2. Delete them
+        const deleteQuery = `
+            DELETE FROM ${coursesTable}
+            WHERE id IN (
+                SELECT id 
+                FROM ${coursesTable} c
+                WHERE NOT EXISTS (
+                    SELECT 1 FROM ${slotsTable} s 
+                    WHERE s.course_code = c.course_code 
+                    AND s.section_name = c.section_name
+                )
+            )
+        `;
+        await pool.query(deleteQuery);
+
+        logActivity(req, 'CLEANUP_NO_SLOTS', {
+            term,
+            deletedCount: toDelete.rows.length,
+            courses: toDelete.rows.map(r => `${r.course_code} (${r.section_name})`)
+        });
+
+        res.json({
+            success: true,
+            message: `Successfully deleted ${toDelete.rows.length} courses with no time slots.`,
+            deletedCount: toDelete.rows.length,
+            deletedCourses: toDelete.rows
+        });
+
+    } catch (error) {
+        console.error('Cleanup error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
 module.exports = router;

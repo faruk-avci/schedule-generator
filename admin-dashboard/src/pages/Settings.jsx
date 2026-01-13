@@ -97,7 +97,7 @@ const Settings = () => {
                                                 return;
                                             }
                                             setSaving(true);
-                                            setMessage({ type: '', text: '' }); // Clear previous messages
+                                            setMessage({ type: '', text: '' });
                                             try {
                                                 const res = await AdminAPI.initializeTerm(term);
                                                 setMessage({ type: 'success', text: res.data.message });
@@ -111,8 +111,39 @@ const Settings = () => {
                                     >
                                         Initialize Tables for this Term
                                     </button>
+
+                                    <button
+                                        className="cleanup-btn"
+                                        onClick={async () => {
+                                            const term = settings.find(s => s.key === 'current_term')?.value;
+                                            if (!term) {
+                                                setMessage({ type: 'error', text: 'Please define a current term before cleaning up.' });
+                                                return;
+                                            }
+                                            if (!window.confirm(`Are you sure you want to delete courses with NO time slots for ${term}? (e.g. Senior Projects, Internships)`)) return;
+
+                                            setSaving(true);
+                                            setMessage({ type: '', text: '' });
+                                            try {
+                                                const res = await AdminAPI.cleanupNoSlots(term);
+                                                if (res.data.deletedCount > 0) {
+                                                    const list = res.data.deletedCourses.map(c => `${c.course_code} (${c.section_name})`).join(', ');
+                                                    setMessage({ type: 'success', text: `${res.data.message} Deleted: ${list}` });
+                                                } else {
+                                                    setMessage({ type: 'success', text: res.data.message });
+                                                }
+                                            } catch (err) {
+                                                setMessage({ type: 'error', text: 'Failed to perform cleanup' });
+                                            } finally {
+                                                setSaving(false);
+                                            }
+                                        }}
+                                        disabled={saving || !settings.find(s => s.key === 'current_term')?.value}
+                                    >
+                                        Cleanup No-Slot Courses
+                                    </button>
                                 </div>
-                                <span className="input-hint">Initializing creates the courses_[term] and course_time_slots_[term] tables.</span>
+                                <span className="input-hint">Initializing creates tables. Cleanup removes non-scheduled courses (Projects/Internships) from the term.</span>
                             </div>
                         </div>
                     </div>
@@ -286,6 +317,26 @@ const Settings = () => {
                     color: white;
                 }
                 .initialize-btn:disabled {
+                    opacity: 0.3;
+                    cursor: not-allowed;
+                }
+                .cleanup-btn {
+                    width: 100%;
+                    padding: 0.75rem;
+                    background: transparent;
+                    color: #fff;
+                    border: 1px solid #ef4444;
+                    border-radius: 0.75rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    margin-top: 0.75rem;
+                }
+                .cleanup-btn:hover:not(:disabled) {
+                    background: #ef4444;
+                    color: white;
+                }
+                .cleanup-btn:disabled {
                     opacity: 0.3;
                     cursor: not-allowed;
                 }
