@@ -344,8 +344,7 @@ router.post('/maintenance/cleanup-no-slots', authAdmin, async (req, res) => {
             FROM ${coursesTable} c
             WHERE NOT EXISTS (
                 SELECT 1 FROM ${slotsTable} s 
-                WHERE s.course_code = c.course_code 
-                AND s.section_name = c.section_name
+                WHERE s.course_id = c.id
             )
         `;
         const toDelete = await pool.query(findQuery);
@@ -367,8 +366,7 @@ router.post('/maintenance/cleanup-no-slots', authAdmin, async (req, res) => {
                 FROM ${coursesTable} c
                 WHERE NOT EXISTS (
                     SELECT 1 FROM ${slotsTable} s 
-                    WHERE s.course_code = c.course_code 
-                    AND s.section_name = c.section_name
+                    WHERE s.course_id = c.id
                 )
             )
         `;
