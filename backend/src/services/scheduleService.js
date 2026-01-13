@@ -98,14 +98,13 @@ function organizeCourseData(rows, addedCourses, addedSections) {
                 lecturer: row.lecturer,
                 credits: parseFloat(row.credits),
                 faculty: row.faculty,
-                description: row.description,
                 timeSlots: [],
                 mask: [0, 0, 0, 0, 0]
             };
         }
 
         if (row.day_of_week && row.start_time && row.end_time) {
-            rawCourses[courseName][sectionName].timeSlots.push({
+            rawCourses[courseCode][sectionName].timeSlots.push({
                 day: row.day_of_week,
                 startTime: row.start_time,
                 endTime: row.end_time
@@ -118,7 +117,7 @@ function organizeCourseData(rows, addedCourses, addedSections) {
 
                 for (let h = startIdx; h < endIdx; h++) {
                     if (h >= 0 && h < 13) {
-                        rawCourses[courseName][sectionName].mask[dayIdx] |= (1 << h);
+                        rawCourses[courseCode][sectionName].mask[dayIdx] |= (1 << h);
                     }
                 }
             }
