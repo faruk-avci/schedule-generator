@@ -163,13 +163,22 @@ router.post('/search', async (req, res) => {
                 });
             }
 
-            // Add time slot if it exists
+            // Add time slot if it exists and is not a duplicate
             if (row.day_of_week && row.start_time && row.end_time) {
-                course.sections.get(row.section_name).times.push({
-                    day: row.day_of_week,
-                    start: row.start_time,
-                    end: row.end_time
-                });
+                const section = course.sections.get(row.section_name);
+                const isDuplicate = section.times.some(t =>
+                    t.day === row.day_of_week &&
+                    t.start === row.start_time &&
+                    t.end === row.end_time
+                );
+
+                if (!isDuplicate) {
+                    section.times.push({
+                        day: row.day_of_week,
+                        start: row.start_time,
+                        end: row.end_time
+                    });
+                }
             }
         });
 

@@ -73,7 +73,7 @@ const importService = {
 
                     // 1. Calculate required hours (mimicking database.py logic)
                     let requiredHours = 0;
-                    const timeSlots = timeInfo.trim().split('\n').filter(t => t.includes('|'));
+                    const timeSlots = [...new Set(timeInfo.trim().split('\n').filter(t => t.includes('|')))];
 
                     timeSlots.forEach(slot => {
                         const [day, hourPart] = slot.split('|').map(s => s.trim());
