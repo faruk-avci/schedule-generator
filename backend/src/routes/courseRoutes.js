@@ -230,6 +230,7 @@ router.post('/add', async (req, res) => {
         }
 
         // Get current academic term from environment
+        const currentTerm = process.env.CURRENT_TERM || "";
         const sanitizedTerm = currentTerm.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
         let coursesTable = currentTerm ? `courses_${sanitizedTerm}` : 'courses';
 
