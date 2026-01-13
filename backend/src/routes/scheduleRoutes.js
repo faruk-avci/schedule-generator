@@ -20,15 +20,12 @@ router.post('/generate', async (req, res) => {
             });
         }
 
-        const { preferences } = req.body;
-
         console.log('🎯 Generating schedules...');
         console.log('   Courses:', addedCourses);
         console.log('   Sections:', addedSections);
-        console.log('   Preferences:', preferences || 'None');
 
         // Generate schedules
-        const result = await generateSchedule(addedCourses, addedSections, preferences);
+        const result = await generateSchedule(addedCourses, addedSections);
 
         if (!result.success) {
             return res.status(400).json(result);
@@ -40,8 +37,7 @@ router.post('/generate', async (req, res) => {
             logActivity(req, 'GENERATE_CONFLICT', {
                 courseCount: addedCourses.length,
                 sectionCount: addedSections.length,
-                conflicts: result.conflicts || [],
-                preferences: preferences || {}
+                conflicts: result.conflicts || []
             });
         } else {
             console.log(`✅ Successfully generated ${result.totalSchedules} schedules`);
@@ -50,8 +46,7 @@ router.post('/generate', async (req, res) => {
                 courseCount: addedCourses.length,
                 sectionCount: addedSections.length,
                 schedulesFound: result.totalSchedules,
-                limited: result.limited,
-                preferences: preferences || {}
+                limited: result.limited
             });
         }
 

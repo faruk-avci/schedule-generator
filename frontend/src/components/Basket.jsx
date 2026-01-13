@@ -15,10 +15,6 @@ function Basket({
 }) {
   const t = translations[language];
   const totalItems = basket.courses.length + basket.sections.length;
-  const [preferences, setPreferences] = useState({
-    morning: 0, // 1: Morning, 0: Balanced, -1: Afternoon
-    freeDays: false
-  });
   const [basketName, setBasketName] = useState('');
   const [showSaveInput, setShowSaveInput] = useState(false);
 
@@ -145,60 +141,13 @@ function Basket({
             </div>
           )}
 
-
           {totalItems > 0 && (
-            <>
-              <div className="preferences-panel">
-                <div className="pref-header">
-                  <span className="pref-title">{language === 'tr' ? 'Tercihler' : 'Preferences'}</span>
-                </div>
-
-                <div className="pref-item">
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={preferences.freeDays}
-                      onChange={(e) => setPreferences({ ...preferences, freeDays: e.target.checked })}
-                    />
-                    {language === 'tr' ? 'Boş Günleri Maksimize Et' : 'Maximize Free Days'}
-                  </label>
-                </div>
-
-                <div className="pref-item">
-                  <label>{language === 'tr' ? 'Zaman Tercihi:' : 'Time Preference:'}</label>
-                  <div className="time-pref-controls">
-                    <button
-                      className={`time-btn ${preferences.morning === 1 ? 'active' : ''}`}
-                      onClick={() => setPreferences({ ...preferences, morning: 1 })}
-                      title={language === 'tr' ? 'Sabah Derslerini Önceliklendir' : 'Prefer Morning Classes'}
-                    >
-                      {language === 'tr' ? 'Sabah' : 'Morning'}
-                    </button>
-                    <button
-                      className={`time-btn ${preferences.morning === 0 ? 'active' : ''}`}
-                      onClick={() => setPreferences({ ...preferences, morning: 0 })}
-                      title={language === 'tr' ? 'Dengeli' : 'Balanced'}
-                    >
-                      {language === 'tr' ? 'Dengeli' : 'Balanced'}
-                    </button>
-                    <button
-                      className={`time-btn ${preferences.morning === -1 ? 'active' : ''}`}
-                      onClick={() => setPreferences({ ...preferences, morning: -1 })}
-                      title={language === 'tr' ? 'Öğleden Sonrayı Önceliklendir' : 'Prefer Afternoon'}
-                    >
-                      {language === 'tr' ? 'Öğlen' : 'Afternoon'}
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <button
-                className="generate-button-basket"
-                onClick={() => onGenerate(preferences)}
-              >
-                {t.generateSchedules}
-              </button>
-            </>
+            <button
+              className="generate-button-basket"
+              onClick={() => onGenerate()}
+            >
+              {t.generateSchedules}
+            </button>
           )}
         </div>
       )}

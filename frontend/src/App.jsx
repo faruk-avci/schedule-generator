@@ -97,7 +97,6 @@ function App() {
   const [term, setTerm] = useState('');
   const [major, setMajor] = useState(null);
   const [showMajorModal, setShowMajorModal] = useState(false);
-  const [pendingPreferences, setPendingPreferences] = useState(null);
   const [savedBaskets, setSavedBaskets] = useState([]);
   const schedulesRef = useRef(null);
 
@@ -382,10 +381,8 @@ function App() {
 
 
   // Generate schedules
-  const handleGenerate = async (preferences, ignoreMajorGuard = false) => {
-    // [MAJOR GUARD] Ask for major if not set
+  const handleGenerate = async (ignoreMajorGuard = false) => {
     if (!major && !ignoreMajorGuard) {
-      setPendingPreferences(preferences);
       setShowMajorModal(true);
       return;
     }
@@ -395,7 +392,7 @@ function App() {
     setMessage(null);
 
     try {
-      const data = await generateSchedule(preferences);
+      const data = await generateSchedule();
       if (data.success) {
         setSchedules(data.schedules);
         setConflicts(data.conflicts || []);
@@ -441,11 +438,7 @@ function App() {
         localStorage.setItem('student_major', selectedMajor);
         setShowMajorModal(false);
         Analytics.track('SELECT_MAJOR', { major: selectedMajor });
-        // Continue with the generation if there were pending preferences
-        if (pendingPreferences !== null) {
-          handleGenerate(pendingPreferences, true); // Pass true to bypass the check
-          setPendingPreferences(null);
-        }
+        handleGenerate(true); // Pass true to bypass the check
       }
     } catch (error) {
       console.error('Error saving major:', error);

@@ -42,8 +42,8 @@ export const setMajor = async (major) => {
 };
 
 // Schedule APIs
-export const generateSchedule = async (preferences = {}) => {
-    const response = await api.post('/schedule/generate', { preferences });
+export const generateSchedule = async () => {
+    const response = await api.post('/schedule/generate');
     return response.data;
 };
 

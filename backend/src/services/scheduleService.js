@@ -343,7 +343,7 @@ function transformSchedules(scheduleLists) {
 /**
  * Main schedule generation function
  */
-async function generateSchedule(addedCourses, addedSections, preferences = {}) {
+async function generateSchedule(addedCourses, addedSections) {
     try {
         // Validate input
         if ((!addedCourses || addedCourses.length === 0) &&
@@ -408,66 +408,15 @@ async function generateSchedule(addedCourses, addedSections, preferences = {}) {
             };
         }
 
-        // ============================================================
-        // SCORING & SORTING ALGORITHM
-        // ============================================================
-        const { morning = 0, freeDays = false } = preferences || {};
-
-        // Weights for morning slots (0=8:40, 1=9:40, 2=10:40, 3=11:40)
-        const MORNING_WEIGHTS = {
-            0: 1.0, // 8:40 - Highest impact
-            1: 0.8, // 9:40
-            2: 0.6, // 10:40
-            3: 0.4  // 11:40
-        };
-
-        const scoredSchedules = allSchedules.map(schedule => {
-            let score = 0;
-            const daysWithClasses = new Set();
-            let morningScore = 0;
-
-            schedule.forEach(section => {
-                section.timeSlots.forEach(slot => {
-                    const dayIdx = DAY_INDEX[slot.day];
-                    if (dayIdx !== undefined) daysWithClasses.add(dayIdx);
-
-                    const startIdx = timeToIndex(slot.startTime);
-
-                    // Morning Preference Calculation
-                    if (startIdx <= 3) {
-                        // If user wants Morning (1), Add score. If Afternoon (-1), Subtract score.
-                        // If Balanced (0), this part is 0.
-                        const weight = MORNING_WEIGHTS[startIdx] || 0;
-                        if (morning === 1) score += (weight * 10);      // Bonus for early
-                        else if (morning === -1) score -= (weight * 10); // Penalty for early
-                    }
-                });
-            });
-
-            // Free Days Preference (High impact)
-            if (freeDays) {
-                const emptyDays = 5 - daysWithClasses.size;
-                score += (emptyDays * 50); // Huge bonus for full free days
-            }
-
-            return { schedule, score };
-        });
-
-        // Sort by Score Descending
-        scoredSchedules.sort((a, b) => b.score - a.score);
-
-        // Extract back to clean list
-        const sortedSchedules = scoredSchedules.map(item => item.schedule);
-
-        // Limit number of schedules
+        // Limit and transform schedules
         const maxSchedules = 120;
-        const limitedSchedules = sortedSchedules.slice(0, maxSchedules);
+        const limitedSchedules = allSchedules.slice(0, maxSchedules);
 
         if (allSchedules.length > maxSchedules) {
             console.log(`⚠️  Limited to ${maxSchedules} schedules (from ${allSchedules.length})`);
         }
 
-        // Transform to readable format (rebuilds matrices for frontend)
+        // Transform to readable format
         const transformedSchedules = transformSchedules(limitedSchedules);
 
         return {
