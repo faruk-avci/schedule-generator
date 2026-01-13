@@ -355,19 +355,20 @@ body.dark-mode .schedules-container {
 }
 
 .course-code-display {
-  font-size: 20px;
+  font-size: 24px;
   color: var(--ozu-burgundy);
   margin: 0;
-  font-weight: 700;
-  letter-spacing: -0.5px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1;
 }
 
 .course-name-display {
-  font-size: 18px;
-  color: var(--ozu-blue);
+  font-size: 20px;
+  color: #1e3a8a; /* Slightly darker/richer blue */
   margin: 0;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
 body.dark-mode .course-name-display {
@@ -542,13 +543,25 @@ body.dark-mode .course-name-display {
 }
 
 .time-slot {
+  background-color: white;
+  color: var(--ozu-burgundy);
+  padding: 6px 14px;
+  border: 1.5px solid var(--ozu-burgundy);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(165, 0, 80, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.time-slot:hover {
   background-color: var(--ozu-burgundy);
   color: white;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  box-shadow: 0 2px 4px rgba(165, 0, 80, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(165, 0, 80, 0.2);
 }
 
 .add-section-btn {
