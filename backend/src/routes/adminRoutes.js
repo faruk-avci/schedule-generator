@@ -34,30 +34,76 @@ const upload = multer({
     }
 });
 
-// Middleware to check if user is authenticated as Admin
-const authAdmin = (req, res, next) => {
-    if (req.session && req.session.isAdmin) {
-        return next();
+const admin = require('../config/firebase');
+
+// Middleware to check if user is authenticated as Admin via Firebase Token
+const authAdmin = async (req, res, next) => {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            // Check if there's still a session (fallback during transition)
+            if (req.session && req.session.isAdmin) return next();
+            return res.status(401).json({ success: false, error: 'Authorization token required' });
+        }
+
+        if (!admin.apps.length) {
+            console.warn('Firebase Admin not initialized, skipping token check');
+            if (req.session && req.session.isAdmin) return next();
+            return res.status(500).json({ success: false, error: 'Firebase Auth is not configured on server.' });
+        }
+
+        const idToken = authHeader.split('Bearer ')[1];
+        const decodedToken = await admin.auth().verifyIdToken(idToken);
+
+        const allowedEmails = (process.env.ADMIN_EMAILS || '').split(',').map(e => e.trim().toLowerCase());
+
+        if (allowedEmails.includes(decodedToken.email.toLowerCase())) {
+            req.admin = decodedToken;
+            return next();
+        }
+
+        res.status(403).json({ success: false, error: 'Email not authorized for admin access.' });
+    } catch (error) {
+        console.error('Auth error:', error.message);
+        res.status(401).json({ success: false, error: 'Invalid or expired token' });
     }
-    res.status(401).json({ success: false, error: 'Unauthorized. Please login as admin.' });
 };
 
 // POST /api/admin/login
-router.post('/login', (req, res) => {
-    const { password } = req.body;
-    const adminPassword = process.env.ADMIN_PASSWORD;
+// Now verify Firebase token and initialize session
+router.post('/login', async (req, res) => {
+    const { idToken } = req.body;
 
-    if (!adminPassword) {
-        return res.status(500).json({ success: false, error: 'Admin password not configured on server.' });
+    if (!idToken) {
+        return res.status(400).json({ success: false, error: 'ID Token is required' });
     }
 
-    if (password === adminPassword) {
-        req.session.isAdmin = true;
-        logActivity(req, 'ADMIN_LOGIN', { status: 'success' });
-        return res.json({ success: true, message: 'Admin login successful' });
-    } else {
-        logActivity(req, 'ADMIN_LOGIN', { status: 'failed', attempt: password });
-        return res.status(401).json({ success: false, error: 'Invalid admin password' });
+    if (!admin.apps.length) {
+        return res.status(500).json({ success: false, error: 'Firebase Auth is not configured on server.' });
+    }
+
+    try {
+        const decodedToken = await admin.auth().verifyIdToken(idToken);
+        const allowedEmails = (process.env.ADMIN_EMAILS || '').split(',').map(e => e.trim().toLowerCase());
+
+        if (allowedEmails.includes(decodedToken.email.toLowerCase())) {
+            req.session.isAdmin = true;
+            req.session.adminEmail = decodedToken.email;
+
+            logActivity(req, 'ADMIN_LOGIN', { status: 'success', email: decodedToken.email });
+
+            return res.json({
+                success: true,
+                message: 'Admin login successful',
+                admin: { email: decodedToken.email, name: decodedToken.name }
+            });
+        }
+
+        logActivity(req, 'ADMIN_LOGIN', { status: 'denied', email: decodedToken.email });
+        res.status(403).json({ success: false, error: 'This email is not on the admin whitelist.' });
+    } catch (error) {
+        console.error('Login error:', error.message);
+        res.status(401).json({ success: false, error: 'Authentication failed' });
     }
 });
 

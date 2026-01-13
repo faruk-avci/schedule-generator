@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || 'https://api.ozuplanner.com';
 
+import { auth } from './firebase';
+
 const api = axios.create({
     baseURL: API_URL,
     withCredentials: true,
@@ -10,9 +12,21 @@ const api = axios.create({
     }
 });
 
+// Add a request interceptor to include the Firebase ID Token
+api.interceptors.request.use(async (config) => {
+    const user = auth.currentUser;
+    if (user) {
+        const idToken = await user.getIdToken();
+        config.headers.Authorization = `Bearer ${idToken}`;
+    }
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});
+
 export const AdminAPI = {
     // Auth
-    login: (password) => api.post('/api/admin/login', { password }),
+    login: (idToken) => api.post('/api/admin/login', { idToken }),
     logout: () => api.post('/api/admin/logout'),
     checkAuth: () => api.get('/api/admin/check'),
 
