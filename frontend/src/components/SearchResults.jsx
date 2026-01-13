@@ -68,29 +68,42 @@ function SearchResults({ courses, onAddCourse, onAddSection, loading, language =
                 <span className="credits">{course.credits} {t.credits}</span>
               </div>
 
+              <div className="course-meta-row">
+                <div className="course-requisites">
+                  {course.prerequisites && (
+                    <div className="req-item" title={course.prerequisites}>
+                      <strong>{language === 'tr' ? 'Ön Koşul:' : 'Prereq:'}</strong>
+                      <span className="req-value">{course.prerequisites}</span>
+                    </div>
+                  )}
+                  {course.corequisites && (
+                    <div className="req-item" title={course.corequisites}>
+                      <strong>{language === 'tr' ? 'Yan Koşul:' : 'Coreq:'}</strong>
+                      <span className="req-value">{course.corequisites}</span>
+                    </div>
+                  )}
+                </div>
+                <span className="section-count">
+                  {course.sections.length} {language === 'tr' ? 'şube' : 'sections'}
+                </span>
+              </div>
+
               <div className="course-actions">
-                <div className="course-actions-left">
-                  <button
-                    className="add-course-btn"
-                    onClick={() => onAddCourse(course.course_code)}
-                  >
-                    + {t.addEntireCourse}
-                  </button>
-                </div>
-                <div className="course-actions-right">
-                  <button
-                    className="add-course-btn"
-                    onClick={() => toggleCourse(course.course_code)}
-                  >
-                    {expandedCourses.has(course.course_code)
-                      ? (language === 'tr' ? 'Şubeleri Gizle' : 'Hide Sections')
-                      : (language === 'tr' ? 'Şubeleri Göster' : 'Show Sections')
-                    }
-                  </button>
-                  <span className="section-count">
-                    {course.sections.length} {language === 'tr' ? 'şube' : 'sections'}
-                  </span>
-                </div>
+                <button
+                  className="add-course-btn"
+                  onClick={() => onAddCourse(course.course_code)}
+                >
+                  + {t.addEntireCourse}
+                </button>
+                <button
+                  className="show-sections-btn"
+                  onClick={() => toggleCourse(course.course_code)}
+                >
+                  {expandedCourses.has(course.course_code)
+                    ? (language === 'tr' ? 'Şubeleri Gizle' : 'Hide Sections')
+                    : (language === 'tr' ? 'Şubeleri Göster' : 'Show Sections')
+                  }
+                </button>
               </div>
 
               {/* Collapsible Sections */}

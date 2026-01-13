@@ -398,12 +398,80 @@ body.dark-mode .schedules-container {
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
-  margin-bottom: 15px;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
 }
 
 .add-course-btn:hover {
   background-color: var(--ozu-burgundy-dark);
+}
+
+.show-sections-btn {
+  padding: 10px 20px;
+  background-color: var(--ozu-burgundy);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.show-sections-btn:hover {
+  background-color: var(--ozu-burgundy-dark);
+}
+
+.course-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.course-requisites {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.req-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 250px;
+}
+
+.req-item strong {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--ozu-gray-light);
+  letter-spacing: 0.5px;
+}
+
+.req-value {
+  font-size: 13px;
+  color: var(--text-primary);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.section-count {
+  font-size: 14px;
+  color: var(--ozu-gray);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.course-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
 }
 
 /* Sections */
