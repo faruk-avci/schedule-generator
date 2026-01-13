@@ -222,9 +222,9 @@ router.post('/add', async (req, res) => {
             });
         }
 
-        // Get current academic term from settings
         // Get current academic term from environment
         const currentTerm = process.env.CURRENT_TERM || "";
+        const sanitizedTerm = currentTerm.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
         let coursesTable = currentTerm ? `courses_${sanitizedTerm}` : 'courses';
 
         // Check if term-specific table exists, fallback to global table if not
