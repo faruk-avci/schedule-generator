@@ -133,7 +133,7 @@ app.get('/', (req, res) => {
 app.use('/api/courses', courseRoutes);
 
 // Schedule routes (generate)
-app.use('/api/schedules', scheduleRoutes);
+app.use('/api/schedule', scheduleRoutes);
 app.use('/api/logs', logRoutes);
 app.use('/api/admin', adminRoutes);
 
