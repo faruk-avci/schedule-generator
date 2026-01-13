@@ -146,6 +146,8 @@ router.post('/search', async (req, res) => {
                     course_name: row.course_name,
                     credits: row.credits,
                     faculty: row.faculty,
+                    prerequisites: row.prerequisites,
+                    corequisites: row.corequisites,
                     sections: new Map()
                 });
             }
@@ -177,6 +179,8 @@ router.post('/search', async (req, res) => {
             course_name: course.course_name,
             credits: course.credits,
             faculty: course.faculty,
+            prerequisites: course.prerequisites,
+            corequisites: course.corequisites,
             sections: Array.from(course.sections.values())
         }));
 
