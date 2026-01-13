@@ -1,5 +1,101 @@
-import { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { translations, getDayName } from '../utils/translations';
+
+const CourseCard = memo(({
+  course,
+  onAddCourse,
+  onAddSection,
+  toggleCourse,
+  isExpanded,
+  language,
+  t
+}) => {
+  return (
+    <div className="course-card">
+      <div className="course-header">
+        <div className="course-title-section">
+          <div className="course-title-row">
+            <h3 className="course-code-display">{course.course_code}</h3>
+            <h4 className="course-name-display">{course.course_name}</h4>
+          </div>
+          {course.description && (
+            <p className="course-desc">{course.description}</p>
+          )}
+        </div>
+        <span className="credits">{course.credits} {t.credits}</span>
+      </div>
+
+      <div className="course-meta-row">
+        <div className="course-requisites">
+          {course.prerequisites && (
+            <div className="req-item" title={course.prerequisites}>
+              <strong>{language === 'tr' ? 'Ön Koşul:' : 'Prereq:'}</strong>
+              <span className="req-value">{course.prerequisites}</span>
+            </div>
+          )}
+          {course.corequisites && (
+            <div className="req-item" title={course.corequisites}>
+              <strong>{language === 'tr' ? 'Yan Koşul:' : 'Coreq:'}</strong>
+              <span className="req-value">{course.corequisites}</span>
+            </div>
+          )}
+        </div>
+        <span className="section-count">
+          {course.sections.length} {language === 'tr' ? 'şube' : 'sections'}
+        </span>
+      </div>
+
+      <div className="course-actions">
+        <button
+          className="add-course-btn"
+          onClick={() => onAddCourse(course.course_code)}
+        >
+          + {t.addEntireCourse}
+        </button>
+        <button
+          className="show-sections-btn"
+          onClick={() => toggleCourse(course.course_code)}
+        >
+          {isExpanded
+            ? (language === 'tr' ? 'Şubeleri Gizle' : 'Hide Sections')
+            : (language === 'tr' ? 'Şubeleri Göster' : 'Show Sections')
+          }
+        </button>
+      </div>
+
+      {isExpanded && (
+        <div className="sections-list">
+          <h4>{t.sections}</h4>
+          {course.sections.map((section) => (
+            <div key={section.section_name} className="section-item">
+              <div className="section-info">
+                <strong>{section.section_name}</strong>
+                <span className="lecturer">{section.lecturer}</span>
+
+                {section.times && section.times.length > 0 && (
+                  <div className="times">
+                    {section.times.map((time, tIdx) => (
+                      <span key={tIdx} className="time-slot">
+                        {getDayName(time.day, language)}: {time.start} - {time.end}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <button
+                className="add-section-btn"
+                onClick={() => onAddSection(course.course_code, section.section_name)}
+              >
+                + {t.addSection}
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+});
 
 function SearchResults({ courses, onAddCourse, onAddSection, loading, language = 'tr', hasSearched = false }) {
   const t = translations[language] || translations.tr;
@@ -50,99 +146,21 @@ function SearchResults({ courses, onAddCourse, onAddSection, loading, language =
       )}
 
       <div className="results-list">
-        {courses.map((course, index) => {
-          const isExpanded = expandedCourses.has(course.course_code);
-
-          return (
-            <div key={index} className="course-card">
-              <div className="course-header">
-                <div className="course-title-section">
-                  <div className="course-title-row">
-                    <h3 className="course-code-display">{course.course_code}</h3>
-                    <h4 className="course-name-display">{course.course_name}</h4>
-                  </div>
-                  {course.description && (
-                    <p className="course-desc">{course.description}</p>
-                  )}
-                </div>
-                <span className="credits">{course.credits} {t.credits}</span>
-              </div>
-
-              <div className="course-meta-row">
-                <div className="course-requisites">
-                  {course.prerequisites && (
-                    <div className="req-item" title={course.prerequisites}>
-                      <strong>{language === 'tr' ? 'Ön Koşul:' : 'Prereq:'}</strong>
-                      <span className="req-value">{course.prerequisites}</span>
-                    </div>
-                  )}
-                  {course.corequisites && (
-                    <div className="req-item" title={course.corequisites}>
-                      <strong>{language === 'tr' ? 'Yan Koşul:' : 'Coreq:'}</strong>
-                      <span className="req-value">{course.corequisites}</span>
-                    </div>
-                  )}
-                </div>
-                <span className="section-count">
-                  {course.sections.length} {language === 'tr' ? 'şube' : 'sections'}
-                </span>
-              </div>
-
-              <div className="course-actions">
-                <button
-                  className="add-course-btn"
-                  onClick={() => onAddCourse(course.course_code)}
-                >
-                  + {t.addEntireCourse}
-                </button>
-                <button
-                  className="show-sections-btn"
-                  onClick={() => toggleCourse(course.course_code)}
-                >
-                  {expandedCourses.has(course.course_code)
-                    ? (language === 'tr' ? 'Şubeleri Gizle' : 'Hide Sections')
-                    : (language === 'tr' ? 'Şubeleri Göster' : 'Show Sections')
-                  }
-                </button>
-              </div>
-
-              {/* Collapsible Sections */}
-              {isExpanded && (
-                <div className="sections-list">
-                  <h4>{t.sections}</h4>
-                  {course.sections.map((section, idx) => (
-                    <div key={idx} className="section-item">
-                      <div className="section-info">
-                        <strong>{section.section_name}</strong>
-                        <span className="lecturer">{section.lecturer}</span>
-
-                        {section.times && section.times.length > 0 && (
-                          <div className="times">
-                            {section.times.map((time, tIdx) => (
-                              <span key={tIdx} className="time-slot">
-                                {getDayName(time.day, language)}: {time.start} - {time.end}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-
-                      <button
-                        className="add-section-btn"
-                        onClick={() => onAddSection(course.course_code, section.section_name)}
-                      >
-                        + {t.addSection}
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {courses.map((course) => (
+          <CourseCard
+            key={course.course_code}
+            course={course}
+            onAddCourse={onAddCourse}
+            onAddSection={onAddSection}
+            toggleCourse={toggleCourse}
+            isExpanded={expandedCourses.has(course.course_code)}
+            language={language}
+            t={t}
+          />
+        ))}
       </div>
     </div>
   );
 }
 
-export default SearchResults;
+export default memo(SearchResults);

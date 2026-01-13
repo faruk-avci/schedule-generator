@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { pool } = require('../database/db');
 const { logActivity } = require('../services/loggerService');
+const { getTableColumns, tableExists } = require('../utils/dbUtils');
 
 const ALLOWED_MAJORS = [
     'Computer Engineering',
@@ -70,20 +71,13 @@ router.post('/search', async (req, res) => {
         let slotsTable = currentTerm ? `course_time_slots_${sanitizedTerm}` : 'course_time_slots';
 
         // Check if term-specific table exists, fallback to global table if not
-        if (currentTerm) {
-            const tableCheck = await pool.query("SELECT to_regclass($1)", [coursesTable]);
-            if (!tableCheck.rows[0].to_regclass) {
-                coursesTable = 'courses';
-                slotsTable = 'course_time_slots';
-            }
+        if (currentTerm && !(await tableExists(coursesTable))) {
+            coursesTable = 'courses';
+            slotsTable = 'course_time_slots';
         }
 
-        // Check for available columns to prevent 500s during migrations
-        const colCheck = await pool.query(`
-            SELECT column_name FROM information_schema.columns 
-            WHERE table_name = $1
-        `, [coursesTable]);
-        const cols = colCheck.rows.map(r => r.column_name);
+        // Check for available columns (cached)
+        const cols = await getTableColumns(coursesTable);
 
         const hasCourseCode = cols.includes('course_code');
         const hasTerm = cols.includes('term');
@@ -236,23 +230,17 @@ router.post('/add', async (req, res) => {
         }
 
         // Get current academic term from environment
-        const currentTerm = process.env.CURRENT_TERM || "";
         const sanitizedTerm = currentTerm.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
         let coursesTable = currentTerm ? `courses_${sanitizedTerm}` : 'courses';
 
         // Check if term-specific table exists, fallback to global table if not
-        if (currentTerm) {
-            const tableCheck = await pool.query("SELECT to_regclass($1)", [coursesTable]);
-            if (!tableCheck.rows[0].to_regclass) {
-                coursesTable = 'courses';
-            }
+        if (currentTerm && !(await tableExists(coursesTable))) {
+            coursesTable = 'courses';
         }
-        // Check if course_code column exists
-        const colCheck = await pool.query(`
-            SELECT column_name FROM information_schema.columns 
-            WHERE table_name = $1 AND column_name = 'course_code'
-        `, [coursesTable]);
-        const hasCourseCode = colCheck.rows.length > 0;
+
+        // Get available columns (cached)
+        const cols = await getTableColumns(coursesTable);
+        const hasCourseCode = cols.includes('course_code');
         const codeCol = hasCourseCode ? 'course_code' : 'course_name';
 
         // Case 1: Adding entire course (section is null or undefined)
