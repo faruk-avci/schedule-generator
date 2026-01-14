@@ -38,4 +38,16 @@ async function testConnection() {
     }
 }
 
+// Monitor pool health in production
+if (process.env.NODE_ENV === 'production') {
+    setInterval(() => {
+        console.log('📊 Pool Status:', {
+            total: pool.totalCount,
+            idle: pool.idleCount,
+            waiting: pool.waitingCount,
+            max: pool.options.max
+        });
+    }, 30000);
+}
+
 module.exports = { pool, testConnection };

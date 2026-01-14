@@ -37,9 +37,15 @@ async function optimize() {
 
         console.log('✓ Trigram indexes created successfully');
 
-        // 4. Analyze to update stats
+        // 4. Index course_id in time slots table
+        const slotsTable = currentTerm ? `course_time_slots_${sanitizedTerm}` : 'course_time_slots';
+        console.log(`Adding index to ${slotsTable}.course_id...`);
+        await pool.query(`CREATE INDEX IF NOT EXISTS idx_${slotsTable}_course_id ON ${slotsTable} (course_id);`);
+
+        // 5. Analyze to update stats
         console.log('Analyzing tables...');
         await pool.query(`ANALYZE ${coursesTable};`);
+        await pool.query(`ANALYZE ${slotsTable};`);
         console.log('✓ Tables analyzed');
 
     } catch (error) {

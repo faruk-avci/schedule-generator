@@ -94,8 +94,15 @@ router.post('/search', async (req, res) => {
         const termCondition = hasTerm ? "AND (c.term = $2 OR $2 = '')" : "";
         const codeColGroup = hasCourseCode ? 'c.course_code' : 'c.course_name';
 
-        // Query database with JSON aggregation: each course is exactly one row
+        // CTE-Optimized Query: Find matching courses FIRST, then join and aggregate
+        // This prevents Postgres from aggregating thousands of rows before the LIMIT
         const query = `
+            WITH matched_courses AS (
+                SELECT DISTINCT ${codeColGroup}
+                FROM ${coursesTable}
+                WHERE ${searchCondition} ${termCondition}
+                LIMIT 30
+            )
             SELECT 
                 ${codeField},
                 c.course_name, 
@@ -122,10 +129,9 @@ router.post('/search', async (req, res) => {
                     )
                 )) as sections
             FROM ${coursesTable} c
-            WHERE ${searchCondition} ${termCondition}
+            JOIN matched_courses mc ON ${codeColGroup} = mc.${codeColGroup}
             GROUP BY c.course_name, ${codeColGroup}, c.credits, c.faculty, ${prereqField}, ${coreqField}
-            ORDER BY ${codeColGroup}
-            LIMIT 50;
+            ORDER BY ${codeColGroup};
         `;
 
         const params = [`%${normalizedInput}%`];
