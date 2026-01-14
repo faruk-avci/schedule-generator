@@ -3,13 +3,41 @@ import { exportAsImage, exportAsPDF, exportAsICS } from '../utils/exportSchedule
 import { translations, getDayName } from '../utils/translations';
 import Analytics from '../utils/analytics';
 
-function ScheduleList({ schedules, conflicts = [], loading, language = 'tr' }) {
+function ScheduleList({ schedules, conflicts = [], overload = null, loading, language = 'tr' }) {
   const [selectedSchedule, setSelectedSchedule] = useState(0);
   const [sortBy, setSortBy] = useState('default'); // default, morning, freeDays
   const t = translations[language] || translations.tr;
 
   if (loading) {
     return <div className="loading">{t.generatingSchedules}</div>;
+  }
+
+  // Combination Overload Guard Display
+  if (overload) {
+    return (
+      <div className="no-schedules">
+        <div className="conflicts-container overload-container">
+          <h3 className="conflicts-title" style={{ color: '#e74c3c' }}>
+            ⚠️ {language === 'tr' ? 'Çok Fazla Olasılık Tespit Edildi' : 'Too Many Potential Combinations'}
+          </h3>
+          <p className="conflicts-subtitle">
+            {language === 'tr'
+              ? `Sepetinizdeki ders şubeleriyle toplamda ${overload.count} program olasılığı oluşuyor.`
+              : `Your current basket results in ${overload.count} potential schedule combinations.`}
+          </p>
+          <div className="conflict-suggestion" style={{ marginTop: '20px', padding: '15px', background: 'rgba(231, 76, 60, 0.1)', borderRadius: '8px' }}>
+            <span className="suggestion-label" style={{ fontWeight: 'bold', display: 'block', marginBottom: '8px' }}>
+              💡 {language === 'tr' ? 'Çözüm Önerisi:' : 'Solution Suggestion:'}
+            </span>
+            <span className="suggestion-text">
+              {language === 'tr'
+                ? 'Lütfen tüm dersleri eklemek yerine, bazı derslerin yanındaki "Şube" (Section) butonuna tıklayıp sadece istediğiniz şubeleri seçerek kombinasyon sayısını düşürün.'
+                : overload.suggestion || 'Please try selecting specific sections for some courses to reduce complexity.'}
+            </span>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (!schedules || schedules.length === 0) {

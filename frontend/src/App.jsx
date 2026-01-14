@@ -93,6 +93,7 @@ function App() {
   const [schedules, setSchedules] = useState([]);
   const [conflicts, setConflicts] = useState([]);
   const [generatingSchedules, setGeneratingSchedules] = useState(false);
+  const [overload, setOverload] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
   const [term, setTerm] = useState('');
   const [major, setMajor] = useState(null);
@@ -389,6 +390,7 @@ function App() {
 
     setGeneratingSchedules(true);
     setConflicts([]);
+    setOverload(null);
     setMessage(null);
 
     try {
@@ -415,13 +417,26 @@ function App() {
         }, 100);
 
       } else {
+        if (data.error === 'COMBINATION_OVERLOAD') {
+          setOverload({
+            count: data.message.match(/\(([^)]+)\)/)?.[1] || 'Unknown',
+            suggestion: data.suggestion
+          });
+        }
         showMessage(null, 'error', data.error || data.message);
         setSchedules([]);
         setConflicts([]);
       }
     } catch (error) {
+      const errorData = error.response?.data;
+      if (errorData?.error === 'COMBINATION_OVERLOAD') {
+        setOverload({
+          count: errorData.message.match(/\(([^)]+)\)/)?.[1] || 'Unknown',
+          suggestion: errorData.suggestion
+        });
+      }
       showMessage(null, 'error',
-        error.response?.data?.error || error.response?.data?.message || t.scheduleGenerationError
+        errorData?.error || errorData?.message || t.scheduleGenerationError
       );
       setSchedules([]);
       setConflicts([]);
@@ -606,6 +621,7 @@ function App() {
               <ScheduleList
                 schedules={schedules}
                 conflicts={conflicts}
+                overload={overload}
                 loading={generatingSchedules}
                 language={language}
               />
