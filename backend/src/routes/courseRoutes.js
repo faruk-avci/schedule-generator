@@ -96,23 +96,23 @@ router.post('/search', async (req, res) => {
 
         // CTE-Optimized Query: Find matching courses FIRST, then join and aggregate
         const query = `
-            WITH matched_courses AS (
-                SELECT DISTINCT ${codeColGroup}
+            WITH matched_codes AS (
+                SELECT DISTINCT ${codeColGroup} as match_code
                 FROM ${coursesTable} c
                 WHERE ${searchCondition} ${termCondition}
                 LIMIT 30
-            )
-            SELECT 
-                ${codeField},
-                c.course_name, 
-                c.credits,
-                c.faculty,
-                ${prereqField},
-                ${coreqField},
-                json_agg(json_build_object(
-                    'section_name', c.section_name,
-                    'lecturer', c.lecturer,
-                    'times', (
+            ),
+            section_data AS (
+                SELECT 
+                    ${codeField},
+                    c.course_name,
+                    c.credits,
+                    c.faculty,
+                    ${prereqField},
+                    ${coreqField},
+                    c.section_name,
+                    c.lecturer,
+                    (
                         SELECT json_agg(json_build_object(
                             'day', ts.day_of_week,
                             'start', ts.hour_of_day,
@@ -125,12 +125,25 @@ router.post('/search', async (req, res) => {
                         JOIN time_slots ts ON cts.start_time_id = ts.time_id
                         JOIN time_slots ts_e ON cts.end_time_id = ts_e.time_id
                         WHERE cts.course_id = c.id
-                    )
+                    ) as times
+                FROM ${coursesTable} c
+                JOIN matched_codes mc ON ${codeColGroup} = mc.match_code
+            )
+            SELECT 
+                course_code,
+                course_name, 
+                credits,
+                faculty,
+                prerequisites,
+                corequisites,
+                json_agg(json_build_object(
+                    'section_name', section_name,
+                    'lecturer', lecturer,
+                    'times', COALESCE(times, '[]'::json)
                 )) as sections
-            FROM ${coursesTable} c
-            JOIN matched_courses mc ON ${codeColGroup} = mc.${codeColGroup}
-            GROUP BY c.course_name, ${codeColGroup}, c.credits, c.faculty, ${prereqField}, ${coreqField}
-            ORDER BY ${codeColGroup};
+            FROM section_data
+            GROUP BY course_name, course_code, credits, faculty, prerequisites, corequisites
+            ORDER BY course_code;
         `;
 
         const params = [`%${normalizedInput}%`];
