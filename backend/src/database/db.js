@@ -7,9 +7,9 @@ const pool = new Pool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    max: 10, // max connections in pool
+    max: 25, // increased from 10 to handle higher concurrent load
     idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
+    connectionTimeoutMillis: 5000, // increased from 2000ms to prevent failures during spikes
 });
 
 // Test connection on startup
