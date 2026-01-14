@@ -27,18 +27,22 @@ const CourseCard = memo(({
 
       <div className="course-meta-row">
         <div className="course-requisites">
-          {course.prerequisites && (
-            <div className="req-item" title={course.prerequisites}>
-              <strong>{language === 'tr' ? 'Ön Koşul:' : 'Prereq:'}</strong>
-              <span className="req-value">{course.prerequisites}</span>
-            </div>
-          )}
-          {course.corequisites && (
-            <div className="req-item" title={course.corequisites}>
-              <strong>{language === 'tr' ? 'Yan Koşul:' : 'Coreq:'}</strong>
-              <span className="req-value">{course.corequisites}</span>
-            </div>
-          )}
+          <div className="req-item" title={course.prerequisites || (language === 'tr' ? 'Bulunmuyor' : 'None')}>
+            <strong>{language === 'tr' ? 'Ön Koşul:' : 'Prereq:'}</strong>
+            <span className="req-value">
+              {course.prerequisites && course.prerequisites.trim() !== ''
+                ? course.prerequisites
+                : (language === 'tr' ? 'Bulunmuyor' : 'None')}
+            </span>
+          </div>
+          <div className="req-item" title={course.corequisites || (language === 'tr' ? 'Bulunmuyor' : 'None')}>
+            <strong>{language === 'tr' ? 'Yan Koşul:' : 'Coreq:'}</strong>
+            <span className="req-value">
+              {course.corequisites && course.corequisites.trim() !== ''
+                ? course.corequisites
+                : (language === 'tr' ? 'Bulunmuyor' : 'None')}
+            </span>
+          </div>
         </div>
         <span className="section-count">
           {course.sections.length} {language === 'tr' ? 'şube' : 'sections'}
