@@ -385,12 +385,29 @@ async function generateSchedule(addedCourses, addedSections) {
         // Organize data (calculates bitmasks internally)
         const { filteredCourses, rawCourses } = organizeCourseData(rows, addedCourses, addedSections);
 
-        // Log what we're working with
-        const totalSections = Object.values(filteredCourses).reduce(
-            (sum, sections) => sum + Object.keys(sections).length,
-            0
+        // ============================================
+        // COMBO GUARD: Pre-calculate total potential combinations
+        // ============================================
+        const potentialCombos = Object.values(filteredCourses).reduce(
+            (product, sections) => product * Object.keys(sections).length,
+            1
         );
-        console.log(`🔧 Processing ${Object.keys(filteredCourses).length} courses with ${totalSections} sections`);
+
+        const MAX_POTENTIAL_COMBOS = 1000000; // 1 Million safety limit
+
+        console.log(`🔧 Processing ${Object.keys(filteredCourses).length} courses. Potential combinations: ${potentialCombos.toLocaleString()}`);
+
+        if (potentialCombos > MAX_POTENTIAL_COMBOS) {
+            console.log(`⚠️  Combo Guard Triggered: ${potentialCombos} exceeds limit`);
+            return {
+                success: false,
+                message: `Too many potential combinations (${potentialCombos.toLocaleString()}).`,
+                error: 'COMBINATION_OVERLOAD',
+                suggestion: 'Please try selecting specific sections for some courses instead of adding entire courses to reduce the complexity.',
+                totalSchedules: 0,
+                schedules: []
+            };
+        }
 
         // Generate all possible schedules (returns list of sections)
         const allSchedules = generateAllSchedules(filteredCourses);
