@@ -52,17 +52,7 @@ function Header({ language, setLanguage, theme, setTheme, onNavigate, term }) {
               {language === 'tr' ? 'İletişim' : 'Contact'}
             </button>
 
-            {/* GitHub Link */}
-            <a
-              href="https://github.com/faruk-avci/schedule-generator"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="header-link github-link"
-              title="GitHub Repository"
-              onClick={() => Analytics.track(Analytics.Events.CLICK_GITHUB)}
-            >
-              GitHub
-            </a>
+
           </div>
 
           <div className="header-divider"></div>
