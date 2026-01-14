@@ -95,11 +95,10 @@ router.post('/search', async (req, res) => {
         const codeColGroup = hasCourseCode ? 'c.course_code' : 'c.course_name';
 
         // CTE-Optimized Query: Find matching courses FIRST, then join and aggregate
-        // This prevents Postgres from aggregating thousands of rows before the LIMIT
         const query = `
             WITH matched_courses AS (
                 SELECT DISTINCT ${codeColGroup}
-                FROM ${coursesTable}
+                FROM ${coursesTable} c
                 WHERE ${searchCondition} ${termCondition}
                 LIMIT 30
             )
