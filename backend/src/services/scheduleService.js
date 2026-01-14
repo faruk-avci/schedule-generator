@@ -1,3 +1,5 @@
+const { Worker } = require('worker_threads');
+const path = require('path');
 const { pool } = require('../database/db');
 
 // Day name to index mapping
@@ -8,6 +10,9 @@ const DAY_INDEX = {
     'Perşembe': 3,
     'Cuma': 4
 };
+
+// ... keep timeToIndex, fetchCoursesData, organizeCourseData, sectionsConflict, detectConflicts ...
+// Note: We need some of these for detectConflicts and organizeCourseData in main thread
 
 // Time to hour index (8:40 -> 0, 9:40 -> 1, etc.)
 function timeToIndex(timeString) {
@@ -23,7 +28,6 @@ async function fetchCoursesData(courseCodes, currentTerm) {
     let coursesTable = currentTerm ? `courses_${sanitizedTerm}` : 'courses';
     let slotsTable = currentTerm ? `course_time_slots_${sanitizedTerm}` : 'course_time_slots';
 
-    // Check if term-specific table exists, fallback to global table if not
     if (currentTerm) {
         const tableCheck = await pool.query("SELECT to_regclass($1)", [coursesTable]);
         if (!tableCheck.rows[0].to_regclass) {
@@ -32,7 +36,6 @@ async function fetchCoursesData(courseCodes, currentTerm) {
         }
     }
 
-    // Check for available columns
     const colCheck = await pool.query(`
         SELECT column_name FROM information_schema.columns 
         WHERE table_name = $1
@@ -40,7 +43,6 @@ async function fetchCoursesData(courseCodes, currentTerm) {
     const cols = colCheck.rows.map(r => r.column_name);
 
     const hasCourseCode = cols.includes('course_code');
-    const hasTerm = cols.includes('term');
     const codeField = hasCourseCode ? 'c.course_code' : 'c.course_name as course_code';
     const filterField = hasCourseCode ? 'c.course_code' : 'c.course_name';
 
@@ -75,7 +77,6 @@ async function fetchCoursesData(courseCodes, currentTerm) {
 
 /**
  * Organize raw database rows into structured course data
- * AND pre-calculate bitmasks for each section
  */
 function organizeCourseData(rows, addedCourses, addedSections) {
     const rawCourses = {};
@@ -147,9 +148,6 @@ function organizeCourseData(rows, addedCourses, addedSections) {
     return { filteredCourses, rawCourses };
 }
 
-/**
- * Helper to check if two sections conflict
- */
 function sectionsConflict(s1, s2) {
     for (let d = 0; d < 5; d++) {
         if ((s1.mask[d] & s2.mask[d]) !== 0) {
@@ -159,9 +157,6 @@ function sectionsConflict(s1, s2) {
     return false;
 }
 
-/**
- * Detect why no schedules could be generated
- */
 function detectConflicts(filteredCourses, rawCourses, addedCourses, addedSections) {
     const courseNames = Object.keys(filteredCourses);
     const conflicts = [];
@@ -170,7 +165,6 @@ function detectConflicts(filteredCourses, rawCourses, addedCourses, addedSection
         for (let j = i + 1; j < courseNames.length; j++) {
             const course1 = courseNames[i];
             const course2 = courseNames[j];
-
             const sections1 = Object.values(filteredCourses[course1]);
             const sections2 = Object.values(filteredCourses[course2]);
 
@@ -186,16 +180,13 @@ function detectConflicts(filteredCourses, rawCourses, addedCourses, addedSection
             }
 
             if (!hasCompatiblePair) {
-                // If they conflict, check if it's because the user picked specific sections
                 const isSectionSpecific1 = addedSections.some(s => s.course === course1);
                 const isSectionSpecific2 = addedSections.some(s => s.course === course2);
 
                 let suggestion = null;
                 if (isSectionSpecific1 || isSectionSpecific2) {
-                    // Check if other sections of these courses would work
                     const allSections1 = Object.values(rawCourses[course1]);
                     const allSections2 = Object.values(rawCourses[course2]);
-
                     let alternativeExists = false;
                     for (const s1 of allSections1) {
                         for (const s2 of allSections2) {
@@ -221,131 +212,14 @@ function detectConflicts(filteredCourses, rawCourses, addedCourses, addedSection
             }
         }
     }
-
     return conflicts;
 }
 
 /**
- * Generate all possible schedules using optimized backtracking with bitmasks
- * Returns array of Arrays of Sections
- */
-function generateAllSchedules(coursesData) {
-    const courseNames = Object.keys(coursesData);
-    const validSchedules = [];
-
-    // Current state of the schedule (5 integers, representing filled slots)
-    const currentMask = [0, 0, 0, 0, 0];
-
-    // Stack of sections in the current schedule
-    const currentSections = [];
-
-    function backtrack(courseIndex) {
-        // Base case: all courses processed
-        if (courseIndex === courseNames.length) {
-            // Push a shallow copy of the sections list
-            validSchedules.push([...currentSections]);
-            return;
-        }
-
-        const courseName = courseNames[courseIndex];
-        const sections = Object.values(coursesData[courseName]);
-
-        // Try each section of current course
-        for (const section of sections) {
-            const sectionMask = section.mask;
-            let conflict = false;
-
-            // 1. Bitwise Conflict Check
-            for (let d = 0; d < 5; d++) {
-                if ((currentMask[d] & sectionMask[d]) !== 0) {
-                    conflict = true;
-                    break;
-                }
-            }
-
-            if (!conflict) {
-                // 2. Add Section (Update Masks In-Place)
-                for (let d = 0; d < 5; d++) {
-                    currentMask[d] |= sectionMask[d];
-                }
-                currentSections.push(section);
-
-                // 3. Recurse
-                backtrack(courseIndex + 1);
-
-                // 4. Backtrack (Undo Changes)
-                currentSections.pop();
-                for (let d = 0; d < 5; d++) {
-                    // XOR removes the bits we just added since we know they didn't exist before
-                    currentMask[d] ^= sectionMask[d];
-                }
-            }
-        }
-    }
-
-    backtrack(0);
-
-    return validSchedules;
-}
-
-/**
- * Reconstruct 5x13 Matrix from a list of sections
- * Used for frontend visualization compatibility
- */
-function createMatrixFromSections(sections) {
-    const matrix = Array(5).fill(null).map(() => Array(13).fill(0));
-
-    for (const section of sections) {
-        for (const slot of section.timeSlots) {
-            const dayIndex = DAY_INDEX[slot.day];
-            if (dayIndex === undefined) continue;
-
-            const startIndex = timeToIndex(slot.startTime);
-            const endIndex = timeToIndex(slot.endTime);
-
-            for (let hour = startIndex; hour < endIndex; hour++) {
-                if (hour >= 0 && hour < 13) {
-                    matrix[dayIndex][hour] = section.id;
-                }
-            }
-        }
-    }
-    return matrix;
-}
-
-/**
- * Transform schedule lists into readable format with matrix
- */
-function transformSchedules(scheduleLists) {
-    return scheduleLists.map(sections => {
-        const matrix = createMatrixFromSections(sections);
-
-        const lessons = sections.map(section => ({
-            id: section.id,
-            course_code: section.course_code,
-            course_name: section.course_name,
-            section_name: section.section_name,
-            lecturer: section.lecturer,
-            credits: section.credits
-        }));
-
-        // Calculate total credits
-        const totalCredits = lessons.reduce((sum, lesson) => sum + lesson.credits, 0);
-
-        return {
-            lessons: lessons,
-            totalCredits: totalCredits,
-            matrix: matrix // Include matrix for frontend visualization
-        };
-    });
-}
-
-/**
- * Main schedule generation function
+ * Main schedule generation function (now offloaded to Worker Threads)
  */
 async function generateSchedule(addedCourses, addedSections) {
     try {
-        // Validate input
         if ((!addedCourses || addedCourses.length === 0) &&
             (!addedSections || addedSections.length === 0)) {
             return {
@@ -356,19 +230,14 @@ async function generateSchedule(addedCourses, addedSections) {
             };
         }
 
-        // Get current academic term from environment
         const currentTerm = process.env.CURRENT_TERM || "";
-
-        // Get all unique course codes
         const allCourseCodes = [
             ...(addedCourses || []),
             ...(addedSections || []).map(s => s.course)
         ];
         const uniqueCourseCodes = [...new Set(allCourseCodes)];
 
-        console.log('📚 Generating schedules for codes:', uniqueCourseCodes);
-
-        // Fetch course data from database
+        // Fetch course data from database (still in main thread for DB access)
         const rows = await fetchCoursesData(uniqueCourseCodes, currentTerm);
 
         if (rows.length === 0) {
@@ -380,69 +249,74 @@ async function generateSchedule(addedCourses, addedSections) {
             };
         }
 
-        console.log(`📊 Fetched ${rows.length} course time slots from database`);
-
-        // Organize data (calculates bitmasks internally)
+        // Organize data
         const { filteredCourses, rawCourses } = organizeCourseData(rows, addedCourses, addedSections);
 
-        // ============================================
-        // COMBO GUARD: Pre-calculate total potential combinations
-        // ============================================
+        // COMBO GUARD pre-check (protect against massive calculations)
         const potentialCombos = Object.values(filteredCourses).reduce(
             (product, sections) => product * Object.keys(sections).length,
             1
         );
 
-        const MAX_POTENTIAL_COMBOS = 1000000; // 1 Million safety limit
-
-        console.log(`🔧 Processing ${Object.keys(filteredCourses).length} courses. Potential combinations: ${potentialCombos.toLocaleString()}`);
+        const MAX_POTENTIAL_COMBOS = 1000000;
+        console.log(`🔧 Potential combinations: ${potentialCombos.toLocaleString()}`);
 
         if (potentialCombos > MAX_POTENTIAL_COMBOS) {
-            console.log(`⚠️  Combo Guard Triggered: ${potentialCombos} exceeds limit`);
             return {
                 success: false,
                 message: `Too many potential combinations (${potentialCombos.toLocaleString()}).`,
                 error: 'COMBINATION_OVERLOAD',
-                suggestion: 'Please try selecting specific sections for some courses instead of adding entire courses to reduce the complexity.',
+                suggestion: 'Please try selecting specific sections for some courses to reduce complexity.',
                 totalSchedules: 0,
                 schedules: []
             };
         }
 
-        // Generate all possible schedules (returns list of sections)
-        const allSchedules = generateAllSchedules(filteredCourses);
+        // --- Offload heavy computation to Worker Thread ---
+        console.log('🧵 Spawning worker thread for schedule computation...');
 
-        console.log(`✨ Generated ${allSchedules.length} possible schedules`);
+        return new Promise((resolve, reject) => {
+            const workerPath = path.join(__dirname, 'scheduleWorker.js');
+            const worker = new Worker(workerPath, {
+                workerData: { filteredCourses }
+            });
 
-        if (allSchedules.length === 0) {
-            const conflicts = detectConflicts(filteredCourses, rawCourses, addedCourses, addedSections);
-            return {
-                success: true,
-                message: 'No valid schedules found (all combinations have time conflicts)',
-                totalSchedules: 0,
-                schedules: [],
-                conflicts: conflicts
-            };
-        }
+            worker.on('message', (result) => {
+                if (result.success) {
+                    if (result.totalGenerated === 0) {
+                        const conflicts = detectConflicts(filteredCourses, rawCourses, addedCourses, addedSections);
+                        resolve({
+                            success: true,
+                            message: 'No valid schedules found (all combinations have time conflicts)',
+                            totalSchedules: 0,
+                            schedules: [],
+                            conflicts: conflicts
+                        });
+                    } else {
+                        resolve({
+                            success: true,
+                            totalSchedules: result.schedules.length,
+                            totalGenerated: result.totalGenerated,
+                            limited: result.limited,
+                            schedules: result.schedules
+                        });
+                    }
+                } else {
+                    reject(new Error(result.error));
+                }
+            });
 
-        // Limit and transform schedules
-        const maxSchedules = 120;
-        const limitedSchedules = allSchedules.slice(0, maxSchedules);
+            worker.on('error', (err) => {
+                console.error('❌ Worker error:', err);
+                reject(err);
+            });
 
-        if (allSchedules.length > maxSchedules) {
-            console.log(`⚠️  Limited to ${maxSchedules} schedules (from ${allSchedules.length})`);
-        }
-
-        // Transform to readable format
-        const transformedSchedules = transformSchedules(limitedSchedules);
-
-        return {
-            success: true,
-            totalSchedules: transformedSchedules.length,
-            totalGenerated: allSchedules.length,
-            limited: allSchedules.length > maxSchedules,
-            schedules: transformedSchedules
-        };
+            worker.on('exit', (code) => {
+                if (code !== 0) {
+                    console.error(`❌ Worker stopped with exit code ${code}`);
+                }
+            });
+        });
 
     } catch (error) {
         console.error('❌ Schedule generation error:', error);
