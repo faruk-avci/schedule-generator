@@ -1,9 +1,16 @@
 const { Worker } = require('worker_threads');
 const path = require('path');
 const { sendAlert } = require('./telegramService');
-const { Worker } = require('worker_threads');
-const path = require('path');
 const { pool } = require('../database/db');
+
+// Day name to index mapping
+const DAY_INDEX = {
+    'Pazartesi': 0,
+    'Salı': 1,
+    'Çarşamba': 2,
+    'Perşembe': 3,
+    'Cuma': 4
+};
 function timeToIndex(timeString) {
     const hour = parseInt(timeString.split(':')[0]);
     return hour - 8;
