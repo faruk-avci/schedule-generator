@@ -92,34 +92,40 @@ router.post('/search', async (req, res) => {
             ? "c.course_code ILIKE $1"
             : "c.course_name ILIKE $1";
         const termCondition = hasTerm ? "AND (c.term = $2 OR $2 = '')" : "";
+        const codeColGroup = hasCourseCode ? 'c.course_code' : 'c.course_name';
 
-        // Query database with normalized space handling and term filtering
+        // Query database with JSON aggregation: each course is exactly one row
         const query = `
             SELECT 
                 ${codeField},
                 c.course_name, 
-                c.credits, 
-                c.section_name, 
-                c.lecturer,
+                c.credits,
                 c.faculty,
                 ${prereqField},
                 ${coreqField},
-                c.id as course_id,
-                ts_start.day_of_week,
-                ts_start.hour_of_day as start_time,
-                CASE 
-                    WHEN ts_end.hour_of_day LIKE '%:40' THEN 
-                        REPLACE(ts_end.hour_of_day, ':40', ':30')
-                ELSE 
-                    ts_end.hour_of_day
-                END as end_time
+                json_agg(json_build_object(
+                    'section_name', c.section_name,
+                    'lecturer', c.lecturer,
+                    'times', (
+                        SELECT json_agg(json_build_object(
+                            'day', ts.day_of_week,
+                            'start', ts.hour_of_day,
+                            'end', CASE 
+                                WHEN ts_e.hour_of_day LIKE '%:40' THEN REPLACE(ts_e.hour_of_day, ':40', ':30')
+                                ELSE ts_e.hour_of_day
+                            END
+                        ))
+                        FROM ${slotsTable} cts
+                        JOIN time_slots ts ON cts.start_time_id = ts.time_id
+                        JOIN time_slots ts_e ON cts.end_time_id = ts_e.time_id
+                        WHERE cts.course_id = c.id
+                    )
+                )) as sections
             FROM ${coursesTable} c
-            LEFT JOIN ${slotsTable} cts ON c.id = cts.course_id
-            LEFT JOIN time_slots ts_start ON cts.start_time_id = ts_start.time_id
-            LEFT JOIN time_slots ts_end ON cts.end_time_id = ts_end.time_id
-            WHERE ${searchCondition}
-            ${termCondition}
-            ORDER BY c.course_code, c.section_name, ts_start.day_of_week, ts_start.hour_of_day
+            WHERE ${searchCondition} ${termCondition}
+            GROUP BY c.course_name, ${codeColGroup}, c.credits, c.faculty, ${prereqField}, ${coreqField}
+            ORDER BY ${codeColGroup}
+            LIMIT 50;
         `;
 
         const params = [`%${normalizedInput}%`];
@@ -129,62 +135,18 @@ router.post('/search', async (req, res) => {
 
         const result = await pool.query(query, params);
 
-        // Group sections by course name and include time slots
-        const courseMap = new Map();
-
-
-        result.rows.forEach(row => {
-            if (!courseMap.has(row.course_code)) {
-                courseMap.set(row.course_code, {
-                    course_code: row.course_code,
-                    course_name: row.course_name,
-                    credits: row.credits,
-                    faculty: row.faculty,
-                    prerequisites: row.prerequisites,
-                    corequisites: row.corequisites,
-                    sections: new Map()
-                });
-            }
-
-            const course = courseMap.get(row.course_code);
-
-            // Initialize section if it doesn't exist
-            if (!course.sections.has(row.section_name)) {
-                course.sections.set(row.section_name, {
-                    section_name: row.section_name,
-                    lecturer: row.lecturer,
-                    times: []
-                });
-            }
-
-            // Add time slot if it exists and is not a duplicate
-            if (row.day_of_week && row.start_time && row.end_time) {
-                const section = course.sections.get(row.section_name);
-                const isDuplicate = section.times.some(t =>
-                    t.day === row.day_of_week &&
-                    t.start === row.start_time &&
-                    t.end === row.end_time
-                );
-
-                if (!isDuplicate) {
-                    section.times.push({
-                        day: row.day_of_week,
-                        start: row.start_time,
-                        end: row.end_time
-                    });
-                }
-            }
-        });
-
-        // Convert nested Maps to arrays
-        const courses = Array.from(courseMap.values()).map(course => ({
-            course_code: course.course_code,
-            course_name: course.course_name,
-            credits: course.credits,
-            faculty: course.faculty,
-            prerequisites: course.prerequisites,
-            corequisites: course.corequisites,
-            sections: Array.from(course.sections.values())
+        // Database response is already grouped: Map to clean objects
+        const courses = result.rows.map(row => ({
+            course_code: row.course_code,
+            course_name: row.course_name,
+            credits: row.credits,
+            faculty: row.faculty,
+            prerequisites: row.prerequisites,
+            corequisites: row.corequisites,
+            sections: (row.sections || []).map(s => ({
+                ...s,
+                times: s.times || []
+            }))
         }));
 
 
