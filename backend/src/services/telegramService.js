@@ -130,11 +130,11 @@ function startMonitoring() {
             const stats = await pidusage(process.pid);
             const cpuUsage = stats.cpu;
 
-            // Alert if CPU is > 90% for 3 consecutive checks (3 minutes)
+            // Alert if CPU is > 90% for 4 consecutive checks (2 minutes)
             if (cpuUsage > 90) {
                 highCpuCount++;
-                if (highCpuCount === 3) {
-                    sendAlert(`🔥 *CRITICAL CPU USAGE*: ${cpuUsage.toFixed(1)}% for 3 minutes!`);
+                if (highCpuCount === 4) {
+                    sendAlert(`🔥 *CRITICAL CPU USAGE*: ${cpuUsage.toFixed(1)}% for 2 minutes!`);
                 }
             } else {
                 highCpuCount = 0;
@@ -143,7 +143,7 @@ function startMonitoring() {
         } catch (err) {
             console.error('Monitoring error:', err);
         }
-    }, 60000); // Check every 60 seconds
+    }, 30000); // Check every 30 seconds
 }
 
 /**
