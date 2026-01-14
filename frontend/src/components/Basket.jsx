@@ -7,6 +7,7 @@ function Basket({
   onRemoveSection,
   onClearBasket,
   onGenerate,
+  loading,
   language,
   savedBaskets = [],
   onSaveBasket,
@@ -145,8 +146,9 @@ function Basket({
             <button
               className="generate-button-basket"
               onClick={() => onGenerate()}
+              disabled={loading}
             >
-              {t.generateSchedules}
+              {loading ? (language === 'tr' ? 'Oluşturuluyor...' : 'Generating...') : t.generateSchedules}
             </button>
           )}
         </div>

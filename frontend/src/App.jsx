@@ -618,6 +618,7 @@ function App() {
                 onRemoveSection={handleRemoveSection}
                 onClearBasket={handleClearBasket}
                 onGenerate={handleGenerate}
+                loading={generatingSchedules}
                 language={language}
                 savedBaskets={savedBaskets}
                 onSaveBasket={handleSaveBasket}
