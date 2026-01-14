@@ -61,7 +61,13 @@ function initTelegramBot() {
     bot.command('cache', (ctx) => {
         try {
             // Lazy load courseRoutes to avoid circular dependency
-            const { searchCache } = require('../routes/courseRoutes');
+            const courseRoutes = require('../routes/courseRoutes');
+            const searchCache = courseRoutes.searchCache;
+
+            if (!searchCache) {
+                return ctx.reply('❌ Error: Search Cache is not initialized on the server.');
+            }
+
             const stats = searchCache.getStats();
 
             const message = [
@@ -86,10 +92,16 @@ function initTelegramBot() {
 
     // Handle button callback
     bot.action('clear_cache', (ctx) => {
-        const { searchCache } = require('../routes/courseRoutes');
-        searchCache.flushAll();
-        ctx.answerCbQuery('Cache cleared!');
-        ctx.editMessageText('✅ *Cache has been cleared!*', { parse_mode: 'Markdown' });
+        const courseRoutes = require('../routes/courseRoutes');
+        const searchCache = courseRoutes.searchCache;
+
+        if (searchCache) {
+            searchCache.flushAll();
+            ctx.answerCbQuery('Cache cleared!');
+            ctx.editMessageText('✅ *Cache has been cleared!*', { parse_mode: 'Markdown' });
+        } else {
+            ctx.answerCbQuery('Error: Cache not found');
+        }
     });
 
     // Launch bot
