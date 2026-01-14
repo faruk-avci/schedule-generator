@@ -422,6 +422,11 @@ function App() {
             count: data.message.match(/\(([^)]+)\)/)?.[1] || 'Unknown',
             suggestion: data.suggestion
           });
+
+          // Auto-scroll to error for visibility
+          setTimeout(() => {
+            schedulesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
         }
         showMessage(null, 'error', data.error || data.message);
         setSchedules([]);
@@ -434,6 +439,11 @@ function App() {
           count: errorData.message.match(/\(([^)]+)\)/)?.[1] || 'Unknown',
           suggestion: errorData.suggestion
         });
+
+        // Auto-scroll to error for visibility
+        setTimeout(() => {
+          schedulesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
       }
       showMessage(null, 'error',
         errorData?.error || errorData?.message || t.scheduleGenerationError
