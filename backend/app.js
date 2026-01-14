@@ -1,5 +1,9 @@
 require('dotenv').config();
+const { initTelegramBot } = require('./src/services/telegramService');
 const express = require('express');
+
+// Initialize Telegram Bot for monitoring
+initTelegramBot();
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');

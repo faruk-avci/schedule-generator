@@ -1,20 +1,9 @@
 const { Worker } = require('worker_threads');
 const path = require('path');
+const { sendAlert } = require('./telegramService');
+const { Worker } = require('worker_threads');
+const path = require('path');
 const { pool } = require('../database/db');
-
-// Day name to index mapping
-const DAY_INDEX = {
-    'Pazartesi': 0,
-    'Salı': 1,
-    'Çarşamba': 2,
-    'Perşembe': 3,
-    'Cuma': 4
-};
-
-// ... keep timeToIndex, fetchCoursesData, organizeCourseData, sectionsConflict, detectConflicts ...
-// Note: We need some of these for detectConflicts and organizeCourseData in main thread
-
-// Time to hour index (8:40 -> 0, 9:40 -> 1, etc.)
 function timeToIndex(timeString) {
     const hour = parseInt(timeString.split(':')[0]);
     return hour - 8;
@@ -261,7 +250,13 @@ async function generateSchedule(addedCourses, addedSections) {
         const MAX_POTENTIAL_COMBOS = 1000000;
         console.log(`🔧 Potential combinations: ${potentialCombos.toLocaleString()}`);
 
+        const { initTelegramBot, sendAlert } = require('./telegramService');
+
+        // ... in generateSchedule ...
         if (potentialCombos > MAX_POTENTIAL_COMBOS) {
+            // Send Alert to Telegram
+            sendAlert(`⚠️ *Combo Guard Triggered*\nPotential Combinations: ${potentialCombos.toLocaleString()}\nUser Basket has too many sections.`);
+
             return {
                 success: false,
                 message: `Too many potential combinations (${potentialCombos.toLocaleString()}).`,

@@ -10,6 +10,8 @@ const searchCache = new NodeCache({ stdTTL: 300, checkperiod: 60, maxKeys: 1000 
 // Request deduplication map
 const pendingQueries = new Map();
 
+module.exports.searchCache = searchCache;
+
 const ALLOWED_MAJORS = [
     'Computer Engineering',
     'Electrical - Electronics Engineering',

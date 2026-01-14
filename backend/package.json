@@ -18,6 +18,8 @@
     "multer": "^2.0.2",
     "node-cache": "^5.1.2",
     "pg": "^8.11.3",
+    "pidusage": "^4.0.1",
+    "telegraf": "^4.16.3",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
