@@ -35,7 +35,14 @@ const Analytics = {
      */
     trackError(error, context = '') {
         const errorMsg = error instanceof Error ? error.message : String(error);
-        const stack = error instanceof Error ? error.stack : '';
+
+        // Don't send stack traces for 4xx errors (Bad Request, Unauthorized, etc.)
+        // These are user/validation errors, not system crashes.
+        let stack = error instanceof Error ? error.stack : '';
+        if (error.response && error.response.status >= 400 && error.response.status < 500) {
+            stack = null; // Suppress stack for client-side validation/auth errors
+        }
+
         logError(errorMsg, stack, window.location.href).catch(() => { });
     },
 
