@@ -208,7 +208,58 @@ function detectConflicts(filteredCourses, rawCourses, addedCourses, addedSection
             }
         }
     }
-    return conflicts;
+}
+        }
+    }
+
+// --- 3-Way Conflict Detection (if no pairwise found) ---
+if (conflicts.length === 0 && courseNames.length >= 3) {
+    for (let i = 0; i < courseNames.length; i++) {
+        for (let j = i + 1; j < courseNames.length; j++) {
+            for (let k = j + 1; k < courseNames.length; k++) {
+                const course1 = courseNames[i];
+                const course2 = courseNames[j];
+                const course3 = courseNames[k];
+
+                const sections1 = Object.values(filteredCourses[course1]);
+                const sections2 = Object.values(filteredCourses[course2]);
+                const sections3 = Object.values(filteredCourses[course3]);
+
+                let hasCompatibleTrio = false;
+
+                // Check if any combination of s1, s2, s3 exists that works together
+                for (const s1 of sections1) {
+                    for (const s2 of sections2) {
+                        if (sectionsConflict(s1, s2)) continue; // Pair 1-2 bad
+
+                        for (const s3 of sections3) {
+                            if (sectionsConflict(s1, s3)) continue; // Pair 1-3 bad
+                            if (sectionsConflict(s2, s3)) continue; // Pair 2-3 bad
+
+                            hasCompatibleTrio = true;
+                            break;
+                        }
+                        if (hasCompatibleTrio) break;
+                    }
+                    if (hasCompatibleTrio) break;
+                }
+
+                if (!hasCompatibleTrio) {
+                    conflicts.push({
+                        type: 'COMPLEX_CONFLICT',
+                        courses: [course1, course2, course3],
+                        message: `3-Way Time Conflict: No schedule allows taking ${course1}, ${course2}, and ${course3} together.`,
+                        suggestion: `One of these 3 courses is blocking the others. Try changing sections or removing one.`
+                    });
+                    // Return immediately to avoid spamming multiple combinations of the same conflict
+                    return conflicts;
+                }
+            }
+        }
+    }
+}
+
+return conflicts;
 }
 
 /**
