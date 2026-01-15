@@ -36,7 +36,8 @@ const ALLOWED_MAJORS = [
     'Gastronomy and Culinary Arts',
     'Hotel Management',
     'Law',
-    'Prefer not to share'
+    'Prefer not to share',
+    'Master / PhD'
 ];
 
 // ============================================
