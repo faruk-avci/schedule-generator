@@ -242,11 +242,22 @@ function detectConflicts(filteredCourses, rawCourses, addedCourses, addedSection
                     }
 
                     if (!hasCompatibleTrio) {
+                        const counts = [
+                            { name: course1, count: sections1.length },
+                            { name: course2, count: sections2.length },
+                            { name: course3, count: sections3.length }
+                        ];
+                        // Sort so the most restricted (fewest sections) comes first
+                        counts.sort((a, b) => a.count - b.count);
+
+                        // e.g. "EE101 (1 section), MATH101 (4 sections)..."
+                        const details = counts.map(c => `${c.name} (${c.count} section${c.count > 1 ? 's' : ''})`).join(', ');
+
                         conflicts.push({
                             type: 'COMPLEX_CONFLICT',
                             courses: [course1, course2, course3],
-                            message: `3-Way Time Conflict: No schedule allows taking ${course1}, ${course2}, and ${course3} together.`,
-                            suggestion: `One of these 3 courses is blocking the others. Try changing sections or removing one.`
+                            message: `3-Way Time Conflict: No schedule allows taking ${details} together.`,
+                            suggestion: `Restricted: ${counts[0].name} has only ${counts[0].count} section(s). It might be the bottleneck.`
                         });
                         // Return immediately to avoid spamming multiple combinations of the same conflict
                         return conflicts;
