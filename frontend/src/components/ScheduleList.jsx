@@ -20,7 +20,7 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
       <div className="no-schedules">
         <div className="conflicts-container overload-container">
           <h3 className="conflicts-title" style={{ color: '#e74c3c' }}>
-            ⚠️ {language === 'tr' ? 'Çok Fazla Olasılık Tespit Edildi' : 'Too Many Potential Combinations'}
+            ⚠️  {language === 'tr' ? 'Çok Fazla Olasılık Tespit Edildi' : 'Too Many Potential Combinations'}
           </h3>
           <p className="conflicts-subtitle">
             {language === 'tr'
@@ -138,6 +138,28 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
 
   return (
     <div className="schedules-container">
+      {/* Partial Conflicts Display (Show even if schedules exist) */}
+      {conflicts.length > 0 && (
+        <div className="conflicts-container" style={{ marginBottom: '20px' }}>
+          <h3 className="conflicts-title" style={{ fontSize: '16px' }}>
+            {language === 'tr' ? '⚠️ Kısmi Çakışmalar Tespit Edildi' : '⚠️ Partial Conflicts Detected'}
+          </h3>
+          <p className="conflicts-subtitle" style={{ fontSize: '14px', marginBottom: '10px' }}>
+            {language === 'tr'
+              ? 'Aşağıdaki ders kombinasyonları çakışıyor, ancak diğer alternatifler aşağıda listelenmiştir:'
+              : 'The following combinations conflict, but valid schedules were found below:'}
+          </p>
+          <div className="conflicts-list">
+            {conflicts.map((conflict, idx) => (
+              <div key={idx} className="conflict-item" style={{ padding: '8px 12px' }}>
+                <div className="conflict-main">
+                  <span className="conflict-text"><strong>{conflict.courses.join(' & ')}</strong></span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="schedules-header" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
         <h2>{schedules.length} {t.schedulesFound}</h2>
 
