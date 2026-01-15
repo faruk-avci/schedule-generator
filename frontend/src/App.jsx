@@ -79,6 +79,7 @@ const MAJORS = [
   {
     category: { tr: 'Diğer', en: 'Other' },
     items: [
+      { id: 'master', en: 'Master / PhD', tr: 'Yüksek Lisans / Doktora' },
       { id: 'skip', en: 'Prefer not to share', tr: 'Paylaşmak istemiyorum' }
     ]
   }
