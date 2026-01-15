@@ -217,14 +217,16 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
             <thead>
               <tr>
                 <th>{t.course}</th>
-                <th>{t.section}</th>
+                <th style={{ textAlign: 'center' }}>{t.section}</th>
                 <th>{t.lecturer}</th>
-                <th>{t.credits}</th>
+                <th style={{ textAlign: 'center' }}>{t.credits}</th>
               </tr>
             </thead>
             <tbody>
               {currentSchedule.lessons.map((lesson, idx) => {
-                const sectionLetter = lesson.section_name.replace(lesson.course_name, '');
+                // Try to strip the course code part (e.g. "EE101A" -> "A")
+                // Assuming format is PREFIX123SECTION
+                const sectionLetter = lesson.section_name.replace(/^[A-Z]+\d+/, '');
 
                 return (
                   <tr key={idx} style={{ color: 'black' }}>
@@ -239,66 +241,84 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
                         )}
                       </div>
                     </td>
-                    <td>{sectionLetter}</td>
-                    <td>{lesson.lecturer}</td>
-                    <td>{lesson.credits}</td>
-                  </tr>
-                );
+                  </div>
+                      </div>
+          </td>
+          <td style={{ textAlign: 'center' }}>
+            <span style={{
+              display: 'inline-block',
+              padding: '4px 10px',
+              background: '#f3f4f6',
+              borderRadius: '6px',
+              fontWeight: 'bold',
+              color: '#8B1538'
+            }}>
+              {sectionLetter || lesson.section_name}
+            </span>
+          </td>
+          <td>{lesson.lecturer}</td>
+          <td style={{ textAlign: 'center' }}>
+            <span style={{ fontWeight: '500' }}>{lesson.credits}</span>
+          </td>
+        </tr>
+        );
               })}
-            </tbody>
-          </table>
-        </div>
+      </tbody>
+    </table>
+        </div >
 
-        {/* Weekly Calendar View */}
-        <div className="calendar-view">
+    {/* Weekly Calendar View */ }
+    < div className = "calendar-view" >
           <h4>{t.weeklySchedule}</h4>
           <WeeklyCalendar
             matrix={currentSchedule.matrix}
             lessons={currentSchedule.lessons}
             language={language}
           />
-        </div>
-      </div>
+        </div >
+      </div >
 
-      {/* Export Confirmation Modal */}
-      {showExportModal && (
-        <div className="modal-overlay">
-          <div className="modal-content export-warning-modal">
-            <h3 className="modal-title">⚠️ {language === 'tr' ? 'Önemli Hatırlatma' : 'Important Reminder'}</h3>
-            <div className="modal-body">
-              <p>
-                {language === 'tr' ? (
-                  <>OzuPlanner <strong>resmi olmayan</strong> bir araçtır. Oluşturulan programlar sadece simülasyon amaçlıdır.</>
-                ) : (
-                  <>OzuPlanner is an <strong>unofficial</strong> tool. Generated schedules are for simulation purposes only.</>
-                )}
-              </p>
-              <p>
-                {language === 'tr'
-                  ? 'Kayıt yapmadan önce lütfen derslerinizi ve kontenjanları resmi sistemden kontrol ediniz:'
-                  : 'Before registering, please verify your course sections and quotas on the official system:'}
-              </p>
-              <a
-                href="https://sis.ozyegin.edu.tr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sis-link"
-              >
-                sis.ozyegin.edu.tr
-              </a>
-            </div>
-            <div className="modal-actions">
-              <button className="modal-btn cancel-btn" onClick={cancelExport}>
-                {language === 'tr' ? 'İptal' : 'Cancel'}
-              </button>
-              <button className="modal-btn confirm-btn" onClick={confirmExport}>
-                {language === 'tr' ? 'Anladım & İndir' : 'I Understand & Download'}
-              </button>
-            </div>
+    {/* Export Confirmation Modal */ }
+  {
+    showExportModal && (
+      <div className="modal-overlay">
+        <div className="modal-content export-warning-modal">
+          <h3 className="modal-title">⚠️ {language === 'tr' ? 'Önemli Hatırlatma' : 'Important Reminder'}</h3>
+          <div className="modal-body">
+            <p>
+              {language === 'tr' ? (
+                <>OzuPlanner <strong>resmi olmayan</strong> bir araçtır. Oluşturulan programlar sadece simülasyon amaçlıdır.</>
+              ) : (
+                <>OzuPlanner is an <strong>unofficial</strong> tool. Generated schedules are for simulation purposes only.</>
+              )}
+            </p>
+            <p>
+              {language === 'tr'
+                ? 'Kayıt yapmadan önce lütfen derslerinizi ve kontenjanları resmi sistemden kontrol ediniz:'
+                : 'Before registering, please verify your course sections and quotas on the official system:'}
+            </p>
+            <a
+              href="https://sis.ozyegin.edu.tr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sis-link"
+            >
+              sis.ozyegin.edu.tr
+            </a>
+          </div>
+          <div className="modal-actions">
+            <button className="modal-btn cancel-btn" onClick={cancelExport}>
+              {language === 'tr' ? 'İptal' : 'Cancel'}
+            </button>
+            <button className="modal-btn confirm-btn" onClick={confirmExport}>
+              {language === 'tr' ? 'Anladım & İndir' : 'I Understand & Download'}
+            </button>
           </div>
         </div>
-      )}
-    </div>
+      </div>
+    )
+  }
+    </div >
   );
 }
 
