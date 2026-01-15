@@ -62,15 +62,7 @@ router.post('/event', async (req, res) => {
     }
 });
 
-// POST /api/logs/error - Log a client-side error
-router.post('/error', async (req, res) => {
-    try {
-        const { error, stack, url } = req.body;
-        await logActivity(req, 'CLIENT_ERROR', { error, stack, url });
-        res.json({ success: true });
-    } catch (error) {
-        res.status(500).json({ success: false });
-    }
-});
+// POST /api/logs/error - DELETED for security
+// Client-side errors are no longer accepted by the server.
 
 module.exports = router;
