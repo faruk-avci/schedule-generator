@@ -113,7 +113,7 @@ function organizeCourseData(rows, addedCourses, addedSections) {
                 const endIdx = timeToIndex(row.end_time);
 
                 for (let h = startIdx; h < endIdx; h++) {
-                    if (h >= 0 && h < 13) {
+                    if (h >= 0 && h < 16) { // Extended to cover classes up to 23:30
                         rawCourses[courseCode][sectionName].mask[dayIdx] |= (1 << h);
                     }
                 }
