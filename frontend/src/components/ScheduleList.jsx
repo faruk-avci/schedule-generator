@@ -240,10 +240,8 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
                           <div className="course-description">{lesson.description}</div>
                         )}
                       </div>
-                    </td>
-                  </div>
                       </div>
-          </td>
+                    </td>
           <td style={{ textAlign: 'center' }}>
             <span style={{
               display: 'inline-block',
@@ -261,22 +259,22 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
             <span style={{ fontWeight: '500' }}>{lesson.credits}</span>
           </td>
         </tr>
-        );
+            );
               })}
-      </tbody>
-    </table>
-        </div >
-
-    {/* Weekly Calendar View */ }
-    < div className = "calendar-view" >
-          <h4>{t.weeklySchedule}</h4>
-          <WeeklyCalendar
-            matrix={currentSchedule.matrix}
-            lessons={currentSchedule.lessons}
-            language={language}
-          />
-        </div >
+          </tbody>
+        </table>
       </div >
+
+      {/* Weekly Calendar View */}
+      < div className="calendar-view" >
+        <h4>{t.weeklySchedule}</h4>
+        <WeeklyCalendar
+          matrix={currentSchedule.matrix}
+          lessons={currentSchedule.lessons}
+          language={language}
+        />
+      </div >
+    </div >
 
     {/* Export Confirmation Modal */ }
   {
