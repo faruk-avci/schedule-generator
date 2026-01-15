@@ -34,30 +34,16 @@ const Analytics = {
      * Track an error specifically
      */
     trackError(error, context = '') {
-        const errorMsg = error instanceof Error ? error.message : String(error);
-
-        // Don't send stack traces for 4xx errors (Bad Request, Unauthorized, etc.)
-        // These are user/validation errors, not system crashes.
-        let stack = error instanceof Error ? error.stack : '';
-        if (error.response && error.response.status >= 400 && error.response.status < 500) {
-            stack = null; // Suppress stack for client-side validation/auth errors
-        }
-
-        logError(errorMsg, stack, window.location.href).catch(() => { });
+        // Only log to console for debugging, do not send to server
+        console.error(`[Analytics] Error tracked: ${context}`, error);
     },
 
     /**
      * Automatic setup for global error catching
      */
     initGlobalErrorTracking() {
-        window.onerror = (message, source, lineno, colno, error) => {
-            this.trackError(error || message, `Global: ${source}:${lineno}:${colno}`);
-        };
-
-        window.onunhandledrejection = (event) => {
-            this.trackError(event.reason, 'Unhandled Promise Rejection');
-        };
-        console.log('✅ Analytics initialized');
+        // Disabled global error reporting to backend for security
+        console.log('✅ Analytics initialized (Error reporting disabled)');
     }
 };
 
