@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { pool } = require('../database/db');
 
 // Ensure logs directory exists
 const LOG_DIR = path.join(__dirname, '../../logs');
@@ -72,4 +73,3 @@ async function logActivity(req, action, details = {}) {
     }
 }
 
-module.exports = { logActivity };
