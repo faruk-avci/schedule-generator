@@ -145,9 +145,7 @@ app.use('/api/logs', logRoutes);
 app.use('/api/admin', adminRoutes);
 
 // Admin Debug Dashboard (Hidden)
-app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin.html'));
-});
+// Admin Dashboard route removed for security
 
 // ============================================
 // ERROR HANDLING

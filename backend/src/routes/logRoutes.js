@@ -3,27 +3,8 @@ const router = express.Router();
 const { pool } = require('../database/db');
 const { logActivity } = require('../services/loggerService');
 
-// GET /api/logs - View all logs (Internal Debug)
-router.get('/', async (req, res) => {
-    try {
-        const result = await pool.query('SELECT * FROM activity_logs ORDER BY created_at DESC LIMIT 50');
-        res.json({ success: true, count: result.rowCount, logs: result.rows });
-    } catch (error) {
-        console.error('Log view error:', error);
-        res.status(500).json({ success: false, error: error.message });
-    }
-});
-
-// GET /api/logs/sessions - View active sessions (Internal Debug)
-router.get('/sessions', async (req, res) => {
-    try {
-        const result = await pool.query('SELECT sid, sess, expire FROM session ORDER BY expire DESC LIMIT 20');
-        res.json({ success: true, count: result.rowCount, sessions: result.rows });
-    } catch (error) {
-        console.error('Session view error:', error);
-        res.status(500).json({ success: false, error: error.message });
-    }
-});
+// GET /api/logs - DELETED for security
+// GET /api/logs/sessions - DELETED for security
 
 // POST /api/logs/view
 router.post('/view', async (req, res) => {
