@@ -11,6 +11,7 @@ const cors = require('cors');
 const { pool, testConnection } = require('./src/database/db');
 const PgSession = require('connect-pg-simple')(session);
 const logRoutes = require('./src/routes/logRoutes');
+const { logActivity, logSystemError, logAccess } = require('./src/services/loggerService');
 const courseRoutes = require('./src/routes/courseRoutes');
 const scheduleRoutes = require('./src/routes/scheduleRoutes');
 const adminRoutes = require('./src/routes/adminRoutes');
@@ -100,10 +101,12 @@ app.use(session({
 
 // Detailed request logger
 app.use((req, res, next) => {
-    const timestamp = new Date().toISOString();
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    const ua = req.headers['user-agent'] || 'No-UA';
-    console.log(`[${timestamp}] ${ip} - ${req.method} ${req.path} - ${ua}`);
+    const start = Date.now();
+    res.on('finish', () => {
+        const duration = Date.now() - start;
+        const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+        logAccess(req.method, req.path, res.statusCode, ip, duration);
+    });
     next();
 });
 
@@ -161,6 +164,7 @@ app.use((req, res) => {
 // General error handler
 app.use((err, req, res, next) => {
     console.error('Error:', err);
+    logSystemError(err, `Global Error (${req.path})`);
 
     // Add CORS headers even for errors!
     const origin = req.headers.origin;
