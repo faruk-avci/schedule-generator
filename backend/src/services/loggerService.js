@@ -1,4 +1,38 @@
-const { pool } = require('../database/db');
+const fs = require('fs');
+const path = require('path');
+
+// Ensure logs directory exists
+const LOG_DIR = path.join(__dirname, '../../logs');
+if (!fs.existsSync(LOG_DIR)) {
+    fs.mkdirSync(LOG_DIR, { recursive: true });
+}
+
+function appendToFile(filename, message) {
+    const timestamp = new Date().toISOString();
+    const logLine = `[${timestamp}] ${message}\n`;
+    fs.appendFile(path.join(LOG_DIR, filename), logLine, (err) => {
+        if (err) console.error('Failed to write to log file:', err);
+    });
+}
+
+/**
+ * Log server errors to file
+ */
+function logSystemError(error, context = '') {
+    const msg = `${context} - ${error.message}\nStack: ${error.stack}`;
+    appendToFile('error.log', msg);
+}
+
+/**
+ * Log HTTP requests to file
+ */
+function logAccess(method, url, status, ip, duration) {
+    const msg = `${method} ${url} ${status} - ${ip} - ${duration}ms`;
+    appendToFile('access.log', msg);
+}
+
+module.exports = { logActivity, logSystemError, logAccess };
+
 
 /**
  * Log user activity to the database
