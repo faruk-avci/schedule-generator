@@ -85,7 +85,8 @@ function generateAllSchedules(coursesData) {
  * Reconstruct 5x13 Matrix from a list of sections
  */
 function createMatrixFromSections(sections) {
-    const matrix = Array(5).fill(null).map(() => Array(13).fill(0));
+    // 5 days x 16 hours (8:40 to 23:40)
+    const matrix = Array(5).fill(null).map(() => Array(16).fill(0));
 
     for (const section of sections) {
         for (const slot of section.timeSlots) {
@@ -96,7 +97,7 @@ function createMatrixFromSections(sections) {
             const endIndex = timeToIndex(slot.endTime);
 
             for (let hour = startIndex; hour < endIndex; hour++) {
-                if (hour >= 0 && hour < 13) {
+                if (hour >= 0 && hour < 16) {
                     matrix[dayIndex][hour] = section.id;
                 }
             }
