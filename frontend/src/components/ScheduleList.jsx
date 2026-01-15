@@ -226,9 +226,15 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
               {currentSchedule.lessons.map((lesson, idx) => {
                 // Try to strip the course code part (e.g. "EE101A" -> "A")
                 // Parsing: Course Code is initial letters+digits
+                // Parsing: Course Code is initial letters+digits
                 const match = lesson.section_name.match(/^([A-Z]+\d+)(.*)$/);
                 const courseCode = match ? match[1] : '';
-                const sectionLetter = match ? match[2] : lesson.section_name;
+                let sectionLetter = match ? match[2] : lesson.section_name;
+
+                // If section part starts with 'L' and has more chars (e.g. LA, LB), strip 'L'
+                if (sectionLetter.length > 1 && sectionLetter.startsWith('L')) {
+                  sectionLetter = sectionLetter.substring(1);
+                }
 
                 return (
                   <tr key={idx} className={idx % 2 === 0 ? 'row-even' : 'row-odd'}>

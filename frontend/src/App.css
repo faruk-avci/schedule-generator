@@ -839,13 +839,16 @@ body.dark-mode .course-name-display {
 }
 
 .course-code-badge {
-  background-color: var(--ozu-burgundy);
-  color: white;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: 700;
-  font-size: 13px;
+  color: var(--ozu-burgundy);
+  font-weight: 800;
+  font-size: 14px;
   white-space: nowrap;
+}
+
+.courses-table td,
+.courses-table th {
+  padding: 16px 16px;
+  /* Increased padding */
 }
 
 .courses-table tbody tr:hover {
