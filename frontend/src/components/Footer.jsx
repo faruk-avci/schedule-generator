@@ -23,7 +23,7 @@ function Footer({ onNavigate, language }) {
                 Ders bilgileri{' '}
                 <a
                   target="_blank"
-                  href="https://sis.ozyegin.edu.tr/OZU_GWT/WEB/CourseCatalogOfferUI?locale=en"
+                  href="https://sis.ozyegin.edu.tr/OZU_GWT/WEB/CourseCatalogOfferUI?locale=tr"
                   className="footer-link"
                   onClick={() => Analytics.track('CLICK_SIS_LINK')}
                 >
@@ -76,7 +76,7 @@ function Footer({ onNavigate, language }) {
             className="footer-link footer-author"
             onClick={() => Analytics.track(Analytics.Events.CLICK_GITHUB_AUTHOR)}
           >
-            @faruk.avci
+            @faruk-avci
           </a>
         </p>
       </div>

@@ -6,6 +6,8 @@ import Analytics from '../utils/analytics';
 function ScheduleList({ schedules, conflicts = [], overload = null, loading, language = 'tr' }) {
   const [selectedSchedule, setSelectedSchedule] = useState(0);
   const [sortBy, setSortBy] = useState('default'); // default, morning, freeDays
+  const [showExportModal, setShowExportModal] = useState(false);
+  const [pendingExportAction, setPendingExportAction] = useState(null);
   const t = translations[language] || translations.tr;
 
   if (loading) {
@@ -116,6 +118,24 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
   const sortedSchedules = getSortedSchedules();
   const currentSchedule = sortedSchedules[selectedSchedule] || sortedSchedules[0];
 
+  const handleExportClick = (action) => {
+    setPendingExportAction(() => action);
+    setShowExportModal(true);
+  };
+
+  const confirmExport = () => {
+    if (pendingExportAction) {
+      pendingExportAction();
+      setPendingExportAction(null);
+    }
+    setShowExportModal(false);
+  };
+
+  const cancelExport = () => {
+    setPendingExportAction(null);
+    setShowExportModal(false);
+  };
+
   return (
     <div className="schedules-container">
       <div className="schedules-header" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
@@ -163,28 +183,28 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
           <div className="export-buttons">
             <button
               className="export-btn export-pdf"
-              onClick={() => {
+              onClick={() => handleExportClick(() => {
                 Analytics.track(Analytics.Events.CLICK_EXPORT_PDF);
                 exportAsPDF(`schedule-${selectedSchedule}`, `OZU-${t.schedule}-${selectedSchedule + 1}`);
-              }}
+              })}
             >
               📄 {t.exportPDF}
             </button>
             <button
               className="export-btn export-image"
-              onClick={() => {
+              onClick={() => handleExportClick(() => {
                 Analytics.track(Analytics.Events.CLICK_EXPORT_IMAGE);
                 exportAsImage(`schedule-${selectedSchedule}`, `OZU-${t.schedule}-${selectedSchedule + 1}`);
-              }}
+              })}
             >
               🖼️ {t.exportImage}
             </button>
             <button
               className="export-btn export-calendar"
-              onClick={() => {
+              onClick={() => handleExportClick(() => {
                 Analytics.track(Analytics.Events.CLICK_EXPORT_CALENDAR);
                 exportAsICS(currentSchedule, 'Spring 2025');
-              }}
+              })}
             >
               📅 {t.exportCalendar}
             </button>
@@ -239,6 +259,43 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
           />
         </div>
       </div>
+
+      {/* Export Confirmation Modal */}
+      {showExportModal && (
+        <div className="modal-overlay">
+          <div className="modal-content export-warning-modal">
+            <h3 className="modal-title">⚠️ {language === 'tr' ? 'Önemli Hatırlatma' : 'Important Reminder'}</h3>
+            <div className="modal-body">
+              <p>
+                {language === 'tr'
+                  ? 'OzuPlanner <strong>resmi olmayan</strong> bir planlama aracıdır. Bu sadece bir simülasyondur.'
+                  : 'OzuPlanner is an <strong>unofficial</strong> planning tool. This is only a simulation.'}
+              </p>
+              <p>
+                {language === 'tr'
+                  ? 'Kayıt yapmadan önce derslerinizi ve kontenjanları mutlaka okulun resmi sisteminden kontrol ediniz:'
+                  : 'Before registering, please verify your courses and quotas on the official university system:'}
+              </p>
+              <a
+                href="https://sis.ozyegin.edu.tr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sis-link"
+              >
+                sis.ozyegin.edu.tr
+              </a>
+            </div>
+            <div className="modal-actions">
+              <button className="modal-btn cancel-btn" onClick={cancelExport}>
+                {language === 'tr' ? 'İptal' : 'Cancel'}
+              </button>
+              <button className="modal-btn confirm-btn" onClick={confirmExport}>
+                {language === 'tr' ? 'Anladım & İndir' : 'I Understand & Download'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
