@@ -138,28 +138,6 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
 
   return (
     <div className="schedules-container">
-      {/* Partial Conflicts Display (Show even if schedules exist) */}
-      {conflicts.length > 0 && (
-        <div className="conflicts-container" style={{ marginBottom: '20px' }}>
-          <h3 className="conflicts-title" style={{ fontSize: '16px' }}>
-            {language === 'tr' ? '⚠️ Kısmi Çakışmalar Tespit Edildi' : '⚠️ Partial Conflicts Detected'}
-          </h3>
-          <p className="conflicts-subtitle" style={{ fontSize: '14px', marginBottom: '10px' }}>
-            {language === 'tr'
-              ? 'Aşağıdaki ders kombinasyonları çakışıyor, ancak diğer alternatifler aşağıda listelenmiştir:'
-              : 'The following combinations conflict, but valid schedules were found below:'}
-          </p>
-          <div className="conflicts-list">
-            {conflicts.map((conflict, idx) => (
-              <div key={idx} className="conflict-item" style={{ padding: '8px 12px' }}>
-                <div className="conflict-main">
-                  <span className="conflict-text"><strong>{conflict.courses.join(' & ')}</strong></span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
       <div className="schedules-header" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
         <h2>{schedules.length} {t.schedulesFound}</h2>
 
@@ -360,8 +338,24 @@ function WeeklyCalendar({ matrix, lessons, language = 'tr' }) {
     ? ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma']
     : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
+  // Determine max hour dynamically
+  // Default to 17:40 (index 9, since 8:40 is 0)
+  // Indices: 0=8:40, 1=9:40 ... 9=17:40 ...
+  let maxHourIndex = 9;
+
+  matrix.forEach(day => {
+    // day is array of slot IDs. Find last non-zero index.
+    for (let i = day.length - 1; i >= 0; i--) {
+      if (day[i] !== 0) {
+        if (i > maxHourIndex) maxHourIndex = i;
+        break;
+      }
+    }
+  });
+
   const hours = [];
-  for (let h = 8; h <= 20; h++) {
+  // Ensure we cover up to the maxHour found
+  for (let h = 8; h <= (8 + maxHourIndex); h++) {
     hours.push(`${h}:40`);
   }
 
