@@ -268,13 +268,13 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
             <div className="modal-body">
               <p>
                 {language === 'tr'
-                  ? 'OzuPlanner <strong>resmi olmayan</strong> bir planlama aracıdır. Bu sadece bir simülasyondur.'
-                  : 'OzuPlanner is an <strong>unofficial</strong> planning tool. This is only a simulation.'}
+                  ? 'OzuPlanner <strong>resmi olmayan</strong> bir araçtır. Oluşturulan programlar sadece simülasyon amaçlıdır.'
+                  : 'OzuPlanner is an <strong>unofficial</strong> tool. Generated schedules are for simulation purposes only.'}
               </p>
               <p>
                 {language === 'tr'
-                  ? 'Kayıt yapmadan önce derslerinizi ve kontenjanları mutlaka okulun resmi sisteminden kontrol ediniz:'
-                  : 'Before registering, please verify your courses and quotas on the official university system:'}
+                  ? 'Kayıt yapmadan önce lütfen derslerinizi ve kontenjanları resmi sistemden kontrol ediniz:'
+                  : 'Before registering, please verify your course sections and quotas on the official system:'}
               </p>
               <a
                 href="https://sis.ozyegin.edu.tr"
