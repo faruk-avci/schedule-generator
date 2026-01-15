@@ -287,6 +287,18 @@ async function generateSchedule(addedCourses, addedSections) {
                 if (result.success) {
                     if (result.totalGenerated === 0) {
                         const conflicts = detectConflicts(filteredCourses, rawCourses, addedCourses, addedSections);
+
+                        // Fallback for complex (3+ way) conflicts that pairwise detection misses
+                        if (conflicts.length === 0) {
+                            const courseNames = Object.keys(filteredCourses);
+                            conflicts.push({
+                                type: 'COMPLEX_CONFLICT',
+                                courses: courseNames,
+                                message: 'Complex time conflict detected involving multiple courses.',
+                                suggestion: 'Try changing sections for one of these courses.'
+                            });
+                        }
+
                         resolve({
                             success: true,
                             message: 'No valid schedules found (all combinations have time conflicts)',
