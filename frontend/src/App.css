@@ -829,8 +829,27 @@ body.dark-mode .course-name-display {
   color: var(--ozu-gray);
 }
 
-.courses-table tbody tr:hover {
+
+.row-odd {
+  background-color: #ffffff;
+}
+
+.row-even {
   background-color: #f9fafb;
+}
+
+.course-code-badge {
+  background-color: var(--ozu-burgundy);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.courses-table tbody tr:hover {
+  background-color: #f3f4f6;
 }
 
 /* Calendar View */

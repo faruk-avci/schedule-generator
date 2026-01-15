@@ -225,14 +225,19 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
             <tbody>
               {currentSchedule.lessons.map((lesson, idx) => {
                 // Try to strip the course code part (e.g. "EE101A" -> "A")
-                // Assuming format is PREFIX123SECTION
-                const sectionLetter = lesson.section_name.replace(/^[A-Z]+\d+/, '');
+                // Parsing: Course Code is initial letters+digits
+                const match = lesson.section_name.match(/^([A-Z]+\d+)(.*)$/);
+                const courseCode = match ? match[1] : '';
+                const sectionLetter = match ? match[2] : lesson.section_name;
 
                 return (
-                  <tr key={idx} style={{ color: 'black' }}>
+                  <tr key={idx} className={idx % 2 === 0 ? 'row-even' : 'row-odd'}>
                     <td>
                       <div className="course-cell-main">
-                        <strong>{lesson.course_name}</strong>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span className="course-code-badge">{courseCode}</span>
+                          <strong>{lesson.course_name}</strong>
+                        </div>
                         {lesson.faculty && (
                           <div className="course-faculty">{lesson.faculty}</div>
                         )}
