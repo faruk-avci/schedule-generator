@@ -240,82 +240,81 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
                           <div className="course-description">{lesson.description}</div>
                         )}
                       </div>
-                      </div>
                     </td>
-          <td style={{ textAlign: 'center' }}>
-            <span style={{
-              display: 'inline-block',
-              padding: '4px 10px',
-              background: '#f3f4f6',
-              borderRadius: '6px',
-              fontWeight: 'bold',
-              color: '#8B1538'
-            }}>
-              {sectionLetter || lesson.section_name}
-            </span>
-          </td>
-          <td>{lesson.lecturer}</td>
-          <td style={{ textAlign: 'center' }}>
-            <span style={{ fontWeight: '500' }}>{lesson.credits}</span>
-          </td>
-        </tr>
-            );
+                    <td style={{ textAlign: 'center' }}>
+                      <span style={{
+                        display: 'inline-block',
+                        padding: '4px 10px',
+                        background: '#f3f4f6',
+                        borderRadius: '6px',
+                        fontWeight: 'bold',
+                        color: '#8B1538'
+                      }}>
+                        {sectionLetter || lesson.section_name}
+                      </span>
+                    </td>
+                    <td>{lesson.lecturer}</td>
+                    <td style={{ textAlign: 'center' }}>
+                      <span style={{ fontWeight: '500' }}>{lesson.credits}</span>
+                    </td>
+                  </tr>
+                );
               })}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div >
+
+        {/* Weekly Calendar View */}
+        < div className="calendar-view" >
+          <h4>{t.weeklySchedule}</h4>
+          <WeeklyCalendar
+            matrix={currentSchedule.matrix}
+            lessons={currentSchedule.lessons}
+            language={language}
+          />
+        </div >
       </div >
 
-      {/* Weekly Calendar View */}
-      < div className="calendar-view" >
-        <h4>{t.weeklySchedule}</h4>
-        <WeeklyCalendar
-          matrix={currentSchedule.matrix}
-          lessons={currentSchedule.lessons}
-          language={language}
-        />
-      </div >
-    </div >
-
-    {/* Export Confirmation Modal */ }
-  {
-    showExportModal && (
-      <div className="modal-overlay">
-        <div className="modal-content export-warning-modal">
-          <h3 className="modal-title">⚠️ {language === 'tr' ? 'Önemli Hatırlatma' : 'Important Reminder'}</h3>
-          <div className="modal-body">
-            <p>
-              {language === 'tr' ? (
-                <>OzuPlanner <strong>resmi olmayan</strong> bir araçtır. Oluşturulan programlar sadece simülasyon amaçlıdır.</>
-              ) : (
-                <>OzuPlanner is an <strong>unofficial</strong> tool. Generated schedules are for simulation purposes only.</>
-              )}
-            </p>
-            <p>
-              {language === 'tr'
-                ? 'Kayıt yapmadan önce lütfen derslerinizi ve kontenjanları resmi sistemden kontrol ediniz:'
-                : 'Before registering, please verify your course sections and quotas on the official system:'}
-            </p>
-            <a
-              href="https://sis.ozyegin.edu.tr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="sis-link"
-            >
-              sis.ozyegin.edu.tr
-            </a>
+      {/* Export Confirmation Modal */}
+      {
+        showExportModal && (
+          <div className="modal-overlay">
+            <div className="modal-content export-warning-modal">
+              <h3 className="modal-title">⚠️ {language === 'tr' ? 'Önemli Hatırlatma' : 'Important Reminder'}</h3>
+              <div className="modal-body">
+                <p>
+                  {language === 'tr' ? (
+                    <>OzuPlanner <strong>resmi olmayan</strong> bir araçtır. Oluşturulan programlar sadece simülasyon amaçlıdır.</>
+                  ) : (
+                    <>OzuPlanner is an <strong>unofficial</strong> tool. Generated schedules are for simulation purposes only.</>
+                  )}
+                </p>
+                <p>
+                  {language === 'tr'
+                    ? 'Kayıt yapmadan önce lütfen derslerinizi ve kontenjanları resmi sistemden kontrol ediniz:'
+                    : 'Before registering, please verify your course sections and quotas on the official system:'}
+                </p>
+                <a
+                  href="https://sis.ozyegin.edu.tr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="sis-link"
+                >
+                  sis.ozyegin.edu.tr
+                </a>
+              </div>
+              <div className="modal-actions">
+                <button className="modal-btn cancel-btn" onClick={cancelExport}>
+                  {language === 'tr' ? 'İptal' : 'Cancel'}
+                </button>
+                <button className="modal-btn confirm-btn" onClick={confirmExport}>
+                  {language === 'tr' ? 'Anladım & İndir' : 'I Understand & Download'}
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="modal-actions">
-            <button className="modal-btn cancel-btn" onClick={cancelExport}>
-              {language === 'tr' ? 'İptal' : 'Cancel'}
-            </button>
-            <button className="modal-btn confirm-btn" onClick={confirmExport}>
-              {language === 'tr' ? 'Anladım & İndir' : 'I Understand & Download'}
-            </button>
-          </div>
-        </div>
-      </div>
-    )
-  }
+        )
+      }
     </div >
   );
 }
