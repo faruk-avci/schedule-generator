@@ -267,9 +267,11 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
             <h3 className="modal-title">⚠️ {language === 'tr' ? 'Önemli Hatırlatma' : 'Important Reminder'}</h3>
             <div className="modal-body">
               <p>
-                {language === 'tr'
-                  ? 'OzuPlanner <strong>resmi olmayan</strong> bir araçtır. Oluşturulan programlar sadece simülasyon amaçlıdır.'
-                  : 'OzuPlanner is an <strong>unofficial</strong> tool. Generated schedules are for simulation purposes only.'}
+                {language === 'tr' ? (
+                  <>OzuPlanner <strong>resmi olmayan</strong> bir araçtır. Oluşturulan programlar sadece simülasyon amaçlıdır.</>
+                ) : (
+                  <>OzuPlanner is an <strong>unofficial</strong> tool. Generated schedules are for simulation purposes only.</>
+                )}
               </p>
               <p>
                 {language === 'tr'
