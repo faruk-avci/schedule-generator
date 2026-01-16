@@ -339,7 +339,10 @@ async function generateSchedule(addedCourses, addedSections, limit = 120) {
         return new Promise((resolve, reject) => {
             const workerPath = path.join(__dirname, 'scheduleWorker.js');
             const worker = new Worker(workerPath, {
-                workerData: { filteredCourses }
+                workerData: {
+                    filteredCourses,
+                    limit
+                }
             });
 
             worker.on('message', (result) => {
