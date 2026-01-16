@@ -673,6 +673,7 @@ function App() {
         <Route path="/contact" element={<Contact language={language} onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
         {/* 404 Catch-All Route */}
         <Route path="*" element={<NotFound language={language} onNavigate={(path) => navigate(path)} />} />
+        <Route path="/results" element={<ResultsPage language={language} />} />
       </Routes>
       <Footer onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} language={language} />
       <CookieBanner language={language} />
@@ -713,12 +714,6 @@ function App() {
           </div>
         </div>
       )}
-      <FocusMode
-        isOpen={showFocusMode}
-        onClose={() => setShowFocusMode(false)}
-        schedules={largeSchedules}
-        language={language}
-      />
     </div>
   )
 }
