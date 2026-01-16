@@ -209,7 +209,7 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
             className={`schedule-tab ${selectedSchedule === index ? 'active' : ''}`}
             onClick={() => setSelectedSchedule(index)}
           >
-            {t.schedule} {index + 1}
+            {t.schedule} {index + 1 + offset}
           </button>
         ))}
       </div>
@@ -218,7 +218,7 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
       <div className="schedule-details" id={`schedule-${selectedSchedule}`}>
         <div className="schedule-info-row">
           <div className="schedule-title">
-            <h3>{t.schedule} {selectedSchedule + 1}</h3>
+            <h3>{t.schedule} {selectedSchedule + 1 + offset}</h3>
             <p className="total-credits">{t.totalCredits}: {currentSchedule.totalCredits}</p>
           </div>
           <div className="export-buttons">
@@ -226,7 +226,7 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
               className="export-btn export-pdf"
               onClick={() => handleExportClick(() => {
                 Analytics.track(Analytics.Events.CLICK_EXPORT_PDF);
-                exportAsPDF(`schedule-${selectedSchedule}`, `OZU-${t.schedule}-${selectedSchedule + 1}`);
+                exportAsPDF(`schedule-${selectedSchedule}`, `OZU-${t.schedule}-${selectedSchedule + 1 + offset}`);
               })}
             >
               📄 {t.exportPDF}
