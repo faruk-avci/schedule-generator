@@ -109,27 +109,8 @@ function organizeCourseData(rows, addedCourses, addedSections) {
 
             const dayIdx = DAY_INDEX[row.day_of_week];
             if (dayIdx !== undefined) {
-                let startIdx = timeToIndex(row.start_time);
-                let endIdx = timeToIndex(row.end_time);
-
-                // Sanitize Bad Data (e.g. 20:40 - 9:30 should be 21:30)
-                if (endIdx <= startIdx) {
-                    endIdx += 12; // Try adding 12 hours (PM correction)
-
-                    // If still weird (e.g. 20:40 - 8:30 -> 20:30 which is < 20:40), force valid slot
-                    if (endIdx <= startIdx) {
-                        endIdx = startIdx + 1; // Force at least 1 hour duration
-                    }
-
-                    // Fix the end_time string for frontend display
-                    const endHour = (parseInt(row.end_time.split(':')[0]) + 12) % 24;
-                    // If we forced it, recalculate hour based on forced index (index + 8)
-                    const finalEndHour = endIdx + 8;
-                    row.end_time = `${finalEndHour}:${row.end_time.split(':')[1]}`;
-
-                    // Update data object
-                    rawCourses[courseCode][sectionName].timeSlots[rawCourses[courseCode][sectionName].timeSlots.length - 1].endTime = row.end_time;
-                }
+                const startIdx = timeToIndex(row.start_time);
+                const endIdx = timeToIndex(row.end_time);
 
                 for (let h = startIdx; h < endIdx; h++) {
                     if (h >= 0 && h < 16) { // Extended to cover classes up to 23:30
@@ -292,7 +273,7 @@ function detectConflicts(filteredCourses, rawCourses, addedCourses, addedSection
 /**
  * Main schedule generation function (now offloaded to Worker Threads)
  */
-async function generateSchedule(addedCourses, addedSections) {
+async function generateSchedule(addedCourses, addedSections, limit = 120) {
     try {
         if ((!addedCourses || addedCourses.length === 0) &&
             (!addedSections || addedSections.length === 0)) {
