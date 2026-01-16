@@ -25,7 +25,7 @@ const ResultsPage = ({ language }) => {
     );
 
     return (
-        <div className="results-page-container" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column' }}>
+        <div className="results-page-container" style={{ width: '100%', maxWidth: '100%', margin: '0 auto', marginTop: '20px', display: 'flex', flexDirection: 'column' }}>
             {/* Header / Nav Area for Results */}
             <div className="results-header" style={{
                 marginBottom: '20px',
