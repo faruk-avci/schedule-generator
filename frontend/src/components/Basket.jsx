@@ -183,11 +183,12 @@ function Basket({
               >
                 {loading ? (language === 'tr' ? 'Oluşturuluyor...' : 'Generating...') : t.generateSchedules}
               </button>
+            </>
           )}
-            </div>
-      )}
         </div>
-      );
+      )}
+    </div>
+  );
 }
 
-      export default Basket;
+export default Basket;
