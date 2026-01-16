@@ -12,7 +12,9 @@ function Basket({
   savedBaskets = [],
   onSaveBasket,
   onLoadBasket,
-  onRemoveSavedBasket
+  onRemoveSavedBasket,
+  preference,
+  setPreference
 }) {
   const t = translations[language];
   const totalItems = basket.courses.length + basket.sections.length;
@@ -143,18 +145,49 @@ function Basket({
           )}
 
           {totalItems > 0 && (
-            <button
-              className="generate-button-basket"
-              onClick={() => onGenerate()}
-              disabled={loading}
-            >
-              {loading ? (language === 'tr' ? 'Oluşturuluyor...' : 'Generating...') : t.generateSchedules}
-            </button>
+            <>
+              <div style={{ marginBottom: '15px' }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  {language === 'tr' ? 'Sıralama Tercihi' : 'Sorting Preference'}
+                </label>
+                <div style={{ position: 'relative' }}>
+                  <select
+                    value={preference}
+                    onChange={(e) => setPreference(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '12px 16px',
+                      borderRadius: '8px',
+                      border: '1px solid var(--border-color)',
+                      backgroundColor: 'white',
+                      fontSize: '15px',
+                      color: 'var(--text-primary)',
+                      cursor: 'pointer',
+                      appearance: 'none',
+                      fontWeight: '500',
+                      boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+                    }}
+                  >
+                    <option value="morning">{language === 'tr' ? '☀️ Sabah Ağırlıklı (Erken Bitir)' : '☀️ More Morning (Finish Early)'}</option>
+                    <option value="evening">{language === 'tr' ? '🌙 Öğlen Ağırlıklı (Geç Başla)' : '🌙 More Afternoon (Start Late)'}</option>
+                    <option value="balanced">{language === 'tr' ? '⚖️ Dengeli / Karışık' : '⚖️ Balanced / Mixed'}</option>
+                  </select>
+                  <div style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-secondary)' }}>▼</div>
+                </div>
+              </div>
+
+              <button
+                className="generate-button-basket"
+                onClick={() => onGenerate()}
+                disabled={loading}
+              >
+                {loading ? (language === 'tr' ? 'Oluşturuluyor...' : 'Generating...') : t.generateSchedules}
+              </button>
           )}
-        </div>
+            </div>
       )}
-    </div>
-  );
+        </div>
+      );
 }
 
-export default Basket;
+      export default Basket;
