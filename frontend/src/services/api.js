@@ -42,8 +42,11 @@ export const setMajor = async (major) => {
 };
 
 // Schedule APIs
-export const generateSchedule = async (limit = null) => {
-    const payload = limit ? { limit } : {};
+export const generateSchedule = async (limit = null, preference = null) => {
+    const payload = {};
+    if (limit) payload.limit = limit;
+    if (preference) payload.preference = preference;
+
     const response = await api.post('/schedule/generate', payload);
     return response.data;
 };
