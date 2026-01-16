@@ -96,6 +96,7 @@ function App() {
   const [schedules, setSchedules] = useState([]);
   const [conflicts, setConflicts] = useState([]);
   const [generatingSchedules, setGeneratingSchedules] = useState(false);
+  const [preference, setPreference] = useState('morning');
   const [overload, setOverload] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
   const [term, setTerm] = useState('');
@@ -398,7 +399,7 @@ function App() {
     setMessage(null);
 
     try {
-      const data = await generateSchedule();
+      const data = await generateSchedule(120, preference);
       if (data.success) {
         setSchedules(data.schedules);
         setConflicts(data.conflicts || []);
@@ -465,11 +466,11 @@ function App() {
   const handleViewAll = async () => {
     setGeneratingSchedules(true);
     try {
-      const data = await generateSchedule(600);
+      const data = await generateSchedule(600, preference);
       if (data.success) {
         Analytics.track('VIEW_ALL_600', { count: data.totalSchedules });
         // Navigate to new results page with data
-        navigate('/results', { state: { schedules: data.schedules } });
+        navigate('/results', { state: { schedules: data.schedules, initialSort: preference } });
       }
     } catch (error) {
       console.error('Error fetching all schedules:', error);
@@ -644,6 +645,8 @@ function App() {
                 onGenerate={handleGenerate}
                 loading={generatingSchedules}
                 language={language}
+                preference={preference}
+                setPreference={setPreference}
                 savedBaskets={savedBaskets}
                 onSaveBasket={handleSaveBasket}
                 onLoadBasket={handleLoadSavedBasket}
