@@ -3,7 +3,7 @@ import { exportAsImage, exportAsPDF, exportAsICS } from '../utils/exportSchedule
 import { translations, getDayName } from '../utils/translations';
 import Analytics from '../utils/analytics';
 
-function ScheduleList({ schedules, conflicts = [], overload = null, loading, language = 'tr', isLimited = false, onViewAll = () => { } }) {
+function ScheduleList({ schedules, conflicts = [], overload = null, loading, language = 'tr', isLimited = false, onViewAll = () => { }, offset = 0 }) {
   const [selectedSchedule, setSelectedSchedule] = useState(0);
   const [sortBy, setSortBy] = useState('default'); // default, morning, freeDays
   const [showExportModal, setShowExportModal] = useState(false);
@@ -178,8 +178,8 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
             <span style={{ fontSize: '1.2rem' }}>⚠️</span>
             <span>
               {language === 'tr'
-                ? 'Çok fazla olasılık bulunduğu için sadece ilk 120 program gösteriliyor.'
-                : 'Showing only the first 120 schedules due to high volume.'}
+                ? 'Çok fazla olasılık bulunduğu için sadece ilk 120 program gösteriliyor. Program sayısını azaltmak için tüm dersi eklemek yerine belirli şubeleri (sections) seçmeyi deneyebilirsiniz.'
+                : 'Showing only the first 120 results due to high volume. To reduce complexity, try selecting specific sections instead of adding the whole course.'}
             </span>
           </div>
           <button
@@ -196,7 +196,7 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
               boxShadow: '0 2px 4px rgba(245, 127, 23, 0.2)'
             }}
           >
-            {language === 'tr' ? '600 Sonucu İncele' : 'View All 600 Results'}
+            {language === 'tr' ? 'Daha Fazla Sonuç Gör' : 'View More Results'}
           </button>
         </div>
       )}
