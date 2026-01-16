@@ -12,23 +12,18 @@ const ResultsPage = ({ language }) => {
     const [sortBy, setSortBy] = useState(initialSort);
     const pageSize = 50;
 
-    // Helper: Calculate Score (Duplicate of Backend Logic for Client-Side responsiveness)
+    // Helper: Calculate Score
     const getScheduleScore = (schedule, preference) => {
         if (preference === 'balanced') return 0;
-        let score = 0;
-        schedule.lessons.forEach(lesson => {
-            // We need time slots to score. 
-            // The structure in 'lessons' might NOT have time slots directly if transformed?
-            // Wait, ScheduleList receives 'schedules' which has 'matrix'.
-            // Or 'lessons' has times?
-            // Backend 'transformSchedules' returns { lessons: [...], matrix: ... }
-            // 'lessons' items don't have time slots easily accessible (just names).
-            // But 'matrix' has IDs.
-            // Actually, we can use the MATRIX to score!
-        });
 
-        // Matrix is 5 arrays of 16 integers.
-        // day[0] is Monday.
+        // Use Backend Pre-calculated Metrics if available
+        if (schedule.metrics) {
+            if (preference === 'morning') return schedule.metrics.morningScore;
+            if (preference === 'evening') return schedule.metrics.eveningScore;
+        }
+
+        // Fallback: Client-side calculation (if metrics missing)
+        let score = 0;
         if (!schedule.matrix) return 0;
 
         schedule.matrix.forEach((dayRow) => {
