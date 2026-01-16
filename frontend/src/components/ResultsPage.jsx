@@ -130,8 +130,6 @@ const ResultsPage = ({ language }) => {
                 <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
                     {/* Pagination Controls */}
                     <div className="pagination-controls" style={{
-                    {/* Pagination Controls */}
-                    <div className="pagination-controls" style={{
                         display: 'flex',
                         alignItems: 'center',
                         gap: '10px',
