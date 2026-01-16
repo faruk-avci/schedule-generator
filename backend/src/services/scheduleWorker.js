@@ -144,7 +144,8 @@ try {
     };
 
     if (allSchedules.length > 0) {
-        const maxSchedules = 120;
+        // Use provided limit or default to 120
+        const maxSchedules = workerData.limit || 120;
         const limitedSchedules = allSchedules.slice(0, maxSchedules);
         result.schedules = transformSchedules(limitedSchedules);
         result.limited = allSchedules.length > maxSchedules;
