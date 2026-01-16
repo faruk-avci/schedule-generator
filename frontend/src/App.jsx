@@ -661,6 +661,8 @@ function App() {
                 overload={overload}
                 loading={generatingSchedules}
                 language={language}
+                isLimited={isLimited}
+                onViewAll={handleViewAll}
               />
             </div>
 
