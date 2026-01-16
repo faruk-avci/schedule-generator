@@ -86,7 +86,30 @@ function generateAllSchedules(coursesData) {
     return validSchedules;
 }
 
-// ... (createMatrixFromSections helper remains same)
+/**
+ * Reconstruct 5x13 Matrix from a list of sections
+ */
+function createMatrixFromSections(sections) {
+    // 5 days x 16 hours (8:40 to 23:40)
+    const matrix = Array(5).fill(null).map(() => Array(16).fill(0));
+
+    for (const section of sections) {
+        for (const slot of section.timeSlots) {
+            const dayIndex = DAY_INDEX[slot.day];
+            if (dayIndex === undefined) continue;
+
+            const startIndex = timeToIndex(slot.startTime);
+            const endIndex = timeToIndex(slot.endTime);
+
+            for (let hour = startIndex; hour < endIndex; hour++) {
+                if (hour >= 0 && hour < 16) {
+                    matrix[dayIndex][hour] = section.id;
+                }
+            }
+        }
+    }
+    return matrix;
+}
 
 /**
  * Score a schedule based on preference
@@ -120,7 +143,31 @@ function getScheduleScore(sections, preference) {
     return score;
 }
 
-// ... (transformSchedules helper)
+/**
+ * Transform schedule lists into readable format with matrix
+ */
+function transformSchedules(scheduleLists) {
+    return scheduleLists.map(sections => {
+        const matrix = createMatrixFromSections(sections);
+
+        const lessons = sections.map(section => ({
+            id: section.id,
+            course_code: section.course_code,
+            course_name: section.course_name,
+            section_name: section.section_name,
+            lecturer: section.lecturer,
+            credits: section.credits
+        }));
+
+        const totalCredits = lessons.reduce((sum, lesson) => sum + lesson.credits, 0);
+
+        return {
+            lessons: lessons,
+            totalCredits: totalCredits,
+            matrix: matrix
+        };
+    });
+}
 
 // Execute calculation
 try {
