@@ -273,7 +273,7 @@ function detectConflicts(filteredCourses, rawCourses, addedCourses, addedSection
 /**
  * Main schedule generation function (now offloaded to Worker Threads)
  */
-async function generateSchedule(addedCourses, addedSections, limit = 120) {
+async function generateSchedule(addedCourses, addedSections, limit = 120, preference = 'morning') {
     try {
         if ((!addedCourses || addedCourses.length === 0) &&
             (!addedSections || addedSections.length === 0)) {
@@ -284,6 +284,10 @@ async function generateSchedule(addedCourses, addedSections, limit = 120) {
                 schedules: []
             };
         }
+
+        // ... (lines 280-340 remain same, skip logic) 
+        // NOTE: replace_file_content uses exact matching.
+        // It's safer to just target the specific blocks.
 
         const currentTerm = process.env.CURRENT_TERM || "";
         const allCourseCodes = [
@@ -341,7 +345,8 @@ async function generateSchedule(addedCourses, addedSections, limit = 120) {
             const worker = new Worker(workerPath, {
                 workerData: {
                     filteredCourses,
-                    limit
+                    limit,
+                    preference
                 }
             });
 
