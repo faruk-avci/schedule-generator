@@ -715,6 +715,12 @@ function App() {
           </div>
         </div>
       )}
+      <FocusMode
+        isOpen={showFocusMode}
+        onClose={() => setShowFocusMode(false)}
+        schedules={largeSchedules}
+        language={language}
+      />
     </div>
   )
 }
