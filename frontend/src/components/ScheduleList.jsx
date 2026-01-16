@@ -3,7 +3,7 @@ import { exportAsImage, exportAsPDF, exportAsICS } from '../utils/exportSchedule
 import { translations, getDayName } from '../utils/translations';
 import Analytics from '../utils/analytics';
 
-function ScheduleList({ schedules, conflicts = [], overload = null, loading, language = 'tr' }) {
+function ScheduleList({ schedules, conflicts = [], overload = null, loading, language = 'tr', isLimited = false, onViewAll = () => { } }) {
   const [selectedSchedule, setSelectedSchedule] = useState(0);
   const [sortBy, setSortBy] = useState('default'); // default, morning, freeDays
   const [showExportModal, setShowExportModal] = useState(false);
