@@ -29,7 +29,9 @@ router.post('/generate', async (req, res) => {
         let limit = req.body.limit ? parseInt(req.body.limit) : 120;
         if (limit > 600) limit = 600; // Hard cap for safety
 
-        const result = await generateSchedule(addedCourses, addedSections, limit);
+        const preference = req.body.preference || 'morning';
+
+        const result = await generateSchedule(addedCourses, addedSections, limit, preference);
 
         if (!result.success) {
             return res.status(400).json(result);
