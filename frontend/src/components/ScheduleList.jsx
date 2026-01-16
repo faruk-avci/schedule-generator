@@ -160,6 +160,47 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
         </div>
       </div>
 
+      {isLimited && (
+        <div className="limit-warning" style={{
+          backgroundColor: '#FFF8E1',
+          border: '1px solid #FFE082',
+          color: '#F57F17',
+          padding: '12px 20px',
+          borderRadius: '8px',
+          marginBottom: '20px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: '15px',
+          fontSize: '0.95rem'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ fontSize: '1.2rem' }}>⚠️</span>
+            <span>
+              {language === 'tr'
+                ? 'Çok fazla olasılık bulunduğu için sadece ilk 120 program gösteriliyor.'
+                : 'Showing only the first 120 schedules due to high volume.'}
+            </span>
+          </div>
+          <button
+            onClick={onViewAll}
+            style={{
+              backgroundColor: '#F57F17',
+              color: 'white',
+              border: 'none',
+              padding: '8px 16px',
+              borderRadius: '6px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              boxShadow: '0 2px 4px rgba(245, 127, 23, 0.2)'
+            }}
+          >
+            {language === 'tr' ? '600 Sonucu İncele' : 'View All 600 Results'}
+          </button>
+        </div>
+      )}
+
       {/* Schedule Selector */}
       <div className="schedule-selector">
         {sortedSchedules.map((_, index) => (
