@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import CookieBanner from './components/CookieBanner';
 import TermsOfService from './components/TermsOfService';
 import NotFound from './components/NotFound';
+import FocusMode from './components/FocusMode';
 import { translations } from './utils/translations'
 import { searchCourses, addCourse, removeCourse, clearBasket, getBasket, generateSchedule, getTermInfo, setMajor as apiSetMajor, saveBasket as apiSaveBasket, getSavedBaskets as apiGetSavedBaskets, loadBasket as apiLoadSavedBasket, removeSavedBasket as apiRemoveSavedBasket } from './services/api'
 import Analytics from './utils/analytics';
@@ -101,6 +102,9 @@ function App() {
   const [major, setMajor] = useState(null);
   const [showMajorModal, setShowMajorModal] = useState(false);
   const [savedBaskets, setSavedBaskets] = useState([]);
+  const [showFocusMode, setShowFocusMode] = useState(false);
+  const [largeSchedules, setLargeSchedules] = useState([]);
+  const [isLimited, setIsLimited] = useState(false);
   const schedulesRef = useRef(null);
 
   const [language, setLanguage] = useState('tr');
@@ -407,9 +411,12 @@ function App() {
           showMessage(null, 'success', `✨ ${data.totalSchedules} ${t.schedulesGenerated}`);
 
           if (data.limited) {
+            setIsLimited(true);
             showMessage(null, 'success',
               `✨ ${data.totalSchedules} ${t.schedulesGenerated} (${language === 'tr' ? 'sınırlandırıldı' : 'limited from'} ${data.totalGenerated})`
             );
+          } else {
+            setIsLimited(false);
           }
         }
 
@@ -452,6 +459,23 @@ function App() {
       );
       setSchedules([]);
       setConflicts([]);
+    } finally {
+      setGeneratingSchedules(false);
+    }
+  };
+
+  const handleViewAll = async () => {
+    setGeneratingSchedules(true);
+    try {
+      const data = await generateSchedule(600);
+      if (data.success) {
+        setLargeSchedules(data.schedules);
+        setShowFocusMode(true);
+        Analytics.track('VIEW_ALL_600', { count: data.totalSchedules });
+      }
+    } catch (error) {
+      console.error('Error fetching all schedules:', error);
+      showMessage(null, 'error', t.scheduleGenerationError);
     } finally {
       setGeneratingSchedules(false);
     }
