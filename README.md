@@ -30,6 +30,8 @@ The project follows a modern **three-tier architecture** optimized for high-traf
 - **Dynamic Term Isolation**: Sub-tables are generated per semester (e.g., `courses_2025_2026_fall`) for maximum reliability.
 - **Performance**: 
     - **GIN Trigram Indexes**: Uses `pg_trgm` for near-instant fuzzy search.
+    - **Advanced SQL**: CTE-optimized queries with `json_agg` for zero-redundancy data transfer.
+    - **Connection Pooling**: Tuned for high concurrency with a **50-connection pool** and statement timeouts.
     - **Metadata Caching**: Server-side caching of table schemas to reduce DB overhead.
 
 ---
@@ -62,6 +64,8 @@ Allows admins to upload university-wide course catalogues in seconds. The system
 ### **Performance Optimization Suite**
 Implemented to handle datasets exceeding 10,000 course sections:
 - **`src/scripts/optimizeDb.js`**: Automatically configures PostgreSQL extensions and trigram indexes on the current production table.
+- **Node.js Memory Cache**: Integrated `node-cache` for 0ms response times on common repeated searches.
+- **Request Deduplication**: A "Pending Queries" balancer that prevents the thundering herd problem by sharing results between identical simultaneous requests.
 - **`src/utils/dbUtils.js`**: Lightweight caching layer for database metadata.
 
 ---

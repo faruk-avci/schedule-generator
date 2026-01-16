@@ -12,6 +12,8 @@ const { pool, testConnection } = require('./src/database/db');
 const PgSession = require('connect-pg-simple')(session);
 const logRoutes = require('./src/routes/logRoutes');
 const { logActivity, logSystemError, logAccess } = require('./src/services/loggerService');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const courseRoutes = require('./src/routes/courseRoutes');
 const scheduleRoutes = require('./src/routes/scheduleRoutes');
 const adminRoutes = require('./src/routes/adminRoutes');
@@ -34,6 +36,38 @@ app.get('/', (req, res) => {
         version: '2.0.0'
     });
 });
+
+// ============================================
+// SECURITY MIDDLEWARE
+// ============================================
+
+// 1. HTTP Headers (Helmet)
+app.use(helmet());
+app.disable('x-powered-by'); // Hide Express stack
+
+// 2. Trust Proxy (Crucial for Rate Limit & Secure Cookies behind Nginx)
+app.set('trust proxy', 1);
+
+// 3. Rate Limiting (DoS Protection)
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000, // 10 minutes
+    max: 200, // limit each IP to 200 requests per 10 mins
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { error: 'Too many requests, please try again later.' }
+});
+
+// Apply rate limiter to all requests
+app.use(limiter);
+
+// Specific stricter limit for heavyweight endpoints
+const generationLimiter = rateLimit({
+    windowMs: 5 * 60 * 1000, // 5 minutes
+    max: 20, // limit to 20 generations per 5 mins
+    message: { error: 'Too many generation requests, please wait.' }
+});
+
+app.use('/api/schedule/generate', generationLimiter);
 
 const allowedOrigins = [
     'https://ozuplanner.com',
@@ -71,8 +105,7 @@ app.use(cors({
     credentials: true
 }));
 
-// Trust proxy (Crucial for secure cookies behind Nginx)
-app.set('trust proxy', 1);
+// Trust proxy already set in security middleware section
 
 // Session configuration
 const sessionStore = new PgSession({
@@ -173,7 +206,7 @@ app.use((err, req, res, next) => {
 
     res.status(500).json({
         error: 'Internal server error',
-        message: err.message
+        message: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred.' : err.message
     });
 });
 

@@ -25,11 +25,21 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
+        // Double check: Extension AND Mime Type
         const ext = path.extname(file.originalname).toLowerCase();
-        if (ext === '.xls' || ext === '.xlsx') {
+        const mime = file.mimetype;
+
+        const validExts = ['.xls', '.xlsx'];
+        const validMimes = [
+            'application/vnd.ms-excel',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/octet-stream' // Sometimes Excel files sent as octet-stream
+        ];
+
+        if (validExts.includes(ext) && validMimes.includes(mime)) {
             cb(null, true);
         } else {
-            cb(new Error('Only Excel files are allowed (.xls, .xlsx)'), false);
+            cb(new Error('Invalid file type. Only Excel files (.xls, .xlsx) are allowed.'), false);
         }
     }
 });
@@ -41,14 +51,11 @@ const authAdmin = async (req, res, next) => {
     try {
         const authHeader = req.headers.authorization;
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
-            // Check if there's still a session (fallback during transition)
-            if (req.session && req.session.isAdmin) return next();
             return res.status(401).json({ success: false, error: 'Authorization token required' });
         }
 
         if (!admin.apps.length) {
-            console.warn('Firebase Admin not initialized, skipping token check');
-            if (req.session && req.session.isAdmin) return next();
+            console.warn('Firebase Admin not initialized');
             return res.status(500).json({ success: false, error: 'Firebase Auth is not configured on server.' });
         }
 
