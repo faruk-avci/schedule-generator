@@ -164,7 +164,11 @@ function transformSchedules(scheduleLists) {
         return {
             lessons: lessons,
             totalCredits: totalCredits,
-            matrix: matrix
+            matrix: matrix,
+            metrics: {
+                morningScore: getScheduleScore(sections, 'morning'),
+                eveningScore: getScheduleScore(sections, 'evening')
+            }
         };
     });
 }
