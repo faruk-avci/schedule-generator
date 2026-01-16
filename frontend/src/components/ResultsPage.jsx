@@ -113,44 +113,8 @@ const ResultsPage = ({ language }) => {
                 loading={false}
                 conflicts={[]} // Results page assumes valid schedules
                 isLimited={false} // Don't show limit warning here
+                offset={currentPage * pageSize}
             />
-
-            {/* Bottom Pagination */}
-            <div className="pagination-wrapper" style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
-                <div className="pagination-controls" style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '15px',
-                    backgroundColor: 'white',
-                    padding: '10px 20px',
-                    borderRadius: '50px',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
-                }}>
-                    <button
-                        className="secondary-btn"
-                        disabled={currentPage === 0}
-                        onClick={() => {
-                            setCurrentPage(p => p - 1);
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }}
-                        style={{ opacity: currentPage === 0 ? 0.5 : 1 }}
-                    >
-                        ← {isTr ? 'Önceki' : 'Prev'}
-                    </button>
-                    <span style={{ fontWeight: 'bold' }}>{currentPage + 1} / {totalPages}</span>
-                    <button
-                        className="secondary-btn"
-                        disabled={currentPage >= totalPages - 1}
-                        onClick={() => {
-                            setCurrentPage(p => p + 1);
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }}
-                        style={{ opacity: currentPage >= totalPages - 1 ? 0.5 : 1 }}
-                    >
-                        {isTr ? 'Sonraki' : 'Next'} →
-                    </button>
-                </div>
-            </div>
         </div>
     );
 };
