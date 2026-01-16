@@ -12,7 +12,7 @@ import Footer from './components/Footer';
 import CookieBanner from './components/CookieBanner';
 import TermsOfService from './components/TermsOfService';
 import NotFound from './components/NotFound';
-import FocusMode from './components/FocusMode';
+import ResultsPage from './components/ResultsPage';
 import { translations } from './utils/translations'
 import { searchCourses, addCourse, removeCourse, clearBasket, getBasket, generateSchedule, getTermInfo, setMajor as apiSetMajor, saveBasket as apiSaveBasket, getSavedBaskets as apiGetSavedBaskets, loadBasket as apiLoadSavedBasket, removeSavedBasket as apiRemoveSavedBasket } from './services/api'
 import Analytics from './utils/analytics';
@@ -102,8 +102,6 @@ function App() {
   const [major, setMajor] = useState(null);
   const [showMajorModal, setShowMajorModal] = useState(false);
   const [savedBaskets, setSavedBaskets] = useState([]);
-  const [showFocusMode, setShowFocusMode] = useState(false);
-  const [largeSchedules, setLargeSchedules] = useState([]);
   const [isLimited, setIsLimited] = useState(false);
   const schedulesRef = useRef(null);
 
@@ -469,9 +467,9 @@ function App() {
     try {
       const data = await generateSchedule(600);
       if (data.success) {
-        setLargeSchedules(data.schedules);
-        setShowFocusMode(true);
         Analytics.track('VIEW_ALL_600', { count: data.totalSchedules });
+        // Navigate to new results page with data
+        navigate('/results', { state: { schedules: data.schedules } });
       }
     } catch (error) {
       console.error('Error fetching all schedules:', error);
