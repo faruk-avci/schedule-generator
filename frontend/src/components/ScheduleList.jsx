@@ -268,7 +268,7 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
                 // Try to strip the course code part (e.g. "EE101A" -> "A")
                 // Parsing: Course Code is initial letters+digits
                 // Parsing: Course Code is initial letters+digits
-                const match = lesson.section_name.match(/^([A-Z]+\d+)(.*)$/);
+                const match = lesson.section_name.match(/^([A-Z]+\d+L?)(.*)$/);
                 const courseCode = match ? match[1] : '';
                 let sectionLetter = match ? match[2] : lesson.section_name;
 
