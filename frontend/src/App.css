@@ -724,6 +724,7 @@ body.dark-mode .course-name-display {
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .schedules-header h2 {
@@ -826,7 +827,6 @@ body.dark-mode .course-name-display {
   padding: 40px 20px;
   border-top: 2px solid var(--ozu-gray-lighter);
   color: var(--ozu-gray);
-  margin-top: 20px;
 }
 
 
@@ -1268,6 +1268,7 @@ body.dark-mode .cookie-banner {
   margin-top: auto;
   border-top: 1px solid var(--border-color);
   color: var(--text-secondary);
+  border-radius: 16px;
 }
 
 .footer-content p {
@@ -2163,12 +2164,6 @@ body.dark-mode .scroll-to-top:hover {
   min-height: 100vh;
 }
 
-.app-footer {
-  margin-top: auto;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
 
 .dark-mode .app-footer {
   background: #1a1a2e;
