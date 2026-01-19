@@ -103,41 +103,40 @@ const importService = {
 
                         // Validation: Start time must end with :40
                         if (!startRaw.endsWith(':40')) {
-                            // Optionally log this skip
                             continue;
                         }
 
-                        // Determine target end time string for matching the DB (X:30 -> X:40)
+                        // Determine target end time string for matching checks (X:30 -> X:40)
                         let targetEndRaw = endRaw;
                         if (endRaw.endsWith(':30')) {
-                            const prefix = endRaw.split(':')[0];
-                            targetEndRaw = `${prefix}:40`;
+                            // Valid
                         } else if (!endRaw.endsWith(':40')) {
                             continue; // Skip if not 30 or 40
                         }
 
-                        // Lookup IDs from DB
-                        const timeQuery = `
-                            SELECT time_id FROM time_slots 
-                            WHERE day_of_week = $1 AND hour_of_day = $2
-                        `;
-
-                        const startRes = await client.query(timeQuery, [targetDay, startRaw]);
-                        const endRes = await client.query(timeQuery, [targetDay, targetEndRaw]);
-
-                        if (startRes.rows.length > 0 && endRes.rows.length > 0) {
-                            const startTimeId = startRes.rows[0].time_id;
-                            const endTimeId = endRes.rows[0].time_id;
-
-                            await client.query(
-                                `INSERT INTO ${slotsTable} (course_id, start_time_id, end_time_id)
-                                 VALUES ($1, $2, $3)`,
-                                [courseId, startTimeId, endTimeId]
-                            );
-                        } else {
-                            // Log missing slot if needed
-                            // console.warn(`Missing slot for ${courseCode}: ${targetDay} ${startRaw}-${targetEndRaw}`);
+                        // Day ID mapping (Updated for 14 slots per day)
+                        let dayOffset = 0;
+                        switch (targetDay) {
+                            case 'Pazartesi': case 'Monday': dayOffset = 1; break;
+                            case 'Salı': case 'Tuesday': dayOffset = 15; break;   // 1 + 14
+                            case 'Çarşamba': case 'Wednesday': dayOffset = 29; break; // 15 + 14
+                            case 'Perşembe': case 'Thursday': dayOffset = 43; break;  // 29 + 14
+                            case 'Cuma': case 'Friday': dayOffset = 57; break;    // 43 + 14
+                            default: continue;
                         }
+
+                        const startHour = parseInt(startRaw.substring(0, 2));
+                        const endHour = parseInt(endRaw.substring(0, 2));
+
+                        // Calculate IDs (startHour - 8 gives 0-indexed hour offset)
+                        const startTimeId = (startHour - 8) + dayOffset;
+                        const endTimeId = (endHour - 8) + dayOffset;
+
+                        await client.query(
+                            `INSERT INTO ${slotsTable} (course_id, start_time_id, end_time_id)
+                             VALUES ($1, $2, $3)`,
+                            [courseId, startTimeId, endTimeId]
+                        );
                     }
 
                     await client.query('COMMIT');
