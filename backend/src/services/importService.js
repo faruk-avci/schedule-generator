@@ -96,29 +96,48 @@ const importService = {
                     for (const slot of timeSlots) {
                         const [day, hourPart] = slot.split('|').map(s => s.trim());
 
-                        // Day ID mapping from database.py
-                        let dayOffset = 0;
-                        switch (day) {
-                            case 'Pazartesi': case 'Monday': dayOffset = 1; break;
-                            case 'Salı': case 'Tuesday': dayOffset = 14; break;
-                            case 'Çarşamba': case 'Wednesday': dayOffset = 27; break;
-                            case 'Perşembe': case 'Thursday': dayOffset = 40; break;
-                            case 'Cuma': case 'Friday': dayOffset = 53; break;
-                            default: continue; // Skip days not in standard schedule
+                        const targetDay = day.trim();
+
+                        // Parse time parts
+                        const [startRaw, endRaw] = hourPart.split('-').map(s => s.trim());
+
+                        // Validation: Start time must end with :40
+                        if (!startRaw.endsWith(':40')) {
+                            // Optionally log this skip
+                            continue;
                         }
 
-                        const [start, end] = hourPart.split('-').map(s => s.trim());
-                        const startHour = parseInt(start.substring(0, 2));
-                        const endHour = parseInt(end.substring(0, 2));
+                        // Determine target end time string for matching the DB (X:30 -> X:40)
+                        let targetEndRaw = endRaw;
+                        if (endRaw.endsWith(':30')) {
+                            const prefix = endRaw.split(':')[0];
+                            targetEndRaw = `${prefix}:40`;
+                        } else if (!endRaw.endsWith(':40')) {
+                            continue; // Skip if not 30 or 40
+                        }
 
-                        const startTimeId = (startHour - 8) + dayOffset;
-                        const endTimeId = (endHour - 8) + dayOffset;
+                        // Lookup IDs from DB
+                        const timeQuery = `
+                            SELECT time_id FROM time_slots 
+                            WHERE day_of_week = $1 AND hour_of_day = $2
+                        `;
 
-                        await client.query(
-                            `INSERT INTO ${slotsTable} (course_id, start_time_id, end_time_id)
-                             VALUES ($1, $2, $3)`,
-                            [courseId, startTimeId, endTimeId]
-                        );
+                        const startRes = await client.query(timeQuery, [targetDay, startRaw]);
+                        const endRes = await client.query(timeQuery, [targetDay, targetEndRaw]);
+
+                        if (startRes.rows.length > 0 && endRes.rows.length > 0) {
+                            const startTimeId = startRes.rows[0].time_id;
+                            const endTimeId = endRes.rows[0].time_id;
+
+                            await client.query(
+                                `INSERT INTO ${slotsTable} (course_id, start_time_id, end_time_id)
+                                 VALUES ($1, $2, $3)`,
+                                [courseId, startTimeId, endTimeId]
+                            );
+                        } else {
+                            // Log missing slot if needed
+                            // console.warn(`Missing slot for ${courseCode}: ${targetDay} ${startRaw}-${targetEndRaw}`);
+                        }
                     }
 
                     await client.query('COMMIT');
