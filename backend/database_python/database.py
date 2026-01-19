@@ -148,7 +148,7 @@ def populate_time_slots():
         days = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma"]
         
         for day in days:
-            for hour in range(8, 21):
+            for hour in range(8, 22):
                 hour_str = f"{hour}:40"
                 cursor.execute('''
                     INSERT INTO time_slots (day_of_week, hour_of_day)
@@ -230,30 +230,42 @@ def add_courses_from_csv(csv_file):
                     for time_slot in time_slots:
                         day, hour = time_slot.split(" | ")
                         
-                        # Calculate day offset
-                        day_id = 0
-                        if day == "Pazartesi":
-                            day_id = 1
-                        elif day == "Salı":
-                            day_id = 14
-                        elif day == "Çarşamba":
-                            day_id = 27
-                        elif day == "Perşembe":
-                            day_id = 40
-                        elif day == "Cuma":
-                            day_id = 53
-                        
+                        # Parse time string: "14:40 - 16:30"
                         sep_hours = hour.split(" - ")
-                        start_hour = int(sep_hours[0][0:2])
-                        end_hour = int(sep_hours[1][0:2]) 
+                        start_time_str = sep_hours[0].strip()
+                        end_time_str = sep_hours[1].strip()
+
+                        # Validation: Only allow standard X:40 start times
+                        if not start_time_str.endswith(":40"):
+                            print(f"   ⚠️ Skipping non-standard start time: {start_time_str} for {course_name}")
+                            continue
                         
-                        start_hour_id = start_hour - 8
-                        end_hour_id = end_hour - 8
+                        # Handle end time mapping (e.g., 16:30 -> 16:40 slot)
+                        # The system expects end_time to match a slot for duration calculation
+                        # If end time is X:30, mapped slot is X:40
+                        if end_time_str.endswith(":30"):
+                            prefix = end_time_str.split(":")[0]
+                            target_end_slot = f"{prefix}:40"
+                        elif end_time_str.endswith(":40"):
+                            target_end_slot = end_time_str
+                        else:
+                             print(f"   ⚠️ Skipping non-standard end time: {end_time_str} for {course_name}")
+                             continue
+
+                        # Find IDs from DB
+                        cursor.execute("SELECT time_id FROM time_slots WHERE day_of_week = %s AND hour_of_day = %s", (day, start_time_str))
+                        res_start = cursor.fetchone()
                         
-                        cursor.execute('''
-                            INSERT INTO course_time_slots (course_id, start_time_id, end_time_id)
-                            VALUES (%s, %s, %s)
-                        ''', (course_id, start_hour_id + day_id, end_hour_id + day_id))
+                        cursor.execute("SELECT time_id FROM time_slots WHERE day_of_week = %s AND hour_of_day = %s", (day, target_end_slot))
+                        res_end = cursor.fetchone()
+
+                        if res_start and res_end:
+                            cursor.execute('''
+                                INSERT INTO course_time_slots (course_id, start_time_id, end_time_id)
+                                VALUES (%s, %s, %s)
+                            ''', (course_id, res_start[0], res_end[0]))
+                        else:
+                             print(f"   ⚠️ Time slot not found in DB: {day} {start_time_str}-{target_end_slot}")
                     
                     if idx % 10 == 0:
                         print(f"  Processed {idx} courses...")
