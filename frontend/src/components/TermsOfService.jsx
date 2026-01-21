@@ -190,8 +190,8 @@ const TermsOfService = ({ language, onNavigate }) => {
                 <h2>{isTr ? 'Kullanıcı Hakları' : 'User Rights'}</h2>
                 <p>
                     {isTr
-                        ? 'Kullanıcılar, kendileriyle ilgili verilerin işlenmesine ilişkin bilgi talep edebilir.'
-                        : 'Users may request information regarding the processing of data concerning them.'}
+                        ? 'Kullanıcılar, kendileriyle ilgili verilerin işlenmesine ilişkin bilgi talep edebilir. İletişim için privacy@ozuplanner.com adresine ulaşabilirsiniz.'
+                        : 'Users may request information regarding the processing of data concerning them. You can reach us at privacy@ozuplanner.com.'}
                 </p>
             </div>
 

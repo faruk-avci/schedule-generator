@@ -50,7 +50,7 @@ function Footer({ onNavigate, language }) {
           <h4>{isTr ? 'Bağlantılar' : 'Links'}</h4>
           <p>
             <button onClick={() => onNavigate('terms')} className="footer-link">
-              {isTr ? 'Kullanım Koşulları' : 'Terms of Service'}
+              {isTr ? 'Kullanım Koşulları ve Gizlilik Politikası' : 'Terms of Service and Privacy Policy'}
             </button>
           </p>
           <p>
