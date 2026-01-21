@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { logPageView } from '../services/api';
 
 function HowToUse({ language, onNavigate }) {
+  const isTr = language === 'tr';
   const hasLogged = useRef(false);
 
   useEffect(() => {
@@ -11,164 +12,107 @@ function HowToUse({ language, onNavigate }) {
     }
   }, []);
 
-  const content = {
-    tr: {
-      title: "Nasıl Kullanılır?",
-      backToHome: "Ana Sayfaya Dön",
-      sections: [
-        {
-          number: "1",
-          title: "Ders Ara",
-          items: [
-            "Arama kutusuna ders kodunu yazın.",
-            "Örnek: BUS, BUS101, BUS 101 veya Bus 101 L",
-            "Enter'a bastığınızda ilgili dersler listelenir."
-          ]
-        },
-        {
-          number: "2",
-          title: "Ders Ekle",
-          intro: "Bir dersi eklerken iki seçeneğiniz var:",
-          options: [
-            {
-              name: "Dersi Ekle",
-              desc: "Dersin tüm şubelerini sepete ekler. (Hangi şubenin uygun olduğuna sistem daha sonra karar verir.)"
-            },
-            {
-              name: "Şubeleri Göster",
-              desc: "Dersin şubelerini tek tek görürsünüz. Sadece istediğiniz şubeyi seçip ekleyebilirsiniz."
-            }
-          ],
-          note: "Yani isterseniz dersi genel olarak, isterseniz belirli bir şubesiyle ekleyebilirsiniz."
-        },
-        {
-          number: "3",
-          title: "Program Oluştur",
-          items: [
-            'Tüm derslerinizi ekledikten sonra "Program Oluştur" butonuna tıklayın.',
-            "Sistem:",
-            "• Saatleri çakışmayan",
-            "• Olası tüm program kombinasyonlarını sizin için hesaplar."
-          ]
-        },
-        {
-          number: "4",
-          title: "Programları İncele",
-          items: [
-            "Oluşturulan programlar arasında geçiş yapabilirsiniz.",
-            "Beğendiğiniz programı PDF veya resim olarak indirebilirsiniz."
-          ]
-        }
-      ],
-      warning: {
-        title: "Önemli Not:",
-        text: "OzuPlanner sadece bir planlama aracıdır. Resmi ders kayıt işlemleri için sis.ozyegin.edu.tr kullanılmalıdır."
-      }
-    },
-    en: {
-      title: "How to Use?",
-      backToHome: "Back to Home",
-      sections: [
-        {
-          number: "1",
-          title: "Search Courses",
-          items: [
-            "Type the course code in the search box.",
-            "Example: BUS, BUS101, BUS 101 or BUS 101 L",
-            "Press Enter to see the relevant courses."
-          ]
-        },
-        {
-          number: "2",
-          title: "Add Course",
-          intro: "When adding a course, you have two options:",
-          options: [
-            {
-              name: "Add Course",
-              desc: "Adds all sections of the course to your basket. (The system will decide which section is suitable later.)"
-            },
-            {
-              name: "Show Sections",
-              desc: "You see the sections one by one. You can select and add only the section you want."
-            }
-          ],
-          note: "So you can add the course either generally or with a specific section."
-        },
-        {
-          number: "3",
-          title: "Generate Schedules",
-          items: [
-            'After adding all your courses, click the "Generate Schedules" button.',
-            "The system:",
-            "• Finds all schedules without time conflicts",
-            "• Calculates all possible schedule combinations for you."
-          ]
-        },
-        {
-          number: "4",
-          title: "Review Schedules",
-          items: [
-            "You can switch between the generated schedules.",
-            "You can download your preferred schedule as PDF or image."
-          ]
-        }
-      ],
-      warning: {
-        title: "Important Note:",
-        text: "OzuPlanner is only a planning tool. sis.ozyegin.edu.tr must be used for official course registration."
-      }
-    }
-  };
-
-  const t = content[language] || content.tr;
-
   return (
-    <div className="how-to-use-page">
-      <div className="how-to-use-container">
-        <button className="back-button" onClick={() => onNavigate('home')}>
-          ← {t.backToHome}
-        </button>
+    <div className="terms-page-container">
+      <button
+        onClick={() => onNavigate('home')}
+        className="back-button"
+      >
+        ← {isTr ? 'Ana Sayfaya Dön' : 'Back to Home'}
+      </button>
 
-        <h1 className="page-title">{t.title}</h1>
+      <div className="terms-header">
+        <h1>{isTr ? 'Nasıl Kullanılır?' : 'How to Use?'}</h1>
+        <p className="subtitle">
+          {isTr
+            ? 'OzuPlanner ile ders programınızı oluşturmanın ve yönetmenin en kolay yolu.'
+            : 'The easiest way to create and manage your course schedule with OzuPlanner.'}
+        </p>
+      </div>
 
-        <div className="guide-sections">
-          {t.sections.map((section, index) => (
-            <div key={index} className="guide-section">
-              <h2 className="section-title">
-                {section.number}. {section.title}
-              </h2>
+      {/* Step 1: Search & Add */}
+      <div className="terms-card">
+        <h2>1. {isTr ? 'Ders Arama ve Ekleme' : 'Searching & Adding Courses'}</h2>
+        <p>
+          {isTr
+            ? 'Arama çubuğunu kullanarak ders kodunu (örn: BUS101, CS 101) yazın. Sonuçlarda dersin genelini veya belirli şubelerini görebilirsiniz.'
+            : 'Type the course code (e.g., BUS101, CS 101) in the search bar. In the results, you can see the course generally or specific sections.'}
+        </p>
+        <ul style={{ marginTop: '15px', paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li>
+            <strong>{isTr ? 'Dersi Ekle' : 'Add Course'}:</strong> {isTr
+              ? 'Dersin tüm açık şubelerini sepetinize ekler. Sistem, bu şubelerden sizin programınıza en uygun olanını otomatik olarak seçer.'
+              : 'Adds all open sections of the course to your basket. The system automatically selects the one that fits your schedule best.'}
+          </li>
+          <li>
+            <strong>{isTr ? 'Şube Ekle (Bölümleri Göster)' : 'Add Section (Show Sections)'}:</strong> {isTr
+              ? 'Eğer sadece belirli bir hocadan veya saatte ders almak istiyorsanız, şubeleri açıp sadece istediğiniz "Section"ları ekleyebilirsiniz.'
+              : 'If you only want to take a course from a specific professor or at a specific time, you can expand sections and add only the specific "Sections" you want.'}
+          </li>
+        </ul>
+      </div>
 
-              {section.intro && <p className="section-intro">{section.intro}</p>}
-
-              {section.items && (
-                <ul className="section-items">
-                  {section.items.map((item, idx) => (
-                    <li key={idx}>{item}</li>
-                  ))}
-                </ul>
-              )}
-
-              {section.options && (
-                <div className="options-list">
-                  {section.options.map((option, idx) => (
-                    <div key={idx} className="option-item">
-                      <strong>{option.name}</strong>
-                      <p>→ {option.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {section.note && <p className="section-note">{section.note}</p>}
-            </div>
-          ))}
-        </div>
-
-        <div className="warning-banner">
-          <strong>{t.warning.title}</strong>
-          <p>{t.warning.text}</p>
+      {/* Step 2: Basket Management */}
+      <div className="terms-card">
+        <h2>2. {isTr ? 'Sepet Yönetimi ve Kaydetme' : 'Basket Management & Saving'}</h2>
+        <p>
+          {isTr
+            ? 'Sepetinizdeki dersleri görüntüleyebilir, istemediklerinizi silebilirsiniz. Ayrıca "Sepet Kaydetme" özelliği ile farklı senaryoları saklayabilirsiniz.'
+            : 'You can view courses in your basket and remove unwanted ones. With the "Save Basket" feature, you can also store different scenarios.'}
+        </p>
+        <div style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', marginTop: '10px' }}>
+          <strong>💡 {isTr ? 'İpucu: Sepet Kaydetme' : 'Tip: Saving Baskets'}</strong>
+          <p style={{ margin: '5px 0 0 0', fontSize: '0.95rem' }}>
+            {isTr
+              ? 'Birden fazla planınız mı var? Sepetinize bir isim verip "Kaydet" butonuna basarak mevcut derslerinizi saklayın. Daha sonra tek tıkla geri yükleyebilirsiniz.'
+              : 'Do you have multiple plans? Name your basket and click "Save" to store your current courses. You can restore them later with a single click.'}
+          </p>
         </div>
       </div>
+
+      {/* Step 3: Preferences */}
+      <div className="terms-card">
+        <h2>3. {isTr ? 'Program Oluşturma Tercihleri' : 'Schedule Generation Preferences'}</h2>
+        <p>
+          {isTr
+            ? 'Sepetiniz hazır olduğunda, sistemin size en uygun programı bulması için tercihlerinizi belirleyebilirsiniz:'
+            : 'Once your basket is ready, you can set your preferences for the system to find the best schedule for you:'}
+        </p>
+        <ul style={{ marginTop: '15px', paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li><strong>{isTr ? 'Morning Person (Sabah)' : 'Morning Person'}:</strong> {isTr ? 'Dersleri mümkün olduğunca sabah saatlerine yığar.' : 'Concentrates classes in the morning hours as much as possible.'}</li>
+          <li><strong>{isTr ? 'Evening Person (Akşam)' : 'Evening Person'}:</strong> {isTr ? 'Dersleri mümkün olduğunca öğleden sonraya ve akşama yığar.' : 'Concentrates classes in the afternoon and evening as much as possible.'}</li>
+          <li><strong>{isTr ? 'Balanced (Dengeli)' : 'Balanced'}:</strong> {isTr ? 'Dersleri gün içine yayarak daha dengeli bir program sunar.' : 'Spreads classes throughout the day for a more balanced schedule.'}</li>
+        </ul>
+      </div>
+
+      {/* Step 4: Results */}
+      <div className="terms-card">
+        <h2>4. {isTr ? 'Sonuçları İnceleme' : 'Reviewing Results'}</h2>
+        <p>
+          {isTr
+            ? '"Program Oluştur" butonuna bastıktan sonra sistem olası tüm çakışmasız programları listeler. Sonuçlar arasında gezinebilir, beğendiğiniz programın görselini indirebilirsiniz.'
+            : 'After clicking "Generate Schedule", the system lists all possible conflict-free schedules. You can browse results and download the image of the schedule you like.'}
+        </p>
+      </div>
+
+      {/* Disclaimer */}
+      <div className="critical-warning-box" style={{ marginTop: '40px' }}>
+        <div className="warning-icon">⚠️</div>
+        <div className="warning-content">
+          <h3>
+            {isTr
+              ? 'UNUTMAYIN: BU RESMİ KAYIT DEĞİLDİR'
+              : 'REMEMBER: THIS IS NOT OFFICIAL REGISTRATION'}
+          </h3>
+          <p>
+            {isTr
+              ? 'Burada oluşturduğunuz program sadece planlama amaçlıdır. Ders kayıtlarınızı mutlaka Özyeğin Üniversitesi SIS sistemi üzerinden, belirtilen kayıt saatlerinde yapmanız gerekmektedir.'
+              : 'The schedule you create here is for planning purposes only. You MUST complete your course registration through the Özyeğin University SIS system during the specified registration times.'}
+          </p>
+        </div>
+      </div>
+
+      <div style={{ height: '40px' }}></div>
     </div>
   );
 }
