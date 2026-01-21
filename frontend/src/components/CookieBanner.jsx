@@ -26,8 +26,8 @@ const CookieBanner = ({ language }) => {
                 <div className="cookie-text">
                     <p>
                         {language === 'tr'
-                            ? 'Deneyiminizi iyileştirmek için çerezleri ve anonim kullanım verilerini kullanıyoruz.'
-                            : 'We use cookies and anonymous usage data to improve your scheduling experience.'}
+                            ? 'Deneyiminizi iyileştirmek, platformun güvenliğini sağlamak ve anonim kullanım istatistikleri oluşturmak amacıyla çerezler ve anonim kullanım verileri kullanıyoruz. Devam ederek çerez kullanımını kabul etmiş sayılırsınız.'
+                            : 'We use cookies and anonymous usage data to improve your experience, ensure platform security, and create anonymous usage statistics. By continuing, you agree to the use of cookies.'}
                     </p>
                 </div>
             </div>
