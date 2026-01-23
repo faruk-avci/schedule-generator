@@ -69,11 +69,57 @@
     font-size: 0.9rem;
     color: var(--text-secondary);
     font-style: italic;
+    margin-top: 15px;
+    margin-bottom: 0px;
 }
 
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color, #e5e7eb);
+}
+
+.secondary-button {
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    background-color: white;
+    color: #374151;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.secondary-button:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.primary-button {
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: none;
+    background-color: #2563eb;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.primary-button:hover {
+    background-color: #1d4ed8;
+}
+
+/* Specific warning button override */
 .warning-button {
     background-color: #d97706 !important;
     /* amber-600 */
+    color: white !important;
 }
 
 .warning-button:hover {
