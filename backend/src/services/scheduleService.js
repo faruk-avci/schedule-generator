@@ -54,10 +54,12 @@ async function fetchCoursesData(courseCodes, currentTerm) {
             ts_start.day_of_week,
             ts_start.hour_of_day as start_time,
             CASE 
-            WHEN ts_end.hour_of_day LIKE '%:40' THEN 
-                REPLACE(ts_end.hour_of_day, ':40', ':30')
-            ELSE 
-                ts_end.hour_of_day
+                WHEN ts_start.day_of_week != ts_end.day_of_week OR ts_end.day_of_week IS NULL THEN 
+                    '22:30'
+                WHEN ts_end.hour_of_day LIKE '%:40' THEN 
+                    REPLACE(ts_end.hour_of_day, ':40', ':30')
+                ELSE 
+                    ts_end.hour_of_day
                 END as end_time
             FROM ${coursesTable} c
         LEFT JOIN ${slotsTable} cts ON c.id = cts.course_id
