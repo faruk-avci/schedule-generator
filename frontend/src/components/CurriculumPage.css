@@ -1,0 +1,271 @@
+/* Curriculum Page Styles */
+
+/* Root variables inherited from global CSS, but refined here */
+.curriculum-page {
+    /* Uses main-container width from global */
+    padding-bottom: 60px;
+}
+
+/* Header Section */
+.curriculum-header-section {
+    text-align: center;
+    margin-bottom: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+}
+
+.curriculum-header-section h1 {
+    color: var(--ozu-blue);
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.curriculum-header-section p {
+    color: var(--text-secondary);
+    margin-bottom: 25px;
+}
+
+/* Major Selector */
+.major-selector {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    text-align: left;
+    min-width: 300px;
+}
+
+.major-selector label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.major-dropdown {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 2px solid var(--ozu-gray-lighter);
+    font-size: 1rem;
+    color: var(--text-primary);
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    appearance: auto;
+    /* Uses browser default arrow for reliability */
+}
+
+.major-dropdown:focus {
+    border-color: var(--ozu-burgundy);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(165, 0, 80, 0.1);
+}
+
+/* Major Title */
+.major-title {
+    text-align: center;
+    color: var(--ozu-burgundy);
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 40px;
+}
+
+.major-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--ozu-burgundy);
+    border-radius: 2px;
+}
+
+/* Year Section */
+.year-section {
+    margin-bottom: 50px;
+}
+
+.year-badge-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.year-badge {
+    background: var(--ozu-blue);
+    color: white;
+    padding: 8px 24px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(0, 48, 135, 0.2);
+}
+
+/* Grid Layout */
+.semesters-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 900px) {
+    .semesters-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Semester Cards */
+.semester-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.05),
+        0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.semester-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: var(--ozu-burgundy-light);
+}
+
+.semester-header {
+    background: #fafafa;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.semester-header h3 {
+    margin: 0;
+    color: var(--ozu-blue);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.semester-icon {
+    font-size: 1.2rem;
+    /* Emojis removed per request, purely text or hidden */
+    display: none;
+}
+
+/* Tables */
+.table-container {
+    padding: 0;
+}
+
+.pixel-perfect-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.pixel-perfect-table th {
+    background: #f8fafc;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pixel-perfect-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    color: var(--text-primary);
+    vertical-align: top;
+}
+
+.pixel-perfect-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Column Widths */
+.th-code {
+    width: 15%;
+}
+
+.th-title {
+    width: 45%;
+}
+
+.th-credits {
+    width: 10%;
+    text-align: center;
+}
+
+.th-req {
+    width: 30%;
+}
+
+.code-cell {
+    font-family: 'SF Mono', 'Roboto Mono', monospace;
+    font-weight: 700;
+    color: var(--ozu-burgundy);
+    white-space: nowrap;
+}
+
+.title-cell {
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.credits-cell {
+    text-align: center;
+    font-weight: 600;
+}
+
+.req-cell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* Tags */
+.tag {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.tag-prereq {
+    background-color: #f3f4f6;
+    color: var(--text-secondary);
+    border: 1px solid #e5e7eb;
+}
+
+.tag-coreq {
+    background-color: #FEF2F2;
+    color: var(--ozu-burgundy);
+    border: 1px solid #FECACA;
+}
+
+.text-right {
+    text-align: right;
+    font-weight: 700;
+    color: var(--ozu-blue);
+    background-color: #f8fafc;
+}
+
+.font-bold {
+    font-weight: 800;
+}

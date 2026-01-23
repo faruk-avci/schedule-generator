@@ -45,6 +45,16 @@ function Header({ language, setLanguage, theme, setTheme, onNavigate, term }) {
             <button
               className="header-link"
               onClick={() => {
+                onNavigate('curriculum');
+                setShowMobileMenu(false);
+              }}
+            >
+              {language === 'tr' ? 'Müfredat' : 'Curriculum'}
+            </button>
+
+            <button
+              className="header-link"
+              onClick={() => {
                 onNavigate('contact');
                 setShowMobileMenu(false);
               }}
@@ -65,7 +75,6 @@ function Header({ language, setLanguage, theme, setTheme, onNavigate, term }) {
               onBlur={() => setTimeout(() => setShowLangDropdown(false), 200)}
               title="Change Language"
             >
-              <span className="flag">{language === 'tr' ? '🇹🇷' : '🇬🇧'}</span>
               <span className="button-text">{language === 'tr' ? 'TR' : 'EN'}</span>
             </button>
 
@@ -78,7 +87,7 @@ function Header({ language, setLanguage, theme, setTheme, onNavigate, term }) {
                     setShowLangDropdown(false);
                   }}
                 >
-                  🇹🇷 Türkçe
+                  Türkçe
                 </button>
                 <button
                   className={`dropdown-item ${language === 'en' ? 'active' : ''}`}
@@ -87,7 +96,7 @@ function Header({ language, setLanguage, theme, setTheme, onNavigate, term }) {
                     setShowLangDropdown(false);
                   }}
                 >
-                  🇬🇧 English
+                  English
                 </button>
               </div>
             )}
