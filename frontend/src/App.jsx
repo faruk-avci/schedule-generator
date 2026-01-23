@@ -13,6 +13,7 @@ import CookieBanner from './components/CookieBanner';
 import TermsOfService from './components/TermsOfService';
 import NotFound from './components/NotFound';
 import ResultsPage from './components/ResultsPage';
+import CoreqWarningModal from './components/CoreqWarningModal';
 import { translations } from './utils/translations'
 import { searchCourses, addCourse, removeCourse, clearBasket, getBasket, generateSchedule, getTermInfo, setMajor as apiSetMajor, saveBasket as apiSaveBasket, getSavedBaskets as apiGetSavedBaskets, loadBasket as apiLoadSavedBasket, removeSavedBasket as apiRemoveSavedBasket } from './services/api'
 import Analytics from './utils/analytics';
@@ -104,6 +105,7 @@ function App() {
   const [showMajorModal, setShowMajorModal] = useState(false);
   const [savedBaskets, setSavedBaskets] = useState([]);
   const [isLimited, setIsLimited] = useState(false);
+  const [coreqWarning, setCoreqWarning] = useState(null);
   const schedulesRef = useRef(null);
 
   const [language, setLanguage] = useState('tr');
@@ -387,7 +389,7 @@ function App() {
 
 
   // Generate schedules
-  const handleGenerate = async (ignoreMajorGuard = false) => {
+  const handleGenerate = async (ignoreMajorGuard = false, ignoreCoreqs = false) => {
     if (!major && !ignoreMajorGuard) {
       setShowMajorModal(true);
       return;
@@ -396,10 +398,11 @@ function App() {
     setGeneratingSchedules(true);
     setConflicts([]);
     setOverload(null);
+    if (!ignoreCoreqs) setCoreqWarning(null); // Reset checking warning only if new start
     setMessage(null);
 
     try {
-      const data = await generateSchedule(120, preference);
+      const data = await generateSchedule(120, preference, ignoreCoreqs);
       if (data.success) {
         setSchedules(data.schedules);
         setConflicts(data.conflicts || []);
@@ -442,6 +445,14 @@ function App() {
       }
     } catch (error) {
       const errorData = error.response?.data;
+
+      // Handle Missing Coreqs Warning (Soft Error)
+      if (error.response?.status === 409 && errorData?.error === 'MISSING_COREQS') {
+        setCoreqWarning(errorData.missingCoreqs);
+        setGeneratingSchedules(false);
+        return;
+      }
+
       if (errorData?.error === 'COMBINATION_OVERLOAD') {
         setOverload({
           count: errorData.message.match(/\(([^)]+)\)/)?.[1] || 'Unknown',
@@ -459,6 +470,8 @@ function App() {
       setSchedules([]);
       setConflicts([]);
     } finally {
+      // Only stop loading if we are NOT showing the modal (because modal is technically "paused" state, but UI feels better if stopped)
+      // Actually we set generating to false inside the 409 block above, so here we just always stop it for consistency
       setGeneratingSchedules(false);
     }
   };
@@ -716,6 +729,19 @@ function App() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Corequisite Warning Modal */}
+      {coreqWarning && (
+        <CoreqWarningModal
+          missingCoreqs={coreqWarning}
+          language={language}
+          onCancel={() => setCoreqWarning(null)}
+          onConfirm={() => {
+            setCoreqWarning(null);
+            handleGenerate(true, true); // ignoreMajorGuard=true (already passed), ignoreCoreqs=true
+          }}
+        />
       )}
     </div>
   )

@@ -30,10 +30,14 @@ router.post('/generate', async (req, res) => {
         if (limit > 600) limit = 600; // Hard cap for safety
 
         const preference = req.body.preference || 'morning';
+        const ignoreCoreqs = req.body.ignoreCoreqs === true;
 
-        const result = await generateSchedule(addedCourses, addedSections, limit, preference);
+        const result = await generateSchedule(addedCourses, addedSections, limit, preference, ignoreCoreqs);
 
         if (!result.success) {
+            if (result.error === 'MISSING_COREQS') {
+                return res.status(409).json(result);
+            }
             return res.status(400).json(result);
         }
 

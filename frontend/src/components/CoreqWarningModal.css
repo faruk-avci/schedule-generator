@@ -1,0 +1,82 @@
+.warning-modal {
+    border-top: 4px solid #f59e0b;
+    max-width: 500px;
+}
+
+.warning-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0px;
+}
+
+.warning-icon {
+    font-size: 24px;
+}
+
+.warning-header h2 {
+    color: #b45309;
+    /* amber-700 */
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.warning-text {
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.missing-coreq-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    background-color: #fffbeb;
+    /* amber-50 */
+    border: 1px solid #fcd34d;
+    /* amber-300 */
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.missing-coreq-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid #fde68a;
+    font-size: 0.95rem;
+}
+
+.missing-coreq-item:last-child {
+    border-bottom: none;
+}
+
+.course-code {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.arrow {
+    color: #9ca3af;
+}
+
+.missing-code {
+    color: #b45309;
+    font-weight: 500;
+}
+
+.warning-subtext {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.warning-button {
+    background-color: #d97706 !important;
+    /* amber-600 */
+}
+
+.warning-button:hover {
+    background-color: #b45309 !important;
+    /* amber-700 */
+}

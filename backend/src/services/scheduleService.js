@@ -51,6 +51,7 @@ async function fetchCoursesData(courseCodes, currentTerm) {
             c.lecturer,
             c.credits,
             c.faculty,
+            c.corequisites,
             ts_start.day_of_week,
             ts_start.hour_of_day as start_time,
             CASE 
@@ -96,7 +97,9 @@ function organizeCourseData(rows, addedCourses, addedSections) {
                 section_name: sectionName,
                 lecturer: row.lecturer,
                 credits: parseFloat(row.credits),
+                credits: parseFloat(row.credits),
                 faculty: row.faculty,
+                corequisites: row.corequisites || '',
                 timeSlots: [],
                 mask: [0, 0, 0, 0, 0]
             };
@@ -275,7 +278,7 @@ function detectConflicts(filteredCourses, rawCourses, addedCourses, addedSection
 /**
  * Main schedule generation function (now offloaded to Worker Threads)
  */
-async function generateSchedule(addedCourses, addedSections, limit = 120, preference = 'morning') {
+async function generateSchedule(addedCourses, addedSections, limit = 120, preference = 'morning', ignoreCoreqs = false) {
     try {
         if ((!addedCourses || addedCourses.length === 0) &&
             (!addedSections || addedSections.length === 0)) {
@@ -322,7 +325,70 @@ async function generateSchedule(addedCourses, addedSections, limit = 120, prefer
         const MAX_POTENTIAL_COMBOS = 1000000;
         console.log(`🔧 Potential combinations: ${potentialCombos.toLocaleString()}`);
 
-        const { initTelegramBot, sendAlert } = require('./telegramService');
+
+
+        // --- Corequisite Checker ---
+        if (!ignoreCoreqs) {
+            const missingCoreqs = [];
+            const basketCodes = new Set([
+                ...(addedCourses || []),
+                ...(addedSections || []).map(s => s.course)
+            ]);
+
+            // Normalized basket codes for comparison (upper case, no spaces)
+            const normalizedBasket = new Set([...basketCodes].map(c => c.replace(/\s+/g, '').toUpperCase()));
+
+            Object.keys(filteredCourses).forEach(courseCode => {
+                // Get one section to access course metadata (coreqs are same for all sections)
+                const sections = Object.values(filteredCourses[courseCode]);
+                if (sections.length > 0) {
+                    const courseData = sections[0];
+                    if (courseData.corequisites && courseData.corequisites.trim() !== '') {
+                        // Parse corequisites: e.g. "CS 101" or "CS 101, MATH 201"
+                        // Assuming simple comma separation or single value based on importService
+                        const coreqList = courseData.corequisites.split(',').map(c => c.trim());
+
+                        coreqList.forEach(requiredCoreq => {
+                            if (!requiredCoreq) return;
+
+                            // Normalize for comparison
+                            const normalizedReq = requiredCoreq.replace(/\s+/g, '').toUpperCase();
+
+                            // Check if in basket
+                            // We need to check if ANY section of requiredCoreq is in basket, or the course itself
+                            // The normalizedBasket contains codes like "CS101"
+
+                            // Heuristic: check exact match or if basket has the code
+                            let found = false;
+
+                            // 1. Check direct match in normalized basket
+                            if (normalizedBasket.has(normalizedReq)) found = true;
+
+                            // 2. If not found, check if mapped (e.g. required is "CS 202L" and basket has "CS202L")
+                            // (Handled by step 1 if normalized correctly)
+
+                            if (!found) {
+                                missingCoreqs.push({
+                                    course: courseCode,
+                                    missing: requiredCoreq
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+
+            if (missingCoreqs.length > 0) {
+                return {
+                    success: false,
+                    error: 'MISSING_COREQS',
+                    message: 'Missing required corequisites',
+                    missingCoreqs: missingCoreqs,
+                    totalSchedules: 0,
+                    schedules: []
+                };
+            }
+        }
 
         // ... in generateSchedule ...
         if (potentialCombos > MAX_POTENTIAL_COMBOS) {
