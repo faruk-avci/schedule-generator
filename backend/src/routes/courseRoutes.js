@@ -142,6 +142,7 @@ router.post('/search', async (req, res) => {
                                 'day', ts.day_of_week,
                                 'start', ts.hour_of_day,
                                 'end', CASE 
+                                    WHEN ts.day_of_week != ts_e.day_of_week THEN '22:30'
                                     WHEN ts_e.hour_of_day LIKE '%:40' THEN REPLACE(ts_e.hour_of_day, ':40', ':30')
                                     ELSE ts_e.hour_of_day
                                 END
