@@ -1,0 +1,439 @@
+{
+    "id": "ce",
+    "title_tr": "İnşaat Mühendisliği",
+    "title_en": "Civil Engineering",
+    "semesters": {
+        "1": {
+            "fall": [
+                {
+                    "code": "CHEM 111",
+                    "title_tr": "Kimya",
+                    "title_en": "Chemistry",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": "CHEM 111L"
+                },
+                {
+                    "code": "ENG 101",
+                    "title_tr": "İngilizce I",
+                    "title_en": "English I",
+                    "credits": 4,
+                    "prereq": "Dil sınavından başarılı sonucuna sahip olmak",
+                    "coreq": ""
+                },
+                {
+                    "code": "MATH 103",
+                    "title_tr": "Mühendislik için Yüksek Matematik I",
+                    "title_en": "Calculus for Engineering I",
+                    "credits": 8,
+                    "prereq": "",
+                    "coreq": "MATH 103R"
+                },
+                {
+                    "code": "PHYS 101",
+                    "title_tr": "Fizik I",
+                    "title_en": "Physics I",
+                    "credits": 8,
+                    "prereq": "",
+                    "coreq": "PHYS 101L"
+                },
+                {
+                    "code": "TLL 101",
+                    "title_tr": "Türk Dili ve Edebiyatı I",
+                    "title_en": "Turkish Language and Literature I",
+                    "credits": 3,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "TRL 101",
+                    "title_tr": "Üniversite Yaşamına Giriş",
+                    "title_en": "Intro to University Life",
+                    "credits": 1,
+                    "prereq": "",
+                    "coreq": ""
+                }
+            ],
+            "spring": [
+                {
+                    "code": "CE 101",
+                    "title_tr": "Teknik Resim",
+                    "title_en": "Teknik Resim",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "CE 102",
+                    "title_tr": "İnşaat Mühendisliğine Giriş",
+                    "title_en": "İnşaat Mühendisliğine Giriş",
+                    "credits": 2,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "ENG 102",
+                    "title_tr": "İngilizce II",
+                    "title_en": "English II",
+                    "credits": 4,
+                    "prereq": "ENG 101",
+                    "coreq": ""
+                },
+                {
+                    "code": "MATH 104",
+                    "title_tr": "Mühendislik için Yüksek Matematik II",
+                    "title_en": "Calculus for Engineering II",
+                    "credits": 8,
+                    "prereq": "MATH103",
+                    "coreq": "MATH 104R"
+                },
+                {
+                    "code": "PHYS 102",
+                    "title_tr": "Fizik II",
+                    "title_en": "Physics II",
+                    "credits": 8,
+                    "prereq": "PHYS 101",
+                    "coreq": "PHYS 102L"
+                },
+                {
+                    "code": "TLL 102",
+                    "title_tr": "Türk Dili ve Edebiyatı II",
+                    "title_en": "Turkish Language and Literature II",
+                    "credits": 3,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "TRL 102",
+                    "title_tr": "Kişisel Gelişim",
+                    "title_en": "Personal Development",
+                    "credits": 1,
+                    "prereq": "",
+                    "coreq": ""
+                }
+            ]
+        },
+        "2": {
+            "fall": [
+                {
+                    "code": "CE 112",
+                    "title_tr": "Statik",
+                    "title_en": "Statik",
+                    "credits": 6,
+                    "prereq": "PHYS 101 and MATH 103",
+                    "coreq": ""
+                },
+                {
+                    "code": "CS 104",
+                    "title_tr": "Programlamaya Giriş",
+                    "title_en": "Introduction to Programming",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": "CS 104L"
+                },
+                {
+                    "code": "HIST 201",
+                    "title_tr": "Atatürk İlkeleri ve İnkılap Tarihi I",
+                    "title_en": "Principles of Atatürk I",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "MATH 211",
+                    "title_tr": "Doğrusal Cebir",
+                    "title_en": "Linear Algebra",
+                    "credits": 6,
+                    "prereq": "MATH 103",
+                    "coreq": "MATH 211R"
+                },
+                {
+                    "code": "MATH 212",
+                    "title_tr": "Diferansiyel Denklemler",
+                    "title_en": "Differential Equations",
+                    "credits": 6,
+                    "prereq": "MATH 104",
+                    "coreq": ""
+                },
+                {
+                    "code": "SEC 201",
+                    "title_tr": "Sektörel Hazırlık",
+                    "title_en": "Sectoral Practicum I",
+                    "credits": 2,
+                    "prereq": "To complete at least 45 ECTS",
+                    "coreq": "SEC201L"
+                }
+            ],
+            "spring": [
+                {
+                    "code": "CE 203",
+                    "title_tr": "Mukavemet",
+                    "title_en": "Mukavemet",
+                    "credits": 6,
+                    "prereq": "CE 112",
+                    "coreq": ""
+                },
+                {
+                    "code": "CE 205",
+                    "title_tr": "Yapı Malzemeleri",
+                    "title_en": "Yapı Malzemeleri",
+                    "credits": 6,
+                    "prereq": "CHEM 111",
+                    "coreq": "CE 205L"
+                },
+                {
+                    "code": "CE 211",
+                    "title_tr": "Dinamik",
+                    "title_en": "Dinamik",
+                    "credits": 4,
+                    "prereq": "CE 112",
+                    "coreq": ""
+                },
+                {
+                    "code": "CE 217",
+                    "title_tr": "İnşaat Mühendisliğinde Olasılık ve İstatistik",
+                    "title_en": "İnşaat Mühendisliğinde Olasılık ve İstatistik",
+                    "credits": 6,
+                    "prereq": "MATH 103",
+                    "coreq": ""
+                },
+                {
+                    "code": "ENG 303",
+                    "title_tr": "Teknik İletişim",
+                    "title_en": "Technical Communication",
+                    "credits": 2,
+                    "prereq": "ENG 102 or ENG106",
+                    "coreq": ""
+                },
+                {
+                    "code": "HIST 202",
+                    "title_tr": "Atatürk İlkeleri ve İnkılap Tarihi II",
+                    "title_en": "Principles of Atatürk II",
+                    "credits": 4,
+                    "prereq": "HIST 201",
+                    "coreq": ""
+                },
+                {
+                    "code": "TRL 202",
+                    "title_tr": "Sorumlu Yurttaşlık",
+                    "title_en": "Civic Responsibility",
+                    "credits": 2,
+                    "prereq": "Having completed at least 75 ECTS",
+                    "coreq": ""
+                }
+            ]
+        },
+        "3": {
+            "fall": [
+                {
+                    "code": "CE 210",
+                    "title_tr": "Akışkanlar Mekaniği",
+                    "title_en": "Akışkanlar Mekaniği",
+                    "credits": 6,
+                    "prereq": "CE 112 and MATH 104",
+                    "coreq": ""
+                },
+                {
+                    "code": "CE 300",
+                    "title_tr": "Yaz Stajı  I",
+                    "title_en": "Yaz Stajı  I",
+                    "credits": 2,
+                    "prereq": "SEC 201",
+                    "coreq": ""
+                },
+                {
+                    "code": "CE 301",
+                    "title_tr": "Yapı Statiği",
+                    "title_en": "Yapı Statiği",
+                    "credits": 6,
+                    "prereq": "CE 203",
+                    "coreq": ""
+                },
+                {
+                    "code": "CE 302",
+                    "title_tr": "Zemin Mekaniği",
+                    "title_en": "Zemin Mekaniği",
+                    "credits": 6,
+                    "prereq": "CE 203",
+                    "coreq": "CE 302L"
+                },
+                {
+                    "code": "CE 307",
+                    "title_tr": "Çelik Yapılar 1",
+                    "title_en": "Çelik Yapılar 1",
+                    "credits": 6,
+                    "prereq": "CE 203",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "FE Sertifika Seçmeli",
+                    "title_en": "FE Certificate Elective",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": ""
+                }
+            ],
+            "spring": [
+                {
+                    "code": "CE 208",
+                    "title_tr": "Yapı İşletmesi",
+                    "title_en": "Yapı İşletmesi",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "CE 304",
+                    "title_tr": "Betonarme",
+                    "title_en": "Betonarme",
+                    "credits": 6,
+                    "prereq": "CE 203",
+                    "coreq": ""
+                },
+                {
+                    "code": "CE 306",
+                    "title_tr": "Temel İnşaatı",
+                    "title_en": "Temel İnşaatı",
+                    "credits": 6,
+                    "prereq": "CE 302",
+                    "coreq": ""
+                },
+                {
+                    "code": "CE 311",
+                    "title_tr": "Hidrolik",
+                    "title_en": "Hidrolik",
+                    "credits": 4,
+                    "prereq": "CE 210",
+                    "coreq": ""
+                },
+                {
+                    "code": "FE 301",
+                    "title_tr": "Mühendis Olmak",
+                    "title_en": "Being an Engineer",
+                    "credits": 2,
+                    "prereq": "En az 105 AKTS tamamlamış olmak",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "FE Serbest Seçmeli",
+                    "title_en": "FE Free Elective",
+                    "credits": 2,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "FE Sertifika Seçmeli",
+                    "title_en": "FE Certificate Elective",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": ""
+                }
+            ]
+        },
+        "4": {
+            "fall": [
+                {
+                    "code": "BUS 101",
+                    "title_tr": "İşletmeye Giriş I (Karar Verme)",
+                    "title_en": "Introduction to Business I",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": "BUS 101L"
+                },
+                {
+                    "code": "CE 310",
+                    "title_tr": "Ulaştırma Mühendisliği",
+                    "title_en": "Ulaştırma Mühendisliği",
+                    "credits": 4,
+                    "prereq": "MATH 217 or CE 217",
+                    "coreq": ""
+                },
+                {
+                    "code": "ECON 210",
+                    "title_tr": "İktisada Giriş",
+                    "title_en": "Introduction to Economics",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "BSCE Program-İçi Seçmeli",
+                    "title_en": "Program Elective",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "BSCE Program-İçi Seçmeli",
+                    "title_en": "Program Elective",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "FE Serbest Seçmeli",
+                    "title_en": "FE Free Elective",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": ""
+                }
+            ],
+            "spring": [
+                {
+                    "code": "BUS 102",
+                    "title_tr": "İşletmeye Giriş II (Girişimcilik)",
+                    "title_en": "Intro. to Business II",
+                    "credits": 4,
+                    "prereq": "BUS 101 or BUS 100",
+                    "coreq": "BUS 102L"
+                },
+                {
+                    "code": "CE 400",
+                    "title_tr": "Staj II",
+                    "title_en": "Summer Internship II",
+                    "credits": 4,
+                    "prereq": "SEC 201",
+                    "coreq": ""
+                },
+                {
+                    "code": "CE 441",
+                    "title_tr": "İnşaat Mühendisliği Bitirme Projesi",
+                    "title_en": "İnşaat Mühendisliği Bitirme Projesi",
+                    "credits": 6,
+                    "prereq": "The student should pass at least 6 of the following courses:CE 208, CE 301, CE 304, CE 306, CE 307, CE 310, CE 311",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "BSCE Program-İçi Seçmeli",
+                    "title_en": "Program Elective",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "FE Serbest Seçmeli",
+                    "title_en": "FE Free Elective",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "FE Sosyal Bilimler Seçmeli",
+                    "title_en": "FE Social Science Elective",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                }
+            ]
+        }
+    }
+}

@@ -49,7 +49,7 @@ function Header({ language, setLanguage, theme, setTheme, onNavigate, term }) {
                 setShowMobileMenu(false);
               }}
             >
-              {language === 'tr' ? 'Müfredat' : 'Curriculum'}
+              {language === 'tr' ? 'Ders Planım' : 'Curriculum'}
             </button>
 
             <button

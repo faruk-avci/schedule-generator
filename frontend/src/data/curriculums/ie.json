@@ -1,0 +1,423 @@
+{
+    "id": "ie",
+    "title_tr": "Endüstri Mühendisliği",
+    "title_en": "Industrial Engineering",
+    "semesters": {
+        "1": {
+            "fall": [
+                {
+                    "code": "CS 104",
+                    "title_tr": "Programlamaya Giriş",
+                    "title_en": "Introduction to Programming",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": "CS 104L"
+                },
+                {
+                    "code": "ENG 101",
+                    "title_tr": "İngilizce I",
+                    "title_en": "English I",
+                    "credits": 4,
+                    "prereq": "Dil sınavından başarılı sonucuna sahip olmak",
+                    "coreq": ""
+                },
+                {
+                    "code": "MATH 103",
+                    "title_tr": "Mühendislik için Yüksek Matematik I",
+                    "title_en": "Calculus for Engineering I",
+                    "credits": 8,
+                    "prereq": "",
+                    "coreq": "MATH 103R"
+                },
+                {
+                    "code": "PHYS 101",
+                    "title_tr": "Fizik I",
+                    "title_en": "Physics I",
+                    "credits": 8,
+                    "prereq": "",
+                    "coreq": "PHYS 101L"
+                },
+                {
+                    "code": "TLL 101",
+                    "title_tr": "Türk Dili ve Edebiyatı I",
+                    "title_en": "Turkish Language and Literature I",
+                    "credits": 3,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "TRL 101",
+                    "title_tr": "Üniversite Yaşamına Giriş",
+                    "title_en": "Intro to University Life",
+                    "credits": 1,
+                    "prereq": "",
+                    "coreq": ""
+                }
+            ],
+            "spring": [
+                {
+                    "code": "ENG 102",
+                    "title_tr": "İngilizce II",
+                    "title_en": "English II",
+                    "credits": 4,
+                    "prereq": "ENG 101",
+                    "coreq": ""
+                },
+                {
+                    "code": "IE 101",
+                    "title_tr": "Endüstri Mühendisliğine Giriş",
+                    "title_en": "Endüstri Mühendisliğine Giriş",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "MATH 104",
+                    "title_tr": "Mühendislik için Yüksek Matematik II",
+                    "title_en": "Calculus for Engineering II",
+                    "credits": 8,
+                    "prereq": "MATH103",
+                    "coreq": "MATH 104R"
+                },
+                {
+                    "code": "PHYS 102",
+                    "title_tr": "Fizik II",
+                    "title_en": "Physics II",
+                    "credits": 8,
+                    "prereq": "PHYS 101",
+                    "coreq": "PHYS 102L"
+                },
+                {
+                    "code": "TLL 102",
+                    "title_tr": "Türk Dili ve Edebiyatı II",
+                    "title_en": "Turkish Language and Literature II",
+                    "credits": 3,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "TRL 102",
+                    "title_tr": "Kişisel Gelişim",
+                    "title_en": "Personal Development",
+                    "credits": 1,
+                    "prereq": "",
+                    "coreq": ""
+                }
+            ]
+        },
+        "2": {
+            "fall": [
+                {
+                    "code": "ECON 210",
+                    "title_tr": "İktisada Giriş",
+                    "title_en": "Introduction to Economics",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "HIST 201",
+                    "title_tr": "Atatürk İlkeleri ve İnkılap Tarihi I",
+                    "title_en": "Principles of Atatürk I",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "MATH 112",
+                    "title_tr": "Ayrık Matematik",
+                    "title_en": "Discrete Mathematics",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "MATH 211",
+                    "title_tr": "Doğrusal Cebir",
+                    "title_en": "Linear Algebra",
+                    "credits": 6,
+                    "prereq": "MATH 103",
+                    "coreq": "MATH 211R"
+                },
+                {
+                    "code": "MATH 215",
+                    "title_tr": "Olasılık ve Rassal Değişkenler",
+                    "title_en": "Olasılık ve Rassal Değişkenler",
+                    "credits": 6,
+                    "prereq": "MATH 104",
+                    "coreq": "MATH 215R"
+                },
+                {
+                    "code": "SEC 201",
+                    "title_tr": "Sektörel Hazırlık",
+                    "title_en": "Sectoral Practicum I",
+                    "credits": 2,
+                    "prereq": "To complete at least 45 ECTS",
+                    "coreq": "SEC201L"
+                }
+            ],
+            "spring": [
+                {
+                    "code": "CHEM 111",
+                    "title_tr": "Kimya",
+                    "title_en": "Chemistry",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": "CHEM 111L"
+                },
+                {
+                    "code": "HIST 202",
+                    "title_tr": "Atatürk İlkeleri ve İnkılap Tarihi II",
+                    "title_en": "Principles of Atatürk II",
+                    "credits": 4,
+                    "prereq": "HIST 201",
+                    "coreq": ""
+                },
+                {
+                    "code": "IE 201",
+                    "title_tr": "Yöneylem Araştırması I",
+                    "title_en": "Yöneylem Araştırması I",
+                    "credits": 6,
+                    "prereq": "MATH 211",
+                    "coreq": "IE 201R"
+                },
+                {
+                    "code": "IE 246",
+                    "title_tr": "Yöneylem Araştırması için Programlama",
+                    "title_en": "Yöneylem Araştırması için Programlama",
+                    "credits": 6,
+                    "prereq": "CS 100 veya CS 101 veya CS 103 or CS 104",
+                    "coreq": "IE 246R"
+                },
+                {
+                    "code": "MATH 216",
+                    "title_tr": "Uygulamalı İstatistik",
+                    "title_en": "Uygulamalı İstatistik",
+                    "credits": 6,
+                    "prereq": "MATH 215",
+                    "coreq": "MATH216R"
+                },
+                {
+                    "code": "TRL 202",
+                    "title_tr": "Sorumlu Yurttaşlık",
+                    "title_en": "Civic Responsibility",
+                    "credits": 2,
+                    "prereq": "Having completed at least 75 ECTS",
+                    "coreq": ""
+                }
+            ]
+        },
+        "3": {
+            "fall": [
+                {
+                    "code": "ENG 303",
+                    "title_tr": "Teknik İletişim",
+                    "title_en": "Technical Communication",
+                    "credits": 2,
+                    "prereq": "ENG 102 or ENG106",
+                    "coreq": ""
+                },
+                {
+                    "code": "IE 301",
+                    "title_tr": "Yöneylem Araştırması II",
+                    "title_en": "Yöneylem Araştırması II",
+                    "credits": 6,
+                    "prereq": "MATH 215 ve IE 201",
+                    "coreq": "IE 301R"
+                },
+                {
+                    "code": "IE 302",
+                    "title_tr": "Üretim Sistemleri Analizi",
+                    "title_en": "Üretim Sistemleri Analizi",
+                    "credits": 6,
+                    "prereq": "IE 201 ve MATH 215",
+                    "coreq": "IE 302R"
+                },
+                {
+                    "code": "IE 342",
+                    "title_tr": "Matematiksel Modelleme ve Kesin Metodlar",
+                    "title_en": "Matematiksel Modelleme ve Kesin Metodlar",
+                    "credits": 6,
+                    "prereq": "IE 201",
+                    "coreq": "IE 342R"
+                },
+                {
+                    "code": "MATH 212",
+                    "title_tr": "Diferansiyel Denklemler",
+                    "title_en": "Differential Equations",
+                    "credits": 6,
+                    "prereq": "MATH 104",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "FE Sertifika Seçmeli",
+                    "title_en": "FE Certificate Elective",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": ""
+                }
+            ],
+            "spring": [
+                {
+                    "code": "BUS 101",
+                    "title_tr": "İşletmeye Giriş I (Karar Verme)",
+                    "title_en": "Introduction to Business I",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": "BUS 101L"
+                },
+                {
+                    "code": "FE 301",
+                    "title_tr": "Mühendis Olmak",
+                    "title_en": "Being an Engineer",
+                    "credits": 2,
+                    "prereq": "En az 105 AKTS tamamlamış olmak",
+                    "coreq": ""
+                },
+                {
+                    "code": "IE 203",
+                    "title_tr": "Mühendislik Ekonomisi",
+                    "title_en": "Mühendislik Ekonomisi",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": "IE 203R"
+                },
+                {
+                    "code": "IE 300",
+                    "title_tr": "Staj I",
+                    "title_en": "Summer Internship I",
+                    "credits": 2,
+                    "prereq": "SEC 201",
+                    "coreq": ""
+                },
+                {
+                    "code": "IE 325",
+                    "title_tr": "Benzetişim Modellemesi ve Analizi",
+                    "title_en": "Benzetişim Modellemesi ve Analizi",
+                    "credits": 6,
+                    "prereq": "MATH 216 and (CS 101 or CS 100 or CS 103 or CS 104)",
+                    "coreq": "IE 325R"
+                },
+                {
+                    "code": "IE 343",
+                    "title_tr": "Yöneylem Araştırması Algoritmaları",
+                    "title_en": "Yöneylem Araştırması Algoritmaları",
+                    "credits": 6,
+                    "prereq": "IE 201 and IE 246",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "FE Sertifika Seçmeli",
+                    "title_en": "FE Certificate Elective",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": ""
+                }
+            ]
+        },
+        "4": {
+            "fall": [
+                {
+                    "code": "BUS 102",
+                    "title_tr": "İşletmeye Giriş II (Girişimcilik)",
+                    "title_en": "Intro. to Business II",
+                    "credits": 4,
+                    "prereq": "BUS 101 or BUS 100",
+                    "coreq": "BUS 102L"
+                },
+                {
+                    "code": "IE 400",
+                    "title_tr": "Staj II",
+                    "title_en": "Summer Internship II",
+                    "credits": 4,
+                    "prereq": "SEC 201",
+                    "coreq": ""
+                },
+                {
+                    "code": "IE 401",
+                    "title_tr": "Endüstri Mühendisliği Bitirme Projesi I",
+                    "title_en": "Endüstri Mühendisliği Bitirme Projesi I",
+                    "credits": 4,
+                    "prereq": "(IE 101 ve IE 201) ve ( (IE 301, IE 302, IE 325, IE 342, IE343 ) derslerinden 4 tanesini) geçmiş olmak",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "BSIE Program-İçi Seçmeli",
+                    "title_en": "Program Elective",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "BSIE Program-İçi Seçmeli",
+                    "title_en": "Program Elective",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "FE Sosyal Bilimler Seçmeli",
+                    "title_en": "FE Social Science Elective",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                }
+            ],
+            "spring": [
+                {
+                    "code": "IE 402",
+                    "title_tr": "Endüstri Mühendisliği Bitirme Projesi II",
+                    "title_en": "Endüstri Mühendisliği Bitirme Projesi II",
+                    "credits": 4,
+                    "prereq": "IE 401",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "BSIE Program-İçi Seçmeli",
+                    "title_en": "Program Elective",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "FE Serbest Seçmeli",
+                    "title_en": "FE Free Elective",
+                    "credits": 2,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "FE Serbest Seçmeli",
+                    "title_en": "FE Free Elective",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "FE Serbest Seçmeli",
+                    "title_en": "FE Free Elective",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                },
+                {
+                    "code": "",
+                    "title_tr": "FE Serbest Seçmeli",
+                    "title_en": "FE Free Elective",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": ""
+                }
+            ]
+        }
+    }
+}

@@ -3,20 +3,38 @@ import './CurriculumPage.css';
 import { translations } from '../utils/translations';
 
 // Import curriculum data
+// Import curriculum data
 import eeCurriculum from '../data/curriculums/ee.json';
+import aiCurriculum from '../data/curriculums/ai.json';
+import ieCurriculum from '../data/curriculums/ie.json';
+import ceCurriculum from '../data/curriculums/ce.json';
+import meCurriculum from '../data/curriculums/me.json';
+import csCurriculum from '../data/curriculums/cs.json';
 
 const AVAILABLE_MAJORS = [
     { id: 'ee', tr: 'Elektrik-Elektronik Mühendisliği', en: 'Electrical-Electronics Engineering', data: eeCurriculum },
-    // Add other majors here as JSONs become available
-    // { id: 'cs', tr: 'Bilgisayar Mühendisliği', en: 'Computer Engineering', data: csCurriculum },
+    { id: 'cs', tr: 'Bilgisayar Mühendisliği', en: 'Computer Science', data: csCurriculum },
+    { id: 'ai', tr: 'Yapay Zeka Mühendisliği', en: 'Artificial Intelligence Engineering', data: aiCurriculum },
+    { id: 'ie', tr: 'Endüstri Mühendisliği', en: 'Industrial Engineering', data: ieCurriculum },
+    { id: 'me', tr: 'Makine Mühendisliği', en: 'Mechanical Engineering', data: meCurriculum },
+    { id: 'ce', tr: 'İnşaat Mühendisliği', en: 'Civil Engineering', data: ceCurriculum },
 ];
 
 // Map full major names (from localStorage) to IDs
 const MAJOR_NAME_MAP = {
     'Electrical-Electronics Engineering': 'ee',
     'Elektrik-Elektronik Mühendisliği': 'ee',
-    'Computer Engineering': 'cs', // Example for future
-    'Bilgisayar Mühendisliği': 'cs'
+    'Computer Science': 'cs',
+    'Computer Engineering': 'cs',
+    'Bilgisayar Mühendisliği': 'cs',
+    'Artificial Intelligence Engineering': 'ai',
+    'Yapay Zeka Mühendisliği': 'ai',
+    'Industrial Engineering': 'ie',
+    'Endüstri Mühendisliği': 'ie',
+    'Mechanical Engineering': 'me',
+    'Makine Mühendisliği': 'me',
+    'Civil Engineering': 'ce',
+    'İnşaat Mühendisliği': 'ce'
 };
 
 function CurriculumPage({ language }) {
