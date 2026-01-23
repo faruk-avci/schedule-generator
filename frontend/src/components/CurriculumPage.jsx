@@ -11,10 +11,30 @@ const AVAILABLE_MAJORS = [
     // { id: 'cs', tr: 'Bilgisayar Mühendisliği', en: 'Computer Engineering', data: csCurriculum },
 ];
 
+// Map full major names (from localStorage) to IDs
+const MAJOR_NAME_MAP = {
+    'Electrical-Electronics Engineering': 'ee',
+    'Elektrik-Elektronik Mühendisliği': 'ee',
+    'Computer Engineering': 'cs', // Example for future
+    'Bilgisayar Mühendisliği': 'cs'
+};
+
 function CurriculumPage({ language }) {
     const isTr = language === 'tr';
-    const [selectedMajorId, setSelectedMajorId] = useState('ee');
+    const [selectedMajorId, setSelectedMajorId] = useState('ee'); // Default fallback
     const [curriculum, setCurriculum] = useState(eeCurriculum);
+
+    // Auto-select major from localStorage on mount
+    useEffect(() => {
+        const storedMajor = localStorage.getItem('student_major');
+        if (storedMajor) {
+            const mappedId = MAJOR_NAME_MAP[storedMajor];
+            // Only autoset if we actually have data for this major
+            if (mappedId && AVAILABLE_MAJORS.find(m => m.id === mappedId)) {
+                setSelectedMajorId(mappedId);
+            }
+        }
+    }, []);
 
     useEffect(() => {
         const major = AVAILABLE_MAJORS.find(m => m.id === selectedMajorId);
@@ -107,26 +127,28 @@ const SemesterTable = ({ courses, isTr }) => {
             <thead>
                 <tr>
                     <th className="th-code">{isTr ? 'Kod' : 'Code'}</th>
-                    <th className="th-title">{isTr ? 'Ders Adı' : 'Title'}</th>
+                    <th className="th-title">{isTr ? 'Ders Adı' : 'Course Title'}</th>
                     <th className="th-credits">{isTr ? 'AKTS' : 'ECTS'}</th>
-                    <th className="th-req">{isTr ? 'Koşul' : 'Req'}</th>
+                    <th className="th-req">{isTr ? 'Koşullar' : 'Requisites'}</th>
                 </tr>
             </thead>
             <tbody>
                 {courses.map((course, idx) => (
                     <tr key={idx}>
                         <td className="code-cell">{course.code || '-'}</td>
-                        <td className="title-cell">{course.title}</td>
+                        <td className="title-cell">
+                            {isTr ? (course.title_tr || course.title) : (course.title_en || course.title)}
+                        </td>
                         <td className="credits-cell">{course.credits}</td>
                         <td className="req-cell">
                             {course.prereq && (
-                                <span className="tag tag-prereq" title={isTr ? 'Ön Koşul' : 'Prerequisite'}>
-                                    P: {course.prereq}
+                                <span className="tag tag-prereq">
+                                    {isTr ? 'Ön Koşul:' : 'Prereq:'} {course.prereq}
                                 </span>
                             )}
                             {course.coreq && (
-                                <span className="tag tag-coreq" title={isTr ? 'Yan Koşul' : 'Corequisite'}>
-                                    C: {course.coreq}
+                                <span className="tag tag-coreq">
+                                    {isTr ? 'Yan Koşul:' : 'Coreq:'} {course.coreq}
                                 </span>
                             )}
                         </td>

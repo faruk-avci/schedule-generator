@@ -73,6 +73,8 @@
     position: relative;
     padding-bottom: 15px;
     margin-bottom: 40px;
+    font-size: 2rem;
+    font-weight: 700;
 }
 
 .major-title::after {
@@ -81,8 +83,8 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
+    width: 80px;
+    height: 4px;
     background: var(--ozu-burgundy);
     border-radius: 2px;
 }
@@ -141,8 +143,8 @@
 }
 
 .semester-header {
-    background: #fafafa;
-    padding: 15px 20px;
+    background: linear-gradient(to right, #f8f9fa, #ffffff);
+    padding: 18px 25px;
     border-bottom: 1px solid var(--border-color);
     display: flex;
     justify-content: space-between;
@@ -152,13 +154,13 @@
 .semester-header h3 {
     margin: 0;
     color: var(--ozu-blue);
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
 }
 
 .semester-icon {
-    font-size: 1.2rem;
-    /* Emojis removed per request, purely text or hidden */
+    /* No emojis as requested */
     display: none;
 }
 
@@ -170,23 +172,23 @@
 .pixel-perfect-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
 }
 
 .pixel-perfect-table th {
-    background: #f8fafc;
+    background: #f1f5f9;
     color: var(--text-secondary);
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     font-size: 0.75rem;
-    letter-spacing: 0.5px;
-    padding: 12px 16px;
+    letter-spacing: 0.05em;
+    padding: 16px 20px;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
 }
 
 .pixel-perfect-table td {
-    padding: 12px 16px;
+    padding: 16px 20px;
     border-bottom: 1px solid #f1f5f9;
     color: var(--text-primary);
     vertical-align: top;
@@ -196,13 +198,23 @@
     border-bottom: none;
 }
 
+/* Row Hover */
+.pixel-perfect-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.pixel-perfect-table tbody tr:hover {
+    background-color: #fafbfc;
+}
+
 /* Column Widths */
 .th-code {
     width: 15%;
+    min-width: 90px;
 }
 
 .th-title {
-    width: 45%;
+    width: 40%;
 }
 
 .th-credits {
@@ -211,7 +223,7 @@
 }
 
 .th-req {
-    width: 30%;
+    width: 35%;
 }
 
 .code-cell {
@@ -224,25 +236,28 @@
 .title-cell {
     font-weight: 500;
     line-height: 1.4;
+    color: #1f2937;
 }
 
 .credits-cell {
     text-align: center;
     font-weight: 600;
+    color: var(--text-secondary);
 }
 
 .req-cell {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 6px;
+    align-items: flex-start;
 }
 
 /* Tags */
 .tag {
-    display: inline-block;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 0.75rem;
+    display: inline-flex;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
     font-weight: 600;
     line-height: 1.2;
 }
@@ -254,9 +269,9 @@
 }
 
 .tag-coreq {
-    background-color: #FEF2F2;
+    background-color: #FFF1F2;
     color: var(--ozu-burgundy);
-    border: 1px solid #FECACA;
+    border: 1px solid #FECDD3;
 }
 
 .text-right {
@@ -264,8 +279,10 @@
     font-weight: 700;
     color: var(--ozu-blue);
     background-color: #f8fafc;
+    padding-right: 20px;
 }
 
 .font-bold {
     font-weight: 800;
+    color: var(--text-primary);
 }
