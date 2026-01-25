@@ -386,6 +386,8 @@ function CurriculumPage({ language }) {
                                 <table className="cp-elective-table">
                                     <thead>
                                         <tr>
+                                            <th className="cp-col-status">{isTr ? 'Açık' : 'Open'}</th>
+                                            <th className="cp-col-action">{isTr ? 'Ekle' : 'Add'}</th>
                                             <th>{isTr ? 'Kod' : 'Code'}</th>
                                             <th>{isTr ? 'Ders Adı' : 'Course Title'}</th>
                                             <th>{isTr ? 'AKTS' : 'ECTS'}</th>
@@ -395,6 +397,21 @@ function CurriculumPage({ language }) {
                                     <tbody>
                                         {electiveModal.courses.map((course, idx) => (
                                             <tr key={idx}>
+                                                <td className="cp-status-cell">
+                                                    <span className={`status-dot ${course.opened !== false ? 'opened' : 'closed'}`} />
+                                                </td>
+                                                <td className="cp-action-cell">
+                                                    <button
+                                                        className="add-btn"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleAddCourse(course);
+                                                        }}
+                                                        title={isTr ? 'Sepete Ekle' : 'Add to Basket'}
+                                                    >
+                                                        +
+                                                    </button>
+                                                </td>
                                                 <td className="cp-code-cell">{course.code}</td>
                                                 <td className="cp-title-cell">
                                                     {isTr ? course.title_tr : course.title_en}

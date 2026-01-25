@@ -481,6 +481,25 @@
     font-size: 0.8rem;
 }
 
+/* New columns */
+.cp-col-status {
+    width: 45px;
+    text-align: center;
+}
+
+.cp-col-action {
+    width: 50px;
+    text-align: center;
+}
+
+.cp-status-cell {
+    text-align: center;
+}
+
+.cp-action-cell {
+    text-align: center;
+}
+
 .cp-modal-footer {
     padding: 12px 20px;
     border-top: 1px solid var(--border-color);
