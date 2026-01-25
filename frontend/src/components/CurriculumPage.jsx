@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './CurriculumPage.css';
 
 // All available majors - data loaded dynamically
@@ -92,6 +93,7 @@ const ELECTIVE_TYPE_NAMES = {
 
 function CurriculumPage({ language }) {
     const isTr = language === 'tr';
+    const navigate = useNavigate();
     const [selectedMajorId, setSelectedMajorId] = useState('ee');
     const [curriculum, setCurriculum] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -180,8 +182,8 @@ function CurriculumPage({ language }) {
         const coreqs = course.coreq
             ? course.coreq.split(/[,;]/)
                 .map(c => c.trim())
-                .filter(c => c && !c.includes(' ')) // Simple filter
                 .map(c => cleanCode(c))
+                .filter(c => c.length > 0)
             : [];
 
         const coursesToAdd = [mainCode, ...coreqs];
@@ -244,6 +246,12 @@ function CurriculumPage({ language }) {
 
     return (
         <div className="terms-page-container">
+            <button
+                onClick={() => navigate('/')}
+                className="back-button"
+            >
+                ← {isTr ? 'Ana Sayfaya Dön' : 'Back to Home'}
+            </button>
             {/* Message Toast */}
             {message && (
                 <div className={`message ${message.type}`}>
