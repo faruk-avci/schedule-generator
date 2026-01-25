@@ -375,12 +375,49 @@ function CurriculumPage({ language }) {
 
             {/* Elective Modal */}
             {electiveModal.open && (
-                <ElectiveModal
-                    typeName={electiveModal.typeName}
-                    courses={electiveModal.courses}
-                    isTr={isTr}
-                    onClose={closeElectiveModal}
-                />
+                <div className="cp-modal-overlay" onClick={closeElectiveModal}>
+                    <div className="cp-elective-modal" onClick={e => e.stopPropagation()}>
+                        <div className="cp-modal-header">
+                            <h2>{electiveModal.typeName}</h2>
+                            <button onClick={closeElectiveModal} className="cp-modal-close">×</button>
+                        </div>
+                        <div className="cp-modal-body">
+                            {electiveModal.courses && electiveModal.courses.length > 0 ? (
+                                <table className="cp-elective-table">
+                                    <thead>
+                                        <tr>
+                                            <th>{isTr ? 'Kod' : 'Code'}</th>
+                                            <th>{isTr ? 'Ders Adı' : 'Course Title'}</th>
+                                            <th>{isTr ? 'AKTS' : 'ECTS'}</th>
+                                            <th>{isTr ? 'Ön Koşul' : 'Prereq'}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {electiveModal.courses.map((course, idx) => (
+                                            <tr key={idx}>
+                                                <td className="cp-code-cell">{course.code}</td>
+                                                <td className="cp-title-cell">
+                                                    {isTr ? course.title_tr : course.title_en}
+                                                </td>
+                                                <td className="cp-credits-cell">{course.credits}</td>
+                                                <td className="cp-prereq-cell">{course.prereq || '-'}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <p className="cp-no-courses">{isTr ? 'Ders bulunamadı.' : 'No courses found.'}</p>
+                            )}
+                        </div>
+                        <div className="cp-modal-footer">
+                            <span className="cp-course-count">
+                                {isTr
+                                    ? `Toplam ${electiveModal.courses?.length || 0} ders`
+                                    : `Total ${electiveModal.courses?.length || 0} courses`}
+                            </span>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );
@@ -502,17 +539,17 @@ const CourseRow = ({ course, isTr, onElectiveClick, onAddCourse }) => {
 // Elective Modal Component
 const ElectiveModal = ({ typeName, courses, isTr, onClose }) => {
     return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="elective-modal" onClick={(e) => e.stopPropagation()}>
-                <div className="modal-header">
+        <div className="cp-modal-overlay" onClick={onClose}>
+            <div className="cp-elective-modal" onClick={(e) => e.stopPropagation()}>
+                <div className="cp-modal-header">
                     <h2>{typeName}</h2>
-                    <button className="modal-close" onClick={onClose}>&times;</button>
+                    <button className="cp-modal-close" onClick={onClose}>&times;</button>
                 </div>
-                <div className="modal-body">
+                <div className="cp-modal-body">
                     {courses.length === 0 ? (
-                        <p className="no-courses">{isTr ? 'Ders bulunamadı.' : 'No courses found.'}</p>
+                        <p className="cp-no-courses">{isTr ? 'Ders bulunamadı.' : 'No courses found.'}</p>
                     ) : (
-                        <table className="elective-table">
+                        <table className="cp-elective-table">
                             <thead>
                                 <tr>
                                     <th>{isTr ? 'Kod' : 'Code'}</th>
