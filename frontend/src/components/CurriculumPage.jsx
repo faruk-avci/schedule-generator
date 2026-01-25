@@ -161,7 +161,12 @@ function CurriculumPage({ language }) {
         // Add course and all corequisites
         for (const code of coursesToAdd) {
             try {
-                const response = await fetch('/api/courses/add', {
+                // Use the dedicated API domain
+                const apiUrl = window.location.hostname === 'localhost'
+                    ? '/api/courses/add'
+                    : 'https://api.ozuplanner.com/api/courses/add';
+
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
