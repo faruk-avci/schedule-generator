@@ -589,6 +589,7 @@ const SemesterCard = ({ title, courses, isTr, onElectiveClick, onAddCourse }) =>
                     />
                 ))}
             </div>
+
             {/* Major Selection Modal */}
             {showMajorModal && (
                 <div className="cp-modal-overlay">
@@ -640,6 +641,8 @@ const SemesterCard = ({ title, courses, isTr, onElectiveClick, onAddCourse }) =>
         </div>
     );
 };
+
+
 
 // Course Row Component - Clean layout with separate req lines
 const CourseRow = ({ course, isTr, onElectiveClick, onAddCourse }) => {
