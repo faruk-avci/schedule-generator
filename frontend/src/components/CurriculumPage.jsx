@@ -184,7 +184,7 @@ const ELECTIVE_TYPE_NAMES = {
 function CurriculumPage({ language }) {
     const isTr = language === 'tr';
     const navigate = useNavigate();
-    const [selectedMajorId, setSelectedMajorId] = useState('ee');
+    const [selectedMajorId, setSelectedMajorId] = useState(null);
     const [curriculum, setCurriculum] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -244,7 +244,9 @@ function CurriculumPage({ language }) {
 
     // Load curriculum when major changes
     useEffect(() => {
-        loadCurriculum(selectedMajorId);
+        if (selectedMajorId) {
+            loadCurriculum(selectedMajorId);
+        }
     }, [selectedMajorId, loadCurriculum]);
 
     // Handle elective click
