@@ -68,8 +68,8 @@ function HowToUse({ language, onNavigate }) {
           </li>
           <li>
             <strong>{isTr ? 'Seçmeli Dersler' : 'Elective Courses'}:</strong> {isTr
-              ? 'Müfredatınızdaki "Alan Seçmeli" veya "Serbest Seçmeli" kutucuklarına tıklayarak, o kategoriye uygun açılan derslerin listesini görebilir ve beğendiğinizi ekleyebilirsiniz.'
-              : 'By clicking on "Area Elective" or "Free Elective" boxes in your curriculum, you can see the list of available courses for that category and add the one you prefer.'}
+              ? 'Müfredatınızdaki "Program içi Seçmeli" veya "Serbest Seçmeli" kutucuklarına tıklayarak, o kategoriye uygun açılan derslerin listesini görebilir ve beğendiğinizi ekleyebilirsiniz.'
+              : 'By clicking on "Program Elective" or "Free Elective" boxes in your curriculum, you can see the list of available courses for that category and add the one you prefer.'}
           </li>
         </ul>
       </div>

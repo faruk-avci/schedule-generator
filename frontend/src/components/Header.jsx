@@ -12,7 +12,11 @@ function Header({ language, setLanguage, theme, setTheme, onNavigate, term }) {
     <header className="app-header">
       <div className="header-container">
         {/* Left: Logo + Title */}
-        <div className="header-left">
+        <div
+          className="header-left"
+          onClick={() => onNavigate('home')}
+          style={{ cursor: 'pointer' }}
+        >
           <svg width="36" height="36" viewBox="0 0 32 32" className="header-logo">
             <rect width="32" height="32" rx="6" fill="#8B1538" />
             <path d="M7 10h18" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
