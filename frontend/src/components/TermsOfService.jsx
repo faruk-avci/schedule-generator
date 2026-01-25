@@ -69,10 +69,10 @@ const TermsOfService = ({ language, onNavigate }) => {
 
             {/* Curriculum and Electives Disclaimer */}
             <div className="terms-card">
-                <h2>{isTr ? 'Ders Planları ve Seçmeli Ders Listeleri Hakkında' : 'About Course Plans and Elective Course Lists'}</h2>
+                <h2>{isTr ? 'Bölüm Müfredatları ve Seçmeli Ders Listeleri Hakkında' : 'About Course Plans and Elective Course Lists'}</h2>
                 <p>
                     {isTr
-                        ? 'OzuPlanner üzerinde sunulan ders planları, program müfredatları ve seçmeli ders listeleri Özyeğin Üniversitesi’nin resmi web sitesinde kamuya açık olarak paylaşılan bilgilerden derlenmiştir. Bu bilgiler bilgilendirme amaçlıdır ve resmi akademik geçerliliğe sahip değildir.'
+                        ? 'OzuPlanner üzerinde sunulan bölüm müfredatları ve seçmeli ders listeleri Özyeğin Üniversitesi’nin resmi web sitesinde kamuya açık olarak paylaşılan bilgilerden derlenmiştir. Bu bilgiler bilgilendirme amaçlıdır ve resmi akademik geçerliliğe sahip değildir.'
                         : 'The course plans, program curriculums, and elective course lists presented on OzuPlanner are compiled from publicly available information on Özyeğin University\'s official website. This information is for informational purposes only and does not have official academic validity.'}
                 </p>
                 <p>

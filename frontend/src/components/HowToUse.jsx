@@ -54,11 +54,11 @@ function HowToUse({ language, onNavigate }) {
 
       {/* Step 2: Curriculum Integration */}
       <div className="terms-card">
-        <h2>2. {isTr ? 'Ders Planım ve Seçmeli Dersler' : 'My Curriculum & Elective Courses'}</h2>
+        <h2>2. {isTr ? 'Ders Planı ve Seçmeli Dersler' : 'My Curriculum & Elective Courses'}</h2>
         <p>
           {isTr
-            ? '"Ders Planım" sayfasını kullanarak bölümünüzü seçebilir ve dönemlik ders programınızı görüntüleyebilirsiniz.'
-            : 'You can use the "Curriculum" page to select your major and view your semester-by-semester course plan.'}
+            ? '"Bölüm Müfredatları" sayfasını kullanarak bölümünüzü seçebilir ve dönemlik ders programınızı görüntüleyebilirsiniz.'
+            : 'You can use the "Curriculums" page to select your major and view your semester-by-semester course plan.'}
         </p>
         <ul style={{ marginTop: '15px', paddingLeft: '20px', lineHeight: '1.6' }}>
           <li>
