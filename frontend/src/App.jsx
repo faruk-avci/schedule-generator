@@ -15,6 +15,7 @@ import NotFound from './components/NotFound';
 import ResultsPage from './components/ResultsPage';
 import CoreqWarningModal from './components/CoreqWarningModal';
 import CurriculumPage from './components/CurriculumPage';
+import SurveyPage from './components/SurveyPage';
 import { translations } from './utils/translations'
 import { searchCourses, addCourse, removeCourse, clearBasket, getBasket, generateSchedule, getTermInfo, setMajor as apiSetMajor, saveBasket as apiSaveBasket, getSavedBaskets as apiGetSavedBaskets, loadBasket as apiLoadSavedBasket, removeSavedBasket as apiRemoveSavedBasket } from './services/api'
 import Analytics from './utils/analytics';
@@ -707,6 +708,7 @@ function App() {
         <Route path="/how-to-use" element={<HowToUse language={language} onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
         <Route path="/contact" element={<Contact language={language} onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
         <Route path="/curriculum" element={<CurriculumPage language={language} />} />
+        <Route path="/survey" element={<SurveyPage language={language} onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
         {/* 404 Catch-All Route */}
         <Route path="*" element={<NotFound language={language} onNavigate={(path) => navigate(path)} />} />
         <Route path="/results" element={<ResultsPage language={language} />} />
