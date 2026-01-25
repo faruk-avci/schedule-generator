@@ -199,6 +199,7 @@
                     "credits": 4,
                     "prereq": "",
                     "coreq": "",
+                    "electiveType": "language",
                     "opened": true
                 }
             ],
@@ -265,6 +266,7 @@
                     "credits": 4,
                     "prereq": "",
                     "coreq": "",
+                    "electiveType": "language",
                     "opened": true
                 }
             ]
@@ -323,6 +325,7 @@
                     "credits": 4,
                     "prereq": "",
                     "coreq": "",
+                    "electiveType": "language",
                     "opened": true
                 }
             ],
@@ -380,6 +383,7 @@
                     "credits": 4,
                     "prereq": "",
                     "coreq": "",
+                    "electiveType": "language",
                     "opened": true
                 }
             ]
@@ -5906,6 +5910,152 @@
                 "title_en": "Uluslararası Pazarlama",
                 "credits": 6,
                 "prereq": "MKTG 201",
+                "coreq": "",
+                "opened": true
+            }
+        ],
+        "language": [
+            {
+                "code": "FRE 101",
+                "title_tr": "Fransızca I",
+                "title_en": "French I",
+                "credits": 4,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "FRE 102",
+                "title_tr": "Fransızca II",
+                "title_en": "French II",
+                "credits": 4,
+                "prereq": "FRE 101",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "FRE 201",
+                "title_tr": "Fransızca III",
+                "title_en": "French III",
+                "credits": 4,
+                "prereq": "FRE 102",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "FRE 202",
+                "title_tr": "Fransızca IV",
+                "title_en": "French IV",
+                "credits": 4,
+                "prereq": "FRE 201",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "GER 101",
+                "title_tr": "Almanca I",
+                "title_en": "German I",
+                "credits": 4,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "GER 102",
+                "title_tr": "Almanca II",
+                "title_en": "German II",
+                "credits": 4,
+                "prereq": "GER 101",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "GER 201",
+                "title_tr": "Almanca III",
+                "title_en": "German III",
+                "credits": 4,
+                "prereq": "GER 102",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "GER 202",
+                "title_tr": "Almanca IV",
+                "title_en": "German IV",
+                "credits": 4,
+                "prereq": "GER 201",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "ITA 101",
+                "title_tr": "İtalyanca I",
+                "title_en": "Italian I",
+                "credits": 4,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "ITA 102",
+                "title_tr": "İtalyanca II",
+                "title_en": "Italian II",
+                "credits": 4,
+                "prereq": "ITA 101",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "ITA 201",
+                "title_tr": "İtalyanca III",
+                "title_en": "Italian III",
+                "credits": 4,
+                "prereq": "ITA 102",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "ITA 202",
+                "title_tr": "İtalyanca IV",
+                "title_en": "Italian IV",
+                "credits": 4,
+                "prereq": "ITA 201",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "SPA 101",
+                "title_tr": "İspanyolca I",
+                "title_en": "Spanish I",
+                "credits": 4,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "SPA 102",
+                "title_tr": "İspanyolca II",
+                "title_en": "Spanish II",
+                "credits": 4,
+                "prereq": "SPA 101",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "SPA 201",
+                "title_tr": "İspanyolca III",
+                "title_en": "Spanish III",
+                "credits": 4,
+                "prereq": "SPA 102",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "SPA 202",
+                "title_tr": "İspanyolca IV",
+                "title_en": "Spanish IV",
+                "credits": 4,
+                "prereq": "SPA 201",
                 "coreq": "",
                 "opened": true
             }
