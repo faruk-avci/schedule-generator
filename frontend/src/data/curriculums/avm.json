@@ -1,18 +1,36 @@
 {
-    "id": "ce",
-    "title_tr": "İnşaat Mühendisliği",
-    "title_en": "Civil Engineering",
-    "faculty": "engineering",
+    "id": "avm",
+    "title_tr": "Havacılık Yönetimi",
+    "title_en": "Aviation Management",
+    "faculty": "havacilik",
     "semesters": {
         "1": {
             "fall": [
                 {
-                    "code": "CHEM 111",
-                    "title_tr": "Kimya",
-                    "title_en": "Kimya",
+                    "code": "AVM 101",
+                    "title_tr": "Hava Taşımacılığı",
+                    "title_en": "Hava Taşımacılığı",
                     "credits": 6,
                     "prereq": "",
-                    "coreq": "CHEM 111L",
+                    "coreq": "",
+                    "opened": true
+                },
+                {
+                    "code": "BUS 101",
+                    "title_tr": "İşletmeye Giriş I (Karar Verme)",
+                    "title_en": "Introduction to Business I",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": "BUS 101L",
+                    "opened": true
+                },
+                {
+                    "code": "ECON 101",
+                    "title_tr": "Mikroekonomi",
+                    "title_en": "Mikroekonomi",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": "",
                     "opened": true
                 },
                 {
@@ -25,21 +43,12 @@
                     "opened": true
                 },
                 {
-                    "code": "MATH 103",
-                    "title_tr": "Mühendislik için Yüksek Matematik I",
-                    "title_en": "Calculus for Engineering I",
-                    "credits": 8,
+                    "code": "MATH 101",
+                    "title_tr": "Sosyal Bilimler için Matematik I",
+                    "title_en": "Sosyal Bilimler için Matematik I",
+                    "credits": 6,
                     "prereq": "",
-                    "coreq": "MATH 103R",
-                    "opened": true
-                },
-                {
-                    "code": "PHYS 101",
-                    "title_tr": "Fizik I",
-                    "title_en": "Physics I",
-                    "credits": 8,
-                    "prereq": "",
-                    "coreq": "PHYS 101L",
+                    "coreq": "MATH 101R",
                     "opened": true
                 },
                 {
@@ -63,19 +72,28 @@
             ],
             "spring": [
                 {
-                    "code": "CE 101",
-                    "title_tr": "Teknik Resim",
-                    "title_en": "Teknik Resim",
-                    "credits": 4,
+                    "code": "AVM 102",
+                    "title_tr": "Havaalanı ve Faaliyetleri",
+                    "title_en": "Havaalanı ve Faaliyetleri",
+                    "credits": 6,
                     "prereq": "",
                     "coreq": "",
                     "opened": true
                 },
                 {
-                    "code": "CE 102",
-                    "title_tr": "İnşaat Mühendisliğine Giriş",
-                    "title_en": "İnşaat Mühendisliğine Giriş",
-                    "credits": 2,
+                    "code": "BUS 102",
+                    "title_tr": "İşletmeye Giriş II (Girişimcilik)",
+                    "title_en": "Introduction to Business II",
+                    "credits": 4,
+                    "prereq": "BUS 101 or BUS 100",
+                    "coreq": "BUS 102L",
+                    "opened": true
+                },
+                {
+                    "code": "ECON 102",
+                    "title_tr": "Makroekonomi",
+                    "title_en": "Makroekonomi",
+                    "credits": 6,
                     "prereq": "",
                     "coreq": "",
                     "opened": true
@@ -90,21 +108,12 @@
                     "opened": true
                 },
                 {
-                    "code": "MATH 104",
-                    "title_tr": "Mühendislik için Yüksek Matematik II",
-                    "title_en": "Calculus for Engineering II",
-                    "credits": 8,
-                    "prereq": "MATH103",
-                    "coreq": "MATH 104R",
-                    "opened": true
-                },
-                {
-                    "code": "PHYS 102",
-                    "title_tr": "Fizik II",
-                    "title_en": "Physics II",
-                    "credits": 8,
-                    "prereq": "PHYS 101",
-                    "coreq": "PHYS 102L",
+                    "code": "MATH 102",
+                    "title_tr": "Sosyal Bilimler için Matematik II",
+                    "title_en": "Sosyal Bilimler için Matematik II",
+                    "credits": 6,
+                    "prereq": "MATH 101",
+                    "coreq": "MATH 102R",
                     "opened": true
                 },
                 {
@@ -130,21 +139,21 @@
         "2": {
             "fall": [
                 {
-                    "code": "CE 112",
-                    "title_tr": "Statik",
-                    "title_en": "Statik",
+                    "code": "ACCT 201",
+                    "title_tr": "Finansal Muhasebe",
+                    "title_en": "Finansal Muhasebe",
                     "credits": 6,
-                    "prereq": "PHYS 101 and MATH 103",
+                    "prereq": "(BUS 101 or (BUS 100 and BUS 190)) and (MATH 101 or MATH 103)",
                     "coreq": "",
                     "opened": true
                 },
                 {
-                    "code": "CS 104",
-                    "title_tr": "Programlamaya Giriş",
-                    "title_en": "Programlamaya Giriş",
-                    "credits": 6,
+                    "code": "AVT 201",
+                    "title_tr": "Uçuş Prensipleri",
+                    "title_en": "Uçuş Prensipleri",
+                    "credits": 4,
                     "prereq": "",
-                    "coreq": "CS 104L",
+                    "coreq": "",
                     "opened": true
                 },
                 {
@@ -157,20 +166,11 @@
                     "opened": true
                 },
                 {
-                    "code": "MATH 211",
-                    "title_tr": "Doğrusal Cebir",
-                    "title_en": "Linear Algebra",
+                    "code": "MKTG 201",
+                    "title_tr": "Pazarlama",
+                    "title_en": "Pazarlama",
                     "credits": 6,
-                    "prereq": "MATH 103",
-                    "coreq": "MATH 211R",
-                    "opened": true
-                },
-                {
-                    "code": "MATH 212",
-                    "title_tr": "Diferansiyel Denklemler",
-                    "title_en": "Differential Equations",
-                    "credits": 6,
-                    "prereq": "MATH 104",
+                    "prereq": "(BUS101 or (BUS100 and BUS190)) and (ENG102 or ENG 104)",
                     "coreq": "",
                     "opened": true
                 },
@@ -182,51 +182,53 @@
                     "prereq": "To complete at least 45 ECTS",
                     "coreq": "SEC201L",
                     "opened": true
+                },
+                {
+                    "code": "",
+                    "title_tr": "BSAVM Serbest Seçmeli",
+                    "title_en": "Free Elective",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": "",
+                    "electiveType": "free",
+                    "opened": true
+                },
+                {
+                    "code": "",
+                    "title_tr": "BSAVM Serbest Seçmeli",
+                    "title_en": "Free Elective",
+                    "credits": 4,
+                    "prereq": "",
+                    "coreq": "",
+                    "electiveType": "free",
+                    "opened": true
                 }
             ],
             "spring": [
                 {
-                    "code": "CE 203",
-                    "title_tr": "Mukavemet",
-                    "title_en": "Mukavemet",
+                    "code": "AVM 202",
+                    "title_tr": "Havacılık Yönetiminde Veri Analizi",
+                    "title_en": "Havacılık Yönetiminde Veri Analizi",
                     "credits": 6,
-                    "prereq": "CE 112",
+                    "prereq": "BUS 102",
                     "coreq": "",
                     "opened": true
                 },
                 {
-                    "code": "CE 205",
-                    "title_tr": "Yapı Malzemeleri",
-                    "title_en": "Yapı Malzemeleri",
+                    "code": "AVM 204",
+                    "title_tr": "Havaalanı Stratejik Planlaması ve Tasarımı",
+                    "title_en": "Havaalanı Stratejik Planlaması ve Tasarımı",
                     "credits": 6,
-                    "prereq": "CHEM 111",
-                    "coreq": "CE 205L",
-                    "opened": true
-                },
-                {
-                    "code": "CE 211",
-                    "title_tr": "Dinamik",
-                    "title_en": "Dinamik",
-                    "credits": 4,
-                    "prereq": "CE 112",
+                    "prereq": "AVM 102",
                     "coreq": "",
                     "opened": true
                 },
                 {
-                    "code": "CE 217",
-                    "title_tr": "İnşaat Mühendisliğinde Olasılık ve İstatistik",
-                    "title_en": "Probability and Statistics",
+                    "code": "FIN 202",
+                    "title_tr": "Finans",
+                    "title_en": "Finans",
                     "credits": 6,
-                    "prereq": "MATH 103",
-                    "coreq": "",
-                    "opened": true
-                },
-                {
-                    "code": "ENG 303",
-                    "title_tr": "Teknik İletişim",
-                    "title_en": "Technical Communication",
-                    "credits": 2,
-                    "prereq": "ENG 102 or ENG106",
+                    "prereq": "(ACCT 201 and (ECON 101 or ECON 102 or ECON 210)",
                     "coreq": "",
                     "opened": true
                 },
@@ -236,6 +238,15 @@
                     "title_en": "Principles of Atatürk II",
                     "credits": 4,
                     "prereq": "HIST 201",
+                    "coreq": "",
+                    "opened": true
+                },
+                {
+                    "code": "MGMT 202",
+                    "title_tr": "Örgütler",
+                    "title_en": "Örgütler",
+                    "credits": 6,
+                    "prereq": "ENG102 and (BUS100 or BUS101)",
                     "coreq": "",
                     "opened": true
                 },
@@ -253,112 +264,47 @@
         "3": {
             "fall": [
                 {
-                    "code": "CE 210",
-                    "title_tr": "Akışkanlar Mekaniği",
-                    "title_en": "Akışkanlar Mekaniği",
+                    "code": "ACCT 301",
+                    "title_tr": "Yönetim Muhasebesi",
+                    "title_en": "Yönetim Muhasebesi",
                     "credits": 6,
-                    "prereq": "CE 112 and MATH 104",
+                    "prereq": "ACCT 201",
                     "coreq": "",
                     "opened": true
                 },
                 {
-                    "code": "CE 300",
-                    "title_tr": "Yaz Stajı  I",
-                    "title_en": "Yaz Stajı  I",
-                    "credits": 2,
-                    "prereq": "SEC 201",
+                    "code": "AVM 301",
+                    "title_tr": "Havayolu Yönetimi",
+                    "title_en": "Havayolu Yönetimi",
+                    "credits": 6,
+                    "prereq": "En az 90 AKTS tamamlamış olmak",
                     "coreq": "",
                     "opened": true
                 },
                 {
-                    "code": "CE 301",
-                    "title_tr": "Yapı Statiği",
-                    "title_en": "Yapı Statiği",
-                    "credits": 6,
-                    "prereq": "CE 203",
-                    "coreq": "",
-                    "opened": true
-                },
-                {
-                    "code": "CE 302",
-                    "title_tr": "Zemin Mekaniği",
-                    "title_en": "Zemin Mekaniği",
-                    "credits": 6,
-                    "prereq": "CE 203",
-                    "coreq": "CE 302L",
-                    "opened": true
-                },
-                {
-                    "code": "CE 307",
-                    "title_tr": "Çelik Yapılar 1",
-                    "title_en": "Çelik Yapılar 1",
-                    "credits": 6,
-                    "prereq": "CE 203",
+                    "code": "AVM 303",
+                    "title_tr": "Hava Trafik ve Meteoroloji",
+                    "title_en": "Hava Trafik ve Meteoroloji",
+                    "credits": 4,
+                    "prereq": "En az 90 AKTS tamamlamış olmak",
                     "coreq": "",
                     "opened": true
                 },
                 {
                     "code": "",
-                    "title_tr": "FE Sertifika Seçmeli",
-                    "title_en": "Certificate Elective",
+                    "title_tr": "BSAVM Fakülte-İçi Seçmeli",
+                    "title_en": "BSAVM Fakülte-İçi Seçmeli",
                     "credits": 4,
                     "prereq": "",
                     "coreq": "",
-                    "electiveType": "certificate",
-                    "opened": true
-                }
-            ],
-            "spring": [
-                {
-                    "code": "CE 208",
-                    "title_tr": "Yapı İşletmesi",
-                    "title_en": "Yapı İşletmesi",
-                    "credits": 6,
-                    "prereq": "",
-                    "coreq": "",
-                    "opened": true
-                },
-                {
-                    "code": "CE 304",
-                    "title_tr": "Betonarme",
-                    "title_en": "Betonarme",
-                    "credits": 6,
-                    "prereq": "CE 203",
-                    "coreq": "",
-                    "opened": true
-                },
-                {
-                    "code": "CE 306",
-                    "title_tr": "Temel İnşaatı",
-                    "title_en": "Temel İnşaatı",
-                    "credits": 6,
-                    "prereq": "CE 302",
-                    "coreq": "",
-                    "opened": true
-                },
-                {
-                    "code": "CE 311",
-                    "title_tr": "Hidrolik",
-                    "title_en": "Hidrolik",
-                    "credits": 4,
-                    "prereq": "CE 210",
-                    "coreq": "",
-                    "opened": true
-                },
-                {
-                    "code": "FE 301",
-                    "title_tr": "Mühendis Olmak",
-                    "title_en": "Being an Engineer",
-                    "credits": 2,
-                    "prereq": "En az 105 AKTS tamamlamış olmak",
-                    "coreq": "",
+                    "electiveType": "faculty",
                     "opened": true
                 },
                 {
                     "code": "",
-                    "title_tr": "FE Serbest Seçmeli",
+                    "title_tr": "BSAVM Serbest Seçmeli",
                     "title_en": "Free Elective",
-                    "credits": 2,
+                    "credits": 6,
                     "prereq": "",
                     "coreq": "",
                     "electiveType": "free",
@@ -366,12 +312,60 @@
                 },
                 {
                     "code": "",
-                    "title_tr": "FE Sertifika Seçmeli",
-                    "title_en": "Certificate Elective",
+                    "title_tr": "BSAVM Serbest Seçmeli",
+                    "title_en": "Free Elective",
                     "credits": 4,
                     "prereq": "",
                     "coreq": "",
-                    "electiveType": "certificate",
+                    "electiveType": "free",
+                    "opened": true
+                }
+            ],
+            "spring": [
+                {
+                    "code": "AVM 300",
+                    "title_tr": "Staj",
+                    "title_en": "Staj",
+                    "credits": 6,
+                    "prereq": "Having completed at least 150 ECTS and SEC 201",
+                    "coreq": "",
+                    "opened": true
+                },
+                {
+                    "code": "AVM 304",
+                    "title_tr": "Havayolu Pazarlaması",
+                    "title_en": "Havayolu Pazarlaması",
+                    "credits": 6,
+                    "prereq": "MKTG 201",
+                    "coreq": "",
+                    "opened": true
+                },
+                {
+                    "code": "AVM 306",
+                    "title_tr": "Havacılıkta Operasyon Yönetimi",
+                    "title_en": "Havacılıkta Operasyon Yönetimi",
+                    "credits": 6,
+                    "prereq": "AVM 202",
+                    "coreq": "",
+                    "opened": true
+                },
+                {
+                    "code": "AVM 309",
+                    "title_tr": "Hava Ulaştırma Ekonomisi",
+                    "title_en": "Hava Ulaştırma Ekonomisi",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": "",
+                    "opened": true
+                },
+                {
+                    "code": "",
+                    "title_tr": "BSAVM Serbest Seçmeli",
+                    "title_en": "Free Elective",
+                    "credits": 6,
+                    "prereq": "",
+                    "coreq": "",
+                    "electiveType": "free",
                     "opened": true
                 }
             ]
@@ -379,57 +373,56 @@
         "4": {
             "fall": [
                 {
-                    "code": "BUS 101",
-                    "title_tr": "İşletmeye Giriş I (Karar Verme)",
-                    "title_en": "Introduction to Business I",
+                    "code": "AVM 401",
+                    "title_tr": "Havayolu Filo Planlaması Ve Uçuş Ağı Yönetimi",
+                    "title_en": "Havayolu Filo Planlaması Ve Uçuş Ağı Yönetimi",
+                    "credits": 6,
+                    "prereq": "AVM 301",
+                    "coreq": "",
+                    "opened": true
+                },
+                {
+                    "code": "AVM 405",
+                    "title_tr": "Emniyet Yönetimi Sistemi",
+                    "title_en": "Emniyet Yönetimi Sistemi",
+                    "credits": 6,
+                    "prereq": "En az 120 AKTS tamamlamış olmak",
+                    "coreq": "",
+                    "opened": true
+                },
+                {
+                    "code": "AVM 406",
+                    "title_tr": "Hava Hukuku",
+                    "title_en": "Hava Hukuku",
                     "credits": 4,
-                    "prereq": "",
-                    "coreq": "BUS 101L",
-                    "opened": true
-                },
-                {
-                    "code": "CE 310",
-                    "title_tr": "Ulaştırma Mühendisliği",
-                    "title_en": "Ulaştırma Mühendisliği",
-                    "credits": 4,
-                    "prereq": "MATH 217 or CE 217",
+                    "prereq": "En az 120 AKTS tamamlamış olmak",
                     "coreq": "",
                     "opened": true
                 },
                 {
-                    "code": "ECON 210",
-                    "title_tr": "İktisada Giriş",
-                    "title_en": "Introduction to Economics",
+                    "code": "AVM 408",
+                    "title_tr": "Havacılık Yönetiminde Öngörü ve Optimizasyon",
+                    "title_en": "Havacılık Yönetiminde Öngörü ve Optimizasyon",
                     "credits": 6,
-                    "prereq": "",
+                    "prereq": "AVM 202 veya OPER 202",
                     "coreq": "",
                     "opened": true
                 },
                 {
                     "code": "",
-                    "title_tr": "BSCE Program-İçi Seçmeli",
-                    "title_en": "Program Elective",
+                    "title_tr": "BSAVM Fakülte-İçi Seçmeli",
+                    "title_en": "BSAVM Fakülte-İçi Seçmeli",
                     "credits": 6,
                     "prereq": "",
                     "coreq": "",
-                    "electiveType": "program",
+                    "electiveType": "faculty",
                     "opened": true
                 },
                 {
                     "code": "",
-                    "title_tr": "BSCE Program-İçi Seçmeli",
-                    "title_en": "Program Elective",
-                    "credits": 6,
-                    "prereq": "",
-                    "coreq": "",
-                    "electiveType": "program",
-                    "opened": true
-                },
-                {
-                    "code": "",
-                    "title_tr": "FE Serbest Seçmeli",
+                    "title_tr": "BSAVM Serbest Seçmeli",
                     "title_en": "Free Elective",
-                    "credits": 4,
+                    "credits": 2,
                     "prereq": "",
                     "coreq": "",
                     "electiveType": "free",
@@ -438,66 +431,166 @@
             ],
             "spring": [
                 {
-                    "code": "BUS 102",
-                    "title_tr": "İşletmeye Giriş II (Girişimcilik)",
-                    "title_en": "Introduction to Business II",
-                    "credits": 4,
-                    "prereq": "BUS 101 or BUS 100",
-                    "coreq": "BUS 102L",
-                    "opened": true
-                },
-                {
-                    "code": "CE 400",
-                    "title_tr": "Staj II",
-                    "title_en": "Summer Internship II",
-                    "credits": 4,
-                    "prereq": "SEC 201",
+                    "code": "AVM 402",
+                    "title_tr": "Havacılık İş Simülasyonu",
+                    "title_en": "Havacılık İş Simülasyonu",
+                    "credits": 6,
+                    "prereq": "AVM 301",
                     "coreq": "",
                     "opened": true
                 },
                 {
-                    "code": "CE 441",
-                    "title_tr": "İnşaat Mühendisliği Bitirme Projesi",
-                    "title_en": "İnşaat Mühendisliği Bitirme Projesi",
-                    "credits": 6,
-                    "prereq": "The student should pass at least 6 of the following courses:CE 208, CE 301, CE 304, CE 306, CE 307, CE 310, CE 311",
+                    "code": "AVM 403",
+                    "title_tr": "Havaalanı Yönetimi ve Pazarlaması",
+                    "title_en": "Havaalanı Yönetimi ve Pazarlaması",
+                    "credits": 4,
+                    "prereq": "En az 150 AKTS tamamlamış olmak",
+                    "coreq": "",
+                    "opened": true
+                },
+                {
+                    "code": "AVM 404",
+                    "title_tr": "Havacılık Güvenliği",
+                    "title_en": "Havacılık Güvenliği",
+                    "credits": 4,
+                    "prereq": "En az 120 AKTS tamamlamış olmak",
+                    "coreq": "",
+                    "opened": true
+                },
+                {
+                    "code": "AVM 415",
+                    "title_tr": "Havacılıkta Sürdürülebilirlik",
+                    "title_en": "Havacılıkta Sürdürülebilirlik",
+                    "credits": 4,
+                    "prereq": "",
                     "coreq": "",
                     "opened": true
                 },
                 {
                     "code": "",
-                    "title_tr": "BSCE Program-İçi Seçmeli",
-                    "title_en": "Program Elective",
+                    "title_tr": "BSAVM Fakülte-İçi Seçmeli",
+                    "title_en": "BSAVM Fakülte-İçi Seçmeli",
                     "credits": 6,
                     "prereq": "",
                     "coreq": "",
-                    "electiveType": "program",
+                    "electiveType": "faculty",
                     "opened": true
                 },
                 {
                     "code": "",
-                    "title_tr": "FE Serbest Seçmeli",
+                    "title_tr": "BSAVM Serbest Seçmeli",
                     "title_en": "Free Elective",
-                    "credits": 4,
+                    "credits": 6,
                     "prereq": "",
                     "coreq": "",
                     "electiveType": "free",
-                    "opened": true
-                },
-                {
-                    "code": "",
-                    "title_tr": "FE Sosyal Bilimler Seçmeli",
-                    "title_en": "Social Science Elective",
-                    "credits": 6,
-                    "prereq": "",
-                    "coreq": "",
-                    "electiveType": "social",
                     "opened": true
                 }
             ]
         }
     },
     "electives": {
+        "faculty": [
+            {
+                "code": "AVM 305",
+                "title_tr": "Havacılıkta İş Hukukuna Giriş",
+                "title_en": "Havacılıkta İş Hukukuna Giriş",
+                "credits": 4,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 307",
+                "title_tr": "İnsansız Hava Aracı Sistemlerine Giriş",
+                "title_en": "İnsansız Hava Aracı Sistemlerine Giriş",
+                "credits": 6,
+                "prereq": "En az 60 kredi tamamlamış olmak",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 308",
+                "title_tr": "Genel Havacılık Faaliyetleri ve Yönetimi",
+                "title_en": "Genel Havacılık Faaliyetleri ve Yönetimi",
+                "credits": 4,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 311",
+                "title_tr": "Havaaracı ve Uçuş İşletme Prosedürleri",
+                "title_en": "Havaaracı ve Uçuş İşletme Prosedürleri",
+                "credits": 4,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 312",
+                "title_tr": "Havacılıkta Modern İnsan Kaynakları Yönetimi",
+                "title_en": "Havacılıkta Modern İnsan Kaynakları Yönetimi",
+                "credits": 4,
+                "prereq": "90 AKTS tamamlamış olmak",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 314",
+                "title_tr": "Havacılıkta İnovasyon",
+                "title_en": "Havacılıkta İnovasyon",
+                "credits": 6,
+                "prereq": "90 AKTS tamamlamış olmak",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 315",
+                "title_tr": "Havacılıkta Çeşitlilik, Eşitlik ve Kapsayıcılık",
+                "title_en": "Havacılıkta Çeşitlilik, Eşitlik ve Kapsayıcılık",
+                "credits": 4,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 407",
+                "title_tr": "Havayolu İş Modelleri ve Stratejileri",
+                "title_en": "Havayolu İş Modelleri ve Stratejileri",
+                "credits": 6,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 409",
+                "title_tr": "Yer Hizmetleri Yönetimi",
+                "title_en": "Yer Hizmetleri Yönetimi",
+                "credits": 6,
+                "prereq": "En az 120 AKTS tamamlamış olmak",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 410",
+                "title_tr": "Havayolu Rezervasyon ve Yönetim Sistemleri",
+                "title_en": "Havayolu Rezervasyon ve Yönetim Sistemleri",
+                "credits": 6,
+                "prereq": "En az 120 AKTS tamamlamış olmak",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 414",
+                "title_tr": "Hava Kargo Yönetimi",
+                "title_en": "Hava Kargo Yönetimi",
+                "credits": 6,
+                "prereq": "En az 120 AKTS tamamlamış olmak.",
+                "coreq": "",
+                "opened": true
+            }
+        ],
         "free": [
             {
                 "code": "ACCT 412",
@@ -505,6 +598,15 @@
                 "title_en": "Bağımsız Denetim",
                 "credits": 6,
                 "prereq": "ACCT 201",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AI 111",
+                "title_tr": "Python'a Giriş",
+                "title_en": "Python'a Giriş",
+                "credits": 6,
+                "prereq": "",
                 "coreq": "",
                 "opened": true
             },
@@ -581,11 +683,20 @@
                 "opened": true
             },
             {
-                "code": "AI 425",
-                "title_tr": "Büyük dil Modelleri",
-                "title_en": "Büyük dil Modelleri",
-                "credits": 6,
-                "prereq": "AI 304 or CS 466 or CS 454 or EE 302",
+                "code": "AI 401",
+                "title_tr": "Bitirme Projesi I",
+                "title_en": "Bitirme Projesi I",
+                "credits": 4,
+                "prereq": "AI 301 and AI 303",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AI 402",
+                "title_tr": "Bitirme Projesi II",
+                "title_en": "Bitirme Projesi II",
+                "credits": 4,
+                "prereq": "AI 401",
                 "coreq": "",
                 "opened": true
             },
@@ -604,15 +715,6 @@
                 "title_en": "Doğal Dil İşlemeye Giriş",
                 "credits": 6,
                 "prereq": "AI 304",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "AIC 390",
-                "title_tr": "İstem Mühendisliği",
-                "title_en": "İstem Mühendisliği",
-                "credits": 4,
-                "prereq": "SEC 201 ve (MATH 211 veya ME 214) ve (MATH 216 veya CE 217 veya MATH 217)",
                 "coreq": "",
                 "opened": true
             },
@@ -1013,6 +1115,60 @@
                 "opened": true
             },
             {
+                "code": "AVM 305",
+                "title_tr": "Havacılıkta İş Hukukuna Giriş",
+                "title_en": "Havacılıkta İş Hukukuna Giriş",
+                "credits": 4,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 307",
+                "title_tr": "İnsansız Hava Aracı Sistemlerine Giriş",
+                "title_en": "İnsansız Hava Aracı Sistemlerine Giriş",
+                "credits": 6,
+                "prereq": "En az 60 kredi tamamlamış olmak",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 308",
+                "title_tr": "Genel Havacılık Faaliyetleri ve Yönetimi",
+                "title_en": "Genel Havacılık Faaliyetleri ve Yönetimi",
+                "credits": 4,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 311",
+                "title_tr": "Havaaracı ve Uçuş İşletme Prosedürleri",
+                "title_en": "Havaaracı ve Uçuş İşletme Prosedürleri",
+                "credits": 4,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 312",
+                "title_tr": "Havacılıkta Modern İnsan Kaynakları Yönetimi",
+                "title_en": "Havacılıkta Modern İnsan Kaynakları Yönetimi",
+                "credits": 4,
+                "prereq": "90 AKTS tamamlamış olmak",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 314",
+                "title_tr": "Havacılıkta İnovasyon",
+                "title_en": "Havacılıkta İnovasyon",
+                "credits": 6,
+                "prereq": "90 AKTS tamamlamış olmak",
+                "coreq": "",
+                "opened": true
+            },
+            {
                 "code": "AVM 315",
                 "title_tr": "Havacılıkta Çeşitlilik, Eşitlik ve Kapsayıcılık",
                 "title_en": "Havacılıkta Çeşitlilik, Eşitlik ve Kapsayıcılık",
@@ -1031,21 +1187,57 @@
                 "opened": true
             },
             {
-                "code": "AVM 415",
-                "title_tr": "Havacılıkta Sürdürülebilirlik",
-                "title_en": "Havacılıkta Sürdürülebilirlik",
-                "credits": 4,
-                "prereq": "",
+                "code": "AVM 409",
+                "title_tr": "Yer Hizmetleri Yönetimi",
+                "title_en": "Yer Hizmetleri Yönetimi",
+                "credits": 6,
+                "prereq": "En az 120 AKTS tamamlamış olmak",
                 "coreq": "",
                 "opened": true
             },
             {
-                "code": "AVT 201",
-                "title_tr": "Uçuş Prensipleri",
-                "title_en": "Uçuş Prensipleri",
-                "credits": 4,
-                "prereq": "",
+                "code": "AVM 410",
+                "title_tr": "Havayolu Rezervasyon ve Yönetim Sistemleri",
+                "title_en": "Havayolu Rezervasyon ve Yönetim Sistemleri",
+                "credits": 6,
+                "prereq": "En az 120 AKTS tamamlamış olmak",
                 "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "AVM 414",
+                "title_tr": "Hava Kargo Yönetimi",
+                "title_en": "Hava Kargo Yönetimi",
+                "credits": 6,
+                "prereq": "En az 120 AKTS tamamlamış olmak.",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "BUS 199",
+                "title_tr": "Problem Çözümü İçin Algoritma Tasarımı",
+                "title_en": "Problem Çözümü İçin Algoritma Tasarımı",
+                "credits": 4,
+                "prereq": "BUS 100 or BUS 101",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "BUS 201",
+                "title_tr": "İş Kararı Modelleme",
+                "title_en": "İş Kararı Modelleme",
+                "credits": 6,
+                "prereq": "MATH 102 and BUS 100 and BUS 190",
+                "coreq": "MATH 201",
+                "opened": true
+            },
+            {
+                "code": "BUS 301",
+                "title_tr": "İş Analitiği",
+                "title_en": "İş Analitiği",
+                "credits": 6,
+                "prereq": "BUS 100 and BUS 199 and MATH 202",
+                "coreq": "BUS 201",
                 "opened": true
             },
             {
@@ -1072,15 +1264,6 @@
                 "title_en": "Yapı İşletmesi",
                 "credits": 6,
                 "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 210",
-                "title_tr": "Akışkanlar Mekaniği",
-                "title_en": "Akışkanlar Mekaniği",
-                "credits": 6,
-                "prereq": "CE 112 and MATH 104",
                 "coreq": "",
                 "opened": true
             },
@@ -1121,15 +1304,6 @@
                 "opened": true
             },
             {
-                "code": "CE 311",
-                "title_tr": "Hidrolik",
-                "title_en": "Hidrolik",
-                "credits": 4,
-                "prereq": "CE 210",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "CE 340",
                 "title_tr": "İnşaat Projelerinde Planlama ve Kontrol teknikleri",
                 "title_en": "İnşaat Projelerinde Planlama ve Kontrol teknikleri",
@@ -1148,29 +1322,11 @@
                 "opened": true
             },
             {
-                "code": "CE 406",
-                "title_tr": "İklim Dirençli Şehirler",
-                "title_en": "İklim Dirençli Şehirler",
-                "credits": 6,
-                "prereq": "CE 210 veya ME 321",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "CE 409",
                 "title_tr": "Ön Gerilmeli Beton",
                 "title_en": "Ön Gerilmeli Beton",
                 "credits": 6,
                 "prereq": "CE 304",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 412",
-                "title_tr": "Plastik Analiz ve Tasarım",
-                "title_en": "Plastik Analiz ve Tasarım",
-                "credits": 6,
-                "prereq": "CE 301 and CE 307",
                 "coreq": "",
                 "opened": true
             },
@@ -1189,15 +1345,6 @@
                 "title_en": "Geoteknik Yapılar",
                 "credits": 6,
                 "prereq": "CE 302 and CE 306",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 426",
-                "title_tr": "Yapı Malzemeleri için Dijital Çözümler",
-                "title_en": "Yapı Malzemeleri için Dijital Çözümler",
-                "credits": 6,
-                "prereq": "CE 205 veya ME 256",
                 "coreq": "",
                 "opened": true
             },
@@ -1247,38 +1394,11 @@
                 "opened": true
             },
             {
-                "code": "CE 466",
-                "title_tr": "Limanlar ve Su Yolları",
-                "title_en": "Limanlar ve Su Yolları",
-                "credits": 6,
-                "prereq": "CE 210 and CE 311",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "CE 467",
                 "title_tr": "Yapı İşletmesi İçin Bilişim Teknolojileri",
                 "title_en": "Yapı İşletmesi İçin Bilişim Teknolojileri",
                 "credits": 6,
                 "prereq": "CE 208 dersini başarı ile tamamlamış olmak",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 468",
-                "title_tr": "Denizcilik Mühendisliğinde Makine Öğrenmesi Uygulamalarına Giriş",
-                "title_en": "Denizcilik Mühendisliğinde Makine Öğrenmesi Uygulamalarına Giriş",
-                "credits": 6,
-                "prereq": "Completed at least 175 ECTS and (CS 104 or CS 101)  and MATH 211 and MATH 212 and (CE 217 or MATH 217 or (MATH 215 and MATH 216))",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 469",
-                "title_tr": "Trafik Mühendisliğinde Simülasyon ve Makine Öğrenmesi",
-                "title_en": "Trafik Mühendisliğinde Simülasyon ve Makine Öğrenmesi",
-                "credits": 6,
-                "prereq": "En az 175 AKTS tamamlamak ve (CS 104 veya CS 101)  ve MATH 211 ve MATH 212 ve (CE 217 veya MATH 217 veya (MATH 215 ve MATH 216))",
                 "coreq": "",
                 "opened": true
             },
@@ -1324,33 +1444,6 @@
                 "title_en": "Certificate Elective",
                 "credits": 4,
                 "prereq": "SEC 201 and CE 210",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CEC 397",
-                "title_tr": "Yalın İnşaat Yönetimi (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CEC 398",
-                "title_tr": "Geoteknik Saha İncelemeleri (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201 ve CE 302",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CEC 399",
-                "title_tr": "İnşaat Sözleşme Dinamikleri: Karmaşıklıkların Yönetimi ve Stratejik Perspektifler",
-                "title_en": "İnşaat Sözleşme Dinamikleri: Karmaşıklıkların Yönetimi ve Stratejik Perspektifler",
-                "credits": 4,
-                "prereq": "SEC 201 ve CE 302",
                 "coreq": "",
                 "opened": true
             },
@@ -1571,11 +1664,11 @@
                 "opened": true
             },
             {
-                "code": "CS 102",
-                "title_tr": "Nesneye Dayalı Programlama",
-                "title_en": "Nesneye Dayalı Programlama",
+                "code": "CS 100",
+                "title_tr": "Programlamaya Giriş",
+                "title_en": "Programlamaya Giriş",
                 "credits": 6,
-                "prereq": "CS 101 veya CS 103",
+                "prereq": "",
                 "coreq": "",
                 "opened": true
             },
@@ -1586,6 +1679,15 @@
                 "credits": 6,
                 "prereq": "",
                 "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "CS 104",
+                "title_tr": "Programlamaya Giriş",
+                "title_en": "Programlamaya Giriş",
+                "credits": 6,
+                "prereq": "",
+                "coreq": "CS 104L",
                 "opened": true
             },
             {
@@ -1706,15 +1808,6 @@
                 "opened": true
             },
             {
-                "code": "CS 413",
-                "title_tr": "Derin Öğrenme Hızlandırıcı Mimarileri",
-                "title_en": "Derin Öğrenme Hızlandırıcı Mimarileri",
-                "credits": 6,
-                "prereq": "CS 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "CS 418",
                 "title_tr": "Ağ Üzerinden Eğlence",
                 "title_en": "Ağ Üzerinden Eğlence",
@@ -1751,15 +1844,6 @@
                 "opened": true
             },
             {
-                "code": "CS 426",
-                "title_tr": "Oyun Geliştirme",
-                "title_en": "Oyun Geliştirme",
-                "credits": 6,
-                "prereq": "CS 350",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "CS 427",
                 "title_tr": "Çokluortam İşleme",
                 "title_en": "Çokluortam İşleme",
@@ -1769,27 +1853,9 @@
                 "opened": true
             },
             {
-                "code": "CS 428",
-                "title_tr": "Otonom Sürüş Sistemleri",
-                "title_en": "Otonom Sürüş Sistemleri",
-                "credits": 6,
-                "prereq": "MATH 211 and (CS 102 or CS 105)",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "CS 434",
                 "title_tr": "Yazılım Tasarım Örüntüleri",
                 "title_en": "Yazılım Tasarım Örüntüleri",
-                "credits": 6,
-                "prereq": "CS 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CS 435",
-                "title_tr": "Çok Çekirdek Programlama",
-                "title_en": "Çok Çekirdek Programlama",
                 "credits": 6,
                 "prereq": "CS 201",
                 "coreq": "",
@@ -1823,15 +1889,6 @@
                 "opened": true
             },
             {
-                "code": "CS 443",
-                "title_tr": "İşlemci Mikromimarisi",
-                "title_en": "İşlemci Mikromimarisi",
-                "credits": 6,
-                "prereq": "CS 240",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "CS 444",
                 "title_tr": "Derleyiciler",
                 "title_en": "Derleyiciler",
@@ -1846,15 +1903,6 @@
                 "title_en": "Pekiştirmeli Derin Öğrenme",
                 "credits": 6,
                 "prereq": "(CS 101 or CS 104) and (MATH 211 and MATH 217)",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CS 446",
-                "title_tr": "Network Teknolojilerinin Güvenliği",
-                "title_en": "Network Teknolojilerinin Güvenliği",
-                "credits": 6,
-                "prereq": "(CS 112 or MATH 112) and (CS 101 or CS 104)",
                 "coreq": "",
                 "opened": true
             },
@@ -1949,24 +1997,6 @@
                 "opened": true
             },
             {
-                "code": "CS 466",
-                "title_tr": "Derin Öğrenmeye Giriş",
-                "title_en": "Derin Öğrenmeye Giriş",
-                "credits": 6,
-                "prereq": "(MATH 211 and CS 102) or MATH 211 and (CS 102 or CS 105)",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CS 468",
-                "title_tr": "Ağ Üzerine Güncel Konular",
-                "title_en": "Ağ Üzerine Güncel Konular",
-                "credits": 6,
-                "prereq": "CS 447",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "CS 471",
                 "title_tr": "Sosyal Ağların Analizi",
                 "title_en": "Sosyal Ağların Analizi",
@@ -2012,24 +2042,6 @@
                 "opened": true
             },
             {
-                "code": "CSC 390",
-                "title_tr": "Yüksek Başarımlı Hesaplamaya Giriş",
-                "title_en": "Yüksek Başarımlı Hesaplamaya Giriş",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CSC 391",
-                "title_tr": "Web Uygulama Geliştirme (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "(CS 102 or CS 105) and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "CSC 392",
                 "title_tr": "İOS Uygulama Geliştirme (Sertifika Seçmeli)",
                 "title_en": "Certificate Elective",
@@ -2039,29 +2051,11 @@
                 "opened": true
             },
             {
-                "code": "CSC 393",
-                "title_tr": "Spring Framework ile Backend Uygulamaları Geliştirmek (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "(CS 102 or CS 105) and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "CSC 394",
                 "title_tr": "Android OS ve Mobil Uygulamalar (Sertifika Seçmeli)",
                 "title_en": "Certificate Elective",
                 "credits": 4,
                 "prereq": "(CS 102 or CS 105) and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CSC 395",
-                "title_tr": "Bilgisayar Mühendisliğinin Mutfağı",
-                "title_en": "Bilgisayar Mühendisliğinin Mutfağı",
-                "credits": 4,
-                "prereq": "(CS102 veya CS105) ve SEC 201",
                 "coreq": "",
                 "opened": true
             },
@@ -2084,20 +2078,29 @@
                 "opened": true
             },
             {
-                "code": "CSC 399",
-                "title_tr": "Haberleşme Güvenliği (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201 and (CS 100 or CS 101 or CS 103 or CS 104)",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "ECON 103",
                 "title_tr": "İktisadi Araştırma ve İletişim I",
                 "title_en": "İktisadi Araştırma ve İletişim I",
                 "credits": 2,
                 "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "ECON 202",
+                "title_tr": "İleri Makroekonomi",
+                "title_en": "İleri Makroekonomi",
+                "credits": 6,
+                "prereq": "ECON 102 and (MATH 102 or MATH 104)",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "ECON 206",
+                "title_tr": "Ekonomi için İstatistik II",
+                "title_en": "Ekonomi için İstatistik II",
+                "credits": 6,
+                "prereq": "ECON 205",
                 "coreq": "",
                 "opened": true
             },
@@ -2138,30 +2141,57 @@
                 "opened": true
             },
             {
-                "code": "EE 208",
-                "title_tr": "C ile Temel Programlama Kavramları",
-                "title_en": "C ile Temel Programlama Kavramları",
+                "code": "EE 201",
+                "title_tr": "Sinyaller ve Sistemler",
+                "title_en": "Sinyaller ve Sistemler",
                 "credits": 6,
-                "prereq": "CS 101 veya CS 104",
-                "coreq": "",
+                "prereq": "",
+                "coreq": "MATH 212",
                 "opened": true
             },
             {
-                "code": "EE 302",
-                "title_tr": "AI Tabanlı Sayısal Sinyal İşleme",
-                "title_en": "AI Tabanlı Sayısal Sinyal İşleme",
+                "code": "EE 202",
+                "title_tr": "Devre Analizi",
+                "title_en": "Devre Analizi",
                 "credits": 6,
-                "prereq": "EE 201 and MATH 104 and (CS 104 or CS 101)",
-                "coreq": "",
+                "prereq": "MATH 211 and PHYS102",
+                "coreq": "EE 202L",
                 "opened": true
             },
             {
-                "code": "EE 303",
-                "title_tr": "Güç Sistemlerinin Temelleri",
-                "title_en": "Güç Sistemlerinin Temelleri",
+                "code": "EE 203",
+                "title_tr": "Sayısal Sistemler",
+                "title_en": "Sayısal Sistemler",
                 "credits": 6,
-                "prereq": "EE 202 and (CS 110 or CS 102 or EE 101) and MATH 211",
-                "coreq": "",
+                "prereq": "",
+                "coreq": "EE 203L",
+                "opened": true
+            },
+            {
+                "code": "EE 301",
+                "title_tr": "Elektronik I",
+                "title_en": "Elektronik I",
+                "credits": 6,
+                "prereq": "EE 202",
+                "coreq": "EE 301L",
+                "opened": true
+            },
+            {
+                "code": "EE 321",
+                "title_tr": "Mikroişlemciler",
+                "title_en": "Mikroişlemciler",
+                "credits": 6,
+                "prereq": "(CS 100 or CS 101 or CS 103 or CS 104) ve EE 203",
+                "coreq": "EE 321L",
+                "opened": true
+            },
+            {
+                "code": "EE 341",
+                "title_tr": "Haberleşme Sistemlerinin Temelleri",
+                "title_en": "Haberleşme Sistemlerinin Temelleri",
+                "credits": 6,
+                "prereq": "MATH 217 ve MATH 211",
+                "coreq": "EE 201, EE 341L",
                 "opened": true
             },
             {
@@ -2192,20 +2222,11 @@
                 "opened": true
             },
             {
-                "code": "EE 411",
-                "title_tr": "Sayısal Yöntemler",
-                "title_en": "Sayısal Yöntemler",
+                "code": "EE 372",
+                "title_tr": "Elektrik Makineleri",
+                "title_en": "Elektrik Makineleri",
                 "credits": 6,
-                "prereq": "MATH 211 veya ME214",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EE 421",
-                "title_tr": "Sayısal Görüntü İşleme",
-                "title_en": "Sayısal Görüntü İşleme",
-                "credits": 6,
-                "prereq": "EE 201 and (CS 100 or CS 101 or CS 103 or CS 104) and (MATH 211 or ME 214) and (MATH 217 or MATH 215)",
+                "prereq": "EE 204 and EE 101",
                 "coreq": "",
                 "opened": true
             },
@@ -2215,24 +2236,6 @@
                 "title_en": "Sayısal Konuşma  İşleme",
                 "credits": 6,
                 "prereq": "EE 302 and MATH 211 and MATH 217",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EE 423",
-                "title_tr": "Sinyal İşleme için Derin Öğrenme",
-                "title_en": "Sinyal İşleme için Derin Öğrenme",
-                "credits": 6,
-                "prereq": "EE 302 or CS 451 or CS 454 or CS 466",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EE 432",
-                "title_tr": "Sinyal işleme için ileri MATLAB",
-                "title_en": "Sinyal işleme için ileri MATLAB",
-                "credits": 6,
-                "prereq": "(CS 101 veya CS 104) ve EE 101 ve EE 201",
                 "coreq": "",
                 "opened": true
             },
@@ -2264,42 +2267,6 @@
                 "opened": true
             },
             {
-                "code": "EE 452",
-                "title_tr": "Nesnelerin Internetine Giriş",
-                "title_en": "Nesnelerin Internetine Giriş",
-                "credits": 6,
-                "prereq": "150 AKTS tamamlamış olmak",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EE 455",
-                "title_tr": "RF Entegre Devreler",
-                "title_en": "RF Entegre Devreler",
-                "credits": 6,
-                "prereq": "EE 301",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EE 457",
-                "title_tr": "Haberleşme  Sistem Tasarımı",
-                "title_en": "Haberleşme  Sistem Tasarımı",
-                "credits": 6,
-                "prereq": "EE 202",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EE 458",
-                "title_tr": "Haberleşme Devre Tasarımı",
-                "title_en": "Haberleşme Devre Tasarımı",
-                "credits": 6,
-                "prereq": "EE 301",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "EE 462",
                 "title_tr": "HDL Tabanlı Sayısal Sistemler Tasarımı",
                 "title_en": "HDL Tabanlı Sayısal Sistemler Tasarımı",
@@ -2323,15 +2290,6 @@
                 "title_en": "Mühendisler için Optimizasyon",
                 "credits": 6,
                 "prereq": "MATH 211 or MATH 214",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EE 475",
-                "title_tr": "Elektrikli Mobilite Ekosistemi",
-                "title_en": "Elektrikli Mobilite Ekosistemi",
-                "credits": 6,
-                "prereq": "CS 104 or CS 101",
                 "coreq": "",
                 "opened": true
             },
@@ -2408,56 +2366,11 @@
                 "opened": true
             },
             {
-                "code": "EE 493",
-                "title_tr": "Güç Elektroniği",
-                "title_en": "Güç Elektroniği",
-                "credits": 6,
-                "prereq": "EE 301",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EE 497",
-                "title_tr": "Otomotiv Gömülü Yazılımına Giriş",
-                "title_en": "Otomotiv Gömülü Yazılımına Giriş",
-                "credits": 6,
-                "prereq": "CS 104 or CS 101",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "EEC 391",
                 "title_tr": "Ağ Teknolojileri (Sertifika Seçmeli)",
                 "title_en": "Certificate Elective",
                 "credits": 4,
                 "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EEC 392",
-                "title_tr": "Endüstriyel Otomasyon",
-                "title_en": "Endüstriyel Otomasyon",
-                "credits": 4,
-                "prereq": "(CS 101 or CS 103 or CS 100 or CS 104) and EE 203 and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EEC 393",
-                "title_tr": "Mühendisler için Python",
-                "title_en": "Mühendisler için Python",
-                "credits": 4,
-                "prereq": "(CS 100 or CS 101 or CS 103 or CS 104) and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EEC 394",
-                "title_tr": "Kablosuz İletişim Mühendisliği Teknolojileri",
-                "title_en": "Kablosuz İletişim Mühendisliği Teknolojileri",
-                "credits": 4,
-                "prereq": "SEC 201 and EE 341",
                 "coreq": "",
                 "opened": true
             },
@@ -2476,15 +2389,6 @@
                 "title_en": "Certificate Elective",
                 "credits": 4,
                 "prereq": "SEC 201 and EE 202",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EEC 397",
-                "title_tr": "Teknolojide Yükselen Trendler I",
-                "title_en": "Teknolojide Yükselen Trendler I",
-                "credits": 4,
-                "prereq": "(CS101 or CS104) and SEC 201",
                 "coreq": "",
                 "opened": true
             },
@@ -2539,6 +2443,15 @@
                 "title_en": "Popüler Kültür",
                 "credits": 4,
                 "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "ENG 303",
+                "title_tr": "Teknik İletişim",
+                "title_en": "Technical Communication",
+                "credits": 2,
+                "prereq": "ENG 102 or ENG106",
                 "coreq": "",
                 "opened": true
             },
@@ -2651,15 +2564,6 @@
                 "opened": true
             },
             {
-                "code": "FIN 202",
-                "title_tr": "Finans",
-                "title_en": "Finans",
-                "credits": 6,
-                "prereq": "(ACCT 201 and (ECON 101 or ECON 102 or ECON 210)",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "FIN 204",
                 "title_tr": "Finansal Tablolar Analizi",
                 "title_en": "Finansal Tablolar Analizi",
@@ -2723,15 +2627,6 @@
                 "opened": true
             },
             {
-                "code": "FIN 416",
-                "title_tr": "Finansal Kurumlarda Risk Yönetimi",
-                "title_en": "Finansal Kurumlarda Risk Yönetimi",
-                "credits": 6,
-                "prereq": "FIN 312 or ECON 309",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "FIN 417",
                 "title_tr": "Para ve Finansal Sistemler",
                 "title_en": "Para ve Finansal Sistemler",
@@ -2782,6 +2677,33 @@
                 "title_en": "Fransızca IV",
                 "credits": 4,
                 "prereq": "FRE 201",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "GARM 224",
+                "title_tr": "Gıda ve Sürdürülebilirlik",
+                "title_en": "Gıda ve Sürdürülebilirlik",
+                "credits": 5,
+                "prereq": "60 ECTS",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "GARM 481",
+                "title_tr": "Filmlerde Yemek Kültürü",
+                "title_en": "Filmlerde Yemek Kültürü",
+                "credits": 5,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "GARM 484",
+                "title_tr": "Türkiye Tarımının Ekonomi Politiği",
+                "title_en": "Türkiye Tarımının Ekonomi Politiği",
+                "credits": 5,
+                "prereq": "120 ECTS",
                 "coreq": "",
                 "opened": true
             },
@@ -2930,6 +2852,24 @@
                 "opened": true
             },
             {
+                "code": "HMAN 336",
+                "title_tr": "Sanat Tarihi",
+                "title_en": "Sanat Tarihi",
+                "credits": 5,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "HMAN 365",
+                "title_tr": "Alternatif Konaklama Tesisleri Yatırım ve Yönetimi",
+                "title_en": "Alternatif Konaklama Tesisleri Yatırım ve Yönetimi",
+                "credits": 5,
+                "prereq": "HMAN 132 and HMAN 204",
+                "coreq": "",
+                "opened": true
+            },
+            {
                 "code": "HUM 213",
                 "title_tr": "Antropolojiye Giriş",
                 "title_en": "Antropolojiye Giriş",
@@ -3020,6 +2960,24 @@
                 "opened": true
             },
             {
+                "code": "IBUS 104",
+                "title_tr": "Küresel Yöneticiliğe ilk Adım",
+                "title_en": "Küresel Yöneticiliğe ilk Adım",
+                "credits": 6,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "IBUS 204",
+                "title_tr": "Uluslararası İşletme",
+                "title_en": "Uluslararası İşletme",
+                "credits": 6,
+                "prereq": "(BUS 100 or BUS101) and ENG 102 and ECON 102 and IBUS 104 and at least 75 ECTS completed",
+                "coreq": "",
+                "opened": true
+            },
+            {
                 "code": "IBUS 313",
                 "title_tr": "Hindistan'da İş Yapmak",
                 "title_en": "Hindistan'da İş Yapmak",
@@ -3029,11 +2987,29 @@
                 "opened": true
             },
             {
-                "code": "IDE 454",
-                "title_tr": "Ekoloji için Biyo-esinlenme ile Sistem Tasarımı",
-                "title_en": "Ekoloji için Biyo-esinlenme ile Sistem Tasarımı",
-                "credits": 5,
-                "prereq": "",
+                "code": "IBUS 402",
+                "title_tr": "Küresel Stratejik Yönetim",
+                "title_en": "Küresel Stratejik Yönetim",
+                "credits": 6,
+                "prereq": "IBUS 204 and to complete at least 150 ECTS",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "IBUS 409",
+                "title_tr": "Küresel Ekonomi ve Gelişmekte Olan Piyasalar",
+                "title_en": "Küresel Ekonomi ve Gelişmekte Olan Piyasalar",
+                "credits": 6,
+                "prereq": "ECON 102 and IBUS 204 and having completed at least 150 ECTS",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "IBUS 411",
+                "title_tr": "Doğrudan Dış Yatırım için Ülke Analizi",
+                "title_en": "Doğrudan Dış Yatırım için Ülke Analizi",
+                "credits": 6,
+                "prereq": "IBUS 204 and having completed at least 150 ECTS",
                 "coreq": "",
                 "opened": true
             },
@@ -3173,15 +3149,6 @@
                 "opened": true
             },
             {
-                "code": "IE 364",
-                "title_tr": "Yöneylem Araştırması Uygulamaları Geliştirme",
-                "title_en": "Yöneylem Araştırması Uygulamaları Geliştirme",
-                "credits": 6,
-                "prereq": "IE 201 and  IE 246",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "IE 372",
                 "title_tr": "Üretim Planlama ve Çizelgeleme",
                 "title_en": "Üretim Planlama ve Çizelgeleme",
@@ -3196,15 +3163,6 @@
                 "title_en": "Fiyatlandırma ve Gelir Optimizasyonu",
                 "credits": 6,
                 "prereq": "IE 301 and (IE 215 or MATH 215)",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IE 378",
-                "title_tr": "Sürdürülebilir Dayanıklılık Yönetimi",
-                "title_en": "Sürdürülebilir Dayanıklılık Yönetimi",
-                "credits": 6,
-                "prereq": "En az 105  AKTS tamamlamış olmak",
                 "coreq": "",
                 "opened": true
             },
@@ -3254,15 +3212,6 @@
                 "opened": true
             },
             {
-                "code": "IE 414",
-                "title_tr": "Ağ Optimizasyonu Metasezgiseller",
-                "title_en": "Ağ Optimizasyonu Metasezgiseller",
-                "credits": 6,
-                "prereq": "IE 301",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "IE 416",
                 "title_tr": "Finansta Blok Zincir Teknolojileri",
                 "title_en": "Finansta Blok Zincir Teknolojileri",
@@ -3299,29 +3248,11 @@
                 "opened": true
             },
             {
-                "code": "IE 461",
-                "title_tr": "İnsani Yardım Lojistiğinde Yöneylem Araştırması Modelleri ve Uygulamaları",
-                "title_en": "İnsani Yardım Lojistiğinde Yöneylem Araştırması Modelleri ve Uygulamaları",
-                "credits": 6,
-                "prereq": "IE 342 or IE 343",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "IE 462",
                 "title_tr": "Oyun Teorisi",
                 "title_en": "Oyun Teorisi",
                 "credits": 6,
                 "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IE 476",
-                "title_tr": "Kurumsal Dönüşüm",
-                "title_en": "Kurumsal Dönüşüm",
-                "credits": 6,
-                "prereq": "165 AKTS tamamlamış olmak",
                 "coreq": "",
                 "opened": true
             },
@@ -3383,15 +3314,6 @@
                 "code": "IEC 397",
                 "title_tr": "İş Süreçleri Yönetimi",
                 "title_en": "İş Süreçleri Yönetimi",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IEC 399",
-                "title_tr": "İnovasyon ve Teknoloji Yönetimi",
-                "title_en": "İnovasyon ve Teknoloji Yönetimi",
                 "credits": 4,
                 "prereq": "SEC 201",
                 "coreq": "",
@@ -3893,6 +3815,15 @@
                 "opened": true
             },
             {
+                "code": "IR 421",
+                "title_tr": "Programlamalı Sosyal Bilimler",
+                "title_en": "Programlamalı Sosyal Bilimler",
+                "credits": 6,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
                 "code": "IR 422",
                 "title_tr": "Aşkın Siyaseti",
                 "title_en": "Aşkın Siyaseti",
@@ -4154,6 +4085,51 @@
                 "opened": true
             },
             {
+                "code": "MATH 103",
+                "title_tr": "Mühendislik için Yüksek Matematik I",
+                "title_en": "Calculus for Engineering I",
+                "credits": 8,
+                "prereq": "",
+                "coreq": "MATH 103R",
+                "opened": true
+            },
+            {
+                "code": "MATH 104",
+                "title_tr": "Mühendislik için Yüksek Matematik II",
+                "title_en": "Calculus for Engineering II",
+                "credits": 8,
+                "prereq": "MATH103",
+                "coreq": "MATH 104R",
+                "opened": true
+            },
+            {
+                "code": "MATH 112",
+                "title_tr": "Ayrık Matematik",
+                "title_en": "Ayrık Matematik",
+                "credits": 6,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "MATH 211",
+                "title_tr": "Doğrusal Cebir",
+                "title_en": "Linear Algebra",
+                "credits": 6,
+                "prereq": "MATH 103",
+                "coreq": "MATH 211R",
+                "opened": true
+            },
+            {
+                "code": "MATH 212",
+                "title_tr": "Diferansiyel Denklemler",
+                "title_en": "Differential Equations",
+                "credits": 6,
+                "prereq": "MATH 104",
+                "coreq": "",
+                "opened": true
+            },
+            {
                 "code": "MATH 216",
                 "title_tr": "Uygulamalı İstatistik",
                 "title_en": "Uygulamalı İstatistik",
@@ -4325,42 +4301,6 @@
                 "opened": true
             },
             {
-                "code": "ME 405",
-                "title_tr": "İnsan-Merkezli Tasarım ve Mekanizma Uygulamaları",
-                "title_en": "İnsan-Merkezli Tasarım ve Mekanizma Uygulamaları",
-                "credits": 6,
-                "prereq": "ME 311 and ME 334",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "ME 406",
-                "title_tr": "Haptik Sistemlere Giriş",
-                "title_en": "Haptik Sistemlere Giriş",
-                "credits": 6,
-                "prereq": "CS101 veya CS 104 ve  PHYS 101",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "ME 409",
-                "title_tr": "Sürdürülebilir Enerji, Malzemeler ve Sistemler: Binalar için Bütünleşik Yaklaşım",
-                "title_en": "Sürdürülebilir Enerji, Malzemeler ve Sistemler: Binalar için Bütünleşik Yaklaşım",
-                "credits": 6,
-                "prereq": "ME 323",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "ME 412",
-                "title_tr": "Sonlu Elemanlar Analizi",
-                "title_en": "Sonlu Elemanlar Analizi",
-                "credits": 6,
-                "prereq": "(ME 214 or MATH 214) or MATH211",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "ME 413",
                 "title_tr": "Robotik I",
                 "title_en": "Robotik I",
@@ -4379,29 +4319,11 @@
                 "opened": true
             },
             {
-                "code": "ME 417",
-                "title_tr": "Mekatronik",
-                "title_en": "Mekatronik",
-                "credits": 6,
-                "prereq": "CS 100 veya CS 101 veya CS 103 veya CS 104",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "ME 418",
                 "title_tr": "Hesaplamalı Akışkanlar Dinamiği",
                 "title_en": "Hesaplamalı Akışkanlar Dinamiği",
                 "credits": 6,
                 "prereq": "(ME 214 or MATH 214) and ME 321",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "ME 419",
-                "title_tr": "Muhendisler icin Hesaplamali Metotlar",
-                "title_en": "Muhendisler icin Hesaplamali Metotlar",
-                "credits": 6,
-                "prereq": "(CS 100 or CS 104) and MATH 212",
                 "coreq": "",
                 "opened": true
             },
@@ -4496,15 +4418,6 @@
                 "opened": true
             },
             {
-                "code": "ME 440",
-                "title_tr": "Mekanik Titreşimler",
-                "title_en": "Mekanik Titreşimler",
-                "credits": 6,
-                "prereq": "ME 311 and MATH 212",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "ME 442",
                 "title_tr": "İnsan Hareketinin Biomekaniği",
                 "title_en": "İnsan Hareketinin Biomekaniği",
@@ -4519,15 +4432,6 @@
                 "title_en": "Sürekli Ortamlar Mekaniği",
                 "credits": 6,
                 "prereq": "ME 212 and ME 256",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "ME 454",
-                "title_tr": "Yarıiletkenler Teknolojisi ve Prosesi",
-                "title_en": "Yarıiletkenler Teknolojisi ve Prosesi",
-                "credits": 6,
-                "prereq": "",
                 "coreq": "",
                 "opened": true
             },
@@ -4550,15 +4454,6 @@
                 "opened": true
             },
             {
-                "code": "ME 474",
-                "title_tr": "Taşıt Dinamiğinin Temelleri",
-                "title_en": "Taşıt Dinamiğinin Temelleri",
-                "credits": 6,
-                "prereq": "MATH212 ve CS104 ve ME311",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "MEC 391",
                 "title_tr": "CNC Makina Programlama (Sertifika Seçmeli)",
                 "title_en": "Certificate Elective",
@@ -4577,20 +4472,11 @@
                 "opened": true
             },
             {
-                "code": "MEC 395",
-                "title_tr": "Endüstriyel Robot Programlama",
-                "title_en": "Endüstriyel Robot Programlama",
-                "credits": 4,
-                "prereq": "(CS 100 or CS 103 or CS 101 or CS 104) and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "MEC 396",
-                "title_tr": "Hesaplamalı Akışkanlar Dinamiği için Profesyonel Simulasyon Yazılımı Kullanımı (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "(MATH 214 or ME 214)  and ME 321 and SEC 201",
+                "code": "MGMT 311",
+                "title_tr": "Proje Yönetimi",
+                "title_en": "Proje Yönetimi",
+                "credits": 6,
+                "prereq": "BUS 102 and (SEC 201 or SEC 203)",
                 "coreq": "",
                 "opened": true
             },
@@ -4667,6 +4553,15 @@
                 "opened": true
             },
             {
+                "code": "MGMT 404",
+                "title_tr": "Uluslararası Yönetim",
+                "title_en": "Uluslararası Yönetim",
+                "credits": 6,
+                "prereq": "MGMT 202 and IBUS 204",
+                "coreq": "",
+                "opened": true
+            },
+            {
                 "code": "MGMT 408",
                 "title_tr": "Yönetim Düşüncesinin Evrimi",
                 "title_en": "Yönetim Düşüncesinin Evrimi",
@@ -4685,11 +4580,47 @@
                 "opened": true
             },
             {
+                "code": "MIS 103",
+                "title_tr": "Bilgisayar Programlamaya Giriş",
+                "title_en": "Bilgisayar Programlamaya Giriş",
+                "credits": 6,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "MIS 104",
+                "title_tr": "Nesneye Dayalı Programlama Temelleri",
+                "title_en": "Nesneye Dayalı Programlama Temelleri",
+                "credits": 6,
+                "prereq": "MIS 103 or CS 101 or CS 103",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "MIS 304",
+                "title_tr": "Bilişim Güvenliği",
+                "title_en": "Bilişim Güvenliği",
+                "credits": 6,
+                "prereq": "To complete at least 90 ECTS",
+                "coreq": "",
+                "opened": true
+            },
+            {
                 "code": "MIS 306",
                 "title_tr": "E-İş'in Temelleri",
                 "title_en": "E-İş'in Temelleri",
                 "credits": 6,
                 "prereq": "BUS 102  and (MIS 301 or MIS311) and MKTG 201",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "MIS 311",
+                "title_tr": "Yönetim Bilişim Sistemlerine Giriş",
+                "title_en": "Yönetim Bilişim Sistemlerine Giriş",
+                "credits": 6,
+                "prereq": "BUS 102 and MKTG 201",
                 "coreq": "",
                 "opened": true
             },
@@ -4703,20 +4634,11 @@
                 "opened": true
             },
             {
-                "code": "MIS 317",
-                "title_tr": "İşletmeler için Bulut Bilişim",
-                "title_en": "İşletmeler için Bulut Bilişim",
+                "code": "MIS 315",
+                "title_tr": "Veri Analizi ve Karar Modellemesi",
+                "title_en": "Veri Analizi ve Karar Modellemesi",
                 "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "MKTG 201",
-                "title_tr": "Pazarlama",
-                "title_en": "Pazarlama",
-                "credits": 6,
-                "prereq": "(BUS101 or (BUS100 and BUS190)) and (ENG102 or ENG 104)",
+                "prereq": "BUS 101 and (MATH 202 or MATH 216)",
                 "coreq": "",
                 "opened": true
             },
@@ -4775,9 +4697,9 @@
                 "opened": true
             },
             {
-                "code": "MKTG 412",
-                "title_tr": "Satış Yönetimi",
-                "title_en": "Satış Yönetimi",
+                "code": "MKTG 414",
+                "title_tr": "İş Modeli İnovasyonu",
+                "title_en": "İş Modeli İnovasyonu",
                 "credits": 6,
                 "prereq": "MKTG 201",
                 "coreq": "",
@@ -4789,6 +4711,15 @@
                 "title_en": "Kişisel Satış ve Satış Yönetimi",
                 "credits": 6,
                 "prereq": "MKTG 201",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "MKTG 417",
+                "title_tr": "İşletmeler Arası Pazarlama",
+                "title_en": "İşletmeler Arası Pazarlama",
+                "credits": 6,
+                "prereq": "SEC 201 and MKTG 201 and to complete at least 120 ECTS",
                 "coreq": "",
                 "opened": true
             },
@@ -4825,6 +4756,51 @@
                 "title_en": "Ses Eğitimi ve Koro I",
                 "credits": 4,
                 "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "OPER 202",
+                "title_tr": "Operasyon Yönetimi",
+                "title_en": "Operasyon Yönetimi",
+                "credits": 6,
+                "prereq": "MATH 201",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "OPER 312",
+                "title_tr": "Tedarik Zinciri Yönetimi",
+                "title_en": "Tedarik Zinciri Yönetimi",
+                "credits": 6,
+                "prereq": "OPER 202 or AVM 202",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "OPER 314",
+                "title_tr": "Hizmet Operasyonları Yönetimi",
+                "title_en": "Hizmet Operasyonları Yönetimi",
+                "credits": 6,
+                "prereq": "OPER 202 veya AVM 202",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "OPER 315",
+                "title_tr": "Karar Verme ve Optimizasyon Modelleri",
+                "title_en": "Karar Verme ve Optimizasyon Modelleri",
+                "credits": 6,
+                "prereq": "BUS 101 and (MATH202 or MATH 216)",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "OPER 403",
+                "title_tr": "Bağımsız Araştırma - OPER",
+                "title_en": "Bağımsız Araştırma - OPER",
+                "credits": 6,
+                "prereq": "OPER 202 or BUS 101 and To complete at least 120 ECTS credits",
                 "coreq": "",
                 "opened": true
             },
@@ -5009,11 +4985,56 @@
                 "opened": true
             },
             {
+                "code": "PHYS 101",
+                "title_tr": "Fizik I",
+                "title_en": "Physics I",
+                "credits": 8,
+                "prereq": "",
+                "coreq": "PHYS 101L",
+                "opened": true
+            },
+            {
+                "code": "PHYS 102",
+                "title_tr": "Fizik II",
+                "title_en": "Physics II",
+                "credits": 8,
+                "prereq": "PHYS 101",
+                "coreq": "PHYS 102L",
+                "opened": true
+            },
+            {
+                "code": "PHYS 103",
+                "title_tr": "Havacılık için Fizik I",
+                "title_en": "Physics I",
+                "credits": 6,
+                "prereq": "",
+                "coreq": "PHYS 103L and PHYS 103R",
+                "opened": true
+            },
+            {
+                "code": "PHYS 104",
+                "title_tr": "Havacılık için Fizik II",
+                "title_en": "Physics I",
+                "credits": 6,
+                "prereq": "PHYS 103",
+                "coreq": "PHYS 104L and PHYS 104R",
+                "opened": true
+            },
+            {
                 "code": "PHYS 221",
                 "title_tr": "Modern Fiziğe Giriş",
                 "title_en": "Modern Fiziğe Giriş",
                 "credits": 6,
                 "prereq": "PHYS 101 and MATH 103 and MATH 104",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "PLT 411",
+                "title_tr": "Uçak Kaza Kırım İncelemeleri",
+                "title_en": "Uçak Kaza Kırım İncelemeleri",
+                "credits": 6,
+                "prereq": "",
                 "coreq": "",
                 "opened": true
             },
@@ -5167,6 +5188,24 @@
                 "title_en": "Rusça V",
                 "credits": 4,
                 "prereq": "RUS 202",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "SAS 101",
+                "title_tr": "Otel ve Yiyecek İçecek Endüstrisi",
+                "title_en": "Otel ve Yiyecek İçecek Endüstrisi",
+                "credits": 5,
+                "prereq": "",
+                "coreq": "",
+                "opened": true
+            },
+            {
+                "code": "SAS 201",
+                "title_tr": "Hizmet Pazarlaması",
+                "title_en": "Hizmet Pazarlaması",
+                "credits": 5,
+                "prereq": "SAS 101",
                 "coreq": "",
                 "opened": true
             },
@@ -5342,15 +5381,6 @@
                 "opened": true
             },
             {
-                "code": "SOC 311",
-                "title_tr": "Çalışma ve Örgüt Sosyolojisi",
-                "title_en": "Çalışma ve Örgüt Sosyolojisi",
-                "credits": 6,
-                "prereq": "SOC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
                 "code": "SPA 101",
                 "title_tr": "İspanyolca I",
                 "title_en": "İspanyolca I",
@@ -5437,930 +5467,6 @@
                 "title_en": "Yabancılar için Türkçe IV",
                 "credits": 4,
                 "prereq": "TURK 201",
-                "coreq": "",
-                "opened": true
-            }
-        ],
-        "certificate": [
-            {
-                "code": "AIC 390",
-                "title_tr": "İstem Mühendisliği",
-                "title_en": "İstem Mühendisliği",
-                "credits": 4,
-                "prereq": "SEC 201 ve (MATH 211 veya ME 214) ve (MATH 216 veya CE 217 veya MATH 217)",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CEC 391",
-                "title_tr": "Beton Malzemeleri",
-                "title_en": "Beton Malzemeleri",
-                "credits": 4,
-                "prereq": "CE 205 and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CEC 393",
-                "title_tr": "Jeodezi ve Jeoinformasyon (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CEC 394",
-                "title_tr": "Zemin İncelemeleri (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "CE 302 and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CEC 395",
-                "title_tr": "İklim Değişikliğine Uyumlu Şehirler (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201 and CE 210",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CEC 397",
-                "title_tr": "Yalın İnşaat Yönetimi (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CEC 398",
-                "title_tr": "Geoteknik Saha İncelemeleri (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201 ve CE 302",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CEC 399",
-                "title_tr": "İnşaat Sözleşme Dinamikleri: Karmaşıklıkların Yönetimi ve Stratejik Perspektifler",
-                "title_en": "İnşaat Sözleşme Dinamikleri: Karmaşıklıkların Yönetimi ve Stratejik Perspektifler",
-                "credits": 4,
-                "prereq": "SEC 201 ve CE 302",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CSC 390",
-                "title_tr": "Yüksek Başarımlı Hesaplamaya Giriş",
-                "title_en": "Yüksek Başarımlı Hesaplamaya Giriş",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CSC 391",
-                "title_tr": "Web Uygulama Geliştirme (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "(CS 102 or CS 105) and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CSC 392",
-                "title_tr": "İOS Uygulama Geliştirme (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "(CS 201 OR CS 222) AND SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CSC 393",
-                "title_tr": "Spring Framework ile Backend Uygulamaları Geliştirmek (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "(CS 102 or CS 105) and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CSC 394",
-                "title_tr": "Android OS ve Mobil Uygulamalar (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "(CS 102 or CS 105) and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CSC 395",
-                "title_tr": "Bilgisayar Mühendisliğinin Mutfağı",
-                "title_en": "Bilgisayar Mühendisliğinin Mutfağı",
-                "credits": 4,
-                "prereq": "(CS102 veya CS105) ve SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CSC 396",
-                "title_tr": "Siber Güvenlik Temelleri (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "(CS 102 or CS 105) and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CSC 397",
-                "title_tr": "Blokzincirine Giriş",
-                "title_en": "Blokzincirine Giriş",
-                "credits": 4,
-                "prereq": "SEC 201 and (CS 101 or CS 104)",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CSC 399",
-                "title_tr": "Haberleşme Güvenliği (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201 and (CS 100 or CS 101 or CS 103 or CS 104)",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EEC 391",
-                "title_tr": "Ağ Teknolojileri (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EEC 392",
-                "title_tr": "Endüstriyel Otomasyon",
-                "title_en": "Endüstriyel Otomasyon",
-                "credits": 4,
-                "prereq": "(CS 101 or CS 103 or CS 100 or CS 104) and EE 203 and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EEC 393",
-                "title_tr": "Mühendisler için Python",
-                "title_en": "Mühendisler için Python",
-                "credits": 4,
-                "prereq": "(CS 100 or CS 101 or CS 103 or CS 104) and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EEC 394",
-                "title_tr": "Kablosuz İletişim Mühendisliği Teknolojileri",
-                "title_en": "Kablosuz İletişim Mühendisliği Teknolojileri",
-                "credits": 4,
-                "prereq": "SEC 201 and EE 341",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EEC 395",
-                "title_tr": "Endüstriyel Uygulamalarda Sibergüvenlik",
-                "title_en": "Endüstriyel Uygulamalarda Sibergüvenlik",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EEC 396",
-                "title_tr": "Otomotiv Elektroniği (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201 and EE 202",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "EEC 397",
-                "title_tr": "Teknolojide Yükselen Trendler I",
-                "title_en": "Teknolojide Yükselen Trendler I",
-                "credits": 4,
-                "prereq": "(CS101 or CS104) and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IEC 391",
-                "title_tr": "Proje Yönetimi (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IEC 393",
-                "title_tr": "Kurum Mimarisi Yönetimi",
-                "title_en": "Kurum Mimarisi Yönetimi",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IEC 394",
-                "title_tr": "İşletmede Sürdürülebilirlik (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IEC 395",
-                "title_tr": "Çevik Yönetim (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IEC 396",
-                "title_tr": "Çevik Yazılım ve Ürün Geliştirme",
-                "title_en": "Çevik Yazılım ve Ürün Geliştirme",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IEC 397",
-                "title_tr": "İş Süreçleri Yönetimi",
-                "title_en": "İş Süreçleri Yönetimi",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IEC 399",
-                "title_tr": "İnovasyon ve Teknoloji Yönetimi",
-                "title_en": "İnovasyon ve Teknoloji Yönetimi",
-                "credits": 4,
-                "prereq": "SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "MEC 391",
-                "title_tr": "CNC Makina Programlama (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "ME 112 and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "MEC 392",
-                "title_tr": "CNC Makina Programlama II (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "SEC 201 and ME 112",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "MEC 395",
-                "title_tr": "Endüstriyel Robot Programlama",
-                "title_en": "Endüstriyel Robot Programlama",
-                "credits": 4,
-                "prereq": "(CS 100 or CS 103 or CS 101 or CS 104) and SEC 201",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "MEC 396",
-                "title_tr": "Hesaplamalı Akışkanlar Dinamiği için Profesyonel Simulasyon Yazılımı Kullanımı (Sertifika Seçmeli)",
-                "title_en": "Certificate Elective",
-                "credits": 4,
-                "prereq": "(MATH 214 or ME 214)  and ME 321 and SEC 201",
-                "coreq": "",
-                "opened": true
-            }
-        ],
-        "social": [
-            {
-                "code": "ANTH 101",
-                "title_tr": "Antropolojiye Giriş",
-                "title_en": "Antropolojiye Giriş",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "ANTH 212",
-                "title_tr": "Çevre ve Toplum",
-                "title_en": "Çevre ve Toplum",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "ANTH 303",
-                "title_tr": "Toplumsal Cinsiyet, Toplum, Siyaset",
-                "title_en": "Toplumsal Cinsiyet, Toplum, Siyaset",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "ANTH 319",
-                "title_tr": "Afetler ve Dayanıklı Kentler",
-                "title_en": "Afetler ve Dayanıklı Kentler",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "HIST 103",
-                "title_tr": "Dünya Tarihi I",
-                "title_en": "Dünya Tarihi I",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "HIST 104",
-                "title_tr": "Dünya Tarihi II",
-                "title_en": "Dünya Tarihi II",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "HIST 309",
-                "title_tr": "Enine Boyuna Osmanlılar",
-                "title_en": "Enine Boyuna Osmanlılar",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "HIST 310",
-                "title_tr": "Balkan Tarihi",
-                "title_en": "Balkan Tarihi",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "HIST 311",
-                "title_tr": "Seyahat ve Acaibin Tarihi",
-                "title_en": "Seyahat ve Acaibin Tarihi",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "HUM 302",
-                "title_tr": "Medya ve Edebiyatta Dizisellik",
-                "title_en": "Medya ve Edebiyatta Dizisellik",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "HUM 310",
-                "title_tr": "Kültür ve Toplum",
-                "title_en": "Kültür ve Toplum",
-                "credits": 4,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "HUM 315",
-                "title_tr": "Edebiyat ve Toplumsal Cinsiyet",
-                "title_en": "Edebiyat ve Toplumsal Cinsiyet",
-                "credits": 4,
-                "prereq": "TLL 101 and TLL 102",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "HUM 319",
-                "title_tr": "Filmlerle Felsefe: Felsefeye Giriş",
-                "title_en": "Filmlerle Felsefe: Felsefeye Giriş",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "HUM 321",
-                "title_tr": "Bilim, Teknoloji ve Toplum",
-                "title_en": "Bilim, Teknoloji ve Toplum",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "HUM 353",
-                "title_tr": "Edebiyat ve Modernizm",
-                "title_en": "Edebiyat ve Modernizm",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IR 101",
-                "title_tr": "Siyaset Bilimine Giriş",
-                "title_en": "Siyaset Bilimine Giriş",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IR 301",
-                "title_tr": "Diplomasi Tarihi",
-                "title_en": "Diplomasi Tarihi",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IR 311",
-                "title_tr": "Uluslararası Çatışma Analizi",
-                "title_en": "Uluslararası Çatışma Analizi",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IR 312",
-                "title_tr": "Amerikan Politikası",
-                "title_en": "Amerikan Politikası",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IR 313",
-                "title_tr": "Tartışmalı Fikirler: Politik ve Toplumsal Konular",
-                "title_en": "Tartışmalı Fikirler: Politik ve Toplumsal Konular",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IR 318",
-                "title_tr": "Avrupa'yı Keşfetmek!",
-                "title_en": "Avrupa'yı Keşfetmek!",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IR 323",
-                "title_tr": "Rusya Siyaseti",
-                "title_en": "Rusya Siyaseti",
-                "credits": 6,
-                "prereq": "IR 101",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IR 325",
-                "title_tr": "Türk Dış Politikasında Güncel Konular",
-                "title_en": "Türk Dış Politikasında Güncel Konular",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IR 326",
-                "title_tr": "Irk ve Etnisite Siyaseti",
-                "title_en": "Irk ve Etnisite Siyaseti",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "IR 329",
-                "title_tr": "Demokrasi ve Demokratikleşme",
-                "title_en": "Demokrasi ve Demokratikleşme",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "MUSIC 103",
-                "title_tr": "Dünya Müzikleri",
-                "title_en": "Dünya Müzikleri",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "PHIL 104",
-                "title_tr": "Doğruluk, Bilgi ve Etik Karar Verme",
-                "title_en": "Doğruluk, Bilgi ve Etik Karar Verme",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "PSY 100",
-                "title_tr": "Genel Psikoloji",
-                "title_en": "Genel Psikoloji",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "PSY 314",
-                "title_tr": "İnsan Belleği",
-                "title_en": "İnsan Belleği",
-                "credits": 6,
-                "prereq": "(PSY 100 or PSY 101) and Having Completed 90 credits",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "PSY 317",
-                "title_tr": "Düşünme ve Akıl Yürütme",
-                "title_en": "Düşünme ve Akıl Yürütme",
-                "credits": 6,
-                "prereq": "PSY 100 veya PSY 101 ve 90 AKTS tamamlamış olmak",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "PSY 324",
-                "title_tr": "Duyum ve Algı",
-                "title_en": "Duyum ve Algı",
-                "credits": 6,
-                "prereq": "(PSY 100 or PSY 101) and having completed 90 credits",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "PSY 429",
-                "title_tr": "İş Hayatında Liderlik ve Motivasyon",
-                "title_en": "İş Hayatında Liderlik ve Motivasyon",
-                "credits": 6,
-                "prereq": "PSY 100 or PSY 101 and Having Completed 90 credits",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "SOC 201",
-                "title_tr": "Sosyal Bilimlere Giriş",
-                "title_en": "Sosyal Bilimlere Giriş",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "SOC 302",
-                "title_tr": "Din ve Sekülerlik Sosyolojisi ve Siyaseti",
-                "title_en": "Din ve Sekülerlik Sosyolojisi ve Siyaseti",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "SOC 304",
-                "title_tr": "Çalışma ve İstihdamın Sosyolojisi: Modern Çalışma Hayatına Giriş",
-                "title_en": "Çalışma ve İstihdamın Sosyolojisi: Modern Çalışma Hayatına Giriş",
-                "credits": 6,
-                "prereq": "",
-                "coreq": "",
-                "opened": true
-            }
-        ],
-        "program": [
-            {
-                "code": "CE 303",
-                "title_tr": "Akışkanlar Mekaniği-Hidrolik",
-                "title_en": "Akışkanlar Mekaniği-Hidrolik",
-                "credits": 4,
-                "prereq": "MATH 104",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 305",
-                "title_tr": "Yapı Statiği II",
-                "title_en": "Yapı Statiği II",
-                "credits": 6,
-                "prereq": "CE 301",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 340",
-                "title_tr": "İnşaat Projelerinde Planlama ve Kontrol teknikleri",
-                "title_en": "İnşaat Projelerinde Planlama ve Kontrol teknikleri",
-                "credits": 6,
-                "prereq": "CE 208",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 350",
-                "title_tr": "Inşaat Mühendisliğinde Sistem Analizi",
-                "title_en": "Inşaat Mühendisliğinde Sistem Analizi",
-                "credits": 6,
-                "prereq": "CE 208",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 403",
-                "title_tr": "Deprem Mühendisliğine Giriş",
-                "title_en": "Deprem Mühendisliğine Giriş",
-                "credits": 6,
-                "prereq": "CE 301",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 404",
-                "title_tr": "Yapı Dinamiği",
-                "title_en": "Yapı Dinamiği",
-                "credits": 6,
-                "prereq": "MATH 212 ve CE 305 ve CE 211",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 406",
-                "title_tr": "İklim Dirençli Şehirler",
-                "title_en": "İklim Dirençli Şehirler",
-                "credits": 6,
-                "prereq": "CE 210 veya ME 321",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 409",
-                "title_tr": "Ön Gerilmeli Beton",
-                "title_en": "Ön Gerilmeli Beton",
-                "credits": 6,
-                "prereq": "CE 304",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 410",
-                "title_tr": "Ulaştırma Ekonomisi",
-                "title_en": "Ulaştırma Ekonomisi",
-                "credits": 6,
-                "prereq": "MATH 217 or CE 217) and ECON 210 and CE 310 and 165 credits completed",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 411",
-                "title_tr": "Betornarme II",
-                "title_en": "Betornarme II",
-                "credits": 6,
-                "prereq": "CE 304",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 412",
-                "title_tr": "Plastik Analiz ve Tasarım",
-                "title_en": "Plastik Analiz ve Tasarım",
-                "credits": 6,
-                "prereq": "CE 301 and CE 307",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 414",
-                "title_tr": "İnşaat Mühendisliği’nde Belirsizlik ve Güvenilirlik",
-                "title_en": "İnşaat Mühendisliği’nde Belirsizlik ve Güvenilirlik",
-                "credits": 6,
-                "prereq": "MATH 217 ve CE 203",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 417",
-                "title_tr": "Çelik Yapılar 2",
-                "title_en": "Çelik Yapılar 2",
-                "credits": 6,
-                "prereq": "CE 307",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 420",
-                "title_tr": "Geoteknik Deprem Mühendisliği",
-                "title_en": "Geoteknik Deprem Mühendisliği",
-                "credits": 6,
-                "prereq": "CE 302 and CE 306",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 423",
-                "title_tr": "İleri Yapı Analizi",
-                "title_en": "İleri Yapı Analizi",
-                "credits": 6,
-                "prereq": "MATH 211 ve (CE 301 veya ME 334)",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 424",
-                "title_tr": "Geoteknik Yapılar",
-                "title_en": "Geoteknik Yapılar",
-                "credits": 6,
-                "prereq": "CE 302 and CE 306",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 426",
-                "title_tr": "Yapı Malzemeleri için Dijital Çözümler",
-                "title_en": "Yapı Malzemeleri için Dijital Çözümler",
-                "credits": 6,
-                "prereq": "CE 205 veya ME 256",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 427",
-                "title_tr": "Yapıların Deprem Tasarımı",
-                "title_en": "Yapıların Deprem Tasarımı",
-                "credits": 6,
-                "prereq": "CE 301 and CE 307",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 428",
-                "title_tr": "Zemin Mekaniği II",
-                "title_en": "Zemin Mekaniği II",
-                "credits": 6,
-                "prereq": "CE 302",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 431",
-                "title_tr": "Mühendislik Jeolojisi",
-                "title_en": "Mühendislik Jeolojisi",
-                "credits": 6,
-                "prereq": "PHYS 101 ve  PHYS 102 ve  CHEM 111 ve MATH 103",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 460",
-                "title_tr": "İnşaat Mühendisliği’nde Maliyet Yönetimi",
-                "title_en": "İnşaat Mühendisliği’nde Maliyet Yönetimi",
-                "credits": 6,
-                "prereq": "CE 208",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 461",
-                "title_tr": "Insaat Projelerinde Risk Yonetimi",
-                "title_en": "Insaat Projelerinde Risk Yonetimi",
-                "credits": 6,
-                "prereq": "CE 208",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 462",
-                "title_tr": "İnşaatta İşçi Sağlığı ve İş Güvenliği",
-                "title_en": "İnşaatta İşçi Sağlığı ve İş Güvenliği",
-                "credits": 6,
-                "prereq": "CE 208",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 463",
-                "title_tr": "İnşaat Mühendisleri için Yapı Bilgi Modellemesi",
-                "title_en": "İnşaat Mühendisleri için Yapı Bilgi Modellemesi",
-                "credits": 6,
-                "prereq": "CE 208",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 464",
-                "title_tr": "Betonarme Yapıların Performansa Dayalı Tasarımı",
-                "title_en": "Betonarme Yapıların Performansa Dayalı Tasarımı",
-                "credits": 6,
-                "prereq": "CE 304 and CE 305",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 465",
-                "title_tr": "Yapıların Karşı Karşıya Oldukları Risklerin Yönetimi",
-                "title_en": "Yapıların Karşı Karşıya Oldukları Risklerin Yönetimi",
-                "credits": 6,
-                "prereq": "CE 208 and CE 301",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 466",
-                "title_tr": "Limanlar ve Su Yolları",
-                "title_en": "Limanlar ve Su Yolları",
-                "credits": 6,
-                "prereq": "CE 210 and CE 311",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 467",
-                "title_tr": "Yapı İşletmesi İçin Bilişim Teknolojileri",
-                "title_en": "Yapı İşletmesi İçin Bilişim Teknolojileri",
-                "credits": 6,
-                "prereq": "CE 208 dersini başarı ile tamamlamış olmak",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 468",
-                "title_tr": "Denizcilik Mühendisliğinde Makine Öğrenmesi Uygulamalarına Giriş",
-                "title_en": "Denizcilik Mühendisliğinde Makine Öğrenmesi Uygulamalarına Giriş",
-                "credits": 6,
-                "prereq": "Completed at least 175 ECTS and (CS 104 or CS 101)  and MATH 211 and MATH 212 and (CE 217 or MATH 217 or (MATH 215 and MATH 216))",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 469",
-                "title_tr": "Trafik Mühendisliğinde Simülasyon ve Makine Öğrenmesi",
-                "title_en": "Trafik Mühendisliğinde Simülasyon ve Makine Öğrenmesi",
-                "credits": 6,
-                "prereq": "En az 175 AKTS tamamlamak ve (CS 104 veya CS 101)  ve MATH 211 ve MATH 212 ve (CE 217 veya MATH 217 veya (MATH 215 ve MATH 216))",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "CE 489",
-                "title_tr": "Yeşil Bina Proje Yönetimi",
-                "title_en": "Yeşil Bina Proje Yönetimi",
-                "credits": 6,
-                "prereq": "CE 208",
-                "coreq": "",
-                "opened": true
-            },
-            {
-                "code": "ME 456",
-                "title_tr": "Mühendislik Malzemelerinin Modellenmesi ve Simülasyonu",
-                "title_en": "Mühendislik Malzemelerinin Modellenmesi ve Simülasyonu",
-                "credits": 6,
-                "prereq": "MATH 212, CHEM 111 ve 135  ECTS'yi tamamlamış olmak",
                 "coreq": "",
                 "opened": true
             }

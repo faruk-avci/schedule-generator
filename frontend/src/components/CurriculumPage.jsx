@@ -1,186 +1,465 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './CurriculumPage.css';
-import { translations } from '../utils/translations';
 
-// Import curriculum data
-// Import curriculum data
-import eeCurriculum from '../data/curriculums/ee.json';
-import aiCurriculum from '../data/curriculums/ai.json';
-import ieCurriculum from '../data/curriculums/ie.json';
-import ceCurriculum from '../data/curriculums/ce.json';
-import meCurriculum from '../data/curriculums/me.json';
-import csCurriculum from '../data/curriculums/cs.json';
-
+// All available majors - data loaded dynamically
 const AVAILABLE_MAJORS = [
-    { id: 'ee', tr: 'Elektrik-Elektronik Mühendisliği', en: 'Electrical-Electronics Engineering', data: eeCurriculum },
-    { id: 'cs', tr: 'Bilgisayar Mühendisliği', en: 'Computer Science', data: csCurriculum },
-    { id: 'ai', tr: 'Yapay Zeka Mühendisliği', en: 'Artificial Intelligence Engineering', data: aiCurriculum },
-    { id: 'ie', tr: 'Endüstri Mühendisliği', en: 'Industrial Engineering', data: ieCurriculum },
-    { id: 'me', tr: 'Makine Mühendisliği', en: 'Mechanical Engineering', data: meCurriculum },
-    { id: 'ce', tr: 'İnşaat Mühendisliği', en: 'Civil Engineering', data: ceCurriculum },
+    // Engineering
+    { id: 'ee', tr: 'Elektrik-Elektronik Mühendisliği', en: 'Electrical-Electronics Engineering', faculty: 'engineering' },
+    { id: 'cs', tr: 'Bilgisayar Mühendisliği', en: 'Computer Science', faculty: 'engineering' },
+    { id: 'ai', tr: 'Yapay Zeka Mühendisliği', en: 'Artificial Intelligence Engineering', faculty: 'engineering' },
+    { id: 'ie', tr: 'Endüstri Mühendisliği', en: 'Industrial Engineering', faculty: 'engineering' },
+    { id: 'me', tr: 'Makine Mühendisliği', en: 'Mechanical Engineering', faculty: 'engineering' },
+    { id: 'ce', tr: 'İnşaat Mühendisliği', en: 'Civil Engineering', faculty: 'engineering' },
+    // Business
+    { id: 'bus', tr: 'İşletme', en: 'Business Administration', faculty: 'business' },
+    { id: 'econ', tr: 'Ekonomi', en: 'Economics', faculty: 'business' },
+    { id: 'mis', tr: 'Yönetim Bilişim Sistemleri', en: 'Management Information Systems', faculty: 'business' },
+    { id: 'uf', tr: 'Uluslararası Finans', en: 'International Finance', faculty: 'business' },
+    { id: 'uti', tr: 'Uluslararası Ticaret ve İşletmecilik', en: 'International Trade and Business', faculty: 'business' },
+    // Architecture & Design
+    { id: 'arch_en', tr: 'Mimarlık (İngilizce)', en: 'Architecture (English)', faculty: 'architecture' },
+    { id: 'arch_tr', tr: 'Mimarlık (Türkçe)', en: 'Architecture (Turkish)', faculty: 'architecture' },
+    { id: 'code', tr: 'İletişim Tasarımı', en: 'Communication Design', faculty: 'architecture' },
+    { id: 'ide', tr: 'Endüstriyel Tasarım', en: 'Industrial Design', faculty: 'architecture' },
+    { id: 'inar', tr: 'İç Mimarlık', en: 'Interior Architecture', faculty: 'architecture' },
+    // Social Sciences
+    { id: 'anth', tr: 'Antropoloji', en: 'Anthropology', faculty: 'social' },
+    { id: 'ir', tr: 'Uluslararası İlişkiler', en: 'International Relations', faculty: 'social' },
+    { id: 'psy', tr: 'Psikoloji', en: 'Psychology', faculty: 'social' },
+    // Aviation
+    { id: 'avm', tr: 'Havacılık Yönetimi', en: 'Aviation Management', faculty: 'aviation' },
+    { id: 'plt', tr: 'Pilotaj', en: 'Pilotage', faculty: 'aviation' },
+    // Applied Sciences
+    { id: 'garm', tr: 'Gastronomi ve Mutfak Sanatları', en: 'Gastronomy and Culinary Arts', faculty: 'applied' },
+    { id: 'hman', tr: 'Otel Yönetimi', en: 'Hotel Management', faculty: 'applied' },
+    // Law
+    { id: 'huk', tr: 'Hukuk', en: 'Law', faculty: 'law' },
 ];
 
-// Map full major names (from localStorage) to IDs
+// Faculty groups for organized dropdown
+const FACULTY_GROUPS = {
+    engineering: { tr: 'Mühendislik', en: 'Engineering' },
+    business: { tr: 'İşletme', en: 'Business' },
+    architecture: { tr: 'Mimarlık ve Tasarım', en: 'Architecture & Design' },
+    social: { tr: 'Sosyal Bilimler', en: 'Social Sciences' },
+    aviation: { tr: 'Havacılık', en: 'Aviation' },
+    applied: { tr: 'Uygulamalı Bilimler', en: 'Applied Sciences' },
+    law: { tr: 'Hukuk', en: 'Law' },
+};
+
+// Map names to IDs for auto-selection
 const MAJOR_NAME_MAP = {
-    'Electrical-Electronics Engineering': 'ee',
-    'Elektrik-Elektronik Mühendisliği': 'ee',
-    'Computer Science': 'cs',
-    'Computer Engineering': 'cs',
-    'Bilgisayar Mühendisliği': 'cs',
-    'Artificial Intelligence Engineering': 'ai',
-    'Yapay Zeka Mühendisliği': 'ai',
-    'Industrial Engineering': 'ie',
-    'Endüstri Mühendisliği': 'ie',
-    'Mechanical Engineering': 'me',
-    'Makine Mühendisliği': 'me',
-    'Civil Engineering': 'ce',
-    'İnşaat Mühendisliği': 'ce'
+    'Electrical-Electronics Engineering': 'ee', 'Elektrik-Elektronik Mühendisliği': 'ee',
+    'Computer Science': 'cs', 'Computer Engineering': 'cs', 'Bilgisayar Mühendisliği': 'cs',
+    'Artificial Intelligence Engineering': 'ai', 'Yapay Zeka Mühendisliği': 'ai',
+    'Industrial Engineering': 'ie', 'Endüstri Mühendisliği': 'ie',
+    'Mechanical Engineering': 'me', 'Makine Mühendisliği': 'me',
+    'Civil Engineering': 'ce', 'İnşaat Mühendisliği': 'ce',
+    'Business Administration': 'bus', 'İşletme': 'bus',
+    'Economics': 'econ', 'Ekonomi': 'econ',
+    'Management Information Systems': 'mis', 'Yönetim Bilişim Sistemleri': 'mis',
+    'International Finance': 'uf', 'Uluslararası Finans': 'uf',
+    'International Trade and Business': 'uti', 'Uluslararası Ticaret ve İşletmecilik': 'uti',
+    'Architecture': 'arch_en', 'Mimarlık': 'arch_tr',
+    'Communication Design': 'code', 'İletişim Tasarımı': 'code',
+    'Industrial Design': 'ide', 'Endüstriyel Tasarım': 'ide',
+    'Interior Architecture': 'inar', 'İç Mimarlık': 'inar',
+    'Anthropology': 'anth', 'Antropoloji': 'anth',
+    'International Relations': 'ir', 'Uluslararası İlişkiler': 'ir',
+    'Psychology': 'psy', 'Psikoloji': 'psy',
+    'Aviation Management': 'avm', 'Havacılık Yönetimi': 'avm',
+    'Pilotage': 'plt', 'Pilotaj': 'plt',
+    'Gastronomy and Culinary Arts': 'garm', 'Gastronomi ve Mutfak Sanatları': 'garm',
+    'Hotel Management': 'hman', 'Otel Yönetimi': 'hman',
+    'Law': 'huk', 'Hukuk': 'huk',
+};
+
+// Elective type display names
+const ELECTIVE_TYPE_NAMES = {
+    free: { tr: 'Serbest Seçmeli', en: 'Free Elective' },
+    social: { tr: 'Sosyal Bilimler Seçmeli', en: 'Social Science Elective' },
+    program: { tr: 'Program Seçmeli', en: 'Program Elective' },
+    certificate: { tr: 'Sertifika Seçmeli', en: 'Certificate Elective' },
+    specialization: { tr: 'Özelleşme Seçmeli', en: 'Specialization Elective' },
+    faculty: { tr: 'Fakülte İçi Seçmeli', en: 'Faculty Elective' },
+    non_faculty: { tr: 'Fakülte Dışı Seçmeli', en: 'Non-Faculty Elective' },
+    restricted: { tr: 'Kısıtlı Seçmeli', en: 'Restricted Elective' },
+    social_restricted: { tr: 'Sosyal Bilimler Kısıtlı', en: 'Social Sciences Restricted' },
+    finishing_project: { tr: 'Bitirme Projesi', en: 'Finishing Project' },
+    design_studio: { tr: 'Tasarım Stüdyosu', en: 'Design Studio' },
+    program_external: { tr: 'Program Dışı Seçmeli', en: 'External Program Elective' },
 };
 
 function CurriculumPage({ language }) {
     const isTr = language === 'tr';
-    const [selectedMajorId, setSelectedMajorId] = useState('ee'); // Default fallback
-    const [curriculum, setCurriculum] = useState(eeCurriculum);
+    const [selectedMajorId, setSelectedMajorId] = useState('ee');
+    const [curriculum, setCurriculum] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [electiveModal, setElectiveModal] = useState({ open: false, type: null, courses: [] });
 
-    // Auto-select major from localStorage on mount
+    // Dynamic import function
+    const loadCurriculum = useCallback(async (majorId) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const module = await import(`../data/curriculums/${majorId}.json`);
+            setCurriculum(module.default);
+        } catch (err) {
+            console.error(`Failed to load curriculum for ${majorId}:`, err);
+            setError(isTr ? 'Müfredat yüklenemedi.' : 'Failed to load curriculum.');
+        } finally {
+            setLoading(false);
+        }
+    }, [isTr]);
+
+    // Auto-select from localStorage
     useEffect(() => {
         const storedMajor = localStorage.getItem('student_major');
-        if (storedMajor) {
-            const mappedId = MAJOR_NAME_MAP[storedMajor];
-            // Only autoset if we actually have data for this major
-            if (mappedId && AVAILABLE_MAJORS.find(m => m.id === mappedId)) {
-                setSelectedMajorId(mappedId);
-            }
+        if (storedMajor && MAJOR_NAME_MAP[storedMajor]) {
+            setSelectedMajorId(MAJOR_NAME_MAP[storedMajor]);
         }
     }, []);
 
+    // Load curriculum when major changes
     useEffect(() => {
-        const major = AVAILABLE_MAJORS.find(m => m.id === selectedMajorId);
-        if (major) {
-            setCurriculum(major.data);
+        loadCurriculum(selectedMajorId);
+    }, [selectedMajorId, loadCurriculum]);
+
+    // Handle elective click
+    const handleElectiveClick = (electiveType) => {
+        if (!curriculum || !curriculum.electives) return;
+
+        const courses = curriculum.electives[electiveType] || [];
+        const typeName = ELECTIVE_TYPE_NAMES[electiveType] || { tr: electiveType, en: electiveType };
+
+        setElectiveModal({
+            open: true,
+            type: electiveType,
+            typeName: isTr ? typeName.tr : typeName.en,
+            courses
+        });
+    };
+
+    const closeElectiveModal = () => {
+        setElectiveModal({ open: false, type: null, courses: [] });
+    };
+
+    // Handle adding a course to schedule
+    const handleAddCourse = async (course) => {
+        if (!course.code) return;
+
+        // Parse corequisites
+        const coreqs = course.coreq
+            ? course.coreq.split(/[,;]/).map(c => c.trim()).filter(c => c && !c.includes(' '))
+            : [];
+
+        const coursesToAdd = [course.code, ...coreqs];
+        const results = [];
+        const errors = [];
+
+        // Add course and all corequisites
+        for (const code of coursesToAdd) {
+            try {
+                const response = await fetch('/api/courses/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ course: code })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    results.push(code);
+                } else {
+                    errors.push(`${code}: ${data.error}`);
+                }
+            } catch (_err) {
+                errors.push(`${code}: ${isTr ? 'Bağlantı hatası' : 'Connection error'}`);
+            }
         }
-    }, [selectedMajorId]);
+
+        // Show result
+        if (results.length > 0) {
+            const msg = isTr
+                ? `Sepete eklendi: ${results.join(', ')}`
+                : `Added to basket: ${results.join(', ')}`;
+            alert(msg);
+        }
+
+        if (errors.length > 0) {
+            console.error('Errors adding courses:', errors);
+        }
+    };
+
+    const _selectedMajor = AVAILABLE_MAJORS.find(m => m.id === selectedMajorId);
 
     return (
         <div className="curriculum-page">
-            <div className="curriculum-header-section">
-                <h1>{isTr ? 'Müfredat' : 'Curriculum'}</h1>
-                <p>
-                    {isTr
-                        ? 'Dönemlik ders planı ve ön/yan koşullar.'
-                        : 'Semester course plan and requisites.'}
-                </p>
+            {/* Header */}
+            <header className="curriculum-hero">
+                <div className="hero-content">
+                    <h1>{isTr ? 'Müfredat' : 'Curriculum'}</h1>
+                    <p>{isTr ? '4 yıllık ders planı ve gereksinimler' : '4-year course plan and requirements'}</p>
+                </div>
+            </header>
 
+            {/* Major Selector */}
+            <div className="major-selector-container">
                 <div className="major-selector">
-                    <label>{isTr ? 'Bölüm Seçiniz:' : 'Select Major:'}</label>
+                    <label htmlFor="major-select">
+                        {isTr ? 'Bölüm:' : 'Major:'}
+                    </label>
                     <select
+                        id="major-select"
                         value={selectedMajorId}
                         onChange={(e) => setSelectedMajorId(e.target.value)}
                         className="major-dropdown"
                     >
-                        {AVAILABLE_MAJORS.map(major => (
-                            <option key={major.id} value={major.id}>
-                                {isTr ? major.tr : major.en}
-                            </option>
+                        {Object.entries(FACULTY_GROUPS).map(([faculty, names]) => (
+                            <optgroup key={faculty} label={isTr ? names.tr : names.en}>
+                                {AVAILABLE_MAJORS.filter(m => m.faculty === faculty).map(major => (
+                                    <option key={major.id} value={major.id}>
+                                        {isTr ? major.tr : major.en}
+                                    </option>
+                                ))}
+                            </optgroup>
                         ))}
                     </select>
                 </div>
             </div>
 
-            {/* Curriculum Content */}
-            <div className="curriculum-content">
-                <h2 className="major-title">
-                    {isTr ? curriculum.title_tr : curriculum.title_en}
-                </h2>
+            {/* Content */}
+            <main className="curriculum-content">
+                {loading && (
+                    <div className="loading-state">
+                        <div className="spinner"></div>
+                        <p>{isTr ? 'Yükleniyor...' : 'Loading...'}</p>
+                    </div>
+                )}
 
-                {[1, 2, 3, 4].map(year => {
-                    const yearData = curriculum.semesters[year];
-                    if (!yearData) return null;
+                {error && (
+                    <div className="error-state">
+                        <p>{error}</p>
+                    </div>
+                )}
 
-                    return (
-                        <div key={year} className="year-section">
-                            <div className="year-badge-container">
-                                <span className="year-badge">
-                                    {year}. {isTr ? 'Yıl' : 'Year'}
-                                </span>
-                            </div>
+                {!loading && !error && curriculum && (
+                    <>
+                        <h2 className="major-title">
+                            {isTr ? curriculum.title_tr : curriculum.title_en}
+                        </h2>
 
-                            <div className="semesters-grid">
-                                {/* Fall Semester */}
-                                <div className="semester-card">
-                                    <div className="semester-header">
-                                        <h3>{isTr ? 'Güz' : 'Fall'}</h3>
-                                        <span className="semester-icon">🍂</span>
-                                    </div>
-                                    <div className="table-container">
-                                        <SemesterTable courses={yearData.fall} isTr={isTr} />
-                                    </div>
-                                </div>
+                        <div className="years-container">
+                            {[1, 2, 3, 4].map(year => {
+                                const yearData = curriculum.semesters?.[year];
+                                if (!yearData) return null;
 
-                                {/* Spring Semester */}
-                                <div className="semester-card">
-                                    <div className="semester-header">
-                                        <h3>{isTr ? 'Bahar' : 'Spring'}</h3>
-                                        <span className="semester-icon">🌱</span>
+                                return (
+                                    <div key={year} className="year-section">
+                                        <div className="year-header">
+                                            <span className="year-number">{year}</span>
+                                            <span className="year-label">{isTr ? 'Yıl' : 'Year'}</span>
+                                        </div>
+
+                                        <div className="semesters-stack">
+                                            {/* Fall */}
+                                            <SemesterCard
+                                                title={isTr ? 'Güz Dönemi' : 'Fall Semester'}
+                                                courses={yearData.fall || []}
+                                                isTr={isTr}
+                                                onElectiveClick={handleElectiveClick}
+                                                onAddCourse={handleAddCourse}
+                                            />
+
+                                            {/* Spring */}
+                                            <SemesterCard
+                                                title={isTr ? 'Bahar Dönemi' : 'Spring Semester'}
+                                                courses={yearData.spring || []}
+                                                isTr={isTr}
+                                                onElectiveClick={handleElectiveClick}
+                                                onAddCourse={handleAddCourse}
+                                            />
+                                        </div>
                                     </div>
-                                    <div className="table-container">
-                                        <SemesterTable courses={yearData.spring} isTr={isTr} />
-                                    </div>
-                                </div>
-                            </div>
+                                );
+                            })}
                         </div>
-                    );
-                })}
-            </div>
+                    </>
+                )}
+            </main>
+
+            {/* Elective Modal */}
+            {electiveModal.open && (
+                <ElectiveModal
+                    typeName={electiveModal.typeName}
+                    courses={electiveModal.courses}
+                    isTr={isTr}
+                    onClose={closeElectiveModal}
+                />
+            )}
         </div>
     );
 }
 
-// Sub-component for clean table rendering
-const SemesterTable = ({ courses, isTr }) => {
+// Semester Card Component with Column Headers
+const SemesterCard = ({ title, courses, isTr, onElectiveClick, onAddCourse }) => {
     const totalCredits = courses.reduce((acc, c) => acc + (parseFloat(c.credits) || 0), 0);
 
     return (
-        <table className="pixel-perfect-table">
-            <thead>
-                <tr>
-                    <th className="th-code">{isTr ? 'Kod' : 'Code'}</th>
-                    <th className="th-title">{isTr ? 'Ders Adı' : 'Course Title'}</th>
-                    <th className="th-credits">{isTr ? 'AKTS' : 'ECTS'}</th>
-                    <th className="th-req">{isTr ? 'Koşullar' : 'Requisites'}</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div className="semester-card">
+            <div className="semester-header">
+                <h3>{title}</h3>
+                <span className="credits-badge">{totalCredits} ECTS</span>
+            </div>
+
+            {/* Column Headers */}
+            <div className="courses-header">
+                <div className="col-status"></div>
+                <div className="col-code">{isTr ? 'Kod' : 'Code'}</div>
+                <div className="col-name">{isTr ? 'Ders Adı' : 'Course Name'}</div>
+                <div className="col-credits">ECTS</div>
+                <div className="col-action"></div>
+            </div>
+
+            <div className="courses-list">
                 {courses.map((course, idx) => (
-                    <tr key={idx}>
-                        <td className="code-cell">{course.code || '-'}</td>
-                        <td className="title-cell">
-                            {isTr ? (course.title_tr || course.title) : (course.title_en || course.title)}
-                        </td>
-                        <td className="credits-cell">{course.credits}</td>
-                        <td className="req-cell">
-                            {course.prereq && (
-                                <span className="tag tag-prereq">
-                                    {isTr ? 'Ön Koşul:' : 'Prereq:'} {course.prereq}
-                                </span>
-                            )}
-                            {course.coreq && (
-                                <span className="tag tag-coreq">
-                                    {isTr ? 'Yan Koşul:' : 'Coreq:'} {course.coreq}
-                                </span>
-                            )}
-                        </td>
-                    </tr>
+                    <CourseRow
+                        key={idx}
+                        course={course}
+                        isTr={isTr}
+                        onElectiveClick={onElectiveClick}
+                        onAddCourse={onAddCourse}
+                    />
                 ))}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colSpan="2" className="text-right">{isTr ? 'Toplam' : 'Total'}</td>
-                    <td className="credits-cell font-bold">{totalCredits}</td>
-                    <td></td>
-                </tr>
-            </tfoot>
-        </table>
+            </div>
+        </div>
+    );
+};
+
+// Course Row Component - Clean layout with separate req lines
+const CourseRow = ({ course, isTr, onElectiveClick, onAddCourse }) => {
+    const isElective = !!course.electiveType;
+    const title = isTr ? (course.title_tr || course.title) : (course.title_en || course.title);
+    const hasPrereq = course.prereq && course.prereq.trim();
+    const hasCoreq = course.coreq && course.coreq.trim();
+    const isOpened = course.opened !== false;
+
+    const handleClick = () => {
+        if (isElective && onElectiveClick) {
+            onElectiveClick(course.electiveType);
+        }
+    };
+
+    const handleAddClick = (e) => {
+        e.stopPropagation();
+        if (onAddCourse && course.code) {
+            onAddCourse(course);
+        }
+    };
+
+    return (
+        <div
+            className={`course-row ${isElective ? 'elective-row' : ''} ${!isOpened ? 'course-closed' : ''}`}
+            onClick={handleClick}
+            role={isElective ? 'button' : undefined}
+            tabIndex={isElective ? 0 : undefined}
+        >
+            {/* Status */}
+            <div className="col-status">
+                <span className={`status-dot ${isOpened ? 'opened' : 'closed'}`} />
+            </div>
+
+            {/* Code */}
+            <div className="col-code">
+                {course.code || <span className="elective-tag">SEÇ</span>}
+            </div>
+
+            {/* Name with Requisites on separate lines */}
+            <div className="col-name">
+                <div className="course-name">
+                    {title}
+                    {isElective && <span className="click-hint">{isTr ? ' (tıkla)' : ' (click)'}</span>}
+                </div>
+                {hasPrereq && (
+                    <div className="req-line">
+                        <span className="req-label prereq">{isTr ? 'Önkoşul:' : 'Prerequisite:'}</span>
+                        <span className="req-codes">{course.prereq}</span>
+                    </div>
+                )}
+                {hasCoreq && (
+                    <div className="req-line">
+                        <span className="req-label coreq">{isTr ? 'Yankoşul:' : 'Corequisite:'}</span>
+                        <span className="req-codes">{course.coreq}</span>
+                    </div>
+                )}
+            </div>
+
+            {/* Credits */}
+            <div className="col-credits">{course.credits}</div>
+
+            {/* Add Button */}
+            <div className="col-action">
+                {course.code && (
+                    <button
+                        className="add-btn"
+                        onClick={handleAddClick}
+                        disabled={!isOpened}
+                        title={isOpened ? (isTr ? 'Sepete Ekle' : 'Add to Basket') : (isTr ? 'Kapalı' : 'Closed')}
+                    >
+                        +
+                    </button>
+                )}
+            </div>
+        </div>
+    );
+};
+
+// Elective Modal Component
+const ElectiveModal = ({ typeName, courses, isTr, onClose }) => {
+    return (
+        <div className="modal-overlay" onClick={onClose}>
+            <div className="elective-modal" onClick={(e) => e.stopPropagation()}>
+                <div className="modal-header">
+                    <h2>{typeName}</h2>
+                    <button className="modal-close" onClick={onClose}>&times;</button>
+                </div>
+                <div className="modal-body">
+                    {courses.length === 0 ? (
+                        <p className="no-courses">{isTr ? 'Ders bulunamadı.' : 'No courses found.'}</p>
+                    ) : (
+                        <table className="elective-table">
+                            <thead>
+                                <tr>
+                                    <th>{isTr ? 'Kod' : 'Code'}</th>
+                                    <th>{isTr ? 'Ders Adı' : 'Course Title'}</th>
+                                    <th>{isTr ? 'AKTS' : 'ECTS'}</th>
+                                    <th>{isTr ? 'Ön Koşul' : 'Prereq'}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {courses.map((course, idx) => (
+                                    <tr key={idx}>
+                                        <td className="code-cell">{course.code}</td>
+                                        <td className="title-cell">
+                                            {isTr ? course.title_tr : course.title_en}
+                                        </td>
+                                        <td className="credits-cell">{course.credits}</td>
+                                        <td className="prereq-cell">{course.prereq || '-'}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    )}
+                </div>
+                <div className="modal-footer">
+                    <span className="course-count">
+                        {courses.length} {isTr ? 'ders' : 'courses'}
+                    </span>
+                </div>
+            </div>
+        </div>
     );
 };
 

@@ -20,3 +20,7 @@ Thumbs.db
 photos/
 dist/
 media/
+scripts/
+courses_csv/
+courses/ 
+courses.zip
