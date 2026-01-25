@@ -63,6 +63,11 @@ function Footer({ onNavigate, language }) {
               {isTr ? 'İletişim' : 'Contact'}
             </button>
           </p>
+          <p>
+            <button onClick={() => onNavigate('survey')} className="footer-link">
+              {isTr ? 'Anket ve Geri Bildirim' : 'Survey & Feedback'}
+            </button>
+          </p>
         </div>
       </div>
 

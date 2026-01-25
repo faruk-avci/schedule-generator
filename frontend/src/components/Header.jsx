@@ -55,6 +55,16 @@ function Header({ language, setLanguage, theme, setTheme, onNavigate, term }) {
             <button
               className="header-link"
               onClick={() => {
+                onNavigate('survey');
+                setShowMobileMenu(false);
+              }}
+            >
+              {language === 'tr' ? 'Anket' : 'Survey'}
+            </button>
+
+            <button
+              className="header-link"
+              onClick={() => {
                 onNavigate('contact');
                 setShowMobileMenu(false);
               }}
