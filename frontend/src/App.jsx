@@ -147,15 +147,22 @@ function App() {
     loadTermInfo();
     loadSavedBaskets();
 
-    // Listen for basket updates from other components (like CurriculumPage)
+    // Listen for updates from other components
     const handleBasketUpdate = () => {
       refreshBasket();
       loadSavedBaskets();
     };
+    const handleMajorUpdate = () => {
+      const stored = localStorage.getItem('student_major');
+      if (stored) setMajor(stored);
+    };
+
     window.addEventListener('basketUpdated', handleBasketUpdate);
+    window.addEventListener('majorUpdated', handleMajorUpdate);
 
     return () => {
       window.removeEventListener('basketUpdated', handleBasketUpdate);
+      window.removeEventListener('majorUpdated', handleMajorUpdate);
     };
   }, []);
 

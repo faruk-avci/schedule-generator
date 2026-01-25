@@ -232,6 +232,8 @@ function CurriculumPage({ language }) {
                 }
 
                 setShowMajorPopup(false);
+                // Dispatch event to update App.jsx state
+                window.dispatchEvent(new Event('majorUpdated'));
                 // Reload curriculum is handled by useEffect on selectedMajorId change
             }
         } catch (error) {
@@ -556,41 +558,29 @@ function CurriculumPage({ language }) {
             )}
             {/* Major Selection Modal */}
             {showMajorPopup && (
-                <div className="cp-modal-overlay">
-                    <div className="cp-elective-modal" style={{ maxWidth: '800px', width: '90%' }}>
-                        <div className="cp-modal-header" style={{ padding: '20px', borderBottom: '1px solid #eee' }}>
-                            <div className="once-notice" style={{ fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <div className="once-notice">
                                 <span>✨ {isTr ? 'Sadece 1 Seferlik' : 'Only Asked Once'}</span>
                             </div>
                             <h2>{isTr ? 'Bölümünüzü Seçin' : 'Select Your Major'}</h2>
-                            <p style={{ marginTop: '10px', color: '#555' }}>
+                            <p>
                                 {isTr
                                     ? 'Size daha iyi yardımcı olabilmemiz için bölümünüzü seçer misiniz? Bu seçim sepetiniz ve verileriniz için bir kereye mahsus kaydedilecektir.'
                                     : 'Could you please select your major so we can assist you better? This choice will be saved once for your basket and data.'}
                             </p>
                         </div>
-                        <div className="major-grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px', padding: '20px', maxHeight: '60vh', overflowY: 'auto' }}>
+                        <div className="major-grid-container">
                             {MAJORS.map(group => (
                                 <div key={group.category.en} className="major-category">
-                                    <h3 style={{ fontSize: '1rem', marginBottom: '10px', color: 'var(--primary-color)' }}>{isTr ? group.category.tr : group.category.en}</h3>
-                                    <div className="major-items" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                    <h3>{isTr ? group.category.tr : group.category.en}</h3>
+                                    <div className="major-items">
                                         {group.items.map(m => (
                                             <button
                                                 key={m.id}
                                                 className={`major-item-btn ${selectedMajorId === MAJOR_NAME_MAP[m.en] ? 'active' : ''}`}
                                                 onClick={() => handleSaveMajor(m.en)}
-                                                style={{
-                                                    padding: '8px 12px',
-                                                    border: '1px solid #ddd',
-                                                    borderRadius: '6px',
-                                                    background: 'none',
-                                                    cursor: 'pointer',
-                                                    textAlign: 'left',
-                                                    fontSize: '0.9rem',
-                                                    transition: 'all 0.2s',
-                                                    backgroundColor: selectedMajorId === MAJOR_NAME_MAP[m.en] ? 'var(--primary-color)' : 'white',
-                                                    color: selectedMajorId === MAJOR_NAME_MAP[m.en] ? 'white' : 'inherit'
-                                                }}
                                             >
                                                 {isTr ? m.tr : m.en}
                                             </button>
