@@ -287,9 +287,6 @@ function CurriculumPage({ language }) {
             <div className="major-selector-container" style={{
                 maxWidth: '600px',
                 margin: '0 auto 40px',
-                position: 'sticky',
-                top: '20px',
-                zIndex: 100,
                 borderRadius: '12px',
                 border: '1px solid var(--border-color)'
             }}>
