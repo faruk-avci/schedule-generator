@@ -52,9 +52,31 @@ function HowToUse({ language, onNavigate }) {
         </ul>
       </div>
 
-      {/* Step 2: Basket Management */}
+      {/* Step 2: Curriculum Integration */}
       <div className="terms-card">
-        <h2>2. {isTr ? 'Sepet Yönetimi ve Kaydetme' : 'Basket Management & Saving'}</h2>
+        <h2>2. {isTr ? 'Ders Planım ve Seçmeli Dersler' : 'My Curriculum & Elective Courses'}</h2>
+        <p>
+          {isTr
+            ? '"Ders Planım" sayfasını kullanarak bölümünüzü seçebilir ve dönemlik ders programınızı görüntüleyebilirsiniz.'
+            : 'You can use the "Curriculum" page to select your major and view your semester-by-semester course plan.'}
+        </p>
+        <ul style={{ marginTop: '15px', paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li>
+            <strong>{isTr ? 'Otomatik Ekleme' : 'Automatic Adding'}:</strong> {isTr
+              ? 'Döneminizdeki zorunlu dersleri tek tıkla sepetinize ekleyebilirsiniz.'
+              : 'You can add required courses from your semester to your basket with a single click.'}
+          </li>
+          <li>
+            <strong>{isTr ? 'Seçmeli Dersler' : 'Elective Courses'}:</strong> {isTr
+              ? 'Müfredatınızdaki "Alan Seçmeli" veya "Serbest Seçmeli" kutucuklarına tıklayarak, o kategoriye uygun açılan derslerin listesini görebilir ve beğendiğinizi ekleyebilirsiniz.'
+              : 'By clicking on "Area Elective" or "Free Elective" boxes in your curriculum, you can see the list of available courses for that category and add the one you prefer.'}
+          </li>
+        </ul>
+      </div>
+
+      {/* Step 3: Basket Management */}
+      <div className="terms-card">
+        <h2>3. {isTr ? 'Sepet Yönetimi ve Kaydetme' : 'Basket Management & Saving'}</h2>
         <p>
           {isTr
             ? 'Sepetinizdeki dersleri görüntüleyebilir, istemediklerinizi silebilirsiniz. Ayrıca "Sepet Kaydetme" özelliği ile farklı senaryoları saklayabilirsiniz.'
@@ -70,9 +92,9 @@ function HowToUse({ language, onNavigate }) {
         </div>
       </div>
 
-      {/* Step 3: Preferences */}
+      {/* Step 4: Preferences */}
       <div className="terms-card">
-        <h2>3. {isTr ? 'Program Oluşturma Tercihleri' : 'Schedule Generation Preferences'}</h2>
+        <h2>4. {isTr ? 'Program Oluşturma Tercihleri' : 'Schedule Generation Preferences'}</h2>
         <p>
           {isTr
             ? 'Sepetiniz hazır olduğunda, sistemin size en uygun programı bulması için tercihlerinizi belirleyebilirsiniz:'
@@ -85,9 +107,9 @@ function HowToUse({ language, onNavigate }) {
         </ul>
       </div>
 
-      {/* Step 4: Results */}
+      {/* Step 5: Results */}
       <div className="terms-card">
-        <h2>4. {isTr ? 'Sonuçları İnceleme' : 'Reviewing Results'}</h2>
+        <h2>5. {isTr ? 'Sonuçları İnceleme' : 'Reviewing Results'}</h2>
         <p>
           {isTr
             ? '"Program Oluştur" butonuna bastıktan sonra sistem olası tüm çakışmasız programları listeler. Sonuçlar arasında gezinebilir, beğendiğiniz programın görselini indirebilirsiniz.'
