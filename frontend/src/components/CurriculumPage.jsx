@@ -189,7 +189,7 @@ function CurriculumPage({ language }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [electiveModal, setElectiveModal] = useState({ open: false, type: null, courses: [] });
-    const [showMajorModal, setShowMajorModal] = useState(false);
+    const [showMajorPopup, setShowMajorPopup] = useState(false);
 
     // Dynamic import function
     const loadCurriculum = useCallback(async (majorId) => {
@@ -215,7 +215,7 @@ function CurriculumPage({ language }) {
                 setSelectedMajorId(MAJOR_NAME_MAP[cleaned]);
             }
         } else {
-            setShowMajorModal(true);
+            setShowMajorPopup(true);
         }
     }, []);
 
@@ -231,7 +231,7 @@ function CurriculumPage({ language }) {
                     setSelectedMajorId(mappedId);
                 }
 
-                setShowMajorModal(false);
+                setShowMajorPopup(false);
                 // Reload curriculum is handled by useEffect on selectedMajorId change
             }
         } catch (error) {
@@ -554,44 +554,8 @@ function CurriculumPage({ language }) {
                     </div>
                 </div>
             )}
-        </div>
-    );
-}
-
-// Semester Card Component with Column Headers
-const SemesterCard = ({ title, courses, isTr, onElectiveClick, onAddCourse }) => {
-    const totalCredits = courses.reduce((acc, c) => acc + (parseFloat(c.credits) || 0), 0);
-
-    return (
-        <div className="semester-card">
-            <div className="semester-header">
-                <h3>{title}</h3>
-                <span className="credits-badge">{totalCredits} ECTS</span>
-            </div>
-
-            {/* Column Headers */}
-            <div className="courses-header">
-                <div className="col-status">{isTr ? 'Açık' : 'Open'}</div>
-                <div className="col-code">{isTr ? 'Kod' : 'Code'}</div>
-                <div className="col-name">{isTr ? 'Ders Adı' : 'Course Name'}</div>
-                <div className="col-credits">ECTS</div>
-                <div className="col-action">{isTr ? 'Ekle' : 'Add'}</div>
-            </div>
-
-            <div className="courses-list">
-                {courses.map((course, idx) => (
-                    <CourseRow
-                        key={idx}
-                        course={course}
-                        isTr={isTr}
-                        onElectiveClick={onElectiveClick}
-                        onAddCourse={onAddCourse}
-                    />
-                ))}
-            </div>
-
             {/* Major Selection Modal */}
-            {showMajorModal && (
+            {showMajorPopup && (
                 <div className="cp-modal-overlay">
                     <div className="cp-elective-modal" style={{ maxWidth: '800px', width: '90%' }}>
                         <div className="cp-modal-header" style={{ padding: '20px', borderBottom: '1px solid #eee' }}>
@@ -638,6 +602,44 @@ const SemesterCard = ({ title, courses, isTr, onElectiveClick, onAddCourse }) =>
                     </div>
                 </div>
             )}
+        </div>
+    );
+}
+
+// Semester Card Component with Column Headers
+const SemesterCard = ({ title, courses, isTr, onElectiveClick, onAddCourse }) => {
+    const totalCredits = courses.reduce((acc, c) => acc + (parseFloat(c.credits) || 0), 0);
+
+    return (
+        <div className="semester-card">
+            <div className="semester-header">
+                <h3>{title}</h3>
+                <span className="credits-badge">{totalCredits} ECTS</span>
+            </div>
+
+            {/* Column Headers */}
+            <div className="courses-header">
+                <div className="col-status">{isTr ? 'Açık' : 'Open'}</div>
+                <div className="col-code">{isTr ? 'Kod' : 'Code'}</div>
+                <div className="col-name">{isTr ? 'Ders Adı' : 'Course Name'}</div>
+                <div className="col-credits">ECTS</div>
+                <div className="col-action">{isTr ? 'Ekle' : 'Add'}</div>
+            </div>
+
+            <div className="courses-list">
+                {courses.map((course, idx) => (
+                    <CourseRow
+                        key={idx}
+                        course={course}
+                        isTr={isTr}
+                        onElectiveClick={onElectiveClick}
+                        onAddCourse={onAddCourse}
+                    />
+                ))}
+            </div>
+
+            {/* Major Selection Modal */}
+
         </div>
     );
 };
