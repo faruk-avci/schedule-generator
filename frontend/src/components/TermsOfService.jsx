@@ -67,6 +67,26 @@ const TermsOfService = ({ language, onNavigate }) => {
                 </p>
             </div>
 
+            {/* Curriculum and Electives Disclaimer */}
+            <div className="terms-card">
+                <h2>{isTr ? 'Ders Planları ve Seçmeli Ders Listeleri Hakkında' : 'About Course Plans and Elective Course Lists'}</h2>
+                <p>
+                    {isTr
+                        ? 'OzuPlanner üzerinde sunulan ders planları, program müfredatları ve seçmeli ders listeleri Özyeğin Üniversitesi’nin resmi web sitesinde kamuya açık olarak paylaşılan bilgilerden derlenmiştir. Bu bilgiler bilgilendirme amaçlıdır ve resmi akademik geçerliliğe sahip değildir.'
+                        : 'The course plans, program curriculums, and elective course lists presented on OzuPlanner are compiled from publicly available information on Özyeğin University\'s official website. This information is for informational purposes only and does not have official academic validity.'}
+                </p>
+                <p>
+                    {isTr
+                        ? 'Üniversite, ders içerikleri, müfredatlar ve seçmeli ders listelerinde zaman zaman değişiklik yapabilir. OzuPlanner bu değişiklikleri anlık olarak yansıtmayabilir.'
+                        : 'The University may make changes to course content, curriculums, and elective course lists from time to time. OzuPlanner may not reflect these changes instantly.'}
+                </p>
+                <p>
+                    {isTr
+                        ? 'Öğrenciler, mezuniyet koşulları, ders uygunlukları ve seçmeli ders geçerlilikleri için mutlaka SIS ve üniversitenin resmi kaynaklarını esas almalıdır.'
+                        : 'Students must strictly rely on SIS and the university\'s official resources for graduation requirements, course eligibility, and elective course validity.'}
+                </p>
+            </div>
+
             {/* Limitation of Liability */}
             <div className="terms-card">
                 <h2>{isTr ? 'Sorumluluk Reddi' : 'Limitation of Liability'}</h2>
@@ -108,7 +128,7 @@ const TermsOfService = ({ language, onNavigate }) => {
             </div>
 
             <div style={{ textAlign: 'center', marginTop: '40px', marginBottom: '40px', opacity: 0.6, fontSize: '0.9rem' }}>
-                <p>{isTr ? 'Son Güncelleme: 28 Aralık 2025' : 'Last Updated: December 28, 2025'}</p>
+                <p>{isTr ? 'Son Güncelleme: 25 Ocak 2026' : 'Last Updated: January 25, 2026'}</p>
             </div>
 
             {/* Privacy Policy Section */}

@@ -1771,7 +1771,9 @@ body.dark-mode .cancel-btn:hover {
   }
 
   .header-button .button-text {
-    display: none;
+    display: block;
+    /* or inline-block, ensuring visibility */
+    font-weight: 700;
   }
 
   .header-button {
