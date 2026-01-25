@@ -145,16 +145,36 @@ function CurriculumPage({ language }) {
         setElectiveModal({ open: false, type: null, courses: [] });
     };
 
+    const [message, setMessage] = useState(null);
+
+    // Auto-dismiss message
+    useEffect(() => {
+        if (message) {
+            const timer = setTimeout(() => {
+                setMessage(null);
+            }, 4000);
+            return () => clearTimeout(timer);
+        }
+    }, [message]);
+
     // Handle adding a course to schedule
     const handleAddCourse = async (course) => {
         if (!course.code) return;
 
-        // Parse corequisites
+        // Helper to clean course code (remove spaces, e.g. "BUS 101" -> "BUS101")
+        const cleanCode = (c) => c.replace(/\s+/g, '');
+
+        const mainCode = cleanCode(course.code);
+
+        // Parse corequisites and clean them
         const coreqs = course.coreq
-            ? course.coreq.split(/[,;]/).map(c => c.trim()).filter(c => c && !c.includes(' '))
+            ? course.coreq.split(/[,;]/)
+                .map(c => c.trim())
+                .filter(c => c && !c.includes(' ')) // Simple filter
+                .map(c => cleanCode(c))
             : [];
 
-        const coursesToAdd = [course.code, ...coreqs];
+        const coursesToAdd = [mainCode, ...coreqs];
         const results = [];
         const errors = [];
 
@@ -170,7 +190,8 @@ function CurriculumPage({ language }) {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
-                    body: JSON.stringify({ course: code })
+                    // Payload format: { course: "CODE", section: null }
+                    body: JSON.stringify({ course: code, section: null })
                 });
 
                 const data = await response.json();
@@ -178,19 +199,29 @@ function CurriculumPage({ language }) {
                 if (data.success) {
                     results.push(code);
                 } else {
-                    errors.push(`${code}: ${data.error}`);
+                    // Extract error message nicely
+                    let errMsg = data.error;
+                    if (errMsg.includes('already in your basket')) {
+                        errMsg = isTr ? 'Zaten sepetinizde' : 'Already in basket';
+                    } else if (errMsg.includes('not found')) {
+                        errMsg = isTr ? 'Bulunamadı' : 'Not found';
+                    }
+                    errors.push(`${code}: ${errMsg}`);
                 }
             } catch (_err) {
                 errors.push(`${code}: ${isTr ? 'Bağlantı hatası' : 'Connection error'}`);
             }
         }
 
-        // Show result
+        // Show result via Toast
         if (results.length > 0) {
-            const msg = isTr
+            const successText = isTr
                 ? `Sepete eklendi: ${results.join(', ')}`
                 : `Added to basket: ${results.join(', ')}`;
-            alert(msg);
+            setMessage({ text: successText, type: 'success' });
+        } else if (errors.length > 0) {
+            // If nothing added, show error from first failure
+            setMessage({ text: errors[0], type: 'error' });
         }
 
         if (errors.length > 0) {
@@ -202,6 +233,29 @@ function CurriculumPage({ language }) {
 
     return (
         <div className="curriculum-page">
+            {/* Message Toast */}
+            {message && (
+                <div className={`message ${message.type}`}>
+                    <span style={{ flex: 1 }}>{message.text}</span>
+                    <button
+                        onClick={() => setMessage(null)}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontSize: '18px',
+                            lineHeight: 1,
+                            color: 'inherit',
+                            opacity: 0.7,
+                            padding: 0,
+                            marginLeft: '10px'
+                        }}
+                    >
+                        ✕
+                    </button>
+                </div>
+            )}
+
             {/* Header */}
             <header className="curriculum-hero">
                 <div className="hero-content">
