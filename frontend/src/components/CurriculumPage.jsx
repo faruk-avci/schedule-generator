@@ -118,8 +118,11 @@ function CurriculumPage({ language }) {
     // Auto-select from localStorage
     useEffect(() => {
         const storedMajor = localStorage.getItem('student_major');
-        if (storedMajor && MAJOR_NAME_MAP[storedMajor]) {
-            setSelectedMajorId(MAJOR_NAME_MAP[storedMajor]);
+        if (storedMajor) {
+            const cleanedMajor = storedMajor.trim();
+            if (MAJOR_NAME_MAP[cleanedMajor]) {
+                setSelectedMajorId(MAJOR_NAME_MAP[cleanedMajor]);
+            }
         }
     }, []);
 
