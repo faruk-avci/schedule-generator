@@ -163,7 +163,7 @@ const MAJOR_NAME_MAP = {
 
     // Law
     'Law': 'huk', 'Hukuk': 'huk',
-};
+}; // End of MAJOR_NAME_MAP
 
 // Elective type display names
 const ELECTIVE_TYPE_NAMES = {
