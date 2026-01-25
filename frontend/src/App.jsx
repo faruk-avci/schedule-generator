@@ -146,6 +146,17 @@ function App() {
     refreshBasket();
     loadTermInfo();
     loadSavedBaskets();
+
+    // Listen for basket updates from other components (like CurriculumPage)
+    const handleBasketUpdate = () => {
+      refreshBasket();
+      loadSavedBaskets();
+    };
+    window.addEventListener('basketUpdated', handleBasketUpdate);
+
+    return () => {
+      window.removeEventListener('basketUpdated', handleBasketUpdate);
+    };
   }, []);
 
   // Track page navigation (simplified since we use routes)

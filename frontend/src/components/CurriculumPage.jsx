@@ -145,6 +145,16 @@ function CurriculumPage({ language }) {
         setElectiveModal({ open: false, type: null, courses: [] });
     };
 
+    // Dispatch event to refresh basket on mount and after changes
+    const triggerGlobalBasketRefresh = () => {
+        window.dispatchEvent(new Event('basketUpdated'));
+    };
+
+    // Refresh basket on mount to ensure sync
+    useEffect(() => {
+        triggerGlobalBasketRefresh();
+    }, []);
+
     const [message, setMessage] = useState(null);
 
     // Auto-dismiss message
@@ -219,6 +229,7 @@ function CurriculumPage({ language }) {
                 ? `Sepete eklendi: ${results.join(', ')}`
                 : `Added to basket: ${results.join(', ')}`;
             setMessage({ text: successText, type: 'success' });
+            triggerGlobalBasketRefresh(); // Refresh global basket
         } else if (errors.length > 0) {
             // If nothing added, show error from first failure
             setMessage({ text: errors[0], type: 'error' });
@@ -232,7 +243,7 @@ function CurriculumPage({ language }) {
     const _selectedMajor = AVAILABLE_MAJORS.find(m => m.id === selectedMajorId);
 
     return (
-        <div className="curriculum-page">
+        <div className="terms-page-container">
             {/* Message Toast */}
             {message && (
                 <div className={`message ${message.type}`}>
@@ -256,16 +267,24 @@ function CurriculumPage({ language }) {
                 </div>
             )}
 
-            {/* Header */}
-            <header className="curriculum-hero">
-                <div className="hero-content">
-                    <h1>{isTr ? 'Müfredat' : 'Curriculum'}</h1>
-                    <p>{isTr ? '4 yıllık ders planı ve gereksinimler' : '4-year course plan and requirements'}</p>
-                </div>
-            </header>
+            {/* Header - Consistent with standard pages */}
+            <div className="terms-header">
+                <h1>{isTr ? 'Müfredat' : 'Curriculum'}</h1>
+                <p className="subtitle">
+                    {isTr ? '4 yıllık ders planı ve gereksinimler' : '4-year course plan and requirements'}
+                </p>
+            </div>
 
             {/* Major Selector */}
-            <div className="major-selector-container">
+            <div className="major-selector-container" style={{
+                maxWidth: '600px',
+                margin: '0 auto 40px',
+                position: 'sticky',
+                top: '20px',
+                zIndex: 100,
+                borderRadius: '12px',
+                border: '1px solid var(--border-color)'
+            }}>
                 <div className="major-selector">
                     <label htmlFor="major-select">
                         {isTr ? 'Bölüm:' : 'Major:'}
@@ -375,11 +394,11 @@ const SemesterCard = ({ title, courses, isTr, onElectiveClick, onAddCourse }) =>
 
             {/* Column Headers */}
             <div className="courses-header">
-                <div className="col-status"></div>
+                <div className="col-status">{isTr ? 'Açık' : 'Open'}</div>
                 <div className="col-code">{isTr ? 'Kod' : 'Code'}</div>
                 <div className="col-name">{isTr ? 'Ders Adı' : 'Course Name'}</div>
                 <div className="col-credits">ECTS</div>
-                <div className="col-action"></div>
+                <div className="col-action">{isTr ? 'Ekle' : 'Add'}</div>
             </div>
 
             <div className="courses-list">

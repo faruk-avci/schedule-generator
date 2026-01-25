@@ -1,28 +1,6 @@
 /* Curriculum Page - Uses OZU color scheme */
-.curriculum-page {
-    min-height: 100vh;
-    background: var(--bg-primary);
-}
+/* Page wrapper matches .terms-page-container from App.css */
 
-/* Hero Header */
-.curriculum-hero {
-    background: linear-gradient(135deg, var(--ozu-burgundy) 0%, var(--ozu-burgundy-dark) 100%);
-    padding: 50px 20px 35px;
-    text-align: center;
-}
-
-.hero-content h1 {
-    color: white;
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0 0 6px;
-}
-
-.hero-content p {
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 1rem;
-    margin: 0;
-}
 
 /* Major Selector */
 .major-selector-container {
@@ -209,7 +187,7 @@
 /* Column Headers */
 .courses-header {
     display: grid;
-    grid-template-columns: 28px 80px 1fr 50px 40px;
+    grid-template-columns: 45px 80px 1fr 50px 45px;
     gap: 8px;
     padding: 8px 12px;
     background: var(--bg-primary);
@@ -229,7 +207,7 @@
 /* Course Row */
 .course-row {
     display: grid;
-    grid-template-columns: 28px 80px 1fr 50px 40px;
+    grid-template-columns: 45px 80px 1fr 50px 45px;
     gap: 8px;
     padding: 10px 12px;
     align-items: start;
@@ -376,7 +354,6 @@
 
 .add-btn:hover:not(:disabled) {
     background: var(--ozu-burgundy-dark);
-    transform: scale(1.05);
 }
 
 .add-btn:disabled {
@@ -545,7 +522,7 @@
 
     .courses-header,
     .course-row {
-        grid-template-columns: 24px 60px 1fr 40px 36px;
+        grid-template-columns: 35px 60px 1fr 40px 36px;
         padding: 8px 10px;
     }
 
