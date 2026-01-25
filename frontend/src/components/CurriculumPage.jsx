@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CurriculumPage.css';
 
+import { setMajor as apiSetMajor } from '../services/api';
+
 // All available majors - data loaded dynamically
 const AVAILABLE_MAJORS = [
     // Engineering
@@ -37,6 +39,79 @@ const AVAILABLE_MAJORS = [
     { id: 'huk', tr: 'Hukuk', en: 'Law', faculty: 'law' },
 ];
 
+/** 
+ * Data source for the Major Selection Popup (matching App.jsx) 
+ */
+const MAJORS = [
+    {
+        category: { tr: 'Mühendislik Fakültesi', en: 'Faculty of Engineering' },
+        items: [
+            { id: 'cs', en: 'Computer Engineering', tr: 'Bilgisayar Mühendisliği' },
+            { id: 'ee', en: 'Electrical - Electronics Engineering', tr: 'Elektrik - Elektronik Mühendisliği' },
+            { id: 'ie', en: 'Industrial Engineering', tr: 'Endüstri Mühendisliği' },
+            { id: 'ce', en: 'Civil Engineering', tr: 'İnşaat Mühendisliği' },
+            { id: 'me', en: 'Mechanical Engineering', tr: 'Makina Mühendisliği' },
+            { id: 'ai', en: 'Artificial Intelligence and Data Engineering', tr: 'Yapay Zeka ve Veri Mühendisliği' }
+        ]
+    },
+    {
+        category: { tr: 'İşletme Fakültesi', en: 'Faculty of Business' },
+        items: [
+            { id: 'econ', en: 'Economics', tr: 'Ekonomi' },
+            { id: 'ent', en: 'Entrepreneurship', tr: 'Girişimcilik' },
+            { id: 'ba', en: 'Business Administration', tr: 'İşletme' },
+            { id: 'fin', en: 'International Finance', tr: 'Uluslararası Finans' },
+            { id: 'itb', en: 'International Trade and Business Management', tr: 'Uluslararası Ticaret ve İşletmecilik' },
+            { id: 'mis', en: 'Management Information Systems', tr: 'Yönetim Bilişim Sistemleri' }
+        ]
+    },
+    {
+        category: { tr: 'Mimarlık ve Tasarım Fakültesi', en: 'Faculty of Architecture and Design' },
+        items: [
+            { id: 'id', en: 'Industrial Design', tr: 'Endüstriyel Tasarım' },
+            { id: 'int', en: 'Interior Architecture and Environmental Design', tr: 'İç Mimarlık ve Çevre Tasarımı' },
+            { id: 'com', en: 'Communication and Design', tr: 'İletişim ve Tasarımı' },
+            { id: 'arch-en', en: 'Architecture (English)', tr: 'Mimarlık (İngilizce)' },
+            { id: 'arch-tr', en: 'Architecture (Turkish)', tr: 'Mimarlık (Türkçe)' }
+        ]
+    },
+    {
+        category: { tr: 'Havacılık ve Uzay Bilimleri Fakültesi', en: 'Faculty of Aviation and Aeronautical Sciences' },
+        items: [
+            { id: 'avm', en: 'Aviation Management', tr: 'Havacılık Yönetimi' },
+            { id: 'pilot', en: 'Pilot Training', tr: 'Pilotaj' }
+        ]
+    },
+    {
+        category: { tr: 'Sosyal Bilimler Fakültesi', en: 'Faculty of Social Sciences' },
+        items: [
+            { id: 'psych', en: 'Psychology', tr: 'Psikoloji' },
+            { id: 'ir', en: 'International Relations', tr: 'Uluslararası İlişkiler' },
+            { id: 'anth', en: 'Anthropology', tr: 'Antropoloji' }
+        ]
+    },
+    {
+        category: { tr: 'Uygulamalı Bilimler Fakültesi', en: 'Faculty of Applied Sciences' },
+        items: [
+            { id: 'gast', en: 'Gastronomy and Culinary Arts', tr: 'Gastronomi ve Mutfak Sanatları' },
+            { id: 'hotel', en: 'Hotel Management', tr: 'Otel Yöneticiliği' }
+        ]
+    },
+    {
+        category: { tr: 'Hukuk Fakültesi', en: 'Faculty of Law' },
+        items: [
+            { id: 'law', en: 'Law', tr: 'Hukuk' }
+        ]
+    },
+    {
+        category: { tr: 'Diğer', en: 'Other' },
+        items: [
+            { id: 'master', en: 'Master / PhD', tr: 'Yüksek Lisans / Doktora' },
+            { id: 'skip', en: 'Prefer not to share', tr: 'Paylaşmak istemiyorum' }
+        ]
+    }
+];
+
 // Faculty groups for organized dropdown
 const FACULTY_GROUPS = {
     engineering: { tr: 'Mühendislik', en: 'Engineering' },
@@ -50,28 +125,43 @@ const FACULTY_GROUPS = {
 
 // Map names to IDs for auto-selection
 const MAJOR_NAME_MAP = {
-    'Electrical-Electronics Engineering': 'ee', 'Elektrik-Elektronik Mühendisliği': 'ee',
-    'Computer Science': 'cs', 'Computer Engineering': 'cs', 'Bilgisayar Mühendisliği': 'cs',
-    'Artificial Intelligence Engineering': 'ai', 'Yapay Zeka Mühendisliği': 'ai',
+    // Engineering
+    'Computer Engineering': 'cs', 'Bilgisayar Mühendisliği': 'cs',
+    'Electrical - Electronics Engineering': 'ee', 'Elektrik - Elektronik Mühendisliği': 'ee',
     'Industrial Engineering': 'ie', 'Endüstri Mühendisliği': 'ie',
-    'Mechanical Engineering': 'me', 'Makine Mühendisliği': 'me',
     'Civil Engineering': 'ce', 'İnşaat Mühendisliği': 'ce',
-    'Business Administration': 'bus', 'İşletme': 'bus',
+    'Mechanical Engineering': 'me', 'Makine Mühendisliği': 'me',
+    'Artificial Intelligence and Data Engineering': 'ai', 'Yapay Zeka ve Veri Mühendisliği': 'ai',
+    'Artificial Intelligence Engineering': 'ai', // Legacy support
+
+    // Business
     'Economics': 'econ', 'Ekonomi': 'econ',
-    'Management Information Systems': 'mis', 'Yönetim Bilişim Sistemleri': 'mis',
+    'Business Administration': 'bus', 'İşletme': 'bus',
     'International Finance': 'uf', 'Uluslararası Finans': 'uf',
-    'International Trade and Business': 'uti', 'International Trade and Business Management': 'uti', 'Uluslararası Ticaret ve İşletmecilik': 'uti',
-    'Architecture': 'arch_en', 'Architecture (English)': 'arch_en', 'Mimarlık': 'arch_tr', 'Mimarlık (Türkçe)': 'arch_tr',
-    'Communication Design': 'code', 'Communication and Design': 'code', 'İletişim Tasarımı': 'code',
+    'International Trade and Business Management': 'uti', 'Uluslararası Ticaret ve İşletmecilik': 'uti',
+    'Management Information Systems': 'mis', 'Yönetim Bilişim Sistemleri': 'mis',
+
+    // Architecture
     'Industrial Design': 'ide', 'Endüstriyel Tasarım': 'ide',
-    'Interior Architecture': 'inar', 'Interior Architecture and Environmental Design': 'inar', 'İç Mimarlık': 'inar', 'İç Mimarlık ve Çevre Tasarımı': 'inar',
-    'Anthropology': 'anth', 'Antropoloji': 'anth',
-    'International Relations': 'ir', 'Uluslararası İlişkiler': 'ir',
-    'Psychology': 'psy', 'Psikoloji': 'psy',
+    'Interior Architecture and Environmental Design': 'inar', 'İç Mimarlık ve Çevre Tasarımı': 'inar',
+    'Communication and Design': 'code', 'İletişim ve Tasarımı': 'code',
+    'Architecture (English)': 'arch_en', 'Mimarlık (İngilizce)': 'arch_en',
+    'Architecture (Turkish)': 'arch_tr', 'Mimarlık (Türkçe)': 'arch_tr',
+
+    // Aviation
     'Aviation Management': 'avm', 'Havacılık Yönetimi': 'avm',
-    'Pilotage': 'plt', 'Pilot Training': 'plt', 'Pilotaj': 'plt',
+    'Pilot Training': 'plt', 'Pilotaj': 'plt',
+
+    // Social
+    'Psychology': 'psy', 'Psikoloji': 'psy',
+    'International Relations': 'ir', 'Uluslararası İlişkiler': 'ir',
+    'Anthropology': 'anth', 'Antropoloji': 'anth',
+
+    // Applied
     'Gastronomy and Culinary Arts': 'garm', 'Gastronomi ve Mutfak Sanatları': 'garm',
-    'Hotel Management': 'hman', 'Otel Yönetimi': 'hman',
+    'Hotel Management': 'hman', 'Otel Yöneticiliği': 'hman',
+
+    // Law
     'Law': 'huk', 'Hukuk': 'huk',
 };
 
@@ -99,6 +189,7 @@ function CurriculumPage({ language }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [electiveModal, setElectiveModal] = useState({ open: false, type: null, courses: [] });
+    const [showMajorModal, setShowMajorModal] = useState(false);
 
     // Dynamic import function
     const loadCurriculum = useCallback(async (majorId) => {
@@ -119,12 +210,35 @@ function CurriculumPage({ language }) {
     useEffect(() => {
         const storedMajor = localStorage.getItem('student_major');
         if (storedMajor) {
-            const cleanedMajor = storedMajor.trim();
-            if (MAJOR_NAME_MAP[cleanedMajor]) {
-                setSelectedMajorId(MAJOR_NAME_MAP[cleanedMajor]);
+            const cleaned = storedMajor.trim();
+            if (MAJOR_NAME_MAP[cleaned]) {
+                setSelectedMajorId(MAJOR_NAME_MAP[cleaned]);
             }
+        } else {
+            setShowMajorModal(true);
         }
     }, []);
+
+    const handleSaveMajor = async (selectedMajorName) => {
+        try {
+            const data = await apiSetMajor(selectedMajorName);
+            if (data.success) {
+                localStorage.setItem('student_major', selectedMajorName);
+
+                // Map name to ID
+                const mappedId = MAJOR_NAME_MAP[selectedMajorName.trim()];
+                if (mappedId) {
+                    setSelectedMajorId(mappedId);
+                }
+
+                setShowMajorModal(false);
+                // Reload curriculum is handled by useEffect on selectedMajorId change
+            }
+        } catch (error) {
+            console.error('Error saving major:', error);
+            setError(isTr ? 'Bölüm kaydedilemedi.' : 'Could not save major.');
+        }
+    };
 
     // Load curriculum when major changes
     useEffect(() => {
@@ -475,6 +589,54 @@ const SemesterCard = ({ title, courses, isTr, onElectiveClick, onAddCourse }) =>
                     />
                 ))}
             </div>
+            {/* Major Selection Modal */}
+            {showMajorModal && (
+                <div className="cp-modal-overlay">
+                    <div className="cp-elective-modal" style={{ maxWidth: '800px', width: '90%' }}>
+                        <div className="cp-modal-header" style={{ padding: '20px', borderBottom: '1px solid #eee' }}>
+                            <div className="once-notice" style={{ fontSize: '0.8rem', color: '#666', marginBottom: '5px' }}>
+                                <span>✨ {isTr ? 'Sadece 1 Seferlik' : 'Only Asked Once'}</span>
+                            </div>
+                            <h2>{isTr ? 'Bölümünüzü Seçin' : 'Select Your Major'}</h2>
+                            <p style={{ marginTop: '10px', color: '#555' }}>
+                                {isTr
+                                    ? 'Size daha iyi yardımcı olabilmemiz için bölümünüzü seçer misiniz? Bu seçim sepetiniz ve verileriniz için bir kereye mahsus kaydedilecektir.'
+                                    : 'Could you please select your major so we can assist you better? This choice will be saved once for your basket and data.'}
+                            </p>
+                        </div>
+                        <div className="major-grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px', padding: '20px', maxHeight: '60vh', overflowY: 'auto' }}>
+                            {MAJORS.map(group => (
+                                <div key={group.category.en} className="major-category">
+                                    <h3 style={{ fontSize: '1rem', marginBottom: '10px', color: 'var(--primary-color)' }}>{isTr ? group.category.tr : group.category.en}</h3>
+                                    <div className="major-items" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                        {group.items.map(m => (
+                                            <button
+                                                key={m.id}
+                                                className={`major-item-btn ${selectedMajorId === MAJOR_NAME_MAP[m.en] ? 'active' : ''}`}
+                                                onClick={() => handleSaveMajor(m.en)}
+                                                style={{
+                                                    padding: '8px 12px',
+                                                    border: '1px solid #ddd',
+                                                    borderRadius: '6px',
+                                                    background: 'none',
+                                                    cursor: 'pointer',
+                                                    textAlign: 'left',
+                                                    fontSize: '0.9rem',
+                                                    transition: 'all 0.2s',
+                                                    backgroundColor: selectedMajorId === MAJOR_NAME_MAP[m.en] ? 'var(--primary-color)' : 'white',
+                                                    color: selectedMajorId === MAJOR_NAME_MAP[m.en] ? 'white' : 'inherit'
+                                                }}
+                                            >
+                                                {isTr ? m.tr : m.en}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

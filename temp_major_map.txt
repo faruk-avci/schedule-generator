@@ -1,0 +1,42 @@
+
+// Map names to IDs for auto-selection
+const MAJOR_NAME_MAP = {
+    // Engineering
+    'Computer Engineering': 'cs', 'Bilgisayar Mühendisliği': 'cs',
+    'Electrical - Electronics Engineering': 'ee', 'Elektrik - Elektronik Mühendisliği': 'ee',
+    'Industrial Engineering': 'ie', 'Endüstri Mühendisliği': 'ie',
+    'Civil Engineering': 'ce', 'İnşaat Mühendisliği': 'ce',
+    'Mechanical Engineering': 'me', 'Makine Mühendisliği': 'me',
+    'Artificial Intelligence and Data Engineering': 'ai', 'Yapay Zeka ve Veri Mühendisliği': 'ai',
+    'Artificial Intelligence Engineering': 'ai', // Legacy support
+    
+    // Business
+    'Economics': 'econ', 'Ekonomi': 'econ',
+    'Business Administration': 'bus', 'İşletme': 'bus',
+    'International Finance': 'uf', 'Uluslararası Finans': 'uf',
+    'International Trade and Business Management': 'uti', 'Uluslararası Ticaret ve İşletmecilik': 'uti',
+    'Management Information Systems': 'mis', 'Yönetim Bilişim Sistemleri': 'mis',
+    
+    // Architecture
+    'Industrial Design': 'ide', 'Endüstriyel Tasarım': 'ide',
+    'Interior Architecture and Environmental Design': 'inar', 'İç Mimarlık ve Çevre Tasarımı': 'inar',
+    'Communication and Design': 'code', 'İletişim ve Tasarımı': 'code',
+    'Architecture (English)': 'arch_en', 'Mimarlık (İngilizce)': 'arch_en',
+    'Architecture (Turkish)': 'arch_tr', 'Mimarlık (Türkçe)': 'arch_tr',
+    
+    // Aviation
+    'Aviation Management': 'avm', 'Havacılık Yönetimi': 'avm',
+    'Pilot Training': 'plt', 'Pilotaj': 'plt',
+    
+    // Social
+    'Psychology': 'psy', 'Psikoloji': 'psy',
+    'International Relations': 'ir', 'Uluslararası İlişkiler': 'ir',
+    'Anthropology': 'anth', 'Antropoloji': 'anth',
+    
+    // Applied
+    'Gastronomy and Culinary Arts': 'garm', 'Gastronomi ve Mutfak Sanatları': 'garm',
+    'Hotel Management': 'hman', 'Otel Yöneticiliği': 'hman',
+    
+    // Law
+    'Law': 'huk', 'Hukuk': 'huk',
+};
