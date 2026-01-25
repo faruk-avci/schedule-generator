@@ -1618,7 +1618,7 @@ body.dark-mode .cancel-btn:hover {
 
 /* Header Title removed old title-row */
 .header-title h1 {
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 700;
   margin: 0;
   letter-spacing: -0.5px;
@@ -1661,10 +1661,10 @@ body.dark-mode .cancel-btn:hover {
 }
 
 .header-title .subtitle {
-  font-size: 14px;
+  font-size: 15px;
   margin: 2px 0 0 0;
-  opacity: 0.9;
-  font-weight: 400;
+  opacity: 0.95;
+  font-weight: 500;
 }
 
 /* Right Side - Controls */
@@ -1906,10 +1906,11 @@ body.dark-mode .scroll-to-top:hover {
   border: none;
   color: white !important;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
   padding: 8px 12px;
   text-decoration: none;
   transition: color 0.3s;
+  font-weight: 600;
 }
 
 .header-link:hover {
