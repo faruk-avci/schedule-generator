@@ -407,7 +407,8 @@ function CurriculumPage({ language }) {
                                                             e.stopPropagation();
                                                             handleAddCourse(course);
                                                         }}
-                                                        title={isTr ? 'Sepete Ekle' : 'Add to Basket'}
+                                                        disabled={course.opened === false}
+                                                        title={course.opened !== false ? (isTr ? 'Sepete Ekle' : 'Add to Basket') : (isTr ? 'Kapalı' : 'Closed')}
                                                     >
                                                         +
                                                     </button>

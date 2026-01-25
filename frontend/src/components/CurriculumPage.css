@@ -221,8 +221,9 @@
 }
 
 /* Closed course styling */
+/* Closed course styling */
 .course-closed {
-    opacity: 0.5;
+    /* Opacity removed per request, so text is readable. Only button is disabled. */
 }
 
 /* Elective Row */
@@ -255,7 +256,8 @@
 }
 
 .status-dot.closed {
-    background: var(--ozu-gray-light);
+    background: #ef4444;
+    /* Red for closed/full */
 }
 
 .col-code {
