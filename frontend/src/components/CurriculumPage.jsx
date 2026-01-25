@@ -163,6 +163,10 @@ const MAJOR_NAME_MAP = {
 
     // Law
     'Law': 'huk', 'Hukuk': 'huk',
+
+    // Others
+    'Master / PhD': 'master', 'Yüksek Lisans / Doktora': 'master',
+    'Prefer not to share': 'skip', 'Paylaşmak istemiyorum': 'skip',
 }; // End of MAJOR_NAME_MAP
 
 // Elective type display names
@@ -196,7 +200,9 @@ function CurriculumPage({ language }) {
         setLoading(true);
         setError(null);
         try {
-            const module = await import(`../data/curriculums/${majorId}.json`);
+            // Fallback for non-undergrad majors to EE (as requested)
+            const fileId = (majorId === 'master' || majorId === 'skip') ? 'ee' : majorId;
+            const module = await import(`../data/curriculums/${fileId}.json`);
             setCurriculum(module.default);
         } catch (err) {
             console.error(`Failed to load curriculum for ${majorId}:`, err);
