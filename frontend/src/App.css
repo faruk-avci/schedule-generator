@@ -358,9 +358,11 @@ body.dark-mode .schedules-container {
   font-size: 24px;
   color: var(--ozu-burgundy);
   margin: 0;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.8px;
   line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .course-name-display {
@@ -840,9 +842,11 @@ body.dark-mode .course-name-display {
 
 .course-code-badge {
   color: var(--ozu-burgundy);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 14px;
   white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .courses-table td,

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { pool } = require('../database/db');
-const { logActivity } = require('../services/loggerService');
+const { logActivity, logSystemError } = require('../services/loggerService');
 
 // GET /api/logs - DELETED for security
 // GET /api/logs/sessions - DELETED for security
@@ -12,7 +12,7 @@ router.post('/view', async (req, res) => {
         const { page } = req.body;
 
         if (!page) {
-            return res.status(400).json({ success: false, message: 'Page name is required' });
+            return res.status(400).end();
         }
 
         await logActivity(
@@ -25,10 +25,11 @@ router.post('/view', async (req, res) => {
             }
         );
 
-        res.json({ success: true });
+        res.status(204).end();
     } catch (error) {
         console.error('Error logging page view:', error);
-        res.status(500).json({ success: false, error: error.message });
+        logSystemError(error, 'POST /api/logs/view');
+        res.status(500).end();
     }
 });
 
@@ -37,9 +38,9 @@ router.post('/event', async (req, res) => {
     try {
         const { eventName, details } = req.body;
         await logActivity(req, 'EVENT', { eventName, ...details });
-        res.json({ success: true });
+        res.status(204).end();
     } catch (error) {
-        res.status(500).json({ success: false });
+        res.status(500).end();
     }
 });
 

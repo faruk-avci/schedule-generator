@@ -17,6 +17,7 @@ const rateLimit = require('express-rate-limit');
 const courseRoutes = require('./src/routes/courseRoutes');
 const scheduleRoutes = require('./src/routes/scheduleRoutes');
 const adminRoutes = require('./src/routes/adminRoutes');
+const optimizedSearchRoutes = require('./src/routes/claude_code_suggestion');
 
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -171,6 +172,9 @@ app.get('/', (req, res) => {
 
 // Course routes (search, add, remove, basket)
 app.use('/api/courses', courseRoutes);
+
+// Optimized search route (for testing/benchmarking)
+app.use('/api/courses-v2', optimizedSearchRoutes);
 
 // Schedule routes (generate)
 app.use('/api/schedule', scheduleRoutes);

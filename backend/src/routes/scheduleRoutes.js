@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { generateSchedule } = require('../services/scheduleService');
-const { logActivity } = require('../services/loggerService');
+const { logActivity, logSystemError } = require('../services/loggerService');
 
 /**
  * POST /api/schedule/generate
@@ -64,10 +64,10 @@ router.post('/generate', async (req, res) => {
 
     } catch (error) {
         console.error('❌ Schedule generation error:', error);
+        logSystemError(error, 'POST /api/schedule/generate');
         res.status(500).json({
             success: false,
-            error: 'Failed to generate schedules',
-            message: error.message
+            error: 'Failed to generate schedules'
         });
     }
 });
@@ -96,10 +96,10 @@ router.get('/info', async (req, res) => {
 
     } catch (error) {
         console.error('❌ Error getting schedule info:', error);
+        logSystemError(error, 'GET /api/schedule/info');
         res.status(500).json({
             success: false,
-            error: 'Failed to get schedule info',
-            message: error.message
+            error: 'Failed to get schedule info'
         });
     }
 });

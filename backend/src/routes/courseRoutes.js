@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const NodeCache = require('node-cache');
 const { pool } = require('../database/db');
-const { logActivity } = require('../services/loggerService');
+const { logActivity, logSystemError } = require('../services/loggerService');
 const { getTableColumns, tableExists } = require('../utils/dbUtils');
 
 // Cache for search results (5 minutes)
@@ -227,10 +227,10 @@ router.post('/search', async (req, res) => {
 
     } catch (error) {
         console.error('Search error:', error);
+        logSystemError(error, 'POST /api/courses/search');
         res.status(500).json({
             success: false,
-            error: 'Database error',
-            message: error.message
+            error: 'Database error'
         });
     }
 });
@@ -402,10 +402,10 @@ router.post('/add', async (req, res) => {
 
     } catch (error) {
         console.error('Add error:', error);
+        logSystemError(error, 'POST /api/courses/add');
         res.status(500).json({
             success: false,
-            error: 'Server error',
-            message: error.message
+            error: 'Server error'
         });
     }
 });
@@ -489,10 +489,10 @@ router.post('/remove', (req, res) => {
 
     } catch (error) {
         console.error('Remove error:', error);
+        logSystemError(error, 'POST /api/courses/remove');
         res.status(500).json({
             success: false,
-            error: 'Server error',
-            message: error.message
+            error: 'Server error'
         });
     }
 });
@@ -520,10 +520,10 @@ router.get('/basket', (req, res) => {
 
     } catch (error) {
         console.error('Basket error:', error);
+        logSystemError(error, 'GET /api/courses/basket');
         res.status(500).json({
             success: false,
-            error: 'Server error',
-            message: error.message
+            error: 'Server error'
         });
     }
 });
@@ -553,10 +553,10 @@ router.delete('/basket/clear', (req, res) => {
 
     } catch (error) {
         console.error('Clear basket error:', error);
+        logSystemError(error, 'DELETE /api/courses/basket/clear');
         res.status(500).json({
             success: false,
-            error: 'Server error',
-            message: error.message
+            error: 'Server error'
         });
     }
 });
@@ -616,10 +616,10 @@ router.post('/major', async (req, res) => {
 
     } catch (error) {
         console.error('Major set error:', error);
+        logSystemError(error, 'POST /api/courses/major');
         res.status(500).json({
             success: false,
-            error: 'Server error',
-            message: error.message
+            error: 'Server error'
         });
     }
 });
@@ -643,7 +643,8 @@ router.get('/admin/logs', async (req, res) => {
         });
     } catch (error) {
         console.error('Log view error:', error);
-        res.status(500).json({ error: error.message });
+        logSystemError(error, 'GET /api/courses/admin/logs');
+        res.status(500).json({ success: false, error: 'Server error' });
     }
 });
 
@@ -678,7 +679,8 @@ router.post('/baskets/save', (req, res) => {
         });
     } catch (error) {
         console.error('Save basket error:', error);
-        res.status(500).json({ success: false, error: error.message });
+        logSystemError(error, 'POST /api/courses/baskets/save');
+        res.status(500).json({ success: false, error: 'Server error' });
     }
 });
 
@@ -698,7 +700,8 @@ router.get('/baskets', (req, res) => {
         res.json({ success: true, baskets: basketList });
     } catch (error) {
         console.error('Get baskets error:', error);
-        res.status(500).json({ success: false, error: error.message });
+        logSystemError(error, 'GET /api/courses/baskets');
+        res.status(500).json({ success: false, error: 'Server error' });
     }
 });
 
@@ -729,7 +732,8 @@ router.post('/baskets/load', (req, res) => {
         });
     } catch (error) {
         console.error('Load basket error:', error);
-        res.status(500).json({ success: false, error: error.message });
+        logSystemError(error, 'POST /api/courses/baskets/load');
+        res.status(500).json({ success: false, error: 'Server error' });
     }
 });
 
@@ -753,7 +757,8 @@ router.post('/baskets/remove', (req, res) => {
         });
     } catch (error) {
         console.error('Remove saved basket error:', error);
-        res.status(500).json({ success: false, error: error.message });
+        logSystemError(error, 'POST /api/courses/baskets/remove');
+        res.status(500).json({ success: false, error: 'Server error' });
     }
 });
 
@@ -777,10 +782,10 @@ router.get('/term', async (req, res) => {
         });
     } catch (error) {
         console.error('Term fetch error:', error);
+        logSystemError(error, 'GET /api/courses/term');
         res.status(500).json({
             success: false,
-            error: 'Server error',
-            message: error.message
+            error: 'Server error'
         });
     }
 });

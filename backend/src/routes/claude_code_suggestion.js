@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const NodeCache = require('node-cache');
 const { pool } = require('../database/db');
-const { logActivity } = require('../services/loggerService');
+const { logActivity, logSystemError } = require('../services/loggerService');
 const { getTableColumns, tableExists } = require('../utils/dbUtils');
 
 // ============================================
@@ -79,10 +79,10 @@ router.post('/search', async (req, res) => {
 
     } catch (error) {
         console.error('Search error:', error);
+        logSystemError(error, 'POST /api/courses/search (optimized)');
         res.status(500).json({
             success: false,
-            error: 'Database error',
-            message: error.message
+            error: 'Database error'
         });
     }
 });
