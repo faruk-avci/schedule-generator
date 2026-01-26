@@ -19,6 +19,7 @@ import SurveyPage from './components/SurveyPage';
 import { translations } from './utils/translations'
 import { searchCourses, addCourse, removeCourse, clearBasket, getBasket, generateSchedule, getTermInfo, setMajor as apiSetMajor, saveBasket as apiSaveBasket, getSavedBaskets as apiGetSavedBaskets, loadBasket as apiLoadSavedBasket, removeSavedBasket as apiRemoveSavedBasket } from './services/api'
 import Analytics from './utils/analytics';
+import grain from './analytics';
 
 const MAJORS = [
   {
@@ -282,6 +283,7 @@ function App() {
     setLoading(true);
     setMessage(null);
     setHasSearched(true);
+    grain.track('search', { query: searchTerm });
 
     try {
       const data = await searchCourses(searchTerm);
@@ -303,6 +305,7 @@ function App() {
     setSearchResults([]);
     setMessage(null);
     setHasSearched(false);
+    grain.track('clear_search');
   };
 
   // Update handleAddCourse
@@ -311,6 +314,7 @@ function App() {
       const data = await addCourse(courseName, null);
       if (data.success) {
         showMessage(null, 'success', `${courseName} ${t.courseAdded}`);
+        grain.track('add_course', { course_id: courseName, source: 'search' });
       } else {
         showMessage(null, 'error', translateBackendError(data.error));
       }
@@ -327,6 +331,7 @@ function App() {
       const data = await addCourse(courseName, sectionName);
       if (data.success) {
         showMessage(null, 'success', `${courseName} ${sectionName} ${t.sectionAdded}`);
+        grain.track('add_section', { course_id: courseName, section_id: sectionName });
       } else {
         showMessage(null, 'error', translateBackendError(data.error));
       }
@@ -343,6 +348,7 @@ function App() {
       const data = await removeCourse(courseName, null);
       if (data.success) {
         showMessage(null, 'success', `${courseName} ${t.courseRemoved}`);
+        grain.track('remove_course', { course_id: courseName });
       }
       refreshBasket();
     } catch (error) {
@@ -357,6 +363,7 @@ function App() {
       const data = await removeCourse(courseName, sectionName);
       if (data.success) {
         showMessage(null, 'success', `${courseName} ${sectionName} ${t.sectionRemoved}`);
+        grain.track('remove_section', { course_id: courseName, section_id: sectionName });
       }
       refreshBasket();
     } catch (error) {
@@ -375,6 +382,7 @@ function App() {
       const data = await clearBasket();
       if (data.success) {
         showMessage('basketCleared', 'success');
+        grain.track('clear_basket');
       }
       refreshBasket();
     } catch (error) {
@@ -420,6 +428,11 @@ function App() {
     setOverload(null);
     if (!ignoreCoreqs) setCoreqWarning(null); // Reset checking warning only if new start
     setMessage(null);
+    grain.track('generate_schedule', {
+      ignore_major_guard: ignoreMajorGuard,
+      ignore_coreqs: ignoreCoreqs,
+      preference: preference
+    });
 
     try {
       const data = await generateSchedule(120, preference, ignoreCoreqs);

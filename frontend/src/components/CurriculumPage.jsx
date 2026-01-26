@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './CurriculumPage.css';
 
 import { setMajor as apiSetMajor } from '../services/api';
+import grain from '../analytics';
 
 // All available majors - data loaded dynamically
 const AVAILABLE_MAJORS = [
@@ -337,6 +338,7 @@ function CurriculumPage({ language }) {
 
                 if (data.success) {
                     results.push(code);
+                    grain.track('add_course', { course_id: code, source: 'curriculum' });
                 } else {
                     // Extract error message nicely
                     let errMsg = data.error;
