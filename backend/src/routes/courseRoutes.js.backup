@@ -42,61 +42,184 @@ const ALLOWED_MAJORS = [
 
 // ============================================
 // POST /api/courses/search
-// Search for courses by name (OPTIMIZED VERSION)
+// Search for courses by name
 // ============================================
 router.post('/search', async (req, res) => {
     try {
         const { courseName } = req.body;
 
-        // Early validation
-        if (!courseName || courseName.trim().length < 2) {
+        // Validation
+        if (!courseName) {
+            return res.status(400).json({
+                success: false,
+                error: 'Course name is required'
+            });
+        }
+
+        if (courseName.trim().length < 2) {
             return res.status(400).json({
                 success: false,
                 error: 'Course name must be at least 2 characters'
             });
         }
 
-        // Normalize input
+
+        // Normalize input: remove all spaces
+        // Normalize input for caching and search
         const normalizedInput = courseName.replace(/\s+/g, '').toLowerCase();
         const cacheKey = `search:${normalizedInput}:${process.env.CURRENT_TERM || 'global'}`;
 
         console.log('🔍 Searching for courses:', normalizedInput);
 
-        // Check cache first
+        // 1. Check Cache
         const cached = searchCache.get(cacheKey);
         if (cached) {
             res.set('X-Cache', 'HIT');
-            res.set('Cache-Control', 'public, max-age=120');
             return res.json(cached);
         }
 
-        // Check if this exact query is already running
+        // 2. Request Deduplication (Thundering Herd Protection)
         if (pendingQueries.has(cacheKey)) {
             const result = await pendingQueries.get(cacheKey);
             res.set('X-Cache', 'DEDUP');
             return res.json(result);
         }
 
-        // Create query promise
-        const queryPromise = executeOptimizedSearch(normalizedInput, req);
+        // Create the query promise
+        const queryPromise = (async () => {
+            // Get current academic term from environment
+            const currentTerm = process.env.CURRENT_TERM || "";
+            const sanitizedTerm = currentTerm.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+
+            // Use term-specific tables if currentTerm is set, otherwise fallback to main tables
+            let coursesTable = currentTerm ? `courses_${sanitizedTerm}` : 'courses';
+            let slotsTable = currentTerm ? `course_time_slots_${sanitizedTerm}` : 'course_time_slots';
+
+            // Check if term-specific table exists, fallback to global table if not
+            if (currentTerm && !(await tableExists(coursesTable))) {
+                coursesTable = 'courses';
+                slotsTable = 'course_time_slots';
+            }
+
+            // Check for available columns (cached)
+            const cols = await getTableColumns(coursesTable);
+
+            const hasCourseCode = cols.includes('course_code');
+            const hasTerm = cols.includes('term');
+            const hasPrereq = cols.includes('prerequisites');
+            const hasCoreq = cols.includes('corequisites');
+
+            const codeField = hasCourseCode ? 'c.course_code' : 'c.course_name as course_code';
+            const prereqField = hasPrereq ? 'c.prerequisites' : "'' as prerequisites";
+            const coreqField = hasCoreq ? 'c.corequisites' : "'' as corequisites";
+
+            const searchCondition = hasCourseCode
+                ? "c.course_code ILIKE $1"
+                : "c.course_name ILIKE $1";
+            const termCondition = hasTerm ? "AND (c.term = $2 OR $2 = '')" : "";
+            const codeColGroup = hasCourseCode ? 'c.course_code' : 'c.course_name';
+
+            // CTE-Optimized Query: Find matching courses FIRST, then join and aggregate
+            const query = `
+                WITH matched_codes AS (
+                    SELECT DISTINCT ${codeColGroup} as match_code
+                    FROM ${coursesTable} c
+                    WHERE ${searchCondition} ${termCondition}
+                    LIMIT 30
+                ),
+                section_data AS (
+                    SELECT 
+                        ${codeField},
+                        c.course_name,
+                        c.credits,
+                        c.faculty,
+                        ${prereqField},
+                        ${coreqField},
+                        c.section_name,
+                        c.lecturer,
+                        (
+                            SELECT json_agg(json_build_object(
+                                'day', ts.day_of_week,
+                                'start', ts.hour_of_day,
+                                'end', CASE 
+                                    WHEN ts.day_of_week != ts_e.day_of_week THEN '22:30'
+                                    WHEN ts_e.hour_of_day LIKE '%:40' THEN REPLACE(ts_e.hour_of_day, ':40', ':30')
+                                    ELSE ts_e.hour_of_day
+                                END
+                            ))
+                            FROM ${slotsTable} cts
+                            JOIN time_slots ts ON cts.start_time_id = ts.time_id
+                            JOIN time_slots ts_e ON cts.end_time_id = ts_e.time_id
+                            WHERE cts.course_id = c.id
+                        ) as times
+                    FROM ${coursesTable} c
+                    JOIN matched_codes mc ON ${codeColGroup} = mc.match_code
+                )
+                SELECT 
+                    course_code,
+                    course_name, 
+                    credits,
+                    faculty,
+                    prerequisites,
+                    corequisites,
+                    json_agg(json_build_object(
+                        'section_name', section_name,
+                        'lecturer', lecturer,
+                        'times', COALESCE(times, '[]'::json)
+                    )) as sections
+                FROM section_data
+                GROUP BY course_name, course_code, credits, faculty, prerequisites, corequisites
+                ORDER BY course_code;
+            `;
+
+            const params = [`%${normalizedInput}%`];
+            if (hasTerm) {
+                params.push(currentTerm);
+            }
+
+            const result = await pool.query(query, params);
+
+            // Database response is already grouped: Map to clean objects
+            const courses = result.rows.map(row => ({
+                course_code: row.course_code,
+                course_name: row.course_name,
+                credits: row.credits,
+                faculty: row.faculty,
+                prerequisites: row.prerequisites,
+                corequisites: row.corequisites,
+                sections: (row.sections || []).map(s => ({
+                    ...s,
+                    times: s.times || []
+                }))
+            }));
+
+            console.log(`✓ Found ${courses.length} courses with ${result.rows.length} total sections`);
+
+            return {
+                success: true,
+                count: courses.length,
+                courses: courses
+            };
+        })();
+
         pendingQueries.set(cacheKey, queryPromise);
 
         try {
-            const result = await queryPromise;
+            const finalResult = await queryPromise;
 
-            // Cache the result
-            searchCache.set(cacheKey, result);
+            // Cache result
+            searchCache.set(cacheKey, finalResult);
 
-            // Log only on cache miss
+            // Log search activity
             logActivity(req, 'SEARCH', {
                 query: courseName,
                 normalized: normalizedInput,
-                resultsCount: result.count
+                resultsCount: finalResult.count,
+                cache: 'MISS'
             });
 
             res.set('X-Cache', 'MISS');
-            res.set('Cache-Control', 'public, max-age=120');
-            res.json(result);
+            res.json(finalResult);
 
         } finally {
             pendingQueries.delete(cacheKey);
@@ -111,113 +234,6 @@ router.post('/search', async (req, res) => {
         });
     }
 });
-
-// ============================================
-// OPTIMIZED SEARCH LOGIC
-// ============================================
-async function executeOptimizedSearch(normalizedInput, req) {
-    // Get current term
-    const currentTerm = process.env.CURRENT_TERM || "";
-    const sanitizedTerm = currentTerm.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-
-    let coursesTable = currentTerm ? `courses_${sanitizedTerm}` : 'courses';
-    let slotsTable = currentTerm ? `course_time_slots_${sanitizedTerm}` : 'course_time_slots';
-
-    // Check table existence
-    if (currentTerm && !(await tableExists(coursesTable))) {
-        coursesTable = 'courses';
-        slotsTable = 'course_time_slots';
-    }
-
-    // Get columns (cached)
-    const cols = await getTableColumns(coursesTable);
-    const hasCourseCode = cols.includes('course_code');
-    const hasTerm = cols.includes('term');
-    const hasPrereq = cols.includes('prerequisites');
-    const hasCoreq = cols.includes('corequisites');
-
-    const codeField = hasCourseCode ? 'c.course_code' : 'c.course_name';
-    const prereqField = hasPrereq ? 'c.prerequisites' : "''";
-    const coreqField = hasCoreq ? 'c.corequisites' : "''";
-    const termCondition = hasTerm ? "AND (c.term = $2 OR $2 = '')" : "";
-
-    // Optimized CTE-based query with separated time slot aggregation
-    const query = `
-        WITH course_sections AS (
-            SELECT 
-                ${codeField} as course_code,
-                c.course_name,
-                c.credits,
-                c.faculty,
-                ${prereqField} as prerequisites,
-                ${coreqField} as corequisites,
-                c.section_name,
-                c.lecturer,
-                c.id as course_id
-            FROM ${coursesTable} c
-            WHERE ${codeField} ILIKE $1
-            ${termCondition}
-            LIMIT 500
-        ),
-        section_times AS (
-            SELECT 
-                cs.course_code,
-                cs.section_name,
-                json_agg(
-                    json_build_object(
-                        'day', ts_start.day_of_week,
-                        'start', ts_start.hour_of_day,
-                        'end', CASE 
-                            WHEN ts_end.hour_of_day LIKE '%:40' 
-                            THEN REPLACE(ts_end.hour_of_day, ':40', ':30')
-                            ELSE ts_end.hour_of_day
-                        END
-                    ) ORDER BY ts_start.day_of_week, ts_start.hour_of_day
-                ) as times
-            FROM course_sections cs
-            LEFT JOIN ${slotsTable} cts ON cs.course_id = cts.course_id
-            LEFT JOIN time_slots ts_start ON cts.start_time_id = ts_start.time_id
-            LEFT JOIN time_slots ts_end ON cts.end_time_id = ts_end.time_id
-            WHERE ts_start.day_of_week IS NOT NULL
-            GROUP BY cs.course_code, cs.section_name
-        )
-        SELECT 
-            cs.course_code,
-            cs.course_name,
-            cs.credits,
-            cs.faculty,
-            cs.prerequisites,
-            cs.corequisites,
-            json_agg(
-                json_build_object(
-                    'section_name', cs.section_name,
-                    'lecturer', cs.lecturer,
-                    'times', COALESCE(st.times, '[]'::json)
-                ) ORDER BY cs.section_name
-            ) as sections
-        FROM course_sections cs
-        LEFT JOIN section_times st ON cs.course_code = st.course_code 
-            AND cs.section_name = st.section_name
-        GROUP BY cs.course_code, cs.course_name, cs.credits, cs.faculty, 
-                 cs.prerequisites, cs.corequisites
-        ORDER BY cs.course_code
-    `;
-
-    const params = [`%${normalizedInput}%`];
-    if (hasTerm) {
-        params.push(currentTerm);
-    }
-
-    const result = await pool.query(query, params);
-
-    console.log(`✓ Found ${result.rows.length} courses for "${normalizedInput}"`);
-
-    return {
-        success: true,
-        count: result.rows.length,
-        courses: result.rows
-    };
-}
 
 // ============================================
 // POST /api/courses/add
