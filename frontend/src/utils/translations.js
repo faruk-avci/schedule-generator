@@ -48,7 +48,7 @@ export const translations = {
     cannotAddSection: 'Tüm ders eklendiği için şube eklenemez.',
     pleaseEnterCourseName: 'Lütfen bir ders adı girin',
     minTwoCharacters: 'En az 2 karakter girmelisiniz',
-    noResults: 'Ders bulunamadı. BUS veya MATH deneyin.',
+    noResults: 'Ders bulunamadı. BUS101 veya MATH101 deneyin.',
     errorSearching: 'Arama hatası. Backend çalıştığından emin olun.',
 
     // Schedule Generation
@@ -136,7 +136,7 @@ export const translations = {
     cannotAddSection: 'Cannot add section when entire course is added.',
     pleaseEnterCourseName: 'Please enter a course name',
     minTwoCharacters: 'Please enter at least 2 characters',
-    noResults: 'No courses found. Try BUS or MATH.',
+    noResults: 'No courses found. Try BUS101 or MATH101.',
     errorSearching: 'Search error. Make sure backend is running.',
 
     // Schedule Generation
