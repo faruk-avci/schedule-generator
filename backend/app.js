@@ -45,6 +45,27 @@ app.get('/', (req, res) => {
 app.use(helmet());
 app.disable('x-powered-by'); // Hide Express stack
 
+// 2. Maintenance Mode (kill switch for emergencies)
+// Enable by setting MAINTENANCE_MODE=true in environment
+// On VPS: pm2 set MAINTENANCE_MODE true && pm2 restart all
+// Or: export MAINTENANCE_MODE=true && pm2 restart all
+app.use((req, res, next) => {
+    if (process.env.MAINTENANCE_MODE === 'true') {
+        // Allow health checks even in maintenance mode
+        if (req.path === '/health' || req.path === '/') {
+            return next();
+        }
+
+        return res.status(503).json({
+            success: false,
+            error: 'Service temporarily unavailable',
+            message: 'We are performing scheduled maintenance. Please try again in a few minutes.',
+            maintenance: true
+        });
+    }
+    next();
+});
+
 // 2. Trust Proxy (Crucial for Rate Limit & Secure Cookies behind Nginx)
 app.set('trust proxy', 1);
 

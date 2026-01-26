@@ -10,6 +10,21 @@ const api = axios.create({
     }
 });
 
+// Response interceptor to detect maintenance mode
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        // Check if backend is in maintenance mode
+        if (error.response?.status === 503 && error.response?.data?.maintenance) {
+            // Dispatch global maintenance event
+            window.dispatchEvent(new CustomEvent('maintenanceMode', {
+                detail: { active: true }
+            }));
+        }
+        return Promise.reject(error);
+    }
+);
+
 // Course APIs
 export const searchCourses = async (courseName) => {
     const response = await api.post('/courses/search', { courseName });
