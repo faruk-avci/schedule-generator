@@ -334,65 +334,127 @@ function App() {
     grain.track('clear_search');
   };
 
-  // Update handleAddCourse
+  // OPTIMISTIC UI: Update handleAddCourse
   const handleAddCourse = async (courseName) => {
+    // Check locally first - already added?
+    if (basket.courses.includes(courseName)) {
+      showMessage(null, 'error', translateBackendError(`Course "${courseName}" is already in your basket`));
+      return;
+    }
+
+    // Has a section of this course? 
+    if (basket.sections.some(s => s.course === courseName)) {
+      showMessage(null, 'error', translateBackendError(`A section of "${courseName}" is already in your basket. Remove the section first.`));
+      return;
+    }
+
+    // OPTIMISTIC: Update UI instantly
+    const prevBasket = { ...basket };
+    setBasket(prev => ({
+      ...prev,
+      courses: [...prev.courses, courseName]
+    }));
+    showMessage(null, 'success', `${courseName} ${t.courseAdded}`);
+    grain.track('add_course', { course_id: courseName, source: 'search' });
+
+    // Sync with backend in background
     try {
       const data = await addCourse(courseName, null);
-      if (data.success) {
-        showMessage(null, 'success', `${courseName} ${t.courseAdded}`);
-        grain.track('add_course', { course_id: courseName, source: 'search' });
-      } else {
+      if (!data.success) {
+        // Rollback on error
+        setBasket(prevBasket);
         showMessage(null, 'error', translateBackendError(data.error));
       }
-      refreshBasket();
     } catch (error) {
+      // Rollback on network error
+      setBasket(prevBasket);
       const errorMsg = error.response?.data?.error || t.errorSearching;
       showMessage(null, 'error', translateBackendError(errorMsg));
     }
   };
 
-  // Update handleAddSection
+  // OPTIMISTIC UI: Update handleAddSection
   const handleAddSection = async (courseName, sectionName) => {
+    // Check locally - already added?
+    if (basket.sections.some(s => s.course === courseName && s.section === sectionName)) {
+      showMessage(null, 'error', translateBackendError(`Section "${sectionName}" of "${courseName}" is already in your basket`));
+      return;
+    }
+
+    // Entire course already added?
+    if (basket.courses.includes(courseName)) {
+      showMessage(null, 'error', translateBackendError(`The entire course "${courseName}" is already in your basket. Cannot add individual sections.`));
+      return;
+    }
+
+    // OPTIMISTIC: Update UI instantly
+    const prevBasket = { ...basket };
+    setBasket(prev => ({
+      ...prev,
+      sections: [...prev.sections, { course: courseName, section: sectionName }]
+    }));
+    showMessage(null, 'success', `${courseName} ${sectionName} ${t.sectionAdded}`);
+    grain.track('add_section', { course_id: courseName, section_id: sectionName });
+
+    // Sync with backend in background
     try {
       const data = await addCourse(courseName, sectionName);
-      if (data.success) {
-        showMessage(null, 'success', `${courseName} ${sectionName} ${t.sectionAdded}`);
-        grain.track('add_section', { course_id: courseName, section_id: sectionName });
-      } else {
+      if (!data.success) {
+        setBasket(prevBasket);
         showMessage(null, 'error', translateBackendError(data.error));
       }
-      refreshBasket();
     } catch (error) {
+      setBasket(prevBasket);
       const errorMsg = error.response?.data?.error || t.errorSearching;
       showMessage(null, 'error', translateBackendError(errorMsg));
     }
   };
 
-  // Update handleRemoveCourse
+  // OPTIMISTIC UI: Update handleRemoveCourse
   const handleRemoveCourse = async (courseName) => {
+    // OPTIMISTIC: Update UI instantly
+    const prevBasket = { ...basket };
+    setBasket(prev => ({
+      ...prev,
+      courses: prev.courses.filter(c => c !== courseName)
+    }));
+    showMessage(null, 'success', `${courseName} ${t.courseRemoved}`);
+    grain.track('remove_course', { course_id: courseName });
+
+    // Sync with backend in background
     try {
       const data = await removeCourse(courseName, null);
-      if (data.success) {
-        showMessage(null, 'success', `${courseName} ${t.courseRemoved}`);
-        grain.track('remove_course', { course_id: courseName });
+      if (!data.success) {
+        setBasket(prevBasket);
+        showMessage(null, 'error', translateBackendError(data.error));
       }
-      refreshBasket();
     } catch (error) {
+      setBasket(prevBasket);
       const errorMsg = error.response?.data?.error || t.errorSearching;
       showMessage(null, 'error', translateBackendError(errorMsg));
     }
   };
 
-  // Update handleRemoveSection
+  // OPTIMISTIC UI: Update handleRemoveSection
   const handleRemoveSection = async (courseName, sectionName) => {
+    // OPTIMISTIC: Update UI instantly
+    const prevBasket = { ...basket };
+    setBasket(prev => ({
+      ...prev,
+      sections: prev.sections.filter(s => !(s.course === courseName && s.section === sectionName))
+    }));
+    showMessage(null, 'success', `${courseName} ${sectionName} ${t.sectionRemoved}`);
+    grain.track('remove_section', { course_id: courseName, section_id: sectionName });
+
+    // Sync with backend in background
     try {
       const data = await removeCourse(courseName, sectionName);
-      if (data.success) {
-        showMessage(null, 'success', `${courseName} ${sectionName} ${t.sectionRemoved}`);
-        grain.track('remove_section', { course_id: courseName, section_id: sectionName });
+      if (!data.success) {
+        setBasket(prevBasket);
+        showMessage(null, 'error', translateBackendError(data.error));
       }
-      refreshBasket();
     } catch (error) {
+      setBasket(prevBasket);
       const errorMsg = error.response?.data?.error || t.errorSearching;
       showMessage(null, 'error', translateBackendError(errorMsg));
     }

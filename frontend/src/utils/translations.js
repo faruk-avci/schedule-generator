@@ -11,7 +11,7 @@ export const translations = {
     searchButton: 'Ara',
     clearButton: 'Temizle',
     searching: 'Aranıyor...',
-    noResults: 'Ders bulunamadı. BUS veya MATH deneyin.',
+    noResults: 'Ders bulunamadı. BUS101 veya MATH101 deneyin.',
 
     // Course Card
     credits: 'Kredi',
@@ -95,11 +95,11 @@ export const translations = {
 
     // Search Section
     searchTitle: 'Search Courses',
-    searchPlaceholder: 'Enter course code (e.g. BUS, MATH)',
+    searchPlaceholder: 'Enter course code (e.g. BUS101, MATH101)',
     searchButton: 'Search',
     clearButton: 'Clear',
     searching: 'Searching...',
-    noResults: 'No courses found. Try BUS or MATH.',
+    noResults: 'No courses found. Try BUS101 or MATH101.',
 
     // Course Card
     credits: 'credits',

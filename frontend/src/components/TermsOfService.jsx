@@ -128,7 +128,7 @@ const TermsOfService = ({ language, onNavigate }) => {
             </div>
 
             <div style={{ textAlign: 'center', marginTop: '40px', marginBottom: '40px', opacity: 0.6, fontSize: '0.9rem' }}>
-                <p>{isTr ? 'Son Güncelleme: 25 Ocak 2026' : 'Last Updated: January 25, 2026'}</p>
+                <p>{isTr ? 'Son Güncelleme: 26 Ocak 2026' : 'Last Updated: January 26, 2026'}</p>
             </div>
 
             {/* Privacy Policy Section */}
@@ -149,6 +149,7 @@ const TermsOfService = ({ language, onNavigate }) => {
                         <li>Tarayıcı ve cihaz bilgileri (User-Agent)</li>
                         <li>Sayfa görüntüleme ve kullanım istatistikleri</li>
                         <li>Güvenlik ve hata ayıklama amaçlı işlem kayıtları (loglar)</li>
+                        <li>Bu veriler mümkün olan ölçüde anonimleştirilerek işlenir.</li>
                     </ul>
                 ) : (
                     <ul style={{ paddingLeft: '20px', lineHeight: '1.6' }}>
@@ -156,6 +157,7 @@ const TermsOfService = ({ language, onNavigate }) => {
                         <li>Browser and device information (User-Agent)</li>
                         <li>Page viewing and usage statistics</li>
                         <li>Transaction logs for security and debugging purposes</li>
+                        <li>This data is processed in an anonymous manner to the extent possible.</li>
                     </ul>
                 )}
             </div>
@@ -164,8 +166,9 @@ const TermsOfService = ({ language, onNavigate }) => {
                 <h2>{isTr ? 'Çerezler (Cookies)' : 'Cookies'}</h2>
                 <p>
                     {isTr
-                        ? 'Platform, temel işlevlerin çalışması ve anonim kullanım istatistikleri oluşturmak amacıyla çerezler kullanabilir. Çerezler kimlik belirleyici kişisel bilgiler içermez.'
-                        : 'The platform may use cookies to enable basic functions and create anonymous usage statistics. Cookies do not contain personally identifiable information.'}
+                        ? 'Platform, temel işlevlerin çalışması, güvenliğin sağlanması ve anonim kullanım istatistikleri oluşturmak amacıyla çerezler kullanabilir. Bazı güvenlik amaçlı çerezler (ör. bot koruması) devre dışı bırakılamaz. Çerezler kimlik belirleyici kişisel bilgiler içermez.'
+                        : 'The platform may use cookies to enable basic functions, ensure security, and create anonymous usage statistics. Some security-related cookies (e.g. bot protection) cannot be disabled. Cookies do not contain personally identifiable information.'
+                    }
                 </p>
             </div>
 
@@ -189,11 +192,20 @@ const TermsOfService = ({ language, onNavigate }) => {
             </div>
 
             <div className="terms-card">
+                <h2>{isTr ? 'Üçüncü Taraf Analiz Araçları' : 'Third-Party Analytics'}</h2>
+                <p>
+                    {isTr
+                        ? 'Platform, kullanım istatistiklerini toplamak için üçüncü taraf analiz hizmetlerini (Grain Analytics ve Cloudflare Web Analytics gibi) kullanmaktadır. Bu hizmetler anonim kullanım verileri toplar ancak kişisel tanımlayıcı bilgiler içermez.'
+                        : 'The platform uses third-party analytics services (such as Grain Analytics and Cloudflare Web Analytics) to collect usage statistics. These services collect anonymous usage data but do not contain personally identifiable information.'}
+                </p>
+            </div>
+
+            <div className="terms-card">
                 <h2>{isTr ? 'Veri Paylaşımı' : 'Data Sharing'}</h2>
                 <p>
                     {isTr
-                        ? 'Toplanan veriler hiçbir üçüncü tarafla paylaşılmaz, satılmaz ve ticari amaçla kullanılmaz.'
-                        : 'Collected data is not shared with, sold to, or used for commercial purposes by any third party.'}
+                        ? 'Anonim kullanım verileri, yalnızca hizmetin analizi ve güvenliği amacıyla yukarıda belirtilen analiz ve altyapı sağlayıcıları tarafından işlenebilir. Bu veriler ticari amaçla paylaşılmaz ve satılmaz.'
+                        : 'Anonymous usage data may be processed by the analytics and infrastructure providers mentioned above solely for service analysis and security purposes. Such data is not sold or shared for commercial purposes.'}
                 </p>
             </div>
 
