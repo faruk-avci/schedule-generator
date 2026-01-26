@@ -147,6 +147,21 @@ function App() {
   useEffect(() => {
     Analytics.initGlobalErrorTracking();
     Analytics.track('APP_START');
+
+    // Check for maintenance mode on load
+    const checkMaintenance = async () => {
+      try {
+        await getTermInfo();
+      } catch (error) {
+        // 503 with maintenance flag will be caught by interceptor
+        if (error.response?.status === 503 && error.response?.data?.maintenance) {
+          setMaintenanceMode(true);
+          return; // Don't load other data if in maintenance
+        }
+      }
+    };
+
+    checkMaintenance();
     refreshBasket();
     loadTermInfo();
     loadSavedBaskets();
