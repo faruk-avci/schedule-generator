@@ -231,6 +231,7 @@ function CurriculumPage({ language }) {
             const data = await apiSetMajor(selectedMajorName);
             if (data.success) {
                 localStorage.setItem('student_major', selectedMajorName);
+                grain.track('select_major', { major: selectedMajorName, source: 'curriculum_page' });
 
                 // Map name to ID
                 const mappedId = MAJOR_NAME_MAP[selectedMajorName.trim()];

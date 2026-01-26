@@ -534,6 +534,7 @@ function App() {
         localStorage.setItem('student_major', selectedMajor);
         setShowMajorModal(false);
         Analytics.track('SELECT_MAJOR', { major: selectedMajor });
+        grain.track('select_major', { major: selectedMajor, source: 'app_modal' });
         handleGenerate(true); // Pass true to bypass the check
       }
     } catch (error) {
@@ -549,6 +550,7 @@ function App() {
       if (data.success) {
         showMessage(null, 'success', language === 'tr' ? `"${name}" sepeti kaydedildi` : `Basket "${name}" saved`);
         loadSavedBaskets();
+        grain.track('save_basket', { basket_name: name });
       }
     } catch (error) {
       console.error('Error saving basket:', error);
@@ -562,6 +564,7 @@ function App() {
       if (data.success) {
         setBasket(data.basket);
         showMessage(null, 'success', language === 'tr' ? `"${name}" sepeti yüklendi` : `Basket "${name}" loaded`);
+        grain.track('load_basket', { basket_name: name });
       }
     } catch (error) {
       console.error('Error loading basket:', error);
@@ -575,6 +578,7 @@ function App() {
       if (data.success) {
         showMessage(null, 'success', language === 'tr' ? `"${name}" sepeti silindi` : `Basket "${name}" removed`);
         loadSavedBaskets();
+        grain.track('remove_basket', { basket_name: name });
       }
     } catch (error) {
       console.error('Error removing basket:', error);
