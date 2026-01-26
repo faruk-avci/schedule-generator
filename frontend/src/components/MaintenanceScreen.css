@@ -1,4 +1,4 @@
-/* Maintenance Screen Styles */
+/* Maintenance Screen Styles - Clean & Formal */
 .maintenance-screen {
     position: fixed;
     top: 0;
@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #6b1c23 100%);
+    background: #f5f5f5;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -17,70 +17,87 @@
     text-align: center;
     padding: 3rem;
     max-width: 500px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* Language toggle button */
+.lang-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #333;
+    transition: background 0.2s;
+}
+
+.lang-toggle:hover {
+    background: #e0e0e0;
+}
+
+body.dark-mode .lang-toggle {
+    background: #444;
+    border-color: #555;
+    color: #ddd;
+}
+
+body.dark-mode .lang-toggle:hover {
+    background: #555;
 }
 
 .maintenance-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 2rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: pulse-ring 2s ease-in-out infinite;
 }
 
 .maintenance-icon svg {
-    width: 40px;
-    height: 40px;
-    color: #fff;
-}
-
-@keyframes pulse-ring {
-
-    0%,
-    100% {
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2);
-    }
-
-    50% {
-        box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
-    }
+    width: 50px;
+    height: 50px;
+    color: #1e3a5f;
 }
 
 .maintenance-screen h1 {
-    color: #fff;
-    font-size: 2.5rem;
-    font-weight: 700;
+    color: #1e3a5f;
+    font-size: 1.75rem;
+    font-weight: 600;
     margin: 0 0 1rem;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .maintenance-message {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.1rem;
+    color: #555;
+    font-size: 1rem;
     line-height: 1.6;
-    margin: 0 0 2rem;
+    margin: 0 0 1.5rem;
 }
 
 .maintenance-eta {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.15);
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    color: #fff;
-    font-size: 0.95rem;
-    margin-bottom: 2rem;
-    backdrop-filter: blur(5px);
+    background: #f0f0f0;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: #333;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
 }
 
 .pulse-dot {
-    width: 10px;
-    height: 10px;
-    background: #4ade80;
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
     border-radius: 50%;
     animation: pulse-dot 1.5s ease-in-out infinite;
 }
@@ -90,59 +107,60 @@
     0%,
     100% {
         opacity: 1;
-        transform: scale(1);
     }
 
     50% {
-        opacity: 0.5;
-        transform: scale(0.8);
+        opacity: 0.4;
     }
 }
 
 .refresh-button {
-    background: #fff;
-    color: #1e3a5f;
+    background: #1e3a5f;
+    color: #fff;
     border: none;
-    padding: 1rem 2.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: background 0.2s ease;
 }
 
 .refresh-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    background: #f8f8f8;
+    background: #2d5a87;
 }
 
-.refresh-button:active {
-    transform: translateY(0);
+/* Dark mode support */
+body.dark-mode .maintenance-screen {
+    background: #1a1a1a;
+}
+
+body.dark-mode .maintenance-content {
+    background: #2a2a2a;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .maintenance-screen h1 {
+    color: #fff;
+}
+
+body.dark-mode .maintenance-message {
+    color: #aaa;
+}
+
+body.dark-mode .maintenance-eta {
+    background: #333;
+    color: #ddd;
 }
 
 /* Mobile responsiveness */
 @media (max-width: 600px) {
     .maintenance-content {
+        margin: 1rem;
         padding: 2rem;
     }
 
     .maintenance-screen h1 {
-        font-size: 1.8rem;
-    }
-
-    .maintenance-message {
-        font-size: 1rem;
-    }
-
-    .maintenance-icon {
-        width: 60px;
-        height: 60px;
-    }
-
-    .maintenance-icon svg {
-        width: 30px;
-        height: 30px;
+        font-size: 1.5rem;
     }
 }
