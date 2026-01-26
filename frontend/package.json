@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@grainql/analytics-web": "^3.3.0",
     "axios": "^1.12.2",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.3",
