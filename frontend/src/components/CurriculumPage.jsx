@@ -760,7 +760,7 @@ const CourseRow = ({ course, isTr, onElectiveClick, onAddCourse }) => {
                 <span className={`status-dot ${isOpened ? 'opened' : 'closed'}`} />
             </div>
 
-            {/* Code */}
+            {/*  */}
             <div className="col-code">
                 {course.code || <span className="elective-tag">SEÇ</span>}
             </div>
