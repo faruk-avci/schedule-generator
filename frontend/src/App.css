@@ -105,6 +105,8 @@ body {
   gap: 20px;
   margin-bottom: 20px;
   padding-top: 20px;
+  align-items: start;
+  /* Required for sticky basket to work */
 }
 
 /* Message Banner */
@@ -608,6 +610,32 @@ body.dark-mode .course-name-display {
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Sticky basket - follows when scrolling */
+  position: sticky;
+  top: 100px;
+  /* Below the header */
+  max-height: calc(100vh - 120px);
+  /* Viewport height minus header and padding */
+  overflow-y: auto;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Custom scrollbar for sticky basket */
+.basket-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.basket-section::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.basket-section::-webkit-scrollbar-thumb {
+  background: var(--ozu-burgundy-light);
+  border-radius: 3px;
+}
+
+.basket-section::-webkit-scrollbar-thumb:hover {
+  background: var(--ozu-burgundy);
 }
 
 .basket-header {
@@ -931,6 +959,13 @@ body.dark-mode .course-name-display {
 @media (max-width: 1024px) {
   .main-container {
     grid-template-columns: 1fr;
+  }
+
+  /* Disable sticky basket on mobile/tablet */
+  .basket-section {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
   }
 }
 

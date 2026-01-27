@@ -144,7 +144,7 @@ app.use(session({
     saveUninitialized: false, // Only save session when something is added to basket
     store: sessionStore,
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24, // 24 hours
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days - for course registration week
         httpOnly: true, // Prevents XSS script access
         secure: isProduction, // Use secure cookies in production
         sameSite: isProduction ? 'lax' : 'lax', // Consistent sameSite
