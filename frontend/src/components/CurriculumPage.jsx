@@ -194,6 +194,7 @@ function CurriculumPage({ language }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [electiveModal, setElectiveModal] = useState({ open: false, type: null, courses: [] });
+    const [electiveFilter, setElectiveFilter] = useState('');
     const [showMajorPopup, setShowMajorPopup] = useState(false);
 
     // Dynamic import function
@@ -254,6 +255,12 @@ function CurriculumPage({ language }) {
     useEffect(() => {
         if (selectedMajorId) {
             loadCurriculum(selectedMajorId);
+            // Track curriculum view
+            const majorInfo = AVAILABLE_MAJORS.find(m => m.id === selectedMajorId);
+            grain.track('curriculum_view', {
+                major_id: selectedMajorId,
+                major_name: majorInfo ? majorInfo.en : selectedMajorId
+            });
         }
     }, [selectedMajorId, loadCurriculum]);
 
@@ -274,6 +281,7 @@ function CurriculumPage({ language }) {
 
     const closeElectiveModal = () => {
         setElectiveModal({ open: false, type: null, courses: [] });
+        setElectiveFilter(''); // Reset filter when closing
     };
 
     // Dispatch event to refresh basket on mount and after changes
@@ -511,57 +519,100 @@ function CurriculumPage({ language }) {
                             <h2>{electiveModal.typeName}</h2>
                             <button onClick={closeElectiveModal} className="cp-modal-close">×</button>
                         </div>
-                        <div className="cp-modal-body">
-                            {electiveModal.courses && electiveModal.courses.length > 0 ? (
-                                <table className="cp-elective-table">
-                                    <thead>
-                                        <tr>
-                                            <th className="cp-col-status">{isTr ? 'Açık' : 'Open'}</th>
-                                            <th className="cp-col-action">{isTr ? 'Ekle' : 'Add'}</th>
-                                            <th>{isTr ? 'Kod' : 'Code'}</th>
-                                            <th>{isTr ? 'Ders Adı' : 'Course Title'}</th>
-                                            <th>{isTr ? 'AKTS' : 'ECTS'}</th>
-                                            <th>{isTr ? 'Ön Koşul' : 'Prereq'}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {electiveModal.courses.map((course, idx) => (
-                                            <tr key={idx}>
-                                                <td className="cp-status-cell">
-                                                    <span className={`status-dot ${course.opened !== false ? 'opened' : 'closed'}`} />
-                                                </td>
-                                                <td className="cp-action-cell">
-                                                    <button
-                                                        className="add-btn"
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            handleAddCourse(course);
-                                                        }}
-                                                        disabled={course.opened === false}
-                                                        title={course.opened !== false ? (isTr ? 'Sepete Ekle' : 'Add to Basket') : (isTr ? 'Kapalı' : 'Closed')}
-                                                    >
-                                                        +
-                                                    </button>
-                                                </td>
-                                                <td className="cp-code-cell">{course.code}</td>
-                                                <td className="cp-title-cell">
-                                                    {isTr ? course.title_tr : course.title_en}
-                                                </td>
-                                                <td className="cp-credits-cell">{course.credits}</td>
-                                                <td className="cp-prereq-cell">{course.prereq || '-'}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            ) : (
-                                <p className="cp-no-courses">{isTr ? 'Ders bulunamadı.' : 'No courses found.'}</p>
+                        {/* Search Filter */}
+                        <div className="cp-modal-search">
+                            <input
+                                type="text"
+                                placeholder={isTr ? 'Ders kodu ile filtrele...' : 'Filter by course code...'}
+                                value={electiveFilter}
+                                onChange={(e) => setElectiveFilter(e.target.value)}
+                                className="cp-filter-input"
+                                autoFocus
+                            />
+                            {electiveFilter && (
+                                <button
+                                    className="cp-filter-clear"
+                                    onClick={() => setElectiveFilter('')}
+                                >
+                                    ×
+                                </button>
                             )}
+                        </div>
+                        <div className="cp-modal-body">
+                            {(() => {
+                                const filteredCourses = electiveModal.courses?.filter(course =>
+                                    !electiveFilter ||
+                                    course.code?.toLowerCase().includes(electiveFilter.toLowerCase())
+                                ) || [];
+
+                                return filteredCourses.length > 0 ? (
+                                    <table className="cp-elective-table">
+                                        <thead>
+                                            <tr>
+                                                <th className="cp-col-status">{isTr ? 'Açık' : 'Open'}</th>
+                                                <th className="cp-col-action">{isTr ? 'Ekle' : 'Add'}</th>
+                                                <th>{isTr ? 'Kod' : 'Code'}</th>
+                                                <th>{isTr ? 'Ders Adı' : 'Course Title'}</th>
+                                                <th>{isTr ? 'AKTS' : 'ECTS'}</th>
+                                                <th>{isTr ? 'Ön Koşul' : 'Prereq'}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {filteredCourses.map((course, idx) => (
+                                                <tr key={idx}>
+                                                    <td className="cp-status-cell">
+                                                        <span className={`status-dot ${course.opened !== false ? 'opened' : 'closed'}`} />
+                                                    </td>
+                                                    <td className="cp-action-cell">
+                                                        <button
+                                                            className="add-btn"
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                handleAddCourse(course);
+                                                            }}
+                                                            disabled={course.opened === false}
+                                                            title={course.opened !== false ? (isTr ? 'Sepete Ekle' : 'Add to Basket') : (isTr ? 'Kapalı' : 'Closed')}
+                                                        >
+                                                            +
+                                                        </button>
+                                                    </td>
+                                                    <td className="cp-code-cell">{course.code}</td>
+                                                    <td className="cp-title-cell">
+                                                        {isTr ? course.title_tr : course.title_en}
+                                                    </td>
+                                                    <td className="cp-credits-cell">{course.credits}</td>
+                                                    <td className="cp-prereq-cell">{course.prereq || '-'}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                ) : (
+                                    <p className="cp-no-courses">
+                                        {electiveFilter
+                                            ? (isTr ? 'Eşleşen ders bulunamadı.' : 'No matching courses found.')
+                                            : (isTr ? 'Ders bulunamadı.' : 'No courses found.')}
+                                    </p>
+                                );
+                            })()}
                         </div>
                         <div className="cp-modal-footer">
                             <span className="cp-course-count">
-                                {isTr
-                                    ? `Toplam ${electiveModal.courses?.length || 0} ders`
-                                    : `Total ${electiveModal.courses?.length || 0} courses`}
+                                {(() => {
+                                    const total = electiveModal.courses?.length || 0;
+                                    const filtered = electiveModal.courses?.filter(course =>
+                                        !electiveFilter ||
+                                        course.code?.toLowerCase().includes(electiveFilter.toLowerCase())
+                                    ).length || 0;
+
+                                    if (electiveFilter && filtered !== total) {
+                                        return isTr
+                                            ? `${filtered} / ${total} ders gösteriliyor`
+                                            : `Showing ${filtered} / ${total} courses`;
+                                    }
+                                    return isTr
+                                        ? `Toplam ${total} ders`
+                                        : `Total ${total} courses`;
+                                })()}
                             </span>
                         </div>
                     </div>
