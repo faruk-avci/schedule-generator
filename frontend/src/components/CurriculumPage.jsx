@@ -196,7 +196,7 @@ function CurriculumPage({ language }) {
     const [error, setError] = useState(null);
     const [electiveModal, setElectiveModal] = useState({ open: false, type: null, courses: [] });
     const [electiveFilter, setElectiveFilter] = useState('');
-    const [showOpenedFirst, setShowOpenedFirst] = useState(true); // Sort opened courses first
+    const [showOpenedFirst, setShowOpenedFirst] = useState(false); // Off by default - let users discover the toggle
     const [showMajorPopup, setShowMajorPopup] = useState(false);
 
     // Dynamic import function
