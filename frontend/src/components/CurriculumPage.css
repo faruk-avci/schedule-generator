@@ -476,29 +476,54 @@
     background: var(--ozu-gray);
 }
 
-/* Sort Toggle Button */
-.cp-sort-opened-btn {
-    padding: 8px 14px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    background: var(--card-bg);
-    color: var(--text-secondary);
+/* Toggle Switch for Open Courses First */
+.cp-toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s ease;
+    user-select: none;
 }
 
-.cp-sort-opened-btn:hover {
-    border-color: var(--ozu-burgundy);
-    color: var(--ozu-burgundy);
+.cp-toggle-switch input {
+    display: none;
 }
 
-.cp-sort-opened-btn.active {
+.cp-toggle-slider {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: var(--ozu-gray-light);
+    border-radius: 12px;
+    transition: background 0.2s ease;
+}
+
+.cp-toggle-slider::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.cp-toggle-switch input:checked + .cp-toggle-slider {
     background: var(--success-green);
-    border-color: var(--success-green);
-    color: white;
+}
+
+.cp-toggle-switch input:checked + .cp-toggle-slider::after {
+    transform: translateX(20px);
+}
+
+.cp-toggle-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
 }
 
 .cp-modal-body {

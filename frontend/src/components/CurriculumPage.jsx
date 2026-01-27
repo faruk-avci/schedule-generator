@@ -184,6 +184,7 @@ const ELECTIVE_TYPE_NAMES = {
     finishing_project: { tr: 'Bitirme Projesi', en: 'Finishing Project' },
     design_studio: { tr: 'Tasarım Stüdyosu', en: 'Design Studio' },
     program_external: { tr: 'Program Dışı Seçmeli', en: 'External Program Elective' },
+    language: { tr: 'İkinci Yabancı Dil Seçmeli', en: 'Second Foreign Language Elective' },
 };
 
 function CurriculumPage({ language }) {
@@ -203,8 +204,13 @@ function CurriculumPage({ language }) {
         setLoading(true);
         setError(null);
         try {
-            // Fallback for non-undergrad majors to EE (as requested)
-            const fileId = (majorId === 'master' || majorId === 'skip') ? 'ee' : majorId;
+            // Fallback for majors without dedicated curriculum files
+            const CURRICULUM_FALLBACKS = {
+                'master': 'ee',
+                'skip': 'ee',
+                'ent': 'bus',  // Entrepreneurship -> Business Administration
+            };
+            const fileId = CURRICULUM_FALLBACKS[majorId] || majorId;
             const module = await import(`../data/curriculums/${fileId}.json`);
             setCurriculum(module.default);
         } catch (err) {
@@ -538,13 +544,19 @@ function CurriculumPage({ language }) {
                                     ×
                                 </button>
                             )}
-                            <button
-                                className={`cp-sort-opened-btn ${showOpenedFirst ? 'active' : ''}`}
-                                onClick={() => setShowOpenedFirst(!showOpenedFirst)}
-                                title={isTr ? 'Açık dersleri önce göster' : 'Show opened courses first'}
-                            >
-                                {isTr ? 'Açık Önce' : 'Open First'}
-                            </button>
+                            <label className="cp-toggle-switch" title={isTr ? 'Açık dersleri önce göster' : 'Show opened courses first'}>
+                                <input
+                                    type="checkbox"
+                                    checked={showOpenedFirst}
+                                    onChange={() => {
+                                        const newValue = !showOpenedFirst;
+                                        setShowOpenedFirst(newValue);
+                                        grain.track('toggle_open_courses_first', { enabled: newValue, source: 'elective_modal' });
+                                    }}
+                                />
+                                <span className="cp-toggle-slider"></span>
+                                <span className="cp-toggle-label">{isTr ? 'Önce Açık Dersler' : 'Open First'}</span>
+                            </label>
                         </div>
                         <div className="cp-modal-body">
                             {(() => {
