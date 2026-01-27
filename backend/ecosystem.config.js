@@ -6,7 +6,7 @@ module.exports = {
         {
             name: 'schedule-backend',
             script: 'app.js',
-            instances: 'max', // Uses all CPU cores
+            instances: 'max', // Uses all CPU cores (2 on your VPS)
             exec_mode: 'cluster',
             max_memory_restart: '1500M', // 1.5GB per instance (safe for 8GB RAM VPS)
             // Auto-restart settings
