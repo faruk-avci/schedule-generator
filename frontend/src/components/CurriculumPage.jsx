@@ -195,6 +195,7 @@ function CurriculumPage({ language }) {
     const [error, setError] = useState(null);
     const [electiveModal, setElectiveModal] = useState({ open: false, type: null, courses: [] });
     const [electiveFilter, setElectiveFilter] = useState('');
+    const [showOpenedFirst, setShowOpenedFirst] = useState(true); // Sort opened courses first
     const [showMajorPopup, setShowMajorPopup] = useState(false);
 
     // Dynamic import function
@@ -537,13 +538,29 @@ function CurriculumPage({ language }) {
                                     ×
                                 </button>
                             )}
+                            <button
+                                className={`cp-sort-opened-btn ${showOpenedFirst ? 'active' : ''}`}
+                                onClick={() => setShowOpenedFirst(!showOpenedFirst)}
+                                title={isTr ? 'Açık dersleri önce göster' : 'Show opened courses first'}
+                            >
+                                {isTr ? 'Açık Önce' : 'Open First'}
+                            </button>
                         </div>
                         <div className="cp-modal-body">
                             {(() => {
-                                const filteredCourses = electiveModal.courses?.filter(course =>
+                                let filteredCourses = electiveModal.courses?.filter(course =>
                                     !electiveFilter ||
                                     course.code?.toLowerCase().includes(electiveFilter.toLowerCase())
                                 ) || [];
+
+                                // Sort opened first if enabled
+                                if (showOpenedFirst) {
+                                    filteredCourses = [...filteredCourses].sort((a, b) => {
+                                        const aOpen = a.opened !== false ? 1 : 0;
+                                        const bOpen = b.opened !== false ? 1 : 0;
+                                        return bOpen - aOpen; // Opened first
+                                    });
+                                }
 
                                 return filteredCourses.length > 0 ? (
                                     <table className="cp-elective-table">

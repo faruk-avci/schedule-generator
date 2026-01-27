@@ -476,6 +476,31 @@
     background: var(--ozu-gray);
 }
 
+/* Sort Toggle Button */
+.cp-sort-opened-btn {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.cp-sort-opened-btn:hover {
+    border-color: var(--ozu-burgundy);
+    color: var(--ozu-burgundy);
+}
+
+.cp-sort-opened-btn.active {
+    background: var(--success-green);
+    border-color: var(--success-green);
+    color: white;
+}
+
 .cp-modal-body {
     flex: 1;
     overflow-y: auto;
