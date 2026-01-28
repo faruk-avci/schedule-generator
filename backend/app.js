@@ -51,9 +51,10 @@ app.set('trust proxy', 1);
 // 3. Rate Limiting (DoS Protection)
 const limiter = rateLimit({
     windowMs: 10 * 60 * 1000, // 10 minutes
-    max: 200, // limit each IP to 200 requests per 10 mins
+    max: 200, // limit each session to 200 requests per 10 mins
     standardHeaders: true,
     legacyHeaders: false,
+    keyGenerator: (req) => req.sessionID || req.ip, // Use session ID instead of IP for fairness on shared networks (eduroam)
     message: { error: 'Too many requests, please try again later.' }
 });
 
@@ -64,6 +65,7 @@ app.use(limiter);
 const generationLimiter = rateLimit({
     windowMs: 5 * 60 * 1000, // 5 minutes
     max: 20, // limit to 20 generations per 5 mins
+    keyGenerator: (req) => req.sessionID || req.ip, // Use session ID instead of IP
     message: { error: 'Too many generation requests, please wait.' }
 });
 
@@ -141,7 +143,7 @@ app.use(session({
     name: '_sid', // Custom name to hide tech stack
     secret: process.env.SESSION_SECRET || 'default-secret-change-this',
     resave: false,
-    saveUninitialized: false, // Only save session when something is added to basket
+    saveUninitialized: true, // Save session on first visit for fair rate limiting
     store: sessionStore,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days - for course registration week

@@ -1909,7 +1909,7 @@ body.dark-mode .cancel-btn:hover {
 
 .scroll-to-top {
   position: fixed;
-  bottom: 30px;
+  bottom: 80px;
   right: 30px;
   width: 50px;
   height: 50px;
@@ -1965,7 +1965,7 @@ body.dark-mode .scroll-to-top:hover {
   .scroll-to-top {
     width: 45px;
     height: 45px;
-    bottom: 20px;
+    bottom: 70px;
     right: 20px;
     font-size: 20px;
   }
