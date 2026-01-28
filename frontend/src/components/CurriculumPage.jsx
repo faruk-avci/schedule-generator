@@ -4,6 +4,7 @@ import './CurriculumPage.css';
 
 import { setMajor as apiSetMajor } from '../services/api';
 import grain from '../analytics';
+import Analytics from '../utils/analytics';
 
 // All available majors - data loaded dynamically
 const AVAILABLE_MAJORS = [
@@ -268,6 +269,10 @@ function CurriculumPage({ language }) {
     // Handle elective click
     const handleElectiveClick = (electiveType) => {
         if (!curriculum || !curriculum.electives) return;
+
+        // Track elective click
+        grain.track('click_elective', { type: electiveType });
+        Analytics.track(Analytics.Events.CLICK_ELECTIVE_SECTION, { type: electiveType });
 
         const courses = curriculum.electives[electiveType] || [];
         const typeName = ELECTIVE_TYPE_NAMES[electiveType] || { tr: electiveType, en: electiveType };

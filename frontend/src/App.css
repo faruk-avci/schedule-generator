@@ -182,6 +182,11 @@ body.dark-mode .schedules-container {
   box-shadow: none;
 }
 
+body.dark-mode .schedule-nav-btn:disabled {
+  background-color: #404040;
+  color: #6b7280;
+}
+
 /* Inputs */
 .search-input {
   border-radius: 12px;
@@ -807,6 +812,69 @@ body.dark-mode .course-name-display {
   border: 2px solid var(--ozu-gray-lighter);
   border-radius: 8px;
   padding: 20px;
+}
+
+/* Schedule Viewer Wrapper with Navigation */
+.schedule-viewer-wrapper {
+  position: relative;
+  margin: 0 60px;
+}
+
+.schedule-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.schedule-nav-prev {
+  left: -55px;
+}
+
+.schedule-nav-next {
+  right: -55px;
+}
+
+/* Hide side nav buttons on smaller screens */
+@media (max-width: 1200px) {
+  .schedule-viewer-wrapper {
+    margin: 0 50px;
+  }
+
+  .schedule-nav-prev {
+    left: -48px;
+  }
+
+  .schedule-nav-next {
+    right: -48px;
+  }
+
+  .schedule-nav-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .schedule-viewer-wrapper {
+    margin: 0;
+  }
+
+  .schedule-nav-btn {
+    display: none;
+  }
 }
 
 .schedule-info {

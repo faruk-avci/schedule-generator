@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { exportAsImage, exportAsPDF, exportAsICS } from '../utils/exportSchedule';
 import { translations, getDayName } from '../utils/translations';
 import Analytics from '../utils/analytics';
+import grain from '../analytics';
 
 function ScheduleList({ schedules, conflicts = [], overload = null, loading, language = 'tr', isLimited = false, onViewAll = () => { }, offset = 0 }) {
   const [selectedSchedule, setSelectedSchedule] = useState(0);
@@ -214,118 +215,210 @@ function ScheduleList({ schedules, conflicts = [], overload = null, loading, lan
         ))}
       </div>
 
-      {/* Current Schedule Details */}
-      <div className="schedule-details" id={`schedule-${selectedSchedule}`}>
-        <div className="schedule-info-row">
-          <div className="schedule-title">
-            <h3>{t.schedule} {selectedSchedule + 1 + offset}</h3>
-            <p className="total-credits">{t.totalCredits}: {currentSchedule.totalCredits}</p>
+      {/* Current Schedule Details with Side Navigation */}
+      <div className="schedule-viewer-wrapper" style={{ position: 'relative', display: 'flex', alignItems: 'stretch' }}>
+        {/* Previous Button */}
+        <button
+          className="schedule-nav-btn schedule-nav-prev"
+          onClick={() => {
+            Analytics.track(Analytics.Events.CLICK_SCHEDULE_PREVIOUS);
+            grain.track('click_schedule_previous');
+            setSelectedSchedule(prev => Math.max(0, prev - 1));
+          }}
+          disabled={selectedSchedule === 0}
+          title={language === 'tr' ? 'Önceki Program' : 'Previous Schedule'}
+          style={{
+            position: 'absolute',
+            left: '-50px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: '44px',
+            height: '44px',
+            borderRadius: '50%',
+            border: 'none',
+            backgroundColor: selectedSchedule === 0 ? '#e5e7eb' : 'var(--ozu-burgundy)',
+            color: selectedSchedule === 0 ? '#9ca3af' : 'white',
+            fontSize: '20px',
+            fontWeight: 'bold',
+            cursor: selectedSchedule === 0 ? 'not-allowed' : 'pointer',
+            boxShadow: selectedSchedule === 0 ? 'none' : '0 4px 12px rgba(139, 21, 56, 0.3)',
+            transition: 'all 0.2s ease',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 10
+          }}
+          onMouseOver={(e) => {
+            if (selectedSchedule !== 0) {
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+              e.currentTarget.style.boxShadow = '0 6px 16px rgba(139, 21, 56, 0.4)';
+            }
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.transform = 'translateY(-50%)';
+            e.currentTarget.style.boxShadow = selectedSchedule === 0 ? 'none' : '0 4px 12px rgba(139, 21, 56, 0.3)';
+          }}
+        >
+          ‹
+        </button>
+
+        {/* Next Button */}
+        <button
+          className="schedule-nav-btn schedule-nav-next"
+          onClick={() => {
+            Analytics.track(Analytics.Events.CLICK_SCHEDULE_NEXT);
+            grain.track('click_schedule_next');
+            setSelectedSchedule(prev => Math.min(sortedSchedules.length - 1, prev + 1));
+          }}
+          disabled={selectedSchedule >= sortedSchedules.length - 1}
+          title={language === 'tr' ? 'Sonraki Program' : 'Next Schedule'}
+          style={{
+            position: 'absolute',
+            right: '-50px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: '44px',
+            height: '44px',
+            borderRadius: '50%',
+            border: 'none',
+            backgroundColor: selectedSchedule >= sortedSchedules.length - 1 ? '#e5e7eb' : 'var(--ozu-burgundy)',
+            color: selectedSchedule >= sortedSchedules.length - 1 ? '#9ca3af' : 'white',
+            fontSize: '20px',
+            fontWeight: 'bold',
+            cursor: selectedSchedule >= sortedSchedules.length - 1 ? 'not-allowed' : 'pointer',
+            boxShadow: selectedSchedule >= sortedSchedules.length - 1 ? 'none' : '0 4px 12px rgba(139, 21, 56, 0.3)',
+            transition: 'all 0.2s ease',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 10
+          }}
+          onMouseOver={(e) => {
+            if (selectedSchedule < sortedSchedules.length - 1) {
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+              e.currentTarget.style.boxShadow = '0 6px 16px rgba(139, 21, 56, 0.4)';
+            }
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.transform = 'translateY(-50%)';
+            e.currentTarget.style.boxShadow = selectedSchedule >= sortedSchedules.length - 1 ? 'none' : '0 4px 12px rgba(139, 21, 56, 0.3)';
+          }}
+        >
+          ›
+        </button>
+
+        <div className="schedule-details" id={`schedule-${selectedSchedule}`} style={{ flex: 1 }}>
+          <div className="schedule-info-row">
+            <div className="schedule-title">
+              <h3>{t.schedule} {selectedSchedule + 1 + offset}</h3>
+              <p className="total-credits">{t.totalCredits}: {currentSchedule.totalCredits}</p>
+            </div>
+            <div className="export-buttons">
+              <button
+                className="export-btn export-pdf"
+                onClick={() => handleExportClick(() => {
+                  Analytics.track(Analytics.Events.CLICK_EXPORT_PDF);
+                  exportAsPDF(`schedule-${selectedSchedule}`, `OZU-${t.schedule}-${selectedSchedule + 1 + offset}`);
+                })}
+              >
+                📄 {t.exportPDF}
+              </button>
+              <button
+                className="export-btn export-image"
+                onClick={() => handleExportClick(() => {
+                  Analytics.track(Analytics.Events.CLICK_EXPORT_IMAGE);
+                  exportAsImage(`schedule-${selectedSchedule}`, `OZU-${t.schedule}-${selectedSchedule + 1}`);
+                })}
+              >
+                🖼️ {t.exportImage}
+              </button>
+              <button
+                className="export-btn export-calendar"
+                onClick={() => handleExportClick(() => {
+                  Analytics.track(Analytics.Events.CLICK_EXPORT_CALENDAR);
+                  exportAsICS(currentSchedule, 'Spring 2025');
+                })}
+              >
+                📅 {t.exportCalendar}
+              </button>
+            </div>
           </div>
-          <div className="export-buttons">
-            <button
-              className="export-btn export-pdf"
-              onClick={() => handleExportClick(() => {
-                Analytics.track(Analytics.Events.CLICK_EXPORT_PDF);
-                exportAsPDF(`schedule-${selectedSchedule}`, `OZU-${t.schedule}-${selectedSchedule + 1 + offset}`);
-              })}
-            >
-              📄 {t.exportPDF}
-            </button>
-            <button
-              className="export-btn export-image"
-              onClick={() => handleExportClick(() => {
-                Analytics.track(Analytics.Events.CLICK_EXPORT_IMAGE);
-                exportAsImage(`schedule-${selectedSchedule}`, `OZU-${t.schedule}-${selectedSchedule + 1}`);
-              })}
-            >
-              🖼️ {t.exportImage}
-            </button>
-            <button
-              className="export-btn export-calendar"
-              onClick={() => handleExportClick(() => {
-                Analytics.track(Analytics.Events.CLICK_EXPORT_CALENDAR);
-                exportAsICS(currentSchedule, 'Spring 2025');
-              })}
-            >
-              📅 {t.exportCalendar}
-            </button>
-          </div>
-        </div>
 
-        {/* Course List */}
-        <div className="courses-table">
-          <table>
-            <thead>
-              <tr>
-                <th>{t.course}</th>
-                <th style={{ textAlign: 'center' }}>{t.section}</th>
-                <th>{t.lecturer}</th>
-                <th style={{ textAlign: 'center' }}>{t.credits}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentSchedule.lessons.map((lesson, idx) => {
-                // Try to strip the course code part (e.g. "EE101A" -> "A")
-                // Parsing: Course Code is initial letters+digits
-                // Parsing: Course Code is initial letters+digits
-                const match = lesson.section_name.match(/^([A-Z]+\d+L?)(.*)$/);
-                const courseCode = match ? match[1] : '';
-                let sectionLetter = match ? match[2] : lesson.section_name;
+          {/* Course List */}
+          <div className="courses-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>{t.course}</th>
+                  <th style={{ textAlign: 'center' }}>{t.section}</th>
+                  <th>{t.lecturer}</th>
+                  <th style={{ textAlign: 'center' }}>{t.credits}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentSchedule.lessons.map((lesson, idx) => {
+                  // Try to strip the course code part (e.g. "EE101A" -> "A")
+                  // Parsing: Course Code is initial letters+digits
+                  // Parsing: Course Code is initial letters+digits
+                  const match = lesson.section_name.match(/^([A-Z]+\d+L?)(.*)$/);
+                  const courseCode = match ? match[1] : '';
+                  let sectionLetter = match ? match[2] : lesson.section_name;
 
-                // If section part starts with 'L' and has more chars (e.g. LA, LB), strip 'L'
-                if (sectionLetter.length > 1 && sectionLetter.startsWith('L')) {
-                  sectionLetter = sectionLetter.substring(1);
-                }
+                  // If section part starts with 'L' and has more chars (e.g. LA, LB), strip 'L'
+                  if (sectionLetter.length > 1 && sectionLetter.startsWith('L')) {
+                    sectionLetter = sectionLetter.substring(1);
+                  }
 
-                return (
-                  <tr key={idx} className={idx % 2 === 0 ? 'row-even' : 'row-odd'}>
-                    <td>
-                      <div className="course-cell-main">
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <span className="course-code-badge">{courseCode}</span>
-                          <strong>{lesson.course_name}</strong>
+                  return (
+                    <tr key={idx} className={idx % 2 === 0 ? 'row-even' : 'row-odd'}>
+                      <td>
+                        <div className="course-cell-main">
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span className="course-code-badge">{courseCode}</span>
+                            <strong>{lesson.course_name}</strong>
+                          </div>
+                          {lesson.faculty && (
+                            <div className="course-faculty">{lesson.faculty}</div>
+                          )}
+                          {lesson.description && lesson.description !== lesson.course_name && (
+                            <div className="course-description">{lesson.description}</div>
+                          )}
                         </div>
-                        {lesson.faculty && (
-                          <div className="course-faculty">{lesson.faculty}</div>
-                        )}
-                        {lesson.description && lesson.description !== lesson.course_name && (
-                          <div className="course-description">{lesson.description}</div>
-                        )}
-                      </div>
-                    </td>
-                    <td style={{ textAlign: 'center' }}>
-                      <span style={{
-                        display: 'inline-block',
-                        padding: '4px 10px',
-                        background: '#f3f4f6',
-                        borderRadius: '6px',
-                        fontWeight: 'bold',
-                        color: '#8B1538'
-                      }}>
-                        {sectionLetter || lesson.section_name}
-                      </span>
-                    </td>
-                    <td>{lesson.lecturer}</td>
-                    <td style={{ textAlign: 'center' }}>
-                      <span style={{ fontWeight: '500' }}>{lesson.credits}</span>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div >
+                      </td>
+                      <td style={{ textAlign: 'center' }}>
+                        <span style={{
+                          display: 'inline-block',
+                          padding: '4px 10px',
+                          background: '#f3f4f6',
+                          borderRadius: '6px',
+                          fontWeight: 'bold',
+                          color: '#8B1538'
+                        }}>
+                          {sectionLetter || lesson.section_name}
+                        </span>
+                      </td>
+                      <td>{lesson.lecturer}</td>
+                      <td style={{ textAlign: 'center' }}>
+                        <span style={{ fontWeight: '500' }}>{lesson.credits}</span>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div >
 
-        {/* Weekly Calendar View */}
-        < div className="calendar-view" >
-          <h4>{t.weeklySchedule}</h4>
-          <WeeklyCalendar
-            matrix={currentSchedule.matrix}
-            lessons={currentSchedule.lessons}
-            language={language}
-          />
-        </div >
-      </div >
+          {/* Weekly Calendar View */}
+          < div className="calendar-view" >
+            <h4>{t.weeklySchedule}</h4>
+            <WeeklyCalendar
+              matrix={currentSchedule.matrix}
+              lessons={currentSchedule.lessons}
+              language={language}
+            />
+          </div >
+        </div>
+      </div>
 
       {/* Export Confirmation Modal */}
       {
