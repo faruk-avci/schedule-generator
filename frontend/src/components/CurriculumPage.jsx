@@ -560,7 +560,7 @@ function CurriculumPage({ language }) {
                                     }}
                                 />
                                 <span className="cp-toggle-slider"></span>
-                                <span className="cp-toggle-label">{isTr ? 'Önce Açık Dersler' : 'Open First'}</span>
+                                <span className="cp-toggle-label">{isTr ? 'Önce Açık Dersler' : 'Open Courses First'}</span>
                             </label>
                         </div>
                         <div className="cp-modal-body">
