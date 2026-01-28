@@ -130,7 +130,8 @@ router.get('/check', authAdmin, (req, res) => {
 // GET /api/admin/logs
 router.get('/logs', authAdmin, async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM activity_logs ORDER BY created_at DESC LIMIT 100');
+        const limit = parseInt(req.query.limit) || 100;
+        const result = await pool.query('SELECT * FROM activity_logs ORDER BY created_at DESC LIMIT $1', [limit]);
         res.json({ success: true, logs: result.rows });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
@@ -140,7 +141,8 @@ router.get('/logs', authAdmin, async (req, res) => {
 // GET /api/admin/sessions
 router.get('/sessions', authAdmin, async (req, res) => {
     try {
-        const result = await pool.query('SELECT sid, sess, expire FROM session ORDER BY expire DESC LIMIT 50');
+        const limit = parseInt(req.query.limit) || 100;
+        const result = await pool.query('SELECT sid, sess, expire FROM session ORDER BY expire DESC LIMIT $1', [limit]);
         res.json({ success: true, sessions: result.rows });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });

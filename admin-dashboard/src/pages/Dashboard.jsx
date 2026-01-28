@@ -1,18 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import AdminAPI from '../api';
-import { Activity, Users, AlertCircle, RefreshCcw } from 'lucide-react';
+import { Activity, Users, AlertCircle, RefreshCcw, Search } from 'lucide-react';
 
 const Dashboard = () => {
     const [logs, setLogs] = useState([]);
     const [sessions, setSessions] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    // Limit States
+    const [logsLimit, setLogsLimit] = useState(100);
+    const [sessionsLimit, setSessionsLimit] = useState(100);
+
+    // Filter Logic
+    const [sessionFilterQuery, setSessionFilterQuery] = useState('');
+
+    // Refs for scrolling
+    const sessionsTableRef = useRef(null);
+
     const fetchData = async () => {
         setLoading(true);
         try {
             const [logsRes, sessionsRes] = await Promise.all([
-                AdminAPI.getLogs(),
-                AdminAPI.getSessions()
+                AdminAPI.getLogs(logsLimit),
+                AdminAPI.getSessions(sessionsLimit)
             ]);
             setLogs(logsRes.data.logs || []);
             setSessions(sessionsRes.data.sessions || []);
@@ -25,11 +35,11 @@ const Dashboard = () => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [logsLimit, sessionsLimit]); // Re-fetch on limit change
 
     const stats = [
-        { name: 'Recent Activity', value: logs.length, icon: <Activity className="text-blue-500" />, desc: 'Last 100 actions' },
-        { name: 'Active Sessions', value: sessions.length, icon: <Users className="text-green-500" />, desc: 'Current unique users' },
+        { name: 'Recent Activity', value: logs.length, icon: <Activity className="text-blue-500" />, desc: `Last ${logsLimit} actions` },
+        { name: 'Active Sessions', value: sessions.length, icon: <Users className="text-green-500" />, desc: 'Current active' },
         { name: 'Client Errors', value: logs.filter(l => l.action === 'CLIENT_ERROR').length, icon: <AlertCircle className="text-red-500" />, desc: 'Issues reported in UI' },
     ];
 
@@ -42,6 +52,21 @@ const Dashboard = () => {
             default: return 'bg-gray-500/10 text-gray-400';
         }
     };
+
+    const handleSessionClick = (sessionId) => {
+        if (!sessionId) return;
+        setSessionFilterQuery(sessionId);
+        // Scroll to sessions table
+        if (sessionsTableRef.current) {
+            sessionsTableRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    // Filter sessions
+    const filteredSessions = sessions.filter(session => {
+        if (!sessionFilterQuery) return true;
+        return session.sid.toLowerCase().includes(sessionFilterQuery.toLowerCase());
+    });
 
     return (
         <div className="p-8 dashboard">
@@ -70,37 +95,137 @@ const Dashboard = () => {
             </div>
 
             <div className="data-sections">
+                {/* 1. Activity Logs */}
                 <section className="data-table-card">
                     <div className="table-header">
-                        <h3>Activity Feed</h3>
+                        <h3>Activity Feed (Logs)</h3>
+                        <div className="controls">
+                            <span className="control-label">Limit:</span>
+                            <input
+                                type="number"
+                                className="control-input"
+                                value={logsLimit}
+                                onChange={(e) => setLogsLimit(parseInt(e.target.value) || 10)}
+                                min="10"
+                                max="1000"
+                            />
+                        </div>
                     </div>
                     <div className="table-wrapper">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Action</th>
-                                    <th>IP Address</th>
-                                    <th>Details</th>
                                     <th>Time</th>
+                                    <th>Session ID</th>
+                                    <th>Action</th>
+                                    <th>Details</th>
+                                    <th>IP</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {logs.map(log => (
                                     <tr key={log.id}>
-                                        <td>
-                                            <span className={`badge \${getBadgeStyle(log.action)}`}>
-                                                {log.action}
-                                            </span>
-                                        </td>
-                                        <td className="mono">{log.ip_address}</td>
-                                        <td className="details-col">
-                                            <pre>{JSON.stringify(log.details)}</pre>
-                                        </td>
                                         <td className="time-col">
                                             {new Date(log.created_at).toLocaleTimeString()}
                                         </td>
+                                        <td className="mono">
+                                            <span
+                                                className="clickable-id"
+                                                onClick={() => handleSessionClick(log.session_id)}
+                                                title="Filter Sessions by this ID"
+                                            >
+                                                {log.session_id ? log.session_id.substring(0, 8) + '...' : '-'}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span className={`badge ${getBadgeStyle(log.action)}`}>
+                                                {log.action}
+                                            </span>
+                                        </td>
+                                        <td className="details-col">
+                                            <div className="json-preview" title={JSON.stringify(log.details, null, 2)}>
+                                                {JSON.stringify(log.details)}
+                                            </div>
+                                        </td>
+                                        <td className="mono text-xs">{log.ip_address}</td>
                                     </tr>
                                 ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                {/* 2. Active Sessions */}
+                <section className="data-table-card" ref={sessionsTableRef}>
+                    <div className="table-header">
+                        <h3>Active Sessions</h3>
+                        <div className="controls">
+                            <div className="filter-wrapper">
+                                <Search size={14} className="search-icon" />
+                                <input
+                                    type="text"
+                                    className="control-input search-input"
+                                    placeholder="Filter Session ID..."
+                                    value={sessionFilterQuery}
+                                    onChange={(e) => setSessionFilterQuery(e.target.value)}
+                                />
+                            </div>
+                            <span className="control-label">Limit:</span>
+                            <input
+                                type="number"
+                                className="control-input"
+                                value={sessionsLimit}
+                                onChange={(e) => setSessionsLimit(parseInt(e.target.value) || 10)}
+                                min="10"
+                                max="1000"
+                            />
+                        </div>
+                    </div>
+                    <div className="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Session ID</th>
+                                    <th>Basket / Data</th>
+                                    <th>Expires</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {filteredSessions.length > 0 ? (
+                                    filteredSessions.map(session => {
+                                        let sessionData;
+                                        try {
+                                            sessionData = typeof session.sess === 'string' ? JSON.parse(session.sess) : session.sess;
+                                        } catch (e) { sessionData = {}; }
+
+                                        const basketCounts = sessionData.basket
+                                            ? `Courses: ${sessionData.basket.courses?.length || 0}, Sections: ${sessionData.basket.sections?.length || 0}`
+                                            : 'Empty';
+
+                                        return (
+                                            <tr key={session.sid}>
+                                                <td className="mono text-blue-400 font-medium">
+                                                    {session.sid.substring(0, 12)}...
+                                                    {sessionData.isAdmin && <span className="ml-2 badge bg-red-500/20 text-red-500">ADMIN</span>}
+                                                </td>
+                                                <td className="details-col">
+                                                    <div className="json-preview" title={JSON.stringify(sessionData, null, 2)}>
+                                                        {JSON.stringify(sessionData)}
+                                                    </div>
+                                                </td>
+                                                <td className="mono text-xs">
+                                                    {new Date(session.expire).toLocaleString()}
+                                                </td>
+                                            </tr>
+                                        );
+                                    })
+                                ) : (
+                                    <tr>
+                                        <td colspan="3" className="text-center py-8 text-gray-500">
+                                            No sessions found matching filter.
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
@@ -109,7 +234,7 @@ const Dashboard = () => {
 
             <style>{`
                 .dashboard {
-                    max-width: 1200px;
+                    max-width: 1400px;
                     margin: 0 auto;
                 }
                 .flex-header {
@@ -196,13 +321,50 @@ const Dashboard = () => {
                 .table-header {
                     padding: 1.25rem 1.5rem;
                     border-bottom: 1px solid #1f1f23;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
                 }
                 .table-header h3 {
                     margin: 0;
                     font-size: 1.125rem;
                 }
+                .controls {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+                .control-label {
+                    color: #666;
+                    font-size: 0.875rem;
+                }
+                .control-input {
+                    background: #1a1a1e;
+                    border: 1px solid #333;
+                    color: white;
+                    padding: 6px 12px;
+                    border-radius: 6px;
+                    width: 80px;
+                }
+                .filter-wrapper {
+                    position: relative;
+                    margin-right: 15px;
+                }
+                .search-input {
+                    width: 200px;
+                    padding-left: 30px;
+                }
+                .search-icon {
+                    position: absolute;
+                    left: 8px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: #666;
+                }
                 .table-wrapper {
                     overflow-x: auto;
+                    max-height: 600px;
+                    overflow-y: auto;
                 }
                 table {
                     width: 100%;
@@ -211,6 +373,9 @@ const Dashboard = () => {
                     font-size: 0.875rem;
                 }
                 th {
+                    position: sticky;
+                    top: 0;
+                    background: #111114;
                     padding: 1rem 1.5rem;
                     color: #555;
                     font-weight: 600;
@@ -218,11 +383,13 @@ const Dashboard = () => {
                     letter-spacing: 0.05em;
                     font-size: 0.75rem;
                     border-bottom: 1px solid #1f1f23;
+                    z-index: 10;
                 }
                 td {
-                    padding: 1rem 1.5rem;
+                    padding: 0.75rem 1.5rem;
                     border-bottom: 1px solid #1f1f23;
                     color: #ccc;
+                    vertical-align: top;
                 }
                 tr:last-child td {
                     border-bottom: none;
@@ -237,18 +404,43 @@ const Dashboard = () => {
                     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
                     color: #888;
                 }
-                .details-col pre {
-                    margin: 0;
+                .json-preview {
                     max-width: 400px;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     font-size: 0.75rem;
                     color: #666;
+                    font-family: monospace;
+                    cursor: help;
+                }
+                .json-preview:hover {
+                    white-space: pre-wrap;
+                    background: #1a1a1e;
+                    position: absolute;
+                    z-index: 50;
+                    padding: 10px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+                    max-width: 600px;
+                    border: 1px solid #333;
+                }
+                .clickable-id {
+                    color: #3b82f6;
+                    cursor: pointer;
+                    text-decoration: underline;
+                    text-decoration-color: transparent;
+                    transition: all 0.2s;
+                }
+                .clickable-id:hover {
+                    color: #60a5fa;
+                    text-decoration-color: #60a5fa;
                 }
                 .time-col {
                     color: #666;
+                    white-space: nowrap;
                 }
+                .text-xs { font-size: 0.75rem; }
             `}</style>
         </div>
     );

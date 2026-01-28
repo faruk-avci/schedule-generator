@@ -31,8 +31,8 @@ export const AdminAPI = {
     checkAuth: () => api.get('/api/admin/check'),
 
     // Analytics
-    getLogs: () => api.get('/api/admin/logs'),
-    getSessions: () => api.get('/api/admin/sessions'),
+    getLogs: (limit) => api.get('/api/admin/logs', { params: { limit } }),
+    getSessions: (limit) => api.get('/api/admin/sessions', { params: { limit } }),
 
     // Settings
     getSettings: () => api.get('/api/admin/settings'),
