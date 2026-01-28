@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /basket
+Sitemap: https://ozuplanner.com/sitemap.xml

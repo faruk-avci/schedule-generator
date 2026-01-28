@@ -77,6 +77,10 @@ export const translations = {
     // Confirmation
     confirmClearBasket: 'Tüm sepeti temizlemek istediğinizden emin misiniz?',
 
+    // Curriculum Info Banner
+    curriculumInfo: 'Bölüm Müfredatları sayfasına giderek ders planınızı görebilir, zorunlu ve seçmeli derslerinizi görüntüleyebilir ve  açık derslerinizi kolayca sepetinize ekleyebilirsiniz.',
+    goToCurriculum: 'Bölüm Müfredatları Sayfasına Git',
+
     // Saved Baskets
     yourSavedBaskets: 'Kayıtlı Sepetlerim',
     saveThisBasket: 'Bu Sepeti Kaydet',
@@ -92,6 +96,10 @@ export const translations = {
     darkMode: 'Dark Mode',
     lightMode: 'Light Mode',
     academicTerm: 'Academic Term:',
+
+    // Curriculum Info Banner
+    curriculumInfo: 'You can view your curriculum, see required and elective courses, and add open courses to your basket by visiting the Curriculum page.',
+    goToCurriculum: 'Go to Curriculum Page',
 
     // Search Section
     searchTitle: 'Search Courses',

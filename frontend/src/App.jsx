@@ -22,6 +22,8 @@ import { searchCourses, addCourse, removeCourse, clearBasket, getBasket, generat
 import Analytics from './utils/analytics';
 import grain from './analytics';
 
+import InfoBanner from './components/InfoBanner';
+
 const MAJORS = [
   {
     category: { tr: 'Mühendislik Fakültesi', en: 'Faculty of Engineering' },
@@ -727,6 +729,8 @@ function App() {
                   </button>
                 </div>
               )}
+
+              <InfoBanner language={language} />
 
               {/* Main Content */}
               <div className="main-container">
