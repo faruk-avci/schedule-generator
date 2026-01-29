@@ -79,7 +79,7 @@ function Footer({ onNavigate, language }) {
 
         <div className="footer-section badge-section">
           <a
-            href="https://grain.com"
+            href="https://www.grainql.com?utm_source=ozuplanner&utm_medium=banner&utm_campaign=ozuplanner_sponsor"
             target="_blank"
             rel="noopener noreferrer"
             className="footer-badge-link"
