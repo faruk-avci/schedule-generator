@@ -2326,14 +2326,15 @@ body.dark-mode .app-footer {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 40px;
 }
 
 .footer-section h4 {
   color: var(--ozu-burgundy);
   margin-bottom: 20px;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
+  /* Smaller header */
   font-weight: 600;
   letter-spacing: -0.5px;
 }
@@ -2343,6 +2344,22 @@ body.dark-mode .app-footer {
   line-height: 1.6;
   opacity: 0.8;
   margin-bottom: 12px;
+  font-size: 0.85rem;
+  /* Smaller content text */
+}
+
+/* Badge Section in Grid */
+.badge-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centered-badge {
+  height: 70px;
+  /* Big badge */
+  transition: transform 0.2s ease;
+  display: block;
 }
 
 .footer-bottom {
@@ -2370,6 +2387,10 @@ body.dark-mode .app-footer {
 .footer-link:hover {
   color: var(--ozu-burgundy-light);
   text-decoration: underline;
+}
+
+.centered-badge:hover {
+  transform: scale(1.05);
 }
 
 /* Premium Terms Page */

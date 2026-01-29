@@ -23,6 +23,7 @@ import Analytics from './utils/analytics';
 import grain from './analytics';
 
 import InfoBanner from './components/InfoBanner';
+import WarningBanner from './components/WarningBanner';
 
 const MAJORS = [
   {
@@ -731,6 +732,7 @@ function App() {
               )}
 
               <InfoBanner language={language} />
+              <WarningBanner language={language} />
 
               {/* Main Content */}
               <div className="main-container">

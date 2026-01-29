@@ -78,8 +78,11 @@ export const translations = {
     confirmClearBasket: 'Tüm sepeti temizlemek istediğinizden emin misiniz?',
 
     // Curriculum Info Banner
-    curriculumInfo: 'Bölüm Müfredatları sayfasına giderek ders planınızı görebilir, zorunlu ve seçmeli derslerinizi görüntüleyebilir ve  açık derslerinizi kolayca sepetinize ekleyebilirsiniz.',
+    curriculumInfo: 'Bölüm Müfredatları sayfasına giderek ders planınızı görebilir, zorunlu ve seçmeli derslerinizi görüntüleyebilir ve  açılan dersleri kolayca sepetinize ekleyebilirsiniz.',
     goToCurriculum: 'Bölüm Müfredatları Sayfasına Git',
+
+    // Warning Banner
+    officialWarning: 'DİKKAT! Bu site resmi ders kayıt sistemi değildir. Kayıtlarınızı kayıt süresi boyunca sis.ozyegin.edu.tr üzerinden yapmalısınız.',
 
     // Saved Baskets
     yourSavedBaskets: 'Kayıtlı Sepetlerim',
@@ -100,6 +103,9 @@ export const translations = {
     // Curriculum Info Banner
     curriculumInfo: 'You can view your curriculum, see required and elective courses, and add open courses to your basket by visiting the Curriculum page.',
     goToCurriculum: 'Go to Curriculum Page',
+
+    // Warning Banner
+    officialWarning: 'ATTENTION! This is not the official course registration system. You should do your registration through sis.ozyegin.edu.tr during registration time.',
 
     // Search Section
     searchTitle: 'Search Courses',

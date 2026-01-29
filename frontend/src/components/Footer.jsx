@@ -1,4 +1,6 @@
 import Analytics from '../utils/analytics';
+import { translations } from '../utils/translations';
+import grainBadge from '../assets/grain-brand-asset-badge.svg';
 
 function Footer({ onNavigate, language }) {
   const isTr = language === 'tr';
@@ -69,6 +71,26 @@ function Footer({ onNavigate, language }) {
             </button>
           </p>
         </div>
+
+
+
+
+
+
+        <div className="footer-section badge-section">
+          <a
+            href="https://grain.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-badge-link"
+          >
+            <img
+              src={grainBadge}
+              alt="Grain"
+              className="footer-badge centered-badge"
+            />
+          </a>
+        </div>
       </div>
 
       <div className="footer-bottom">
@@ -85,7 +107,7 @@ function Footer({ onNavigate, language }) {
           </a>
         </p>
       </div>
-    </footer>
+    </footer >
   );
 }
 
