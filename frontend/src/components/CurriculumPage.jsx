@@ -18,6 +18,7 @@ const AVAILABLE_MAJORS = [
     // Business
     { id: 'bus', tr: 'İşletme', en: 'Business Administration', faculty: 'business' },
     { id: 'econ', tr: 'Ekonomi', en: 'Economics', faculty: 'business' },
+    { id: 'entr', tr: 'Girişimcilik', en: 'Entrepreneurship', faculty: 'business' },
     { id: 'mis', tr: 'Yönetim Bilişim Sistemleri', en: 'Management Information Systems', faculty: 'business' },
     { id: 'uf', tr: 'Uluslararası Finans', en: 'International Finance', faculty: 'business' },
     { id: 'uti', tr: 'Uluslararası Ticaret ve İşletmecilik', en: 'International Trade and Business', faculty: 'business' },
@@ -60,7 +61,7 @@ const MAJORS = [
         category: { tr: 'İşletme Fakültesi', en: 'Faculty of Business' },
         items: [
             { id: 'econ', en: 'Economics', tr: 'Ekonomi' },
-            { id: 'ent', en: 'Entrepreneurship', tr: 'Girişimcilik' },
+            { id: 'entr', en: 'Entrepreneurship', tr: 'Girişimcilik' },
             { id: 'ba', en: 'Business Administration', tr: 'İşletme' },
             { id: 'fin', en: 'International Finance', tr: 'Uluslararası Finans' },
             { id: 'itb', en: 'International Trade and Business Management', tr: 'Uluslararası Ticaret ve İşletmecilik' },
@@ -138,6 +139,7 @@ const MAJOR_NAME_MAP = {
 
     // Business
     'Economics': 'econ', 'Ekonomi': 'econ',
+    'Entrepreneurship': 'entr', 'Girişimcilik': 'entr',
     'Business Administration': 'bus', 'İşletme': 'bus',
     'International Finance': 'uf', 'Uluslararası Finans': 'uf',
     'International Trade and Business Management': 'uti', 'Uluslararası Ticaret ve İşletmecilik': 'uti',
@@ -209,7 +211,6 @@ function CurriculumPage({ language }) {
             const CURRICULUM_FALLBACKS = {
                 'master': 'ee',
                 'skip': 'ee',
-                'ent': 'bus',  // Entrepreneurship -> Business Administration
             };
             const fileId = CURRICULUM_FALLBACKS[majorId] || majorId;
             const module = await import(`../data/curriculums/${fileId}.json`);
