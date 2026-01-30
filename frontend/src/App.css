@@ -610,22 +610,29 @@ body.dark-mode .course-name-display {
 }
 
 /* Basket Section */
-.basket-section {
-  background: white;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* Sticky basket - follows when scrolling */
+.basket-wrapper {
   position: sticky;
   top: 100px;
   /* Below the header */
   max-height: calc(100vh - 120px);
   /* Viewport height minus header and padding */
-  overflow-y: auto;
-  transition: box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* Custom scrollbar for sticky basket */
+.basket-section {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  transition: box-shadow 0.3s ease;
+  flex-shrink: 1;
+  /* Allow shrinking if needed, though auto usually fine */
+}
+
+/* Custom scrollbar for basket-section (since it now scrolls internally) */
 .basket-section::-webkit-scrollbar {
   width: 6px;
 }
@@ -641,6 +648,22 @@ body.dark-mode .course-name-display {
 
 .basket-section::-webkit-scrollbar-thumb:hover {
   background: var(--ozu-burgundy);
+}
+
+
+.basket-warning-box {
+  background-color: #fff7ed;
+  border: 1px solid #f97316;
+  color: #c2410c;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 0;
+  /* Margin handled by parent gap */
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.4;
+  flex-shrink: 0;
 }
 
 .basket-header {

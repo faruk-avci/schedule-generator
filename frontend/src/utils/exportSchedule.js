@@ -47,7 +47,8 @@ export const exportAsPDF = async (elementId, fileName = 'schedule') => {
       useCORS: true
     });
 
-    const imgData = canvas.toDataURL('image/png');
+    // Use JPEG with compression (0.75 quality) to reduce file size significantly
+    const imgData = canvas.toDataURL('image/jpeg', 0.75);
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
@@ -63,11 +64,11 @@ export const exportAsPDF = async (elementId, fileName = 'schedule') => {
     const imgY = 10;
 
     pdf.addImage(
-      imgData, 
-      'PNG', 
-      imgX, 
-      imgY, 
-      imgWidth * ratio, 
+      imgData,
+      'JPEG', // Changed from PNG to JPEG
+      imgX,
+      imgY,
+      imgWidth * ratio,
       imgHeight * ratio
     );
 
@@ -161,20 +162,20 @@ export const exportAsICS = (schedule, semester = 'Spring 2025') => {
  */
 function formatICSDate(baseDate, dayOfWeek, hour, minute) {
   const date = new Date(baseDate);
-  
+
   // Find first occurrence of the day
   const currentDay = date.getDay();
   const targetDay = dayOfWeek === 0 ? 1 : dayOfWeek + 1; // Adjust for Monday = 0
   const daysToAdd = (targetDay - currentDay + 7) % 7;
   date.setDate(date.getDate() + daysToAdd);
-  
+
   date.setHours(hour, minute, 0, 0);
-  
+
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   const hours = String(date.getHours()).padStart(2, '0');
   const minutes = String(date.getMinutes()).padStart(2, '0');
-  
+
   return `${year}${month}${day}T${hours}${minutes}00`;
 }
