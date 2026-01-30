@@ -16,7 +16,14 @@ export const exportAsImage = async (elementId, fileName = 'schedule') => {
       scale: 2,
       backgroundColor: '#ffffff',
       logging: false,
-      useCORS: true
+      useCORS: true,
+      onclone: (clonedDoc) => {
+        // Fix for text overlapping issue in html2canvas
+        const clonedElement = clonedDoc.getElementById(elementId);
+        if (clonedElement) {
+          clonedElement.style.letterSpacing = '0.5px';
+        }
+      }
     });
 
     const link = document.createElement('a');
@@ -41,19 +48,26 @@ export const exportAsPDF = async (elementId, fileName = 'schedule') => {
 
   try {
     const canvas = await html2canvas(element, {
-      scale: 3, // Increased scale for better text clarity
+      scale: 2, // Back to 2 for size optimization
       backgroundColor: '#ffffff',
       logging: false,
-      useCORS: true
+      useCORS: true,
+      onclone: (clonedDoc) => {
+        // Fix for text overlapping issue in html2canvas
+        const clonedElement = clonedDoc.getElementById(elementId);
+        if (clonedElement) {
+          clonedElement.style.letterSpacing = '0.5px';
+        }
+      }
     });
 
-    // Use JPEG with higher quality (0.92) to maintain text readability while keeping size low
-    const imgData = canvas.toDataURL('image/jpeg', 0.92);
+    // Use JPEG with 0.85 quality - balanced for size and clarity
+    const imgData = canvas.toDataURL('image/jpeg', 0.85);
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
       format: 'a4',
-      compress: true // Enable internal PDF compression
+      compress: true
     });
 
     const pdfWidth = pdf.internal.pageSize.getWidth();
