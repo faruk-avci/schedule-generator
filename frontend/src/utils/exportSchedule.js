@@ -41,18 +41,19 @@ export const exportAsPDF = async (elementId, fileName = 'schedule') => {
 
   try {
     const canvas = await html2canvas(element, {
-      scale: 2,
+      scale: 3, // Increased scale for better text clarity
       backgroundColor: '#ffffff',
       logging: false,
       useCORS: true
     });
 
-    // Use JPEG with compression (0.75 quality) to reduce file size significantly
-    const imgData = canvas.toDataURL('image/jpeg', 0.75);
+    // Use JPEG with higher quality (0.92) to maintain text readability while keeping size low
+    const imgData = canvas.toDataURL('image/jpeg', 0.92);
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
-      format: 'a4'
+      format: 'a4',
+      compress: true // Enable internal PDF compression
     });
 
     const pdfWidth = pdf.internal.pageSize.getWidth();
