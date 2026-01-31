@@ -21,6 +21,7 @@ import { translations } from './utils/translations'
 import { searchCourses, addCourse, removeCourse, clearBasket, getBasket, generateSchedule, getTermInfo, setMajor as apiSetMajor, saveBasket as apiSaveBasket, getSavedBaskets as apiGetSavedBaskets, loadBasket as apiLoadSavedBasket, removeSavedBasket as apiRemoveSavedBasket } from './services/api'
 import Analytics from './utils/analytics';
 import grain from './analytics';
+import { GrainProvider, ConsentBanner } from '@grainql/analytics-web/react';
 
 import InfoBanner from './components/InfoBanner';
 import WarningBanner from './components/WarningBanner';
@@ -680,209 +681,223 @@ function App() {
 
 
   return (
-    <>
-      {/* Maintenance Mode Screen */}
-      {maintenanceMode && <MaintenanceScreen language={language} />}
+    <GrainProvider
+      config={{
+        tenantId: 'ozuplanner-aseris',
+        consentMode: 'GDPR_STRICT',
+        waitForConsent: true
+      }}
+    >
+      <ConsentBanner
+        position="bottom"
+        theme="glass"
+        privacyPolicyUrl="ozuplanner.com/terms"
+        customText="We use cookies to improve your experience."
+      />
+      <>
+        {/* Maintenance Mode Screen */}
+        {maintenanceMode && <MaintenanceScreen language={language} />}
 
-      <div className="app">
-        {/* Header */}
-        <Header
-          language={language}
-          setLanguage={setLanguage}
-          theme={theme}
-          setTheme={setTheme}
-          onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)}
-          term={term}
-        />
+        <div className="app">
+          {/* Header */}
+          <Header
+            language={language}
+            setLanguage={setLanguage}
+            theme={theme}
+            setTheme={setTheme}
+            onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)}
+            term={term}
+          />
 
-        <Routes>
-          <Route path="/" element={
-            <>
-              {/* Mobile-only Laptop Notice */}
-              <div className="mobile-only-notice">
-                <span className="notice-icon">💡</span>
-                <p>
-                  {language === 'tr'
-                    ? 'Daha iyi bir deneyim için bilgisayar üzerinden kullanmanız önerilir.'
-                    : 'Using a laptop for the best experience is recommended.'}
-                </p>
-              </div>
-
-              {/* Message Banner */}
-              {message && (
-                <div className={`message ${message.type}`}>
-                  <span style={{ flex: 1 }}>{message.text}</span>
-                  <button
-                    onClick={() => setMessage(null)}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      fontSize: '18px',
-                      lineHeight: 1,
-                      color: 'inherit',
-                      opacity: 0.7,
-                      padding: 0,
-                      marginLeft: '10px'
-                    }}
-                  >
-                    ✕
-                  </button>
+          <Routes>
+            <Route path="/" element={
+              <>
+                {/* Mobile-only Laptop Notice */}
+                <div className="mobile-only-notice">
+                  <span className="notice-icon">💡</span>
+                  <p>
+                    {language === 'tr'
+                      ? 'Daha iyi bir deneyim için bilgisayar üzerinden kullanmanız önerilir.'
+                      : 'Using a laptop for the best experience is recommended.'}
+                  </p>
                 </div>
-              )}
 
-              <InfoBanner language={language} />
-              <WarningBanner language={language} />
-
-              {/* Main Content */}
-              <div className="main-container">
-
-                {/* Search Section */}
-                <div className="search-section">
-                  <div className="section-header">
-                    <h2>{t.searchTitle}</h2>
-                    {term && (
-                      <div className="term-badge inline" title={language === 'tr' ? 'Aktif Dönem' : 'Active Term'}>
-                        <span className="term-label">{t.academicTerm}</span>
-                        <span className="term-value">{term}</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="search-bar">
-                    <input
-                      type="text"
-                      placeholder={t.searchPlaceholder}
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      onKeyPress={handleKeyPress}
-                      className="search-input"
-                    />
+                {/* Message Banner */}
+                {message && (
+                  <div className={`message ${message.type}`}>
+                    <span style={{ flex: 1 }}>{message.text}</span>
                     <button
-                      className="search-button"
-                      onClick={handleSearch}
-                      disabled={loading}
+                      onClick={() => setMessage(null)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        fontSize: '18px',
+                        lineHeight: 1,
+                        color: 'inherit',
+                        opacity: 0.7,
+                        padding: 0,
+                        marginLeft: '10px'
+                      }}
                     >
-                      {loading ? t.searching : t.searchButton}
-                    </button>
-                    <button
-                      className="clear-button"
-                      onClick={handleClearSearch}
-                    >
-                      {t.clearButton}
+                      ✕
                     </button>
                   </div>
+                )}
 
-                  <div className="search-results">
-                    <SearchResults
-                      courses={searchResults}
-                      onAddCourse={handleAddCourse}
-                      onAddSection={handleAddSection}
-                      loading={loading}
-                      language={language}
-                      hasSearched={hasSearched}
-                    />
-                  </div>
-                </div>
+                <InfoBanner language={language} />
+                <WarningBanner language={language} />
 
-                {/* Basket Section */}
-                <Basket
-                  basket={basket}
-                  onRemoveCourse={handleRemoveCourse}
-                  onRemoveSection={handleRemoveSection}
-                  onClearBasket={handleClearBasket}
-                  onGenerate={handleGenerate}
-                  loading={generatingSchedules}
-                  language={language}
-                  preference={preference}
-                  setPreference={setPreference}
-                  savedBaskets={savedBaskets}
-                  onSaveBasket={handleSaveBasket}
-                  onLoadBasket={handleLoadSavedBasket}
-                  onRemoveSavedBasket={handleRemoveSavedBasket}
-                />
-              </div>
+                {/* Main Content */}
+                <div className="main-container">
 
-              {/* Schedules Section */}
-              <div ref={schedulesRef}>
-                <ScheduleList
-                  schedules={schedules}
-                  conflicts={conflicts}
-                  overload={overload}
-                  loading={generatingSchedules}
-                  language={language}
-                  isLimited={isLimited}
-                  onViewAll={handleViewAll}
-                />
-              </div>
+                  {/* Search Section */}
+                  <div className="search-section">
+                    <div className="section-header">
+                      <h2>{t.searchTitle}</h2>
+                      {term && (
+                        <div className="term-badge inline" title={language === 'tr' ? 'Aktif Dönem' : 'Active Term'}>
+                          <span className="term-label">{t.academicTerm}</span>
+                          <span className="term-value">{term}</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="search-bar">
+                      <input
+                        type="text"
+                        placeholder={t.searchPlaceholder}
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                        className="search-input"
+                      />
+                      <button
+                        className="search-button"
+                        onClick={handleSearch}
+                        disabled={loading}
+                      >
+                        {loading ? t.searching : t.searchButton}
+                      </button>
+                      <button
+                        className="clear-button"
+                        onClick={handleClearSearch}
+                      >
+                        {t.clearButton}
+                      </button>
+                    </div>
 
-              {/* Scroll to Top Button */}
-              <ScrollToTop language={language} />
-            </>
-          } />
-          <Route path="/terms" element={<TermsOfService language={language} onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
-          <Route path="/how-to-use" element={<HowToUse language={language} onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
-          <Route path="/contact" element={<Contact language={language} onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
-          <Route path="/curriculum" element={<CurriculumPage language={language} />} />
-          <Route path="/survey" element={<SurveyPage language={language} onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
-          {/* 404 Catch-All Route */}
-          <Route path="*" element={<NotFound language={language} onNavigate={(path) => navigate(path)} />} />
-          <Route path="/results" element={<ResultsPage language={language} />} />
-        </Routes>
-        <Footer onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} language={language} />
-        <CookieBanner language={language} />
-
-        {/* Major Selection Modal */}
-        {showMajorModal && (
-          <div className="modal-overlay">
-            <div className="modal-content">
-              <div className="modal-header">
-                <div className="once-notice">
-                  <span>✨ {language === 'tr' ? 'Sadece 1 Seferlik' : 'Only Asked Once'}</span>
-                </div>
-                <h2>{language === 'tr' ? 'Bölümünüzü Seçin' : 'Select Your Major'}</h2>
-                <p>
-                  {language === 'tr'
-                    ? 'Size daha iyi yardımcı olabilmemiz için bölümünüzü seçer misiniz? Bu seçim sepetiniz ve verileriniz için bir kereye mahsus kaydedilecektir.'
-                    : 'Could you please select your major so we can assist you better? This choice will be saved once for your basket and data.'}
-                </p>
-              </div>
-              <div className="major-grid-container">
-                {MAJORS.map(group => (
-                  <div key={group.category.en} className="major-category">
-                    <h3>{language === 'tr' ? group.category.tr : group.category.en}</h3>
-                    <div className="major-items">
-                      {group.items.map(m => (
-                        <button
-                          key={m.id}
-                          className={`major-item-btn ${major === m.en ? 'active' : ''}`}
-                          onClick={() => handleSaveMajor(m.en)}
-                        >
-                          {language === 'tr' ? m.tr : m.en}
-                        </button>
-                      ))}
+                    <div className="search-results">
+                      <SearchResults
+                        courses={searchResults}
+                        onAddCourse={handleAddCourse}
+                        onAddSection={handleAddSection}
+                        loading={loading}
+                        language={language}
+                        hasSearched={hasSearched}
+                      />
                     </div>
                   </div>
-                ))}
+
+                  {/* Basket Section */}
+                  <Basket
+                    basket={basket}
+                    onRemoveCourse={handleRemoveCourse}
+                    onRemoveSection={handleRemoveSection}
+                    onClearBasket={handleClearBasket}
+                    onGenerate={handleGenerate}
+                    loading={generatingSchedules}
+                    language={language}
+                    preference={preference}
+                    setPreference={setPreference}
+                    savedBaskets={savedBaskets}
+                    onSaveBasket={handleSaveBasket}
+                    onLoadBasket={handleLoadSavedBasket}
+                    onRemoveSavedBasket={handleRemoveSavedBasket}
+                  />
+                </div>
+
+                {/* Schedules Section */}
+                <div ref={schedulesRef}>
+                  <ScheduleList
+                    schedules={schedules}
+                    conflicts={conflicts}
+                    overload={overload}
+                    loading={generatingSchedules}
+                    language={language}
+                    isLimited={isLimited}
+                    onViewAll={handleViewAll}
+                  />
+                </div>
+
+                {/* Scroll to Top Button */}
+                <ScrollToTop language={language} />
+              </>
+            } />
+            <Route path="/terms" element={<TermsOfService language={language} onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
+            <Route path="/how-to-use" element={<HowToUse language={language} onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
+            <Route path="/contact" element={<Contact language={language} onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
+            <Route path="/curriculum" element={<CurriculumPage language={language} />} />
+            <Route path="/survey" element={<SurveyPage language={language} onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} />} />
+            {/* 404 Catch-All Route */}
+            <Route path="*" element={<NotFound language={language} onNavigate={(path) => navigate(path)} />} />
+            <Route path="/results" element={<ResultsPage language={language} />} />
+          </Routes>
+          <Footer onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} language={language} />
+          <CookieBanner language={language} />
+
+          {/* Major Selection Modal */}
+          {showMajorModal && (
+            <div className="modal-overlay">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <div className="once-notice">
+                    <span>✨ {language === 'tr' ? 'Sadece 1 Seferlik' : 'Only Asked Once'}</span>
+                  </div>
+                  <h2>{language === 'tr' ? 'Bölümünüzü Seçin' : 'Select Your Major'}</h2>
+                  <p>
+                    {language === 'tr'
+                      ? 'Size daha iyi yardımcı olabilmemiz için bölümünüzü seçer misiniz? Bu seçim sepetiniz ve verileriniz için bir kereye mahsus kaydedilecektir.'
+                      : 'Could you please select your major so we can assist you better? This choice will be saved once for your basket and data.'}
+                  </p>
+                </div>
+                <div className="major-grid-container">
+                  {MAJORS.map(group => (
+                    <div key={group.category.en} className="major-category">
+                      <h3>{language === 'tr' ? group.category.tr : group.category.en}</h3>
+                      <div className="major-items">
+                        {group.items.map(m => (
+                          <button
+                            key={m.id}
+                            className={`major-item-btn ${major === m.en ? 'active' : ''}`}
+                            onClick={() => handleSaveMajor(m.en)}
+                          >
+                            {language === 'tr' ? m.tr : m.en}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Corequisite Warning Modal */}
-        {coreqWarning && (
-          <CoreqWarningModal
-            missingCoreqs={coreqWarning}
-            language={language}
-            onCancel={() => setCoreqWarning(null)}
-            onConfirm={() => {
-              setCoreqWarning(null);
-              handleGenerate(true, true); // ignoreMajorGuard=true (already passed), ignoreCoreqs=true
-            }}
-          />
-        )}
-      </div>
-    </>
-  )
+          {/* Corequisite Warning Modal */}
+          {coreqWarning && (
+            <CoreqWarningModal
+              missingCoreqs={coreqWarning}
+              language={language}
+              onCancel={() => setCoreqWarning(null)}
+              onConfirm={() => {
+                setCoreqWarning(null);
+                handleGenerate(true, true); // ignoreMajorGuard=true (already passed), ignoreCoreqs=true
+              }}
+            />
+          )}
+        </div>
+      </>
+    </GrainProvider>
+  );
 }
 
 export default App
