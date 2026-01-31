@@ -39,7 +39,7 @@ const SurveyPage = ({ language, onNavigate }) => {
                         : 'I would appreciate it if you could fill out this short survey to help improve the application.'}
                 </p>
                 <a
-                    href="https://docs.google.com/forms/d/18QWAame4oCrh2MLgfOQOpDfPsKu1ZTHXJaz1w14ugRs"
+                    href="https://forms.gle/zyrJEyniQTPZkfGn7"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-submit-major"
