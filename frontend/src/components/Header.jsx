@@ -59,7 +59,7 @@ function Header({ language, setLanguage, theme, setTheme, onNavigate, term }) {
             <button
               className="header-link"
               onClick={() => {
-                onNavigate('survey');
+                window.open('https://docs.google.com/forms/d/e/1FAIpQLSeCaXzVr8tFIQzHJdqCrxNq95NwGIQFU8UvllBFlqvSfaOOhA/viewform', '_blank');
                 setShowMobileMenu(false);
               }}
             >
