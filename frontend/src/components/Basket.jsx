@@ -34,14 +34,14 @@ function Basket({
       <div className="basket-warning-box">
         {language === 'en' ? (
           <>
-            OzuPlanner will be closed on February 3rd at 15:00.
+            OzuPlanner will be closed on February 3rd at 23:59.
             <div>
               Course registrations must be completed via <a href="https://sis.ozyegin.edu.tr" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>sis.ozyegin.edu.tr</a>
             </div>
           </>
         ) : (
           <>
-            OzuPlanner, 3 Şubat saat 15:00’te kapatılacaktır.
+            OzuPlanner, 3 Şubat saat 23:59’da kapatılacaktır.
             <div>
               Ders kayıtlarınızı <a href="https://sis.ozyegin.edu.tr" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>sis.ozyegin.edu.tr</a> üzerinden yapmalısınız.
             </div>

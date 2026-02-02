@@ -1,4 +1,4 @@
-/* Maintenance Screen Styles - Clean & Formal */
+/* Maintenance Screen - Premium 2x2 Grid Design */
 .maintenance-screen {
     position: fixed;
     top: 0;
@@ -9,158 +9,334 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f5f5f5;
+    background: linear-gradient(160deg, #fdf2f6 0%, #f0e4e8 50%, #e8e0e4 100%);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Hide body scrollbar when maintenance screen is visible */
+body:has(.maintenance-screen) {
+    overflow: hidden;
 }
 
 .maintenance-content {
     text-align: center;
-    padding: 3rem;
-    max-width: 500px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 900px;
+    width: 100%;
     position: relative;
 }
 
-/* Language toggle button */
+/* Language Toggle */
 .lang-toggle {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: #f0f0f0;
-    border: 1px solid #ddd;
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(165, 0, 80, 0.15);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    color: #333;
-    transition: background 0.2s;
+    color: #A50050;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    z-index: 10;
 }
 
 .lang-toggle:hover {
-    background: #e0e0e0;
+    background: #A50050;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Logo Header */
+.logo-header {
+    margin-bottom: 2rem;
+}
+
+.logo-text {
+    font-size: 2.75rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #A50050 0%, #003087 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+}
+
+/* 2x2 Card Grid */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+/* Cards Base */
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+    font-size: 2.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.card h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    color: #111827;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #374151;
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+    font-weight: 500;
+}
+
+/* Thanks Card */
+.thanks-card {
+    border-top: 4px solid #A50050;
+    background: linear-gradient(180deg, #fdf2f6 0%, #fff 100%);
+}
+
+.thanks-card h2 {
+    color: #A50050;
+}
+
+/* Survey Card */
+.survey-card {
+    border-top: 4px solid #A50050;
+}
+
+.survey-card p {
+    margin-bottom: 1rem;
+}
+
+/* Warning Card */
+.warning-card {
+    border-top: 4px solid #f59e0b;
+    background: linear-gradient(180deg, #fffbeb 0%, #fff 100%);
+}
+
+.warning-card h2 {
+    color: #b45309;
+}
+
+.warning-card p {
+    color: #92400e;
+}
+
+/* Contact Card */
+.contact-card {
+    border-top: 4px solid #059669;
+    background: linear-gradient(180deg, #f0fdf4 0%, #fff 100%);
+}
+
+.contact-card h2 {
+    color: #047857;
+}
+
+.contact-card p {
+    margin-bottom: 1rem;
+}
+
+/* Buttons */
+.btn-primary {
+    display: inline-block;
+    background: linear-gradient(135deg, #A50050 0%, #82003f 100%);
+    color: white;
+    text-decoration: none;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(165, 0, 80, 0.3);
+    margin-top: auto;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(165, 0, 80, 0.4);
+}
+
+.btn-warning {
+    display: inline-block;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    text-decoration: none;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+    margin-top: auto;
+}
+
+.btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(245, 158, 11, 0.5);
+}
+
+.btn-contact {
+    display: inline-block;
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    color: white;
+    text-decoration: none;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+    margin-top: auto;
+}
+
+.btn-contact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(5, 150, 105, 0.4);
+}
+
+/* Dark Mode */
+body.dark-mode .maintenance-screen {
+    background: linear-gradient(160deg, #1a1a1a 0%, #2d2025 50%, #1f1a1c 100%);
 }
 
 body.dark-mode .lang-toggle {
-    background: #444;
-    border-color: #555;
-    color: #ddd;
+    background: rgba(45, 45, 45, 0.9);
+    border-color: rgba(165, 0, 80, 0.3);
+    color: #e87da3;
 }
 
 body.dark-mode .lang-toggle:hover {
-    background: #555;
+    background: #A50050;
+    color: white;
 }
 
-.maintenance-icon {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+body.dark-mode .logo-text {
+    background: linear-gradient(135deg, #e87da3 0%, #6b9fff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
-.maintenance-icon svg {
-    width: 50px;
-    height: 50px;
-    color: #1e3a5f;
+body.dark-mode .card {
+    background: #2d2d2d;
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.maintenance-screen h1 {
-    color: #1e3a5f;
-    font-size: 1.75rem;
-    font-weight: 600;
-    margin: 0 0 1rem;
+body.dark-mode .card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
-.maintenance-message {
-    color: #555;
-    font-size: 1rem;
-    line-height: 1.6;
-    margin: 0 0 1.5rem;
+body.dark-mode .card h2 {
+    color: #f3f4f6;
 }
 
-.maintenance-eta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: #f0f0f0;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    color: #333;
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
+body.dark-mode .card p {
+    color: #9ca3af;
 }
 
-.pulse-dot {
-    width: 8px;
-    height: 8px;
-    background: #22c55e;
-    border-radius: 50%;
-    animation: pulse-dot 1.5s ease-in-out infinite;
+body.dark-mode .thanks-card {
+    background: linear-gradient(180deg, #3d2530 0%, #2d2d2d 100%);
 }
 
-@keyframes pulse-dot {
+body.dark-mode .thanks-card h2 {
+    color: #e87da3;
+}
 
-    0%,
-    100% {
-        opacity: 1;
+body.dark-mode .survey-card {
+    background: #2d2d2d;
+}
+
+body.dark-mode .warning-card {
+    background: linear-gradient(180deg, #3d3520 0%, #2d2d2d 100%);
+    border-color: #a67c00;
+}
+
+body.dark-mode .warning-card h2 {
+    color: #fcd34d;
+}
+
+body.dark-mode .warning-card p {
+    color: #fbbf24;
+}
+
+body.dark-mode .contact-card {
+    background: linear-gradient(180deg, #1f2d25 0%, #2d2d2d 100%);
+}
+
+body.dark-mode .contact-card h2 {
+    color: #6ee7b7;
+}
+
+/* Mobile: Stack cards vertically */
+@media (max-width: 700px) {
+    .maintenance-screen {
+        align-items: flex-start;
+        padding-top: 60px;
     }
 
-    50% {
-        opacity: 0.4;
-    }
-}
-
-.refresh-button {
-    background: #1e3a5f;
-    color: #fff;
-    border: none;
-    padding: 0.75rem 2rem;
-    font-size: 0.95rem;
-    font-weight: 500;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.refresh-button:hover {
-    background: #2d5a87;
-}
-
-/* Dark mode support */
-body.dark-mode .maintenance-screen {
-    background: #1a1a1a;
-}
-
-body.dark-mode .maintenance-content {
-    background: #2a2a2a;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-body.dark-mode .maintenance-screen h1 {
-    color: #fff;
-}
-
-body.dark-mode .maintenance-message {
-    color: #aaa;
-}
-
-body.dark-mode .maintenance-eta {
-    background: #333;
-    color: #ddd;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 600px) {
     .maintenance-content {
-        margin: 1rem;
-        padding: 2rem;
+        padding: 1rem;
     }
 
-    .maintenance-screen h1 {
-        font-size: 1.5rem;
+    .logo-text {
+        font-size: 1.75rem;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Reorder cards on mobile: thanks, survey, sis, contact */
+    .thanks-card {
+        order: 1;
+    }
+
+    .survey-card {
+        order: 2;
+    }
+
+    .warning-card {
+        order: 3;
+    }
+
+    .contact-card {
+        order: 4;
+    }
+
+    .card {
+        padding: 1.25rem;
+    }
+
+    .card-icon {
+        font-size: 1.75rem;
+    }
+
+    .card h2 {
+        font-size: 1rem;
     }
 }
