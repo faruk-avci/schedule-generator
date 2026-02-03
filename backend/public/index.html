@@ -393,16 +393,35 @@
             const container = document.getElementById('searchResults');
             container.innerHTML = courses.map(course => `
                 <div class="course-result">
-                    <div class="course-header">
-                        ${course.course_name}
-                        <button onclick="addCourse('${escapeJs(course.course_name)}')">Add All Sections</button>
+                    <div class="course-header" style="display:flex; justify-content:space-between; align-items:center;">
+                        <span>
+                            <strong>${course.course_name}</strong>
+                            <div style="font-size:12px; color:#666; margin-top:2px;">
+                                ${course.credits || ''} Credits • ${course.sections.length} Sections
+                            </div>
+                        </span>
+                        <button onclick="addCourse('${escapeJs(course.course_name)}')">Add Course (Any Section)</button>
                     </div>
-                    <div>
-                        ${course.sections.map(sec => `
-                            <button class="section-btn" onclick="addSection('${escapeJs(course.course_name)}', '${escapeJs(sec.section_name)}')">
-                                ${sec.section_name}
-                            </button>
-                        `).join('')}
+                    <div style="margin-top:10px;">
+                        ${course.sections.map(sec => {
+                // Format times: Mon 10:00-12:00, etc.
+                const times = (sec.times || []).map(t =>
+                    `${t.day_of_week?.substring(0, 3) || t.day?.substring(0, 3)} ${t.start_time || t.start}-${t.end_time || t.end}`
+                ).join(', ');
+
+                return `
+                            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid #eee; padding:8px 0;">
+                                <div>
+                                    <div style="font-weight:bold; font-size:13px;">${sec.section_name}</div>
+                                    <div style="font-size:12px; color:#666;">${sec.instructors?.[0] || sec.lecturer || 'Staff'}</div>
+                                    <div style="font-size:12px; color:#444;">${times}</div>
+                                </div>
+                                <button class="section-btn" onclick="addSection('${escapeJs(course.course_name)}', '${escapeJs(sec.section_name)}')">
+                                    Add Section
+                                </button>
+                            </div>
+                            `;
+            }).join('')}
                     </div>
                 </div>
             `).join('');
