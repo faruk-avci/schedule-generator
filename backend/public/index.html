@@ -371,10 +371,8 @@
             }
 
             try {
-                const res = await fetch(`${API_BASE}/api/courses/search`, {
+                const res = await api('/api/courses/search', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
                     body: JSON.stringify({ courseName: query })
                 });
                 const data = await res.json();
@@ -439,7 +437,7 @@
         // Basket
         async function loadBasket() {
             try {
-                const res = await fetch(`${API_BASE}/api/courses/basket`, { credentials: 'include' });
+                const res = await api('/api/courses/basket');
                 const data = await res.json();
                 if (data.success) {
                     renderBasket(data.basket);
@@ -466,10 +464,8 @@
 
         async function addCourse(name) {
             try {
-                const res = await fetch(`${API_BASE}/api/courses/add`, {
+                const res = await api('/api/courses/add', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
                     body: JSON.stringify({ course: name, section: null })
                 });
                 const data = await res.json();
@@ -486,10 +482,8 @@
 
         async function addSection(course, section) {
             try {
-                const res = await fetch(`${API_BASE}/api/courses/add`, {
+                const res = await api('/api/courses/add', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
                     body: JSON.stringify({ course, section })
                 });
                 const data = await res.json();
@@ -506,10 +500,8 @@
 
         async function removeCourse(name) {
             try {
-                const res = await fetch(`${API_BASE}/api/courses/remove`, {
+                const res = await api('/api/courses/remove', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
                     body: JSON.stringify({ course: name, section: null })
                 });
                 const data = await res.json();
@@ -526,10 +518,8 @@
 
         async function removeSection(course, section) {
             try {
-                const res = await fetch(`${API_BASE}/api/courses/remove`, {
+                const res = await api('/api/courses/remove', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
                     body: JSON.stringify({ course, section })
                 });
                 const data = await res.json();
@@ -547,9 +537,8 @@
         async function clearBasket() {
             if (!confirm('Clear entire basket?')) return;
             try {
-                const res = await fetch(`${API_BASE}/api/courses/basket/clear`, {
-                    method: 'DELETE',
-                    credentials: 'include'
+                const res = await api('/api/courses/basket/clear', {
+                    method: 'DELETE'
                 });
                 const data = await res.json();
                 if (data.success) {
@@ -564,7 +553,7 @@
         // Saved Baskets
         async function loadSavedBaskets() {
             try {
-                const res = await fetch(`${API_BASE}/api/courses/baskets`, { credentials: 'include' });
+                const res = await api('/api/courses/baskets');
                 const data = await res.json();
                 if (data.success) {
                     renderSavedBaskets(data.baskets || []);
@@ -598,10 +587,8 @@
                 return;
             }
             try {
-                const res = await fetch(`${API_BASE}/api/courses/baskets/save`, {
+                const res = await api('/api/courses/baskets/save', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
                     body: JSON.stringify({ name })
                 });
                 const data = await res.json();
@@ -619,10 +606,8 @@
 
         async function loadSavedBasket(name) {
             try {
-                const res = await fetch(`${API_BASE}/api/courses/baskets/load`, {
+                const res = await api('/api/courses/baskets/load', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
                     body: JSON.stringify({ name })
                 });
                 const data = await res.json();
@@ -640,10 +625,8 @@
         async function deleteSavedBasket(name) {
             if (!confirm(`Delete saved basket "${name}"?`)) return;
             try {
-                const res = await fetch(`${API_BASE}/api/courses/baskets/remove`, {
+                const res = await api('/api/courses/baskets/remove', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
                     body: JSON.stringify({ name })
                 });
                 const data = await res.json();
@@ -666,10 +649,8 @@
             btn.textContent = 'Generating...';
 
             try {
-                const res = await fetch(`${API_BASE}/api/schedule/generate`, {
+                const res = await api('/api/schedule/generate', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
                     body: JSON.stringify({ limit: 50, preference })
                 });
                 const data = await res.json();
