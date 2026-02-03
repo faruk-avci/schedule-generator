@@ -642,22 +642,32 @@
         }
 
         // Generate Schedules
-        async function generateSchedules() {
+        async function generateSchedules(ignoreCoreqs = false) {
             const preference = document.querySelector('input[name="pref"]:checked').value;
             const btn = document.getElementById('generateBtn');
             btn.disabled = true;
-            btn.textContent = 'Generating...';
+            btn.textContent = ignoreCoreqs ? 'Generating (Ignoring Coreqs)...' : 'Generating...';
 
             try {
                 const res = await api('/api/schedule/generate', {
                     method: 'POST',
-                    body: JSON.stringify({ limit: 50, preference })
+                    body: JSON.stringify({ limit: 50, preference, ignoreCoreqs })
                 });
                 const data = await res.json();
 
                 if (data.success && data.schedules) {
                     renderSchedules(data.schedules);
                     showMessage(`Generated ${data.totalSchedules} schedules`);
+                } else if (!data.success && data.error === 'MISSING_COREQS') {
+                    // Handle missing coreqs
+                    const missingList = data.missingCoreqs.map(m => `• ${m.course} requires ${m.missing}`).join('\n');
+                    const msg = `Missing Corequisites:\n${missingList}\n\nGenerate anyway?`;
+
+                    if (confirm(msg)) {
+                        await generateSchedules(true); // Retry with ignore flag
+                    } else {
+                        showMessage('Generation cancelled', true);
+                    }
                 } else {
                     showMessage(data.error || data.message || 'Generation failed', true);
                     document.getElementById('scheduleResults').innerHTML = '';
@@ -669,6 +679,7 @@
                 btn.textContent = 'Generate Schedules';
             }
         }
+
 
         function renderSchedules(schedules) {
             const container = document.getElementById('scheduleResults');
