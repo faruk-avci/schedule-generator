@@ -205,22 +205,22 @@
     <!-- Disclaimer Modal -->
     <div id="disclaimerModal" class="modal-overlay">
         <div class="modal">
-            <h2>Important Notice</h2>
+            <h2>Önemli Uyarı</h2>
             <p>
-                OzuPlanner is NOT an official university application. You MUST complete your course registration through
-                the official SIS portal.
+                OzuPlanner resmi bir üniversite uygulaması DEĞİLDİR. Ders kayıtlarınızı resmi SIS portalı üzerinden
+                yapmalısınız.
             </p>
             <p style="margin-top:15px;">
-                To continue, type the following phrase exactly:
+                Devam etmek için aşağıdaki cümleyi aynen yazın:
             </p>
             <p style="background:#f5f5f5; padding:10px; font-weight:bold; margin:15px 0;">
-                I understand OzuPlanner is not official and I will register through SIS
+                OzuPlanner resmi degil ve derslerimi SIS uzerinden yapacağım
             </p>
-            <input type="text" id="disclaimerInput" placeholder="Type the phrase above..."
+            <input type="text" id="disclaimerInput" placeholder="Yukarıdaki cümleyi yazın..."
                 style="width:100%; margin-bottom:15px;">
-            <p id="disclaimerError" style="color:#c00; display:none; margin-bottom:10px;">Phrase does not match. Please
-                type exactly as shown.</p>
-            <button onclick="window.checkDisclaimer()">Continue</button>
+            <p id="disclaimerError" style="color:#c00; display:none; margin-bottom:10px;">Cümle eşleşmiyor. Lütfen aynen
+                yazın.</p>
+            <button onclick="window.checkDisclaimer()">Devam Et</button>
         </div>
     </div>
 
@@ -291,14 +291,21 @@
         });
 
         function checkDisclaimer() {
-            const input = document.getElementById('disclaimerInput').value.trim().toLowerCase();
-            const expected = 'i understand ozuplanner is not official and i will register through sis';
+            // Normalize: lowercase, replace Turkish ı with i, collapse whitespace
+            const input = document.getElementById('disclaimerInput').value
+                .trim()
+                .toLowerCase()
+                .replace(/ı/g, 'i')
+                .replace(/\s+/g, ' ');
+            const expected = 'ozuplanner resmi degil ve derslerimi sis uzerinden yapacagim';
 
             if (input === expected) {
                 localStorage.setItem('ozuplanner_disclaimer_accepted', 'true');
                 hideDisclaimer();
             } else {
                 document.getElementById('disclaimerError').style.display = 'block';
+                console.log('Expected:', expected);
+                console.log('Got:', input);
             }
         }
         window.checkDisclaimer = checkDisclaimer;
