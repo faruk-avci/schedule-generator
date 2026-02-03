@@ -526,4 +526,22 @@ router.post('/maintenance/cleanup-no-slots', authAdmin, async (req, res) => {
     }
 });
 
+// POST /api/admin/cache/clear - Clear search cache
+router.post('/cache/clear', authAdmin, (req, res) => {
+    try {
+        const courseRoutes = require('./courseRoutes');
+        if (courseRoutes.searchCache) {
+            const keysBefore = courseRoutes.searchCache.keys().length;
+            courseRoutes.searchCache.flushAll();
+            logActivity(req, 'CLEAR_SEARCH_CACHE', { keysCleared: keysBefore });
+            res.json({ success: true, message: `Search cache cleared (${keysBefore} keys)` });
+        } else {
+            res.status(500).json({ success: false, error: 'Search cache not accessible' });
+        }
+    } catch (error) {
+        console.error('Cache clear error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
 module.exports = router;
