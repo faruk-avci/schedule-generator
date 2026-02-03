@@ -28,6 +28,9 @@ const PORT = process.env.PORT || 8081;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Serve static files from public folder (simple backup site)
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Health check or API root
 app.get('/', (req, res) => {
     res.json({
@@ -112,8 +115,22 @@ app.use(cors({
 // On VPS: export MAINTENANCE_MODE=true && pm2 restart all
 app.use((req, res, next) => {
     if (process.env.MAINTENANCE_MODE === 'true') {
-        // Allow health checks and basket viewing even in maintenance mode
-        const allowedPaths = ['/health', '/', '/api/courses/basket', '/api/courses/baskets', '/api/courses/baskets/load'];
+        // Allow the simple backup site and its required endpoints during maintenance
+        const allowedPaths = [
+            '/health',
+            '/',
+            '/index.html',
+            '/api/courses/basket',
+            '/api/courses/baskets',
+            '/api/courses/baskets/load',
+            '/api/courses/baskets/save',
+            '/api/courses/baskets/remove',
+            '/api/courses/search',
+            '/api/courses/add',
+            '/api/courses/remove',
+            '/api/courses/basket/clear',
+            '/api/schedule/generate'
+        ];
         if (allowedPaths.includes(req.path)) {
             return next();
         }

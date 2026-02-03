@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OzuPlanner - Simple</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            margin: 20px 0 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        input,
+        button,
+        select {
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+        }
+
+        button {
+            cursor: pointer;
+            background: #333;
+            color: white;
+            border: none;
+            margin-left: 5px;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+        button:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .item {
+            background: #f5f5f5;
+            padding: 10px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item button {
+            background: #c00;
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+
+        .course-result {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        .course-header {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .section-btn {
+            background: #666;
+            padding: 4px 8px;
+            font-size: 12px;
+            margin: 2px;
+        }
+
+        .section-btn:hover {
+            background: #888;
+        }
+
+        .schedule {
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .schedule-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .time-slot {
+            font-size: 13px;
+            margin: 3px 0;
+        }
+
+        .error {
+            color: #c00;
+        }
+
+        .success {
+            color: #080;
+        }
+
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Disclaimer Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal {
+            background: white;
+            padding: 30px;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: #c00;
+        }
+
+        .modal p {
+            margin-bottom: 20px;
+        }
+
+        .modal button {
+            padding: 12px 24px;
+            font-size: 16px;
+        }
+
+        .preferences {
+            margin: 10px 0;
+        }
+
+        .preferences label {
+            margin-right: 15px;
+        }
+
+        .saved-baskets {
+            margin-top: 15px;
+        }
+
+        .saved-basket-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            background: #eee;
+            margin: 3px 0;
+        }
+
+        .saved-basket-item button {
+            margin-left: 5px;
+        }
+
+        .save-basket-form {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Disclaimer Modal -->
+    <div id="disclaimerModal" class="modal-overlay">
+        <div class="modal">
+            <h2>⚠️ Important Notice</h2>
+            <p>
+                <strong>I understand that OzuPlanner is NOT an official university application.</strong>
+            </p>
+            <p>
+                I will complete my course registration through the official SIS (Student Information System) portal.
+            </p>
+            <p>
+                OzuPlanner is only a planning tool to help organize my schedule.
+            </p>
+            <button onclick="acceptDisclaimer()">I Understand & Accept</button>
+        </div>
+    </div>
+
+    <div id="mainContent" class="hidden">
+        <h1>OzuPlanner (Simple)</h1>
+        <p style="color:#666; margin-bottom:20px;">Lightweight version - core features only</p>
+
+        <!-- Search Section -->
+        <div class="section">
+            <h2>Search Courses</h2>
+            <div>
+                <input type="text" id="searchInput" placeholder="Course name or code (e.g. CS201)">
+                <button onclick="searchCourses()">Search</button>
+                <button onclick="clearSearch()" style="background:#666;">Clear</button>
+            </div>
+            <div id="searchResults"></div>
+        </div>
+
+        <!-- Basket Section -->
+        <div class="section">
+            <h2>My Basket</h2>
+            <div id="basketItems"></div>
+            <div style="margin-top:10px;">
+                <button onclick="clearBasket()" style="background:#c00;">Clear Basket</button>
+            </div>
+
+            <!-- Saved Baskets -->
+            <div class="saved-baskets">
+                <h3 style="font-size:14px; margin-top:15px;">Saved Baskets</h3>
+                <div id="savedBasketsList"></div>
+                <div class="save-basket-form">
+                    <input type="text" id="basketName" placeholder="Basket name" style="width:150px;">
+                    <button onclick="saveBasket()">Save Current</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generate Section -->
+        <div class="section">
+            <h2>Generate Schedules</h2>
+            <div class="preferences">
+                <label><input type="radio" name="pref" value="morning" checked> Morning</label>
+                <label><input type="radio" name="pref" value="balanced"> Balanced</label>
+                <label><input type="radio" name="pref" value="evening"> Evening</label>
+            </div>
+            <button onclick="generateSchedules()" id="generateBtn">Generate Schedules</button>
+            <div id="scheduleResults"></div>
+        </div>
+
+        <div id="messageBox"></div>
+    </div>
+
+    <script>
+        const API_BASE = '';
+
+        // Check disclaimer on load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('ozuplanner_disclaimer_accepted') === 'true') {
+                hideDisclaimer();
+            }
+            loadBasket();
+            loadSavedBaskets();
+        });
+
+        function acceptDisclaimer() {
+            localStorage.setItem('ozuplanner_disclaimer_accepted', 'true');
+            hideDisclaimer();
+        }
+
+        function hideDisclaimer() {
+            document.getElementById('disclaimerModal').classList.add('hidden');
+            document.getElementById('mainContent').classList.remove('hidden');
+        }
+
+        function showMessage(text, isError = false) {
+            const box = document.getElementById('messageBox');
+            box.innerHTML = `<div class="message ${isError ? 'error' : 'success'}">${text}</div>`;
+            setTimeout(() => box.innerHTML = '', 4000);
+        }
+
+        // Search
+        async function searchCourses() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query || query.length < 2) {
+                showMessage('Please enter at least 2 characters', true);
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/api/courses/search`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ courseName: query })
+                });
+                const data = await res.json();
+
+                if (data.courses && data.courses.length > 0) {
+                    renderSearchResults(data.courses);
+                } else {
+                    document.getElementById('searchResults').innerHTML = '<p>No courses found.</p>';
+                }
+            } catch (err) {
+                showMessage('Search failed: ' + err.message, true);
+            }
+        }
+
+        function renderSearchResults(courses) {
+            const container = document.getElementById('searchResults');
+            container.innerHTML = courses.map(course => `
+                <div class="course-result">
+                    <div class="course-header">
+                        ${course.course_name}
+                        <button onclick="addCourse('${escapeJs(course.course_name)}')">Add All Sections</button>
+                    </div>
+                    <div>
+                        ${course.sections.map(sec => `
+                            <button class="section-btn" onclick="addSection('${escapeJs(course.course_name)}', '${escapeJs(sec.section_name)}')">
+                                ${sec.section_name}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function escapeJs(str) {
+            return str.replace(/'/g, "\\'").replace(/"/g, '\\"');
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchResults').innerHTML = '';
+        }
+
+        // Basket
+        async function loadBasket() {
+            try {
+                const res = await fetch(`${API_BASE}/api/courses/basket`, { credentials: 'include' });
+                const data = await res.json();
+                if (data.success) {
+                    renderBasket(data.basket);
+                }
+            } catch (err) {
+                console.error('Load basket error:', err);
+            }
+        }
+
+        function renderBasket(basket) {
+            const container = document.getElementById('basketItems');
+            const items = [];
+
+            (basket.courses || []).forEach(c => {
+                items.push(`<div class="item"><span>${c} (all sections)</span><button onclick="removeCourse('${escapeJs(c)}')">Remove</button></div>`);
+            });
+
+            (basket.sections || []).forEach(s => {
+                items.push(`<div class="item"><span>${s.course} - ${s.section}</span><button onclick="removeSection('${escapeJs(s.course)}', '${escapeJs(s.section)}')">Remove</button></div>`);
+            });
+
+            container.innerHTML = items.length ? items.join('') : '<p style="color:#666;">Basket is empty</p>';
+        }
+
+        async function addCourse(name) {
+            try {
+                const res = await fetch(`${API_BASE}/api/courses/add`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ course: name, section: null })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showMessage(`Added ${name}`);
+                    loadBasket();
+                } else {
+                    showMessage(data.error || 'Failed to add', true);
+                }
+            } catch (err) {
+                showMessage('Error: ' + err.message, true);
+            }
+        }
+
+        async function addSection(course, section) {
+            try {
+                const res = await fetch(`${API_BASE}/api/courses/add`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ course, section })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showMessage(`Added ${course} - ${section}`);
+                    loadBasket();
+                } else {
+                    showMessage(data.error || 'Failed to add', true);
+                }
+            } catch (err) {
+                showMessage('Error: ' + err.message, true);
+            }
+        }
+
+        async function removeCourse(name) {
+            try {
+                const res = await fetch(`${API_BASE}/api/courses/remove`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ course: name, section: null })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showMessage(`Removed ${name}`);
+                    loadBasket();
+                } else {
+                    showMessage(data.error || 'Failed to remove', true);
+                }
+            } catch (err) {
+                showMessage('Error: ' + err.message, true);
+            }
+        }
+
+        async function removeSection(course, section) {
+            try {
+                const res = await fetch(`${API_BASE}/api/courses/remove`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ course, section })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showMessage(`Removed ${course} - ${section}`);
+                    loadBasket();
+                } else {
+                    showMessage(data.error || 'Failed to remove', true);
+                }
+            } catch (err) {
+                showMessage('Error: ' + err.message, true);
+            }
+        }
+
+        async function clearBasket() {
+            if (!confirm('Clear entire basket?')) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/courses/basket/clear`, {
+                    method: 'DELETE',
+                    credentials: 'include'
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showMessage('Basket cleared');
+                    loadBasket();
+                }
+            } catch (err) {
+                showMessage('Error: ' + err.message, true);
+            }
+        }
+
+        // Saved Baskets
+        async function loadSavedBaskets() {
+            try {
+                const res = await fetch(`${API_BASE}/api/courses/baskets`, { credentials: 'include' });
+                const data = await res.json();
+                if (data.success) {
+                    renderSavedBaskets(data.baskets || []);
+                }
+            } catch (err) {
+                console.error('Load saved baskets error:', err);
+            }
+        }
+
+        function renderSavedBaskets(baskets) {
+            const container = document.getElementById('savedBasketsList');
+            if (baskets.length === 0) {
+                container.innerHTML = '<p style="color:#666; font-size:13px;">No saved baskets</p>';
+                return;
+            }
+            container.innerHTML = baskets.map(b => `
+                <div class="saved-basket-item">
+                    <span>${b.name} (${b.totalItems} items)</span>
+                    <div>
+                        <button onclick="loadSavedBasket('${escapeJs(b.name)}')" style="background:#333;">Load</button>
+                        <button onclick="deleteSavedBasket('${escapeJs(b.name)}')" style="background:#c00;">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function saveBasket() {
+            const name = document.getElementById('basketName').value.trim();
+            if (!name) {
+                showMessage('Enter a basket name', true);
+                return;
+            }
+            try {
+                const res = await fetch(`${API_BASE}/api/courses/baskets/save`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ name })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showMessage(`Basket "${name}" saved`);
+                    document.getElementById('basketName').value = '';
+                    loadSavedBaskets();
+                } else {
+                    showMessage(data.error || 'Failed to save', true);
+                }
+            } catch (err) {
+                showMessage('Error: ' + err.message, true);
+            }
+        }
+
+        async function loadSavedBasket(name) {
+            try {
+                const res = await fetch(`${API_BASE}/api/courses/baskets/load`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ name })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showMessage(`Loaded basket "${name}"`);
+                    loadBasket();
+                } else {
+                    showMessage(data.error || 'Failed to load', true);
+                }
+            } catch (err) {
+                showMessage('Error: ' + err.message, true);
+            }
+        }
+
+        async function deleteSavedBasket(name) {
+            if (!confirm(`Delete saved basket "${name}"?`)) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/courses/baskets/remove`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ name })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showMessage(`Deleted "${name}"`);
+                    loadSavedBaskets();
+                } else {
+                    showMessage(data.error || 'Failed to delete', true);
+                }
+            } catch (err) {
+                showMessage('Error: ' + err.message, true);
+            }
+        }
+
+        // Generate Schedules
+        async function generateSchedules() {
+            const preference = document.querySelector('input[name="pref"]:checked').value;
+            const btn = document.getElementById('generateBtn');
+            btn.disabled = true;
+            btn.textContent = 'Generating...';
+
+            try {
+                const res = await fetch(`${API_BASE}/api/schedule/generate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ limit: 50, preference })
+                });
+                const data = await res.json();
+
+                if (data.success && data.schedules) {
+                    renderSchedules(data.schedules);
+                    showMessage(`Generated ${data.totalSchedules} schedules`);
+                } else {
+                    showMessage(data.error || data.message || 'Generation failed', true);
+                    document.getElementById('scheduleResults').innerHTML = '';
+                }
+            } catch (err) {
+                showMessage('Error: ' + err.message, true);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Generate Schedules';
+            }
+        }
+
+        function renderSchedules(schedules) {
+            const container = document.getElementById('scheduleResults');
+            if (schedules.length === 0) {
+                container.innerHTML = '<p>No valid schedules found. Check for conflicts.</p>';
+                return;
+            }
+
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
+            container.innerHTML = schedules.slice(0, 20).map((schedule, idx) => {
+                const courses = schedule.courses || schedule;
+                const slots = [];
+
+                courses.forEach(course => {
+                    (course.times || []).forEach(time => {
+                        slots.push({
+                            day: time.day_of_week,
+                            start: time.start_time,
+                            end: time.end_time,
+                            name: `${course.course_name} (${course.section_name})`
+                        });
+                    });
+                });
+
+                // Group by day
+                const byDay = {};
+                days.forEach(d => byDay[d] = []);
+                slots.forEach(s => {
+                    if (byDay[s.day]) byDay[s.day].push(s);
+                });
+
+                // Sort each day by start time
+                Object.keys(byDay).forEach(d => {
+                    byDay[d].sort((a, b) => a.start.localeCompare(b.start));
+                });
+
+                return `
+                    <div class="schedule">
+                        <div class="schedule-title">Schedule ${idx + 1}</div>
+                        ${days.map(day => {
+                    const daySlots = byDay[day];
+                    if (daySlots.length === 0) return '';
+                    return `
+                                <div><strong>${day}:</strong></div>
+                                ${daySlots.map(s => `<div class="time-slot">${s.start}-${s.end}: ${s.name}</div>`).join('')}
+                            `;
+                }).join('')}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Enter key for search
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && document.activeElement.id === 'searchInput') {
+                searchCourses();
+            }
+        });
+    </script>
+</body>
+
+</html>
