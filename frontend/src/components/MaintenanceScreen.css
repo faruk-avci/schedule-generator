@@ -311,7 +311,7 @@ body.dark-mode .contact-card h2 {
         grid-template-columns: 1fr;
     }
 
-    /* Reorder cards on mobile: thanks, survey, sis, contact */
+    /* Mobile order: thanks, survey, warning, basket */
     .thanks-card {
         order: 1;
     }
@@ -324,7 +324,7 @@ body.dark-mode .contact-card h2 {
         order: 3;
     }
 
-    .contact-card {
+    .basket-card {
         order: 4;
     }
 
@@ -338,6 +338,12 @@ body.dark-mode .contact-card h2 {
 
     .card h2 {
         font-size: 1rem;
+    }
+
+    .contact-card-standalone {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
     }
 }
 
@@ -372,22 +378,66 @@ body.dark-mode .contact-card h2 {
     box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
 }
 
-/* Contact Footer */
-.contact-footer {
+/* Contact Footer - removed, now using contact-card-standalone */
+
+/* Contact Card Standalone */
+.contact-card-standalone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: white;
+    border-radius: 16px;
+    padding: 1.25rem 2rem;
     margin-top: 1.5rem;
-    font-size: 0.95rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.contact-card-standalone:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-icon {
+    font-size: 2rem;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.contact-label {
+    font-size: 0.9rem;
     color: #6b7280;
+    font-weight: 500;
 }
 
-.contact-footer a {
-    color: #A50050;
+.contact-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #A50050 0%, #82003f 100%);
+    color: white;
     text-decoration: none;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.95rem;
     font-weight: 600;
-    margin-left: 0.5rem;
+    border-radius: 10px;
+    transition: all 0.2s;
+    box-shadow: 0 3px 10px rgba(165, 0, 80, 0.25);
 }
 
-.contact-footer a:hover {
-    text-decoration: underline;
+.contact-email:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(165, 0, 80, 0.35);
+}
+
+.email-icon {
+    font-size: 1rem;
 }
 
 /* Basket Modal */
@@ -499,6 +549,119 @@ body.dark-mode .contact-card h2 {
     margin-top: 1rem;
 }
 
+/* Wider modal for saved baskets */
+.basket-modal-wide {
+    max-width: 600px;
+}
+
+/* Basket Groups */
+.basket-group {
+    margin-bottom: 1.5rem;
+}
+
+.basket-group-title {
+    font-size: 1rem;
+    color: #374151;
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.basket-items-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.basket-empty-inline {
+    color: #9ca3af;
+    font-style: italic;
+    margin: 0.5rem 0;
+}
+
+/* Saved Baskets List */
+.saved-baskets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.saved-basket-card {
+    background: #f9fafb;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.saved-basket-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.875rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s;
+}
+
+.saved-basket-header:hover {
+    background: #f3f4f6;
+}
+
+.saved-basket-name {
+    font-weight: 600;
+    color: #374151;
+    flex: 1;
+}
+
+.saved-basket-count {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-right: 0.75rem;
+}
+
+.saved-basket-toggle {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+.saved-basket-content {
+    padding: 0.75rem 1rem 1rem;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Dark Mode - Saved Baskets */
+body.dark-mode .basket-group-title {
+    color: #e5e7eb;
+    border-bottom-color: #404040;
+}
+
+body.dark-mode .saved-basket-card {
+    background: #3d3d3d;
+    border-color: #525252;
+}
+
+body.dark-mode .saved-basket-header:hover {
+    background: #454545;
+}
+
+body.dark-mode .saved-basket-name {
+    color: #f3f4f6;
+}
+
+body.dark-mode .saved-basket-count {
+    color: #9ca3af;
+}
+
+body.dark-mode .saved-basket-content {
+    border-top-color: #525252;
+}
+
 /* Dark Mode - Basket Card */
 body.dark-mode .basket-card {
     background: linear-gradient(180deg, #2d2d40 0%, #2d2d2d 100%);
@@ -509,12 +672,17 @@ body.dark-mode .basket-card h2 {
     color: #a5b4fc;
 }
 
-body.dark-mode .contact-footer {
+body.dark-mode .contact-card-standalone {
+    background: #2d2d2d;
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .contact-label {
     color: #9ca3af;
 }
 
-body.dark-mode .contact-footer a {
-    color: #e87da3;
+body.dark-mode .contact-email {
+    background: linear-gradient(135deg, #e87da3 0%, #c4506e 100%);
 }
 
 body.dark-mode .basket-modal {
