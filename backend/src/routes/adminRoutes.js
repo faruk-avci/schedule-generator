@@ -258,10 +258,11 @@ router.post('/courses', authAdmin, async (req, res) => {
         const sanitizedTerm = term ? term.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : null;
         const coursesTable = sanitizedTerm ? `courses_${sanitizedTerm}` : 'courses';
 
+        // 'required' field stores required hours - default to 0, will be calculated from time slots
         const result = await pool.query(
-            `INSERT INTO ${coursesTable} (course_code, course_name, section_name, faculty, description, credits, lecturer, term, prerequisites, corequisites)
-             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
-            [course_code, course_name, section_name, faculty, description, credits, lecturer, term, prerequisites, corequisites]
+            `INSERT INTO ${coursesTable} (course_code, course_name, section_name, faculty, description, credits, lecturer, required, term, prerequisites, corequisites)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
+            [course_code, course_name, section_name, faculty, description, credits, lecturer, 0, term, prerequisites, corequisites]
         );
         logActivity(req, 'ADD_COURSE_ADMIN', { id: result.rows[0].id, course_name });
         res.json({ success: true, course: result.rows[0] });
