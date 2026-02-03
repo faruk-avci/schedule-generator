@@ -59,13 +59,19 @@ async function logActivity(req, action, details = {}) {
             }
         }
 
+        // Detect source (e.g. 'simple' from simple site, or 'web' default)
+        const source = req.headers && req.headers['x-source'] ? req.headers['x-source'] : 'web';
+
+        // Merge source into details
+        const logDetails = { ...details, source };
+
         const query = `
             INSERT INTO activity_logs (session_id, action, details, ip_address)
             VALUES ($1, $2, $3, $4)
         `;
 
         // Fire and forget - don't await to avoid blocking response
-        pool.query(query, [sessionId, action, details, ipAddress])
+        pool.query(query, [sessionId, action, logDetails, ipAddress])
             .catch(err => console.error('❌ Logger error:', err.message));
 
     } catch (error) {

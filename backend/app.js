@@ -129,7 +129,8 @@ app.use((req, res, next) => {
             '/api/courses/add',
             '/api/courses/remove',
             '/api/courses/basket/clear',
-            '/api/schedule/generate'
+            '/api/schedule/generate',
+            '/api/logs/event'
         ];
         if (allowedPaths.includes(req.path)) {
             return next();

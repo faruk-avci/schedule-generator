@@ -214,7 +214,7 @@
                 Devam etmek için aşağıdaki cümleyi aynen yazın:
             </p>
             <p style="background:#f5f5f5; padding:10px; font-weight:bold; margin:15px 0;">
-                OzuPlanner resmi degil ve derslerimi SIS uzerinden yapacağım
+                OzuPlanner resmi degil ve derslerimi SIS uzerinden kaydedecegim
             </p>
             <input type="text" id="disclaimerInput" placeholder="Yukarıdaki cümleyi yazın..."
                 style="width:100%; margin-bottom:15px;">
@@ -276,6 +276,20 @@
     <script>
         const API_BASE = '';
 
+        // API helper that adds source identifier for logging
+        async function api(endpoint, options = {}) {
+            const headers = {
+                'Content-Type': 'application/json',
+                'X-Source': 'simple',
+                ...(options.headers || {})
+            };
+            return fetch(`${API_BASE}${endpoint}`, {
+                ...options,
+                headers,
+                credentials: 'include'
+            });
+        }
+
         // Check disclaimer on load
         document.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('ozuplanner_disclaimer_accepted') === 'true') {
@@ -303,11 +317,32 @@
                 .replace(/ö/g, 'o')
                 .replace(/ç/g, 'c')
                 .replace(/\s+/g, ' ');
-            const expected = 'ozuplanner resmi degil ve derslerimi sis uzerinden yapacagim';
+            const expected = 'ozuplanner resmi degil ve derslerimi sis uzerinden kaydedeceğim';
 
             if (input === expected) {
+                console.log('MATCH! Hiding disclaimer...');
                 localStorage.setItem('ozuplanner_disclaimer_accepted', 'true');
-                hideDisclaimer();
+
+                // Log the acceptance
+                api('/api/logs/event', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        eventName: 'DISCLAIMER_ACCEPTED',
+                        details: {
+                            phrase: input,
+                            timestamp: new Date().toISOString()
+                        }
+                    })
+                }).catch(err => console.error('Log failed:', err));
+
+                try {
+                    document.getElementById('disclaimerModal').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('mainContent').classList.remove('hidden');
+                    document.getElementById('disclaimerModal').classList.add('hidden');
+                } catch (e) {
+                    console.error('Hide error:', e);
+                }
             } else {
                 document.getElementById('disclaimerError').style.display = 'block';
                 console.log('Expected:', expected);
