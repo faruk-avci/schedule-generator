@@ -207,16 +207,20 @@
         <div class="modal">
             <h2>Important Notice</h2>
             <p>
+                OzuPlanner is NOT an official university application. You MUST complete your course registration through
+                the official SIS portal.
+            </p>
+            <p style="margin-top:15px;">
                 To continue, type the following phrase exactly:
             </p>
             <p style="background:#f5f5f5; padding:10px; font-weight:bold; margin:15px 0;">
-                I will register through SIS
+                I understand OzuPlanner is not official and I will register through SIS
             </p>
             <input type="text" id="disclaimerInput" placeholder="Type the phrase above..."
                 style="width:100%; margin-bottom:15px;">
             <p id="disclaimerError" style="color:#c00; display:none; margin-bottom:10px;">Phrase does not match. Please
                 type exactly as shown.</p>
-            <button onclick="checkDisclaimer()">Continue</button>
+            <button onclick="window.checkDisclaimer()">Continue</button>
         </div>
     </div>
 
@@ -279,12 +283,25 @@
             }
             loadBasket();
             loadSavedBaskets();
+
+            // Allow Enter key on disclaimer input
+            document.getElementById('disclaimerInput')?.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') checkDisclaimer();
+            });
         });
 
-        function acceptDisclaimer() {
-            localStorage.setItem('ozuplanner_disclaimer_accepted', 'true');
-            hideDisclaimer();
+        function checkDisclaimer() {
+            const input = document.getElementById('disclaimerInput').value.trim().toLowerCase();
+            const expected = 'i understand ozuplanner is not official and i will register through sis';
+
+            if (input === expected) {
+                localStorage.setItem('ozuplanner_disclaimer_accepted', 'true');
+                hideDisclaimer();
+            } else {
+                document.getElementById('disclaimerError').style.display = 'block';
+            }
         }
+        window.checkDisclaimer = checkDisclaimer;
 
         function hideDisclaimer() {
             document.getElementById('disclaimerModal').classList.add('hidden');
