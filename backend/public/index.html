@@ -291,11 +291,17 @@
         });
 
         function checkDisclaimer() {
-            // Normalize: lowercase, replace Turkish ı with i, collapse whitespace
+            // Normalize: lowercase, replace all Turkish special chars, collapse whitespace
             const input = document.getElementById('disclaimerInput').value
                 .trim()
                 .toLowerCase()
                 .replace(/ı/g, 'i')
+                .replace(/İ/g, 'i')
+                .replace(/ğ/g, 'g')
+                .replace(/ü/g, 'u')
+                .replace(/ş/g, 's')
+                .replace(/ö/g, 'o')
+                .replace(/ç/g, 'c')
                 .replace(/\s+/g, ' ');
             const expected = 'ozuplanner resmi degil ve derslerimi sis uzerinden yapacagim';
 
