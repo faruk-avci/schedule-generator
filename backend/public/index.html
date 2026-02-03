@@ -393,12 +393,12 @@
                 <div class="course-result">
                     <div class="course-header" style="display:flex; justify-content:space-between; align-items:center;">
                         <span>
-                            <strong>${course.course_name}</strong>
+                            <strong>${course.course_code} - ${course.course_name}</strong>
                             <div style="font-size:12px; color:#666; margin-top:2px;">
                                 ${course.credits || ''} Credits • ${course.sections.length} Sections
                             </div>
                         </span>
-                        <button onclick="addCourse('${escapeJs(course.course_name)}')">Add Course (Any Section)</button>
+                        <button onclick="addCourse('${escapeJs(course.course_code)}')">Add Course (Any Section)</button>
                     </div>
                     <div style="margin-top:10px;">
                         ${course.sections.map(sec => {
@@ -414,7 +414,7 @@
                                     <div style="font-size:12px; color:#666;">${sec.instructors?.[0] || sec.lecturer || 'Staff'}</div>
                                     <div style="font-size:12px; color:#444;">${times}</div>
                                 </div>
-                                <button class="section-btn" onclick="addSection('${escapeJs(course.course_name)}', '${escapeJs(sec.section_name)}')">
+                                <button class="section-btn" onclick="addSection('${escapeJs(course.course_code)}', '${escapeJs(sec.section_name)}')">
                                     Add Section
                                 </button>
                             </div>
