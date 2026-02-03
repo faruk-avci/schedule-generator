@@ -198,6 +198,50 @@
         .save-basket-form {
             margin-top: 10px;
         }
+
+        /* Schedule Grid Styles */
+        .schedule-grid-container {
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+
+        .schedule-grid-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+            background: white;
+            border: 1px solid #ccc;
+        }
+
+        .schedule-grid-table th,
+        .schedule-grid-table td {
+            border: 1px solid #ddd;
+            padding: 4px;
+            text-align: center;
+            height: 25px;
+        }
+
+        .schedule-grid-table th {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .grid-time-col {
+            width: 50px;
+            background: #fafafa;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .grid-cell-filled {
+            color: white;
+            border-radius: 4px;
+            font-size: 10px;
+            line-height: 1.2;
+            padding: 2px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
@@ -681,6 +725,56 @@
         }
 
 
+        function getColorForId(id, lessons) {
+            if (!id) return 'transparent';
+            const idx = lessons.findIndex(l => l.id === id);
+            if (idx === -1) return '#999';
+            const hue = (idx * 137.5) % 360;
+            return `hsl(${hue}, 65%, 45%)`;
+        }
+
+        function renderScheduleGrid(matrix, lessons) {
+            const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+            const startHour = 8;
+            let html = '<div class="schedule-grid-container"><table class="schedule-grid-table">';
+
+            // Header
+            html += '<thead><tr><th class="grid-time-col">Time</th>';
+            days.forEach(d => html += `<th>${d}</th>`);
+            html += '</tr></thead><tbody>';
+
+            // Find max occupied hour
+            let maxH = 9;
+            for (let d = 0; d < 5; d++) {
+                if (matrix[d]) {
+                    for (let h = 0; h < 16; h++) {
+                        if (matrix[d][h] !== 0 && h > maxH) maxH = h;
+                    }
+                }
+            }
+
+            for (let h = 0; h <= maxH; h++) {
+                const timeLabel = `${h + startHour}:40`;
+                html += `<tr><td class="grid-time-col">${timeLabel}</td>`;
+
+                for (let d = 0; d < 5; d++) {
+                    const lessonId = matrix[d] ? matrix[d][h] : 0;
+                    let cellContent = '';
+                    if (lessonId !== 0) {
+                        const lesson = lessons.find(l => l.id === lessonId);
+                        const color = getColorForId(lessonId, lessons);
+                        if (lesson) {
+                            cellContent = `<div class="grid-cell-filled" style="background:${color}">${lesson.section_name}</div>`;
+                        }
+                    }
+                    html += `<td>${cellContent}</td>`;
+                }
+                html += '</tr>';
+            }
+            html += '</tbody></table></div>';
+            return html;
+        }
+
         function getTimesFromMatrix(matrix, lessonId) {
             const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
             const times = [];
@@ -727,6 +821,13 @@
                     </div>`;
 
                 if (Array.isArray(lessons)) {
+                    // Render Grid
+                    if (matrix.length > 0) {
+                        html += renderScheduleGrid(matrix, lessons);
+                    }
+
+                    // Render List
+                    html += '<div style="margin-top:15px; border-top:1px solid #eee; padding-top:10px;">';
                     lessons.forEach(c => {
                         let timeString = '';
                         if (matrix.length > 0) {
@@ -734,14 +835,19 @@
                         } else {
                             timeString = (c.times || []).map(t => `${t.day} ${t.start}`).join(', ');
                         }
+                        const color = getColorForId(c.id, lessons);
 
                         html += `
-                        <div class="schedule-course" style="background:#f9f9f9; padding:8px; margin-bottom:5px; border-radius:4px;">
-                            <div style="font-weight:bold; font-size:13px;">${c.course_code || c.course_name} (${c.section_name})</div>
-                            <div style="font-size:12px; color:#666;">${c.lecturer || 'Staff'}</div>
-                            <div style="font-size:12px; color:#444; font-family:monospace;">${timeString}</div>
+                        <div class="schedule-course" style="display:flex; align-items:center; margin-bottom:5px;">
+                            <div style="width:12px; height:12px; background:${color}; margin-right:8px; border-radius:2px;"></div>
+                            <div style="flex:1;">
+                                <span style="font-weight:bold; font-size:13px;">${c.course_code || c.course_name} (${c.section_name})</span>
+                                <span style="font-size:12px; color:#666; margin-left:5px;">${c.lecturer || 'Staff'}</span>
+                                <div style="font-size:11px; color:#444;">${timeString}</div>
+                            </div>
                         </div>`;
                     });
+                    html += '</div>';
                 } else {
                     html += '<p>Invalid schedule data</p>';
                 }
