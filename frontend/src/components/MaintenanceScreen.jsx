@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './MaintenanceScreen.css';
 
 const MaintenanceScreen = ({ language: initialLanguage }) => {
@@ -8,6 +8,10 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
     const [savedBaskets, setSavedBaskets] = useState([]);
     const [loadingBasket, setLoadingBasket] = useState(false);
     const [expandedBasket, setExpandedBasket] = useState(null);
+    const [expandedBasketData, setExpandedBasketData] = useState({});
+    const [loadingExpanded, setLoadingExpanded] = useState(null);
+
+    const API_URL = import.meta.env.VITE_API_URL || '';
 
     const toggleLanguage = () => {
         const newLang = lang === 'tr' ? 'en' : 'tr';
@@ -18,8 +22,6 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
     const fetchBaskets = async () => {
         setLoadingBasket(true);
         try {
-            const API_URL = import.meta.env.VITE_API_URL || '';
-
             // Fetch current basket
             const basketResponse = await fetch(`${API_URL}/api/courses/basket`, {
                 credentials: 'include'
@@ -29,7 +31,7 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
                 setBasket(basketData.basket);
             }
 
-            // Fetch saved baskets
+            // Fetch saved baskets list
             const savedResponse = await fetch(`${API_URL}/api/courses/baskets`, {
                 credentials: 'include'
             });
@@ -44,6 +46,37 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
         }
     };
 
+    const fetchSavedBasketDetails = async (name) => {
+        if (expandedBasketData[name]) {
+            // Already loaded
+            setExpandedBasket(expandedBasket === name ? null : name);
+            return;
+        }
+
+        setLoadingExpanded(name);
+        try {
+            // Use the load endpoint to get full basket data (it returns the basket contents)
+            const response = await fetch(`${API_URL}/api/courses/baskets/load`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            });
+            const data = await response.json();
+            if (data.success && data.basket) {
+                setExpandedBasketData(prev => ({
+                    ...prev,
+                    [name]: data.basket
+                }));
+                setExpandedBasket(name);
+            }
+        } catch (error) {
+            console.error('Error fetching basket details:', error);
+        } finally {
+            setLoadingExpanded(null);
+        }
+    };
+
     const handleViewBasket = () => {
         setShowBasket(true);
         if (!basket) {
@@ -52,7 +85,11 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
     };
 
     const toggleExpandBasket = (name) => {
-        setExpandedBasket(expandedBasket === name ? null : name);
+        if (expandedBasket === name) {
+            setExpandedBasket(null);
+        } else {
+            fetchSavedBasketDetails(name);
+        }
     };
 
     const hasCurrentBasket = basket && (basket.courses?.length > 0 || basket.sections?.length > 0);
@@ -71,7 +108,7 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
                     <div className="logo-text">OzuPlanner</div>
                 </div>
 
-                {/* 2x2 Card Grid - Desktop: Thanks, Survey, Warning, Basket */}
+                {/* 2x2 Card Grid */}
                 <div className="card-grid">
                     {/* 1. Thanks Card */}
                     <div className="card thanks-card">
@@ -79,8 +116,8 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
                         <h2>{lang === 'tr' ? 'Teşekkürler!' : 'Thank You!'}</h2>
                         <p>
                             {lang === 'tr'
-                                ? 'Ders kayıtlarınızda başarılar! OzuPlanner\'ı kullandığınız için çok teşekkür ederim. Site 4-6 Şubat tarihleri arasında kullanıma kapalı kalacaktır.'
-                                : 'Good luck with your course registration! Thank you so much for using OzuPlanner. The site will be closed between February 4-6.'}
+                                ? 'OzuPlanner\'ı kullandığınız için çok teşekkür ederim. Ders kayıtlarınızı SIS üzerinden yapmalısınız. Güvenlik nedenleriyle site 4-6 Şubat tarihleri arasında kullanıma kapalı kalacaktır.'
+                                : 'Thank you so much for using OzuPlanner. You must register for your courses through SIS. The site will be closed between February 4-6 for security reasons.'}
                         </p>
                     </div>
 
@@ -118,7 +155,7 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
                             rel="noopener noreferrer"
                             className="btn-warning"
                         >
-                            {lang === 'tr' ? 'SIS\'e Git →' : 'Go to SIS →'}
+                            {lang === 'tr' ? 'SIS\'e Git' : 'Go to SIS'}
                         </a>
                     </div>
 
@@ -137,15 +174,13 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
                     </div>
                 </div>
 
-                {/* Contact Card - Better Design */}
+                {/* Contact Card */}
                 <div className="contact-card-standalone">
-                    <div className="contact-icon">💬</div>
                     <div className="contact-info">
                         <span className="contact-label">
-                            {lang === 'tr' ? 'Sorularınız veya geri bildirimleriniz için:' : 'Questions or feedback?'}
+                            {lang === 'tr' ? 'Sorularınız için:' : 'Questions?'}
                         </span>
                         <a href="mailto:faruk.avci@ozu.edu.tr" className="contact-email">
-                            <span className="email-icon">✉️</span>
                             faruk.avci@ozu.edu.tr
                         </a>
                     </div>
@@ -159,7 +194,7 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
                         <button className="basket-modal-close" onClick={() => setShowBasket(false)}>
                             ✕
                         </button>
-                        <h2>{lang === 'tr' ? '🛒 Sepetlerim' : '🛒 My Baskets'}</h2>
+                        <h2>{lang === 'tr' ? 'Sepetlerim' : 'My Baskets'}</h2>
 
                         {loadingBasket ? (
                             <div className="basket-loading">
@@ -170,7 +205,7 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
                                 {/* Current Basket */}
                                 <div className="basket-group">
                                     <h3 className="basket-group-title">
-                                        {lang === 'tr' ? '📦 Mevcut Sepet' : '📦 Current Basket'}
+                                        {lang === 'tr' ? 'Mevcut Sepet' : 'Current Basket'}
                                     </h3>
                                     {hasCurrentBasket ? (
                                         <div className="basket-items-grid">
@@ -194,7 +229,7 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
                                 {hasSavedBaskets && (
                                     <div className="basket-group">
                                         <h3 className="basket-group-title">
-                                            {lang === 'tr' ? '💾 Kayıtlı Sepetler' : '💾 Saved Baskets'}
+                                            {lang === 'tr' ? 'Kayıtlı Sepetler' : 'Saved Baskets'}
                                         </h3>
                                         <div className="saved-baskets-list">
                                             {savedBaskets.map((saved, i) => (
@@ -202,21 +237,22 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
                                                     <button
                                                         className="saved-basket-header"
                                                         onClick={() => toggleExpandBasket(saved.name)}
+                                                        disabled={loadingExpanded === saved.name}
                                                     >
-                                                        <span className="saved-basket-name">📁 {saved.name}</span>
+                                                        <span className="saved-basket-name">{saved.name}</span>
                                                         <span className="saved-basket-count">
-                                                            {(saved.courses?.length || 0) + (saved.sections?.length || 0)} {lang === 'tr' ? 'ders' : 'courses'}
+                                                            {saved.totalItems} {lang === 'tr' ? 'ders' : 'courses'}
                                                         </span>
                                                         <span className="saved-basket-toggle">
-                                                            {expandedBasket === saved.name ? '▲' : '▼'}
+                                                            {loadingExpanded === saved.name ? '...' : (expandedBasket === saved.name ? '▲' : '▼')}
                                                         </span>
                                                     </button>
-                                                    {expandedBasket === saved.name && (
+                                                    {expandedBasket === saved.name && expandedBasketData[saved.name] && (
                                                         <div className="saved-basket-content">
-                                                            {saved.courses?.map((course, j) => (
+                                                            {expandedBasketData[saved.name].courses?.map((course, j) => (
                                                                 <div key={`sc-${j}`} className="basket-item">{course}</div>
                                                             ))}
-                                                            {saved.sections?.map((sec, j) => (
+                                                            {expandedBasketData[saved.name].sections?.map((sec, j) => (
                                                                 <div key={`ss-${j}`} className="basket-item">
                                                                     {sec.course} - {sec.section}
                                                                 </div>
@@ -239,8 +275,8 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
 
                         <p className="basket-note">
                             {lang === 'tr'
-                                ? '💡 Bu dersleri SIS\'e girerek kayıt olabilirsiniz.'
-                                : '💡 You can register for these courses through SIS.'}
+                                ? 'Bu dersleri SIS\'e girerek kayıt olabilirsiniz.'
+                                : 'You can register for these courses through SIS.'}
                         </p>
                     </div>
                 </div>

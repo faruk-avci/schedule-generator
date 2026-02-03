@@ -113,7 +113,7 @@ app.use(cors({
 app.use((req, res, next) => {
     if (process.env.MAINTENANCE_MODE === 'true') {
         // Allow health checks and basket viewing even in maintenance mode
-        const allowedPaths = ['/health', '/', '/api/courses/basket', '/api/courses/baskets'];
+        const allowedPaths = ['/health', '/', '/api/courses/basket', '/api/courses/baskets', '/api/courses/baskets/load'];
         if (allowedPaths.includes(req.path)) {
             return next();
         }
