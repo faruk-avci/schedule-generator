@@ -275,8 +275,8 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
 
                         <p className="basket-note">
                             {lang === 'tr'
-                                ? 'Bu dersleri SIS\'e girerek kayıt olabilirsiniz.'
-                                : 'You can register for these courses through SIS.'}
+                                ? 'DERS KAYITLARINIZI SIS ÜZERİNDEN YAPMALISINIZ.'
+                                : 'YOU MUST REGISTER FOR YOUR COURSES THROUGH SIS.'}
                         </p>
                     </div>
                 </div>
