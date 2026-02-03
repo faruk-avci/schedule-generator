@@ -681,6 +681,34 @@
         }
 
 
+        function getTimesFromMatrix(matrix, lessonId) {
+            const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+            const times = [];
+
+            for (let d = 0; d < 5; d++) {
+                if (!matrix[d]) continue;
+                let startHour = -1;
+                let currentBlock = false;
+
+                for (let h = 0; h < 16; h++) {
+                    const isLesson = matrix[d][h] === lessonId;
+                    if (isLesson && !currentBlock) {
+                        startHour = h;
+                        currentBlock = true;
+                    } else if (!isLesson && currentBlock) {
+                        const endHour = h;
+                        times.push(`${days[d]} ${startHour + 8}:40-${endHour + 8}:30`);
+                        currentBlock = false;
+                    }
+                }
+                if (currentBlock) {
+                    const endHour = 16;
+                    times.push(`${days[d]} ${startHour + 8}:40-${endHour + 8}:30`);
+                }
+            }
+            return times.join(', ');
+        }
+
         function renderSchedules(schedules) {
             const container = document.getElementById('scheduleResults');
             if (schedules.length === 0) {
@@ -688,48 +716,38 @@
                 return;
             }
 
-            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-
             container.innerHTML = schedules.slice(0, 20).map((schedule, idx) => {
-                const courses = schedule.courses || schedule;
-                const slots = [];
+                const lessons = schedule.lessons || (Array.isArray(schedule) ? schedule : []);
+                const matrix = schedule.matrix || [];
 
-                courses.forEach(course => {
-                    (course.times || []).forEach(time => {
-                        slots.push({
-                            day: time.day_of_week,
-                            start: time.start_time,
-                            end: time.end_time,
-                            name: `${course.course_name} (${course.section_name})`
-                        });
+                let html = `<div class="schedule-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <h3>Schedule #${idx + 1}</h3>
+                        <span style="font-size:12px; font-weight:bold;">${schedule.totalCredits || ''} Credits</span>
+                    </div>`;
+
+                if (Array.isArray(lessons)) {
+                    lessons.forEach(c => {
+                        let timeString = '';
+                        if (matrix.length > 0) {
+                            timeString = getTimesFromMatrix(matrix, c.id);
+                        } else {
+                            timeString = (c.times || []).map(t => `${t.day} ${t.start}`).join(', ');
+                        }
+
+                        html += `
+                        <div class="schedule-course" style="background:#f9f9f9; padding:8px; margin-bottom:5px; border-radius:4px;">
+                            <div style="font-weight:bold; font-size:13px;">${c.course_code || c.course_name} (${c.section_name})</div>
+                            <div style="font-size:12px; color:#666;">${c.lecturer || 'Staff'}</div>
+                            <div style="font-size:12px; color:#444; font-family:monospace;">${timeString}</div>
+                        </div>`;
                     });
-                });
+                } else {
+                    html += '<p>Invalid schedule data</p>';
+                }
 
-                // Group by day
-                const byDay = {};
-                days.forEach(d => byDay[d] = []);
-                slots.forEach(s => {
-                    if (byDay[s.day]) byDay[s.day].push(s);
-                });
-
-                // Sort each day by start time
-                Object.keys(byDay).forEach(d => {
-                    byDay[d].sort((a, b) => a.start.localeCompare(b.start));
-                });
-
-                return `
-                    <div class="schedule">
-                        <div class="schedule-title">Schedule ${idx + 1}</div>
-                        ${days.map(day => {
-                    const daySlots = byDay[day];
-                    if (daySlots.length === 0) return '';
-                    return `
-                                <div><strong>${day}:</strong></div>
-                                ${daySlots.map(s => `<div class="time-slot">${s.start}-${s.end}: ${s.name}</div>`).join('')}
-                            `;
-                }).join('')}
-                    </div>
-                `;
+                html += '</div>';
+                return html;
             }).join('');
         }
 
