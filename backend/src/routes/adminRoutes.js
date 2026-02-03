@@ -7,6 +7,19 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+// Helper to clear search cache after course modifications
+const clearSearchCache = () => {
+    try {
+        const courseRoutes = require('./courseRoutes');
+        if (courseRoutes.searchCache) {
+            courseRoutes.searchCache.flushAll();
+            console.log('🗑️ Search cache cleared after course modification');
+        }
+    } catch (err) {
+        console.error('Failed to clear search cache:', err.message);
+    }
+};
+
 // Configure multer for file uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -265,6 +278,7 @@ router.post('/courses', authAdmin, async (req, res) => {
             [course_code, course_name, section_name, faculty, description, credits, lecturer, 0, term, prerequisites, corequisites]
         );
         logActivity(req, 'ADD_COURSE_ADMIN', { id: result.rows[0].id, course_name });
+        clearSearchCache(); // Clear cache so new course appears on main site
         res.json({ success: true, course: result.rows[0] });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
@@ -284,6 +298,7 @@ router.put('/courses/:id', authAdmin, async (req, res) => {
             [course_code, course_name, section_name, faculty, description, credits, lecturer, term, prerequisites, corequisites, id]
         );
         logActivity(req, 'UPDATE_COURSE_ADMIN', { id, course_name });
+        clearSearchCache(); // Clear cache so updated course appears on main site
         res.json({ success: true, course: result.rows[0] });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
@@ -300,6 +315,7 @@ router.delete('/courses/:id', authAdmin, async (req, res) => {
 
         await pool.query(`DELETE FROM ${coursesTable} WHERE id = $1`, [id]);
         logActivity(req, 'DELETE_COURSE_ADMIN', { id });
+        clearSearchCache(); // Clear cache so deleted course no longer appears
         res.json({ success: true, message: 'Course deleted successfully' });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
@@ -345,6 +361,7 @@ router.post('/courses/:id/slots', authAdmin, async (req, res) => {
             [id, start_time_id, end_time_id]
         );
         logActivity(req, 'ADD_SLOT_ADMIN', { course_id: id, start_time_id, end_time_id });
+        clearSearchCache(); // Clear cache so course time slots appear on main site
         res.json({ success: true, slot: result.rows[0] });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
@@ -361,6 +378,7 @@ router.delete('/courses/:id/slots/:slotId', authAdmin, async (req, res) => {
 
         await pool.query(`DELETE FROM ${slotsTable} WHERE id = $1 AND course_id = $2`, [slotId, id]);
         logActivity(req, 'DELETE_SLOT_ADMIN', { course_id: id, slot_id: slotId });
+        clearSearchCache(); // Clear cache so updated time slots appear on main site
         res.json({ success: true, message: 'Time slot deleted successfully' });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });

@@ -54,6 +54,9 @@ export const AdminAPI = {
     addCourseSlot: (id, data) => api.post(`/api/admin/courses/${id}/slots`, data),
     deleteCourseSlot: (id, slotId, term) => api.delete(`/api/admin/courses/${id}/slots/${slotId}`, { params: { term } }),
 
+    // Cache Management
+    clearSearchCache: () => api.post('/api/admin/cache/clear'),
+
     // Batch Import
     batchImport: (formData) => api.post('/api/admin/import', formData, {
         headers: {
