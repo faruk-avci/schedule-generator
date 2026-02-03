@@ -8,6 +8,7 @@ import ScheduleList from './components/ScheduleList'
 import ScrollToTop from './components/ScrollToTop'
 import HowToUse from './components/HowToUse';
 import Contact from './components/Contact';
+import InfoBanner from './components/InfoBanner';
 import Footer from './components/Footer';
 import CookieBanner from './components/CookieBanner';
 import TermsOfService from './components/TermsOfService';
@@ -22,7 +23,6 @@ import { searchCourses, addCourse, removeCourse, clearBasket, getBasket, generat
 import Analytics from './utils/analytics';
 import grain from './analytics';
 
-import InfoBanner from './components/InfoBanner';
 import WarningBanner from './components/WarningBanner';
 
 const MAJORS = [

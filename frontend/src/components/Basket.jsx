@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { translations } from '../utils/translations';
+import CountdownTimer from './CountdownTimer';
 
 function Basket({
   basket,
@@ -48,6 +49,7 @@ function Basket({
           </>
         )}
       </div>
+      <CountdownTimer targetDate="2026-02-03T23:59:00+03:00" language={language} />
       <div className="basket-section">
         <div className="basket-header">
           <h2>{t.myBasket} ({totalItems})</h2>
