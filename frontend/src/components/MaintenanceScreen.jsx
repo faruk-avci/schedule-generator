@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './MaintenanceScreen.css';
+import Analytics from '../utils/analytics';
 
 const MaintenanceScreen = ({ language: initialLanguage }) => {
     const [lang, setLang] = useState(initialLanguage || localStorage.getItem('language') || 'tr');
@@ -17,6 +18,7 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
         const newLang = lang === 'tr' ? 'en' : 'tr';
         setLang(newLang);
         localStorage.setItem('language', newLang);
+        Analytics.track(Analytics.Events.MAINTENANCE_TOGGLE_LANG, { to: newLang });
     };
 
     const fetchBaskets = async () => {
@@ -78,6 +80,7 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
     };
 
     const handleViewBasket = () => {
+        Analytics.track(Analytics.Events.MAINTENANCE_OPEN_BASKET);
         setShowBasket(true);
         if (!basket) {
             fetchBaskets();
@@ -89,6 +92,7 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
             setExpandedBasket(null);
         } else {
             fetchSavedBasketDetails(name);
+            Analytics.track(Analytics.Events.MAINTENANCE_EXP_SAVED_BASKET, { basketName: name });
         }
     };
 
@@ -132,6 +136,7 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
                         </p>
                         <a
                             href="https://docs.google.com/forms/d/e/1FAIpQLSeCaXzVr8tFIQzHJdqCrxNq95NwGIQFU8UvllBFlqvSfaOOhA/viewform?usp=sharing&ouid=109363452252301908479"
+                            onClick={() => Analytics.track(Analytics.Events.MAINTENANCE_CLICK_SURVEY)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-primary"
@@ -151,6 +156,7 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
                         </p>
                         <a
                             href="https://sis.ozyegin.edu.tr"
+                            onClick={() => Analytics.track(Analytics.Events.MAINTENANCE_CLICK_SIS)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-warning"
@@ -180,7 +186,7 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
                         <span className="contact-label">
                             {lang === 'tr' ? 'Sorularınız için:' : 'Questions?'}
                         </span>
-                        <a href="mailto:faruk.avci@ozu.edu.tr" className="contact-email">
+                        <a href="mailto:faruk.avci@ozu.edu.tr" className="contact-email" onClick={() => Analytics.track(Analytics.Events.MAINTENANCE_CLICK_CONTACT)}>
                             faruk.avci@ozu.edu.tr
                         </a>
                     </div>
@@ -191,7 +197,10 @@ const MaintenanceScreen = ({ language: initialLanguage }) => {
             {showBasket && (
                 <div className="basket-modal-overlay" onClick={() => setShowBasket(false)}>
                     <div className="basket-modal basket-modal-wide" onClick={(e) => e.stopPropagation()}>
-                        <button className="basket-modal-close" onClick={() => setShowBasket(false)}>
+                        <button className="basket-modal-close" onClick={() => {
+                            setShowBasket(false);
+                            Analytics.track(Analytics.Events.MAINTENANCE_CLOSE_BASKET);
+                        }}>
                             ✕
                         </button>
                         <h2>{lang === 'tr' ? 'Sepetlerim' : 'My Baskets'}</h2>
