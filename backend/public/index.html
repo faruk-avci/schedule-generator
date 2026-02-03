@@ -6,211 +6,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OzuPlanner - Simple</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            padding: 20px;
-            max-width: 900px;
+            font-family: Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            max-width: 800px;
             margin: 0 auto;
-            line-height: 1.5;
+            padding: 20px;
+            line-height: 1.6;
         }
 
-        h1 {
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            margin: 20px 0 10px;
-            border-bottom: 1px solid #ccc;
+        h1,
+        h2,
+        h3 {
+            color: #444;
+            border-bottom: 2px solid #ddd;
             padding-bottom: 5px;
+            margin-top: 20px;
+            font-family: 'Trebuchet MS', sans-serif;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
 
         input,
-        button,
         select {
-            padding: 8px 12px;
+            border: 1px solid #ccc;
+            padding: 6px;
             font-size: 14px;
-        }
-
-        input[type="text"] {
-            width: 300px;
+            border-radius: 4px;
+            background: white;
         }
 
         button {
+            background: #e0e0e0;
+            border: 1px solid #999;
+            color: #333;
+            font-weight: bold;
+            padding: 6px 12px;
             cursor: pointer;
-            background: #333;
-            color: white;
-            border: none;
-            margin-left: 5px;
+            border-radius: 4px;
+            font-family: Verdana, sans-serif;
+            background: linear-gradient(to bottom, #fff, #e0e0e0);
         }
 
         button:hover {
-            background: #555;
+            background: #d0d0d0;
+            border-color: #666;
+        }
+
+        button:active {
+            background: #ccc;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         button:disabled {
-            background: #999;
-            cursor: not-allowed;
+            color: #aaa;
+            background: #f0f0f0;
+            border-color: #ddd;
+            cursor: default;
         }
 
         .section {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .item {
-            background: #f5f5f5;
-            padding: 10px;
+            background: #fafafa;
+            padding: 8px;
             margin: 5px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .item button {
-            background: #c00;
-            padding: 4px 8px;
-            font-size: 12px;
+            border: 1px solid #eee;
+            border-radius: 3px;
         }
 
         .course-result {
-            background: #f9f9f9;
+            background: #fff;
             border: 1px solid #ddd;
             padding: 10px;
-            margin: 5px 0;
+            margin: 10px 0;
+            border-radius: 5px;
         }
 
-        .course-header {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .section-btn {
-            background: #666;
-            padding: 4px 8px;
-            font-size: 12px;
-            margin: 2px;
-        }
-
-        .section-btn:hover {
-            background: #888;
-        }
-
-        .schedule {
-            background: #f0f0f0;
-            border: 1px solid #ccc;
+        .schedule-card {
+            background: #fff;
+            border: 1px solid #bbb;
             padding: 15px;
-            margin: 10px 0;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .schedule-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .time-slot {
-            font-size: 13px;
-            margin: 3px 0;
-        }
-
-        .error {
-            color: #c00;
-        }
-
-        .success {
-            color: #080;
-        }
-
-        .message {
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Disclaimer Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .modal {
-            background: white;
-            padding: 30px;
-            max-width: 500px;
-            text-align: center;
-        }
-
-        .modal h2 {
-            margin-bottom: 20px;
-            color: #c00;
-        }
-
-        .modal p {
-            margin-bottom: 20px;
-        }
-
-        .modal button {
-            padding: 12px 24px;
-            font-size: 16px;
-        }
-
-        .preferences {
-            margin: 10px 0;
-        }
-
-        .preferences label {
-            margin-right: 15px;
-        }
-
-        .saved-baskets {
-            margin-top: 15px;
-        }
-
-        .saved-basket-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px;
-            background: #eee;
-            margin: 3px 0;
-        }
-
-        .saved-basket-item button {
-            margin-left: 5px;
-        }
-
-        .save-basket-form {
-            margin-top: 10px;
-        }
-
-        /* Schedule Grid Styles */
+        /* Grid Styles */
         .schedule-grid-container {
             overflow-x: auto;
             margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
         }
 
         .schedule-grid-table {
-            width: 100%;
+            border: none;
             border-collapse: collapse;
+            width: 100%;
             font-size: 11px;
-            background: white;
-            border: 1px solid #ccc;
+            font-family: Verdana, sans-serif;
         }
 
         .schedule-grid-table th,
@@ -218,29 +131,82 @@
             border: 1px solid #ddd;
             padding: 4px;
             text-align: center;
-            height: 25px;
         }
 
         .schedule-grid-table th {
             background: #f0f0f0;
             font-weight: bold;
+            color: #555;
         }
 
         .grid-time-col {
-            width: 50px;
-            background: #fafafa;
+            background: #f9f9f9;
             font-weight: bold;
-            color: #555;
+            color: #777;
+            width: 50px;
         }
 
         .grid-cell-filled {
             color: white;
-            border-radius: 4px;
+            padding: 2px 4px;
             font-size: 10px;
-            line-height: 1.2;
-            padding: 2px;
+            border-radius: 3px;
+            font-weight: bold;
             overflow: hidden;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+        }
+
+        .modal {
+            background: #fff;
+            border: 1px solid #999;
+            padding: 20px;
+            max-width: 450px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal h2 {
+            margin-top: 0;
+            border-bottom: none;
+            color: #cc0000;
+        }
+
+        .error {
+            color: #cc0000;
+            font-weight: bold;
+        }
+
+        .success {
+            color: #009900;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .message {
+            border: 1px solid #faebcc;
+            padding: 10px;
+            background: #fcf8e3;
+            color: #8a6d3b;
+            border-radius: 4px;
+            margin: 10px 0;
         }
     </style>
 </head>

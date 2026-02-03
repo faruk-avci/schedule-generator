@@ -1,0 +1,276 @@
+[2026-02-03T19:29:43.829Z] Global Error (/api/logs/event) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:21.568Z] Global Error (/api/courses/search) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:23.906Z] Global Error (/api/courses/search) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:44.126Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:44.980Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:45.515Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:45.680Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:45.843Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:46.058Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:46.193Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:46.378Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:46.682Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:47.099Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:47.532Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:47.655Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:47.905Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:48.052Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:48.248Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:48.413Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:48.630Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:48.762Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:48.979Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
+[2026-02-03T19:32:49.155Z] Global Error (/api/schedule/generate) - CORS not allowed
+Stack: Error: CORS not allowed
+    at origin (/home/aseris/Desktop/projects/schedule-generator-v2/backend/app.js:107:29)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:328:13)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:346:12)
+    at next (/home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express/lib/router/index.js:280:10)
+    at /home/aseris/Desktop/projects/schedule-generator-v2/backend/node_modules/express-rate-limit/dist/index.cjs:942:7
