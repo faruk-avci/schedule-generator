@@ -1,6 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import AdminAPI from '../api';
-import { Search, Plus, Edit2, Trash2, X, Check, Filter } from 'lucide-react';
+import { Search, Plus, Edit2, Trash2, X, Check, Filter, Clock, Calendar } from 'lucide-react';
+
+// Time slot ID mappings (14 slots per day)
+const DAYS = [
+    { name: 'Monday', offset: 1 },
+    { name: 'Tuesday', offset: 15 },
+    { name: 'Wednesday', offset: 29 },
+    { name: 'Thursday', offset: 43 },
+    { name: 'Friday', offset: 57 }
+];
+
+const TIME_HOURS = [
+    { label: '08:40', hour: 8 },
+    { label: '09:40', hour: 9 },
+    { label: '10:40', hour: 10 },
+    { label: '11:40', hour: 11 },
+    { label: '12:40', hour: 12 },
+    { label: '13:40', hour: 13 },
+    { label: '14:40', hour: 14 },
+    { label: '15:40', hour: 15 },
+    { label: '16:40', hour: 16 },
+    { label: '17:40', hour: 17 },
+    { label: '18:40', hour: 18 },
+    { label: '19:40', hour: 19 },
+    { label: '20:40', hour: 20 },
+    { label: '21:40', hour: 21 }
+];
+
+// Helper to convert time ID to readable format
+const timeIdToReadable = (timeId) => {
+    for (const day of DAYS) {
+        const hourIndex = timeId - day.offset;
+        if (hourIndex >= 0 && hourIndex < 14) {
+            return { day: day.name, hour: TIME_HOURS[hourIndex]?.label || `${hourIndex + 8}:40` };
+        }
+    }
+    return { day: 'Unknown', hour: 'Unknown' };
+};
 
 const Courses = () => {
     const [courses, setCourses] = useState([]);
@@ -10,6 +47,9 @@ const Courses = () => {
     const [search, setSearch] = useState('');
     const [editingCourse, setEditingCourse] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [timeSlots, setTimeSlots] = useState([]);
+    const [newSlot, setNewSlot] = useState({ day: 'Monday', startHour: 9, endHour: 10 });
+    const [loadingSlots, setLoadingSlots] = useState(false);
 
     const fetchData = async () => {
         setLoading(true);
@@ -34,33 +74,131 @@ const Courses = () => {
         return () => clearTimeout(timer);
     }, [search, selectedTerm]);
 
-    const handleDelete = async (id) => {
+    const fetchTimeSlots = async (courseId, term) => {
+        if (!courseId) {
+            setTimeSlots([]);
+            return;
+        }
+        setLoadingSlots(true);
+        try {
+            const res = await AdminAPI.getCourseSlots(courseId, term);
+            setTimeSlots(res.data.slots || []);
+        } catch (err) {
+            console.error('Failed to fetch time slots');
+            setTimeSlots([]);
+        } finally {
+            setLoadingSlots(false);
+        }
+    };
+
+    const handleDelete = async (course) => {
         if (!window.confirm('Are you sure you want to delete this course?')) return;
         try {
-            await AdminAPI.deleteCourse(id);
+            await AdminAPI.deleteCourse(course.id, course.term);
             fetchData();
         } catch (err) {
             alert('Failed to delete course');
         }
     };
 
-    const handleEdit = (course) => {
+    const handleEdit = async (course) => {
         setEditingCourse({ ...course });
+        setShowModal(true);
+        await fetchTimeSlots(course.id, course.term);
+    };
+
+    const handleAddNew = () => {
+        const defaultTerm = selectedTerm || (terms.length > 0 ? terms[0] : '');
+        setEditingCourse({
+            course_code: '',
+            course_name: '',
+            section_name: '',
+            faculty: '',
+            term: defaultTerm,
+            lecturer: '',
+            credits: 0,
+            prerequisites: '',
+            corequisites: '',
+            description: ''
+        });
+        setTimeSlots([]);
         setShowModal(true);
     };
 
     const handleSave = async (e) => {
         e.preventDefault();
         try {
+            let courseId = editingCourse.id;
             if (editingCourse.id) {
                 await AdminAPI.updateCourse(editingCourse.id, editingCourse);
             } else {
-                await AdminAPI.addCourse(editingCourse);
+                const res = await AdminAPI.addCourse(editingCourse);
+                courseId = res.data.course.id;
             }
+
+            // Save new time slots for newly created courses
+            if (!editingCourse.id && timeSlots.length > 0) {
+                for (const slot of timeSlots) {
+                    if (!slot.id) { // Only add new (unsaved) slots
+                        await AdminAPI.addCourseSlot(courseId, {
+                            term: editingCourse.term,
+                            start_time_id: slot.start_time_id,
+                            end_time_id: slot.end_time_id
+                        });
+                    }
+                }
+            }
+
             setShowModal(false);
             fetchData();
         } catch (err) {
-            alert('Failed to save course');
+            alert('Failed to save course: ' + (err.response?.data?.error || err.message));
+        }
+    };
+
+    const handleAddSlot = async () => {
+        const dayData = DAYS.find(d => d.name === newSlot.day);
+        if (!dayData) return;
+
+        const start_time_id = (newSlot.startHour - 8) + dayData.offset;
+        const end_time_id = (newSlot.endHour - 8) + dayData.offset;
+
+        if (start_time_id >= end_time_id) {
+            alert('End time must be after start time');
+            return;
+        }
+
+        const slotToAdd = { start_time_id, end_time_id };
+
+        if (editingCourse.id) {
+            // Existing course - save to backend immediately
+            try {
+                const res = await AdminAPI.addCourseSlot(editingCourse.id, {
+                    term: editingCourse.term,
+                    ...slotToAdd
+                });
+                setTimeSlots([...timeSlots, res.data.slot]);
+            } catch (err) {
+                alert('Failed to add time slot');
+            }
+        } else {
+            // New course - add to local state (will be saved when course is created)
+            setTimeSlots([...timeSlots, slotToAdd]);
+        }
+    };
+
+    const handleDeleteSlot = async (slot, index) => {
+        if (slot.id && editingCourse.id) {
+            // Existing slot - delete from backend
+            try {
+                await AdminAPI.deleteCourseSlot(editingCourse.id, slot.id, editingCourse.term);
+                setTimeSlots(timeSlots.filter((_, i) => i !== index));
+            } catch (err) {
+                alert('Failed to delete time slot');
+            }
+        } else {
+            // Local slot - just remove from state
+            setTimeSlots(timeSlots.filter((_, i) => i !== index));
         }
     };
 
@@ -71,7 +209,7 @@ const Courses = () => {
                     <h1>Course Management</h1>
                     <p className="subtitle">Search, edit, and manage the course database</p>
                 </div>
-                <button className="add-btn" onClick={() => { setEditingCourse({ course_code: '', course_name: '', section_name: '', faculty: '', term: '', lecturer: '', credits: 0, prerequisites: '', corequisites: '' }); setShowModal(true); }}>
+                <button className="add-btn" onClick={handleAddNew}>
                     <Plus size={18} />
                     <span>Add New Course</span>
                 </button>
@@ -130,7 +268,7 @@ const Courses = () => {
                                                 <button className="icon-btn edit" onClick={() => handleEdit(course)}>
                                                     <Edit2 size={16} />
                                                 </button>
-                                                <button className="icon-btn delete" onClick={() => handleDelete(course.id)}>
+                                                <button className="icon-btn delete" onClick={() => handleDelete(course)}>
                                                     <Trash2 size={16} />
                                                 </button>
                                             </div>
@@ -182,17 +320,68 @@ const Courses = () => {
                                 </div>
                                 <div className="form-group full-width">
                                     <label>Description</label>
-                                    <textarea value={editingCourse.description} onChange={e => setEditingCourse({ ...editingCourse, description: e.target.value })} rows="3" />
+                                    <textarea value={editingCourse.description || ''} onChange={e => setEditingCourse({ ...editingCourse, description: e.target.value })} rows="3" />
                                 </div>
                                 <div className="form-group">
                                     <label>Prerequisites</label>
-                                    <input type="text" value={editingCourse.prerequisites} onChange={e => setEditingCourse({ ...editingCourse, prerequisites: e.target.value })} placeholder="e.g. CS101" />
+                                    <input type="text" value={editingCourse.prerequisites || ''} onChange={e => setEditingCourse({ ...editingCourse, prerequisites: e.target.value })} placeholder="e.g. CS101" />
                                 </div>
                                 <div className="form-group">
                                     <label>Corequisites</label>
-                                    <input type="text" value={editingCourse.corequisites} onChange={e => setEditingCourse({ ...editingCourse, corequisites: e.target.value })} placeholder="e.g. CS101L" />
+                                    <input type="text" value={editingCourse.corequisites || ''} onChange={e => setEditingCourse({ ...editingCourse, corequisites: e.target.value })} placeholder="e.g. CS101L" />
                                 </div>
                             </div>
+
+                            {/* Time Slots Section */}
+                            <div className="time-slots-section">
+                                <div className="section-header">
+                                    <Clock size={18} />
+                                    <h3>Time Slots</h3>
+                                </div>
+
+                                {loadingSlots ? (
+                                    <p className="loading-slots">Loading time slots...</p>
+                                ) : (
+                                    <>
+                                        {timeSlots.length > 0 && (
+                                            <div className="slots-list">
+                                                {timeSlots.map((slot, index) => {
+                                                    const start = timeIdToReadable(slot.start_time_id);
+                                                    const end = timeIdToReadable(slot.end_time_id);
+                                                    return (
+                                                        <div key={index} className="slot-item">
+                                                            <Calendar size={14} />
+                                                            <span className="slot-day">{start.day}</span>
+                                                            <span className="slot-time">{start.hour} - {end.hour}</span>
+                                                            <button type="button" className="remove-slot-btn" onClick={() => handleDeleteSlot(slot, index)}>
+                                                                <X size={14} />
+                                                            </button>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        )}
+
+                                        <div className="add-slot-form">
+                                            <select value={newSlot.day} onChange={e => setNewSlot({ ...newSlot, day: e.target.value })}>
+                                                {DAYS.map(d => <option key={d.name} value={d.name}>{d.name}</option>)}
+                                            </select>
+                                            <select value={newSlot.startHour} onChange={e => setNewSlot({ ...newSlot, startHour: parseInt(e.target.value) })}>
+                                                {TIME_HOURS.map(t => <option key={t.hour} value={t.hour}>{t.label}</option>)}
+                                            </select>
+                                            <span className="to-separator">to</span>
+                                            <select value={newSlot.endHour} onChange={e => setNewSlot({ ...newSlot, endHour: parseInt(e.target.value) })}>
+                                                {TIME_HOURS.map(t => <option key={t.hour} value={t.hour}>{t.label}</option>)}
+                                            </select>
+                                            <button type="button" className="add-slot-btn" onClick={handleAddSlot}>
+                                                <Plus size={16} />
+                                                Add Slot
+                                            </button>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+
                             <div className="modal-footer">
                                 <button type="button" className="cancel-btn" onClick={() => setShowModal(false)}>Cancel</button>
                                 <button type="submit" className="save-btn">Save Changes</button>
@@ -242,6 +431,25 @@ const Courses = () => {
                 .cancel-btn { background: none; border: 1px solid #1f1f23; color: #888; padding: 0.75rem 1.5rem; border-radius: 0.75rem; cursor: pointer; font-weight: 600; }
                 .save-btn { background: #3b82f6; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; cursor: pointer; font-weight: 600; }
                 .close-btn { background: none; border: none; color: #555; cursor: pointer; }
+
+                /* Time Slots Section */
+                .time-slots-section { padding: 0 2rem 1.5rem; border-top: 1px solid #1f1f23; margin-top: 0.5rem; }
+                .section-header { display: flex; align-items: center; gap: 0.5rem; padding: 1.25rem 0 1rem; color: #888; }
+                .section-header h3 { margin: 0; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; }
+                .loading-slots { color: #555; font-style: italic; }
+                
+                .slots-list { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+                .slot-item { display: flex; align-items: center; gap: 0.75rem; background: #1a1a1e; border: 1px solid #2a2a2f; border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: #ccc; }
+                .slot-day { font-weight: 600; color: #3b82f6; min-width: 100px; }
+                .slot-time { font-family: monospace; color: #888; }
+                .remove-slot-btn { margin-left: auto; background: none; border: none; color: #ef4444; cursor: pointer; padding: 0.25rem; border-radius: 0.25rem; }
+                .remove-slot-btn:hover { background: #ef444420; }
+
+                .add-slot-form { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+                .add-slot-form select { background: #1a1a1e; border: 1px solid #2a2a2f; border-radius: 0.5rem; padding: 0.5rem 0.75rem; color: white; }
+                .to-separator { color: #555; }
+                .add-slot-btn { display: flex; align-items: center; gap: 0.25rem; background: #22c55e; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600; font-size: 0.875rem; }
+                .add-slot-btn:hover { background: #16a34a; }
             `}</style>
         </div>
     );

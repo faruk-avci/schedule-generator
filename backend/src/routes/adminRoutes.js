@@ -305,6 +305,67 @@ router.delete('/courses/:id', authAdmin, async (req, res) => {
     }
 });
 
+// --- COURSE TIME SLOTS CRUD ---
+
+// GET /api/admin/courses/:id/slots (Get time slots for a course)
+router.get('/courses/:id/slots', authAdmin, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { term } = req.query;
+        const sanitizedTerm = term ? term.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : null;
+        const slotsTable = sanitizedTerm ? `course_time_slots_${sanitizedTerm}` : 'course_time_slots';
+
+        // Check if table exists
+        const tableCheck = await pool.query("SELECT to_regclass($1)", [slotsTable]);
+        if (!tableCheck.rows[0].to_regclass) {
+            return res.json({ success: true, slots: [] });
+        }
+
+        const result = await pool.query(
+            `SELECT * FROM ${slotsTable} WHERE course_id = $1 ORDER BY start_time_id ASC`,
+            [id]
+        );
+        res.json({ success: true, slots: result.rows });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// POST /api/admin/courses/:id/slots (Add time slot to a course)
+router.post('/courses/:id/slots', authAdmin, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { term, start_time_id, end_time_id } = req.body;
+        const sanitizedTerm = term ? term.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : null;
+        const slotsTable = sanitizedTerm ? `course_time_slots_${sanitizedTerm}` : 'course_time_slots';
+
+        const result = await pool.query(
+            `INSERT INTO ${slotsTable} (course_id, start_time_id, end_time_id) VALUES ($1, $2, $3) RETURNING *`,
+            [id, start_time_id, end_time_id]
+        );
+        logActivity(req, 'ADD_SLOT_ADMIN', { course_id: id, start_time_id, end_time_id });
+        res.json({ success: true, slot: result.rows[0] });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// DELETE /api/admin/courses/:id/slots/:slotId (Delete time slot)
+router.delete('/courses/:id/slots/:slotId', authAdmin, async (req, res) => {
+    try {
+        const { id, slotId } = req.params;
+        const { term } = req.query;
+        const sanitizedTerm = term ? term.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase() : null;
+        const slotsTable = sanitizedTerm ? `course_time_slots_${sanitizedTerm}` : 'course_time_slots';
+
+        await pool.query(`DELETE FROM ${slotsTable} WHERE id = $1 AND course_id = $2`, [slotId, id]);
+        logActivity(req, 'DELETE_SLOT_ADMIN', { course_id: id, slot_id: slotId });
+        res.json({ success: true, message: 'Time slot deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
 // --- BATCH IMPORT ---
 
 // POST /api/admin/import

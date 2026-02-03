@@ -44,10 +44,15 @@ export const AdminAPI = {
     initializeTerm: (term) => api.post('/api/admin/maintenance/initialize-term', { term }),
     cleanupNoSlots: (term) => api.post('/api/admin/maintenance/cleanup-no-slots', { term }),
 
-    // Course CRUD (Stubs for now)
+    // Course CRUD
     addCourse: (data) => api.post('/api/admin/courses', data),
     updateCourse: (id, data) => api.put(`/api/admin/courses/${id}`, data),
-    deleteCourse: (id) => api.delete(`/api/admin/courses/${id}`),
+    deleteCourse: (id, term) => api.delete(`/api/admin/courses/${id}`, { params: { term } }),
+
+    // Time Slot CRUD
+    getCourseSlots: (id, term) => api.get(`/api/admin/courses/${id}/slots`, { params: { term } }),
+    addCourseSlot: (id, data) => api.post(`/api/admin/courses/${id}/slots`, data),
+    deleteCourseSlot: (id, slotId, term) => api.delete(`/api/admin/courses/${id}/slots/${slotId}`, { params: { term } }),
 
     // Batch Import
     batchImport: (formData) => api.post('/api/admin/import', formData, {
