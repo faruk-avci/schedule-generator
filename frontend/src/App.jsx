@@ -828,6 +828,8 @@ function App() {
           {/* 404 Catch-All Route */}
           <Route path="*" element={<NotFound language={language} onNavigate={(path) => navigate(path)} />} />
           <Route path="/results" element={<ResultsPage language={language} />} />
+          {/* Test route for maintenance screen */}
+          <Route path="/maintenance_test" element={<MaintenanceScreen language={language} />} />
         </Routes>
         <Footer onNavigate={(page) => navigate(page === 'home' ? '/' : `/${page}`)} language={language} />
         <CookieBanner language={language} />

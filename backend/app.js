@@ -112,8 +112,9 @@ app.use(cors({
 // On VPS: export MAINTENANCE_MODE=true && pm2 restart all
 app.use((req, res, next) => {
     if (process.env.MAINTENANCE_MODE === 'true') {
-        // Allow health checks even in maintenance mode
-        if (req.path === '/health' || req.path === '/') {
+        // Allow health checks and basket viewing even in maintenance mode
+        const allowedPaths = ['/health', '/', '/api/courses/basket'];
+        if (allowedPaths.includes(req.path)) {
             return next();
         }
 

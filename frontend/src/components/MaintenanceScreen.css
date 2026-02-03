@@ -340,3 +340,211 @@ body.dark-mode .contact-card h2 {
         font-size: 1rem;
     }
 }
+
+/* Basket Card */
+.basket-card {
+    border-top: 4px solid #6366f1;
+    background: linear-gradient(180deg, #eef2ff 0%, #fff 100%);
+}
+
+.basket-card h2 {
+    color: #4338ca;
+}
+
+.btn-basket {
+    display: inline-block;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: white;
+    text-decoration: none;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    margin-top: auto;
+}
+
+.btn-basket:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+/* Contact Footer */
+.contact-footer {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: #6b7280;
+}
+
+.contact-footer a {
+    color: #A50050;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+.contact-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Basket Modal */
+.basket-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.basket-modal {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.basket-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #f3f4f6;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.basket-modal-close:hover {
+    background: #e5e7eb;
+    transform: scale(1.1);
+}
+
+.basket-modal h2 {
+    margin: 0 0 1.5rem;
+    font-size: 1.5rem;
+    color: #111827;
+}
+
+.basket-loading {
+    text-align: center;
+    padding: 2rem;
+    color: #6b7280;
+}
+
+.basket-content {
+    margin-bottom: 1rem;
+}
+
+.basket-section {
+    margin-bottom: 1rem;
+}
+
+.basket-section h3 {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.basket-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.basket-item {
+    background: #f9fafb;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+    border-left: 3px solid #A50050;
+}
+
+.basket-empty {
+    text-align: center;
+    color: #9ca3af;
+    padding: 1rem;
+}
+
+.basket-note {
+    background: #fef3c7;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #92400e;
+    margin-top: 1rem;
+}
+
+/* Dark Mode - Basket Card */
+body.dark-mode .basket-card {
+    background: linear-gradient(180deg, #2d2d40 0%, #2d2d2d 100%);
+    border-color: #818cf8;
+}
+
+body.dark-mode .basket-card h2 {
+    color: #a5b4fc;
+}
+
+body.dark-mode .contact-footer {
+    color: #9ca3af;
+}
+
+body.dark-mode .contact-footer a {
+    color: #e87da3;
+}
+
+body.dark-mode .basket-modal {
+    background: #2d2d2d;
+}
+
+body.dark-mode .basket-modal h2 {
+    color: #f3f4f6;
+}
+
+body.dark-mode .basket-modal-close {
+    background: #404040;
+    color: #f3f4f6;
+}
+
+body.dark-mode .basket-modal-close:hover {
+    background: #525252;
+}
+
+body.dark-mode .basket-section h3 {
+    color: #9ca3af;
+}
+
+body.dark-mode .basket-item {
+    background: #404040;
+    color: #f3f4f6;
+    border-left-color: #e87da3;
+}
+
+body.dark-mode .basket-note {
+    background: #3d3520;
+    color: #fcd34d;
+}
