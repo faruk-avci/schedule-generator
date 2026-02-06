@@ -18,12 +18,13 @@ import CoreqWarningModal from './components/CoreqWarningModal';
 import CurriculumPage from './components/CurriculumPage';
 import SurveyPage from './components/SurveyPage';
 import MaintenanceScreen from './components/MaintenanceScreen';
+import DisclaimerModal from './components/DisclaimerModal';
 import { translations } from './utils/translations'
 import { searchCourses, addCourse, removeCourse, clearBasket, getBasket, generateSchedule, getTermInfo, setMajor as apiSetMajor, saveBasket as apiSaveBasket, getSavedBaskets as apiGetSavedBaskets, loadBasket as apiLoadSavedBasket, removeSavedBasket as apiRemoveSavedBasket } from './services/api'
 import Analytics from './utils/analytics';
 import grain from './analytics';
 
-import WarningBanner from './components/WarningBanner';
+
 
 const MAJORS = [
   {
@@ -685,6 +686,9 @@ function App() {
       {/* Maintenance Mode Screen */}
       {maintenanceMode && <MaintenanceScreen language={language} />}
 
+      {/* Disclaimer Modal for First-time Visitors */}
+      <DisclaimerModal language={language} setLanguage={setLanguage} />
+
       <div className="app">
         {/* Header */}
         <Header
@@ -733,7 +737,6 @@ function App() {
               )}
 
               <InfoBanner language={language} />
-              <WarningBanner language={language} />
 
               {/* Main Content */}
               <div className="main-container">
