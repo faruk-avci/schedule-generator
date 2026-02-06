@@ -32,23 +32,7 @@ function Basket({
 
   return (
     <div className="basket-wrapper">
-      <div className="basket-warning-box">
-        {language === 'en' ? (
-          <>
-            OzuPlanner will be closed on February 3rd at 23:59.
-            <div>
-              Course registrations must be completed via <a href="https://sis.ozyegin.edu.tr" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>sis.ozyegin.edu.tr</a>
-            </div>
-          </>
-        ) : (
-          <>
-            OzuPlanner, 3 Şubat saat 23:59’da kapatılacaktır.
-            <div>
-              Ders kayıtlarınızı <a href="https://sis.ozyegin.edu.tr" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>sis.ozyegin.edu.tr</a> üzerinden yapmalısınız.
-            </div>
-          </>
-        )}
-      </div>
+
       <CountdownTimer targetDate="2026-02-03T23:59:00+03:00" language={language} />
       <div className="basket-section">
         <div className="basket-header">

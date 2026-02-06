@@ -24,6 +24,8 @@ import { searchCourses, addCourse, removeCourse, clearBasket, getBasket, generat
 import Analytics from './utils/analytics';
 import grain from './analytics';
 
+import WarningBanner from './components/WarningBanner';
+
 
 
 const MAJORS = [
@@ -737,6 +739,7 @@ function App() {
               )}
 
               <InfoBanner language={language} />
+              <WarningBanner language={language} />
 
               {/* Main Content */}
               <div className="main-container">
